@@ -1,0 +1,36 @@
+<header class="col-12 row">
+  @if(sharedService.screenWidth > 900){
+    <span class="title col-lg-8 col-12">{{ 'hotelPayment.Payment Summary' | translate }}</span>
+    <span class="sub-title col-lg-2 col-6">{{ 'hotelPayment.Total' | translate }}</span>
+    <span class="price col-lg-2 col-6">{{ currency | exchange: 'code' }} {{ totalPrice | exchange: 'value' }}</span>
+  }@else {
+    <div class="mobile-price">
+      <div class="mobile-sub">
+        <span class="title">{{ 'hotelPayment.Payment Summary' | translate }}</span>
+      </div>
+      <div class="mobile-sub">
+        <span class="sub-title">{{ 'hotelPayment.Total' | translate }}</span>
+        <span class="price">{{ currency | exchange: 'code' }} {{ totalPrice | exchange: 'value' }}</span>
+      </div>
+    </div>
+  }
+</header>
+@if(sharedService.screenWidth > 900){
+
+  <body class="col-12 row">
+      <p class="col-12">{{ 'hotelPayment.Payment Timeline' | translate }}</p>
+
+      <p class="col-8">{{ 'hotelPayment.Pay now' | translate }}</p>
+      <p class="col-4">{{ currency | exchange: 'code' }} {{ totalPrice | exchange: 'value' }}</p>
+
+      <!-- <p class="col-12 row">
+          <span class="col-8">{{ 'hotelPayment.Pay at Property' | translate }}</span>
+          <span class="col-4">EGP 988.03</span>
+
+          <span class="col-8 property-currency">{{ 'hotelPayment.In property curreency' | translate }}</span>
+          <span class="col-4 property-currency">US$20.00</span>
+      </p>  -->
+
+      <caption class="col-12">{{ 'hotelPayment.note' | translate }}</caption>
+  </body>
+}

@@ -1,0 +1,55 @@
+<header class="row between gap-2">
+  <div class="titles col-6 col-md-5 col-xl-3">
+    <p class="titles__main">{{ 'flightDetails.title' | translate }}</p>
+    <p class="titles__secondayr">
+      {{ sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO[0].departureTerminalAirport.cityName }} -
+      {{
+        sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO[
+          sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO.length - 1
+        ].arrivalTerminalAirport.cityName
+      }}
+    </p>
+  </div>
+
+  @if (sharedService.isSegmentPresent(['flight-checkout'])) {
+    <div class="price col-5">
+      <p class="price__text">
+        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+        {{
+          flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
+            ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount
+            : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value')
+        }}
+      </p>
+
+      <p class="price__caption">{{ 'flightDetails.pricePerAdult' | translate }}</p>
+    </div>
+
+    @if(sharedService.screenWidth >= 1200) {
+      <img
+      src="assets/icons/exit-icon.svg"
+      title="Exit Icon"
+      class="info-action__icon"
+      (click)="onClickExit()"
+      width="40"
+    />
+    }
+  } @else {
+    <div class="price col-4">
+      <p class="price__text">
+        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+        {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' }}
+      </p>
+      <p class="price__caption">Price per adult</p>
+    </div>
+
+    <div class="info-action col-12 col-md-6 col-xl-4">
+      <app-main-button
+        [title]="'flightDetails.select' | translate"
+        [mainButtonInfo]="selectButton"
+        (clickMainButton)="onClickSelect()"
+        [isLoading]="flightResultService.isBrandedFaresLoading"
+      />
+    </div>
+  }
+</header>

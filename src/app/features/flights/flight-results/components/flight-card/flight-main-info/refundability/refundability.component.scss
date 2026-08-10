@@ -1,0 +1,15 @@
+@import '../../../../../../../../sass/variables';
+@import '../../../../../../../../sass/colors';
+
+p {
+  cursor: default;
+
+  border-radius: $base-radius-small;
+  color: map-get($map: $colors, $key: 'main');
+  background-color: map-get($map: $colors, $key: 'off-white');
+
+  padding-block: 8px;
+  padding-inline: 15px;
+  text-align: center;
+  font-weight: 400;
+}

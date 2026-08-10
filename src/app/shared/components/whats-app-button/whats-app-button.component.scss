@@ -1,0 +1,15 @@
+.whatsapp-btn {
+  cursor: pointer;
+  position: fixed;
+  width: 8%;
+
+  max-width: 80px;
+  min-width: 40px;
+
+  bottom: 10px;
+  z-index: 100;
+  transition: all 0.1s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

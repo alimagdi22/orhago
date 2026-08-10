@@ -1,0 +1,29 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { SharedService } from '../../shared.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+
+@Component({
+  standalone: false,
+  selector: 'app-search-box',
+  templateUrl: './search-box.component.html',
+  styleUrl: './search-box.component.scss',
+})
+export class SearchBoxComponent implements OnInit {
+  translate = inject(TranslateService);
+  sharedService = inject(SharedService);
+  router = inject(Router);
+
+  tabIndex = 0;
+
+  ngOnInit(): void {
+    const url = this.router.url.toLowerCase();
+    if (url.includes('hotels')) {
+      this.tabIndex = 1;
+    }
+  }
+
+  onTabChanged(_tabIndex: number) {
+    this.tabIndex = _tabIndex;
+  }
+}

@@ -1,0 +1,241 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/colors';
+
+.wrapper {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  padding-block: 10px;
+
+  transition: all 0.2s;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 11px;
+}
+
+.actions-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.manage-booking-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  padding: 8px 18px;
+  background: transparent;
+  color: #333;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.custom-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+  .flag-icon {
+    border-radius: 4px;
+  }
+
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+
+  border: 1.5px solid #333  ;
+  border-radius: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  color: #333;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.white-space {
+  height: 75px;
+}
+
+.scroll-background {
+  background-color: map-get($map: $colors, $key: 'black-light');
+  opacity: 0.9;
+}
+
+.scroll-button {
+  color: white;
+  background-color: black;
+  border-color: black;
+
+  &:hover {
+    background-color: rgb(41, 41, 41);
+  }
+}
+
+.top-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+
+  color: black;
+  height: 50px;
+  padding: 1em;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  z-index: 1000;
+}
+
+.menu > li {
+  overflow: hidden;
+}
+
+.menu-button-container {
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+  display: block;
+  background-color: map-get($map: $colors, $key: 'main');
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 2px;
+}
+
+.menu-button::before {
+  content: '';
+  margin-top: -8px;
+}
+
+.menu-button::after {
+  content: '';
+  margin-top: 8px;
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+  margin-top: 0px;
+  transform: rotate(405deg);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button {
+  background: rgba(255, 255, 255, 0);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+  margin-top: 0px;
+  transform: rotate(-405deg);
+}
+
+::ng-deep .gradient-button{
+  border-radius:6px
+}
+
+@media (max-width: 1200px) {
+  .menu-button-container {
+    display: flex;
+  }
+  .menu {
+    position: absolute;
+    top: 0;
+    margin-top: 70px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  #menu-toggle ~ .menu li {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #menu-toggle:checked ~ .menu li {
+    border: 1px solid #333;
+    height: 3.5em;
+    padding: 0.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .menu > li {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.5em 0;
+    color: black;
+    width: 100%;
+    background-color: #222;
+  }
+  .menu > li:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+}
+
+.mobile-nav-item {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  color: white;
+  font-weight: bold;
+
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

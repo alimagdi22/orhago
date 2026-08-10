@@ -1,0 +1,126 @@
+@if(sharedService.screenWidth > 1000){
+
+  <section class="upper-section col-12 row">
+      <img [src]="hotel.hotelImages[0]" class="col-lg-3 col-12 preview" />
+
+      <div class="col-lg-9 col-12 row wrapper">
+          <span class="title col-12">{{ hotel.hotelName }}</span>
+          <span class="sub-title col-12">{{ hotel.City }}, {{ hotel.Country }}</span>
+
+          @for (amenity of hotel.Amenities | slice: 0: 2; track $index) {
+          <p class="amenity col-6" [style]="{
+              'padding-top': '35px',
+              'padding-bottom': '15px'
+          }"><img src="assets/icons/hotel-card/check.svg" /> {{ amenity.Amenity }}</p>
+          }
+
+          <p class="info col-lg-4 col-6">
+              <span>{{ "hotelCheckout.Check In" | translate }}</span>
+              <span>{{ hotel.HotelFormDto.CheckIn | date: 'd MMM y' }}</span>
+              <span>{{ "hotelCheckout.From" | translate }} {{ hotel.HotelFormDto.CheckIn | date: 'h:mm a' }}</span>
+          </p>
+
+          <p class="info col-lg-4 col-6">
+              <span>{{ "hotelCheckout.Check Out" | translate }}</span>
+              <span>{{ hotel.HotelFormDto.CheckOut | date: 'd MMM y' }}</span>
+              <span>{{ "hotelCheckout.To" | translate }} {{ hotel.HotelFormDto.CheckOut | date: 'h:mm a' }}</span>
+          </p>
+
+          <p class="info col-lg-4 col-12">
+              <span>{{ "hotelCheckout.Stay" | translate }}</span>
+              <span>{{ nights }}</span>
+          </p>
+      </div>
+  </section>
+}
+
+@for (room of rooms; track $index) {
+  @if(sharedService.screenWidth > 1000){
+    <hr class="col-12" />
+    <section class="lower-section col-12 row">
+        <img [src]="room.Images[$index + 2]" class="col-lg-3 col-12 preview" />
+
+        <div class="col-lg-9 col-12 row wrapper">
+            <span class="title col-12">{{ room.RoomCode }}</span>
+            <p class="col-6 amenity"><img src="assets/icons/hotels/people.svg"/> {{ room.Adult }} {{ "hotelCheckout.Adult" | translate }}</p>
+            @if(room.Child) {
+                <p class="col-6 amenity"><img src="assets/icons/hotels/people.svg"/> {{ room.Adult }} {{ "hotelCheckout.Child" | translate }}</p>
+            }
+
+            <div class="amenities">
+                @switch(room.RoomMeal) {
+                    @case('Room_Only') {
+                        <p class="amenity"><img src="assets/icons/hotels/room.svg" />{{ "hotelCheckout.Room only" | translate }}</p>
+                    }
+                    @case('BreakFast') {
+                        <p class="amenity"><img src="assets/icons/hotels/dinnar.svg" />{{ "hotelCheckout.Breackfast included" | translate }}</p>
+                    }
+                    @case('Half_Board') {
+                        <p class="amenity"><img src="assets/icons/hotels/dinnar.svg" />{{ "hotelCheckout.Meals included" | translate }}</p>
+                    }
+                }
+
+                @for (amenity of hotel.Amenities | slice: 0: 6; track $index) {
+                    <p class="amenity"><img src="assets/icons/hotel-card/check.svg" />{{ amenity.Amenity }}</p>
+                }
+            </div>
+
+            <p class="col-12 cancellation"><img src="assets/icons/hotel-card/check.svg" /> Free cancellation until 20 Jul, 12:00 PM</p>
+        </div>
+    </section>
+
+  }@else {
+
+    <!-- hotel-card.component.html -->
+<div class="hotel-card">
+
+  <!-- القسم الأول: معلومات الفندق -->
+  <div class="hotel-header">
+    <div class="hotel-info">
+      <h3 class="hotel-name">{{ hotel.hotelName }}</h3>
+      <p class="hotel-location">{{ hotel.City }}, {{ hotel.Country }}</p>
+    </div>
+    <img class="hotel-img" [src]="room.Images[$index + 2]"alt="hotel" />
+  </div>
+
+  <div class="hotel-services">
+    <!-- <div class="service">
+      <i class="bi bi-p-square"></i>
+      <span>وقوف السيارات</span>
+    </div> -->
+    <div class="service">
+      <img src="assets/images/hotels/formkit_date.svg" alt="">
+      <span>{{ hotel.HotelFormDto.CheckIn | date: 'd MMM y' }} - {{ hotel.HotelFormDto.CheckOut | date: 'd MMM y' }} ({{ nights }}) </span>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- القسم الثاني: تفاصيل الغرفة -->
+  <div class="room-details">
+    <h4 class="room-title">{{ room.RoomCode }}</h4>
+
+    <div class="room-guests">
+      <i class="bi bi-person"></i>
+            <p class="col-6 amenity"><img src="assets/icons/hotels/people.svg"/> {{ room.Adult }} {{ "hotelCheckout.Adult" | translate }}</p>
+            @if(room.Child) {
+                <p class="col-6 amenity"><img src="assets/icons/hotels/people.svg"/> {{ room.Adult }} {{ "hotelCheckout.Child" | translate }}</p>
+            }
+    </div>
+
+    <div class="room-features">
+
+                @for (amenity of hotel.Amenities | slice: 0: 6; track $index) {
+                    <p class="amenity"><img src="assets/icons/hotel-card/check.svg" />{{ amenity.Amenity }}</p>
+                }
+    </div>
+
+    <!-- <div class="free-cancel">
+      <i class="bi bi-check2"></i>
+      <span>إلغاء مجاني حتى 20 يوليو الساعة 12:00 ظهرًا</span>
+    </div> -->
+  </div>
+</div>
+  }
+
+}

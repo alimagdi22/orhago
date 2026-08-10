@@ -1,0 +1,68 @@
+<div class="cabin" #cabinClassTrigger="matMenuTrigger" [matMenuTriggerFor]="sharedService.screenWidth >= 1200 ? cabinClass : null" (click)="onClickInput()">
+  <p class="cabin__placeholder">{{ 'home.search.passenger' | translate }}</p>
+  <p class="cabin__guests">{{ getTotalPassenger }} {{ 'home.search.guest' | translate }}</p>
+  <p class="cabin__type">
+    {{ 'home.search.' + flightSearchService.searchFlight.get('class')?.value | translate }}
+  </p>
+</div>
+
+<mat-menu #cabinClass="matMenu" class="cabin-menu">
+  <div class="cabin-menu__guests" (click)="$event.stopPropagation()">
+    <ul class="cabin-menu__guests__list">
+      <li class="cabin-menu__guests__list__item">
+        <span class="cabin-menu__guests__list__item__title">{{ 'home.search.adult' | translate }}</span>
+        <div class="cabin-menu__guests__list__item__btns">
+          <button class="cabin-menu__guests__list__item__btns__left" (click)="changeAdultValue('decrease')">-</button>
+          <span class="cabin-menu__guests__list__item__btns__counter">
+            {{ flightSearchService.searchFlight.get('passengers')?.get('adults')?.value }}
+          </span>
+          <button class="cabin-menu__guests__list__item__btns__right" (click)="changeAdultValue('increase')">+</button>
+        </div>
+      </li>
+
+      <li class="cabin-menu__guests__list__item">
+        <span class="cabin-menu__guests__list__item__title">{{ 'home.search.child' | translate }}</span>
+        <div class="cabin-menu__guests__list__item__btns">
+          <button class="cabin-menu__guests__list__item__btns__left" (click)="changeChildValue('decrease')">-</button>
+          <span class="cabin-menu__guests__list__item__btns__counter">
+            {{ flightSearchService.searchFlight.get('passengers')?.get('child')?.value }}
+          </span>
+          <button class="cabin-menu__guests__list__item__btns__right" (click)="changeChildValue('increase')">+</button>
+        </div>
+      </li>
+
+      <li class="cabin-menu__guests__list__item">
+        <span class="cabin-menu__guests__list__item__title">{{ 'home.search.infant' | translate }}</span>
+        <div class="cabin-menu__guests__list__item__btns">
+          <button class="cabin-menu__guests__list__item__btns__left" (click)="changeInfantValue('decrease')">-</button>
+          <span class="cabin-menu__guests__list__item__btns__counter">
+            {{ flightSearchService.searchFlight.get('passengers')?.get('infant')?.value }}
+          </span>
+          <button class="cabin-menu__guests__list__item__btns__right" (click)="changeInfantValue('increase')">+</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <hr />
+  <div class="cabin-menu__options" (click)="$event.stopPropagation()">
+    <ul class="cabin-menu__options__list">
+      @for (classType of classTypes; track classType.value) {
+        <li
+          class="cabin-menu__options__list__item"
+          (click)="setClassType(classType.value, classType)"
+          [ngClass]="{ active: classType.isSelected }"
+        >
+          {{ 'home.search.' + classType.value | translate }}
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="cabin-menu__button">
+    <app-main-button
+      [title]="'home.search.done' | translate"
+      [mainButtonInfo]="cabinClassDoneButton"
+      (clickMainButton)="onClickDone()"
+    />
+  </div>
+</mat-menu>

@@ -1,0 +1,25 @@
+@import '../../../../../../../../sass/variables';
+@import '../../../../../../../../sass/colors';
+
+.tab-group {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    flex-grow: 1;
+    flex-basis: 50%;
+    cursor: pointer;
+
+    text-align: center;
+    text-transform: capitalize;
+
+    padding-block: 8px;
+    transition: all 0.2s;
+  }
+
+  .active {
+    border-radius: $base-radius-small;
+    color: map-get($map: $colors, $key: 'main');
+    background-color: map-get($map: $colors, $key: 'off-white');
+  }
+}

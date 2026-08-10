@@ -1,0 +1,24 @@
+.flight-details-modal {
+  width: 80%;
+}
+
+.error-sheet-modal,
+.user-management-sheet {
+  height: auto;
+  border-radius: 25px;
+}
+
+.register {
+  width: 60%;
+}
+
+
+@media (max-width : 768px){
+  .custom_modal{
+    max-width: 300px;
+  }
+  .register{
+    height: 90vh;
+    width: 290px;
+  }
+}

@@ -1,0 +1,12 @@
+<a href="https://wa.me/96566414350" target="_blank">
+  <img
+    src="assets/icons/whats-app-icon.svg"
+    title="Whatsapp Icon"
+    class="whatsapp-btn"
+    [ngStyle]="{
+      right: translate.currentLang === 'en' ? '10px' : 'auto',
+      left: translate.currentLang === 'en' ? 'auto' : '10px',
+      bottom: sharedService.isSegmentPresent(['checkout']) && sharedService.checkoutSteps < 1  ? '160px' : '10px'
+    }"
+  />
+</a>

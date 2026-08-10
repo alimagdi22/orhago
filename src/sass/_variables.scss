@@ -1,0 +1,75 @@
+/* theme colors */
+
+$green: #1f8f0a;
+$yellow: #d3a939;
+$white: #f4f4f4;
+$off-white: #f0fff1;
+$black: #000000;
+$black-light: #1d1d1d;
+$gray: #8f8f8f;
+$gray-dark: #7a7a7a;
+$gray-border: #cbcbcb;
+$red: #ec1b1b;
+$blue: #1877f2;
+
+/* typography */
+
+$fontSizes: (
+  'xs': 8px,
+  'sm': 12px,
+  'md': 16px,
+  'lg': 20px,
+  'xl': 24px,
+  'xxl': 28px,
+);
+
+$fontWeights: (
+  'thin': 100,
+  'extra-light': 200,
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'semi-bold': 600,
+  'bold': 700,
+);
+
+/* base border radius*/
+
+$base-radius-tiny: 6px;
+$base-radius-small: 12px;
+$base-radius: 16px;
+$base-radius-large: 36px;
+
+/* breakpoints */
+
+$breakpoints: (
+  'xs': 0,
+  'sm': 480px,
+  'md': 720px,
+  'lg': 960px,
+  'xl': 1200px,
+);
+
+/* grid */
+
+$grid-columns: 12;
+$grid-gaps: (
+  '0': 0,
+  '1': 10px,
+  '2': 20px,
+  '3': 30px,
+  '4': 40px,
+);
+
+$layout-values: (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'between': space-between,
+  'around': space-around,
+  'evenly': space-evenly,
+);
+
+/* Search Box */
+
+$inputs-height: 100px;

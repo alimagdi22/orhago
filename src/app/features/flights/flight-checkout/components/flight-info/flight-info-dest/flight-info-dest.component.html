@@ -1,0 +1,22 @@
+@if (flightSegment) {
+  <div class="info">
+    <span class="info__dest">{{ (isDepart ? 'checkout.Depart' : 'checkout.Arrival') | translate }}</span>
+    <div>
+      <p class="info__time">
+        {{
+          isDepart ? (flightSegment.departureDate | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US') : (flightSegment.arrivalDate | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
+        }}
+      </p>
+      <p class="info__date">
+        {{
+          isDepart
+            ? (flightSegment.departureDate | date: 'dd MMMM yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
+            : (flightSegment.arrivalDate | date: 'dd MMMM yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
+        }}
+      </p>
+    </div>
+    <span class="info__airport">{{
+      isDepart ? flightSegment.departureTerminalAirport.airportName : flightSegment.arrivalTerminalAirport.airportName
+    }}</span>
+  </div>
+}

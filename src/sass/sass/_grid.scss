@@ -1,0 +1,165 @@
+@use 'sass:math';
+
+/* layout classes */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* grid gaps classes */
+
+@include xs {
+  @each $key, $val in $grid-gaps {
+    .gap-xs#{$key} {
+      gap: $val;
+    }
+
+    .gap-#{$key} {
+      gap: $val;
+    }
+  }
+}
+
+@include sm {
+  @each $key, $val in $grid-gaps {
+    .gap-sm-#{$key} {
+      gap: $val;
+    }
+  }
+}
+
+@include md {
+  @each $key, $val in $grid-gaps {
+    .gap-md-#{$key} {
+      gap: $val;
+    }
+  }
+}
+
+@include lg {
+  @each $key, $val in $grid-gaps {
+    .gap-lg-#{$key} {
+      gap: $val;
+    }
+  }
+}
+
+@include xl {
+  @each $key, $val in $grid-gaps {
+    .gap-xl-#{$key} {
+      gap: $val;
+    }
+  }
+}
+
+/* grid alignment classes */
+
+@include xs {
+  @each $key, $val in $layout-values {
+    .#{$key}-xs {
+      justify-content: $val;
+    }
+
+    .#{$key} {
+      justify-content: $val;
+    }
+  }
+}
+
+@include sm {
+  @each $key, $val in $layout-values {
+    .#{$key}-sm {
+      justify-content: $val;
+    }
+  }
+}
+
+@include md {
+  @each $key, $val in $layout-values {
+    .#{$key}-md {
+      justify-content: $val;
+    }
+  }
+}
+
+@include lg {
+  @each $key, $val in $layout-values {
+    .#{$key}-lg {
+      justify-content: $val;
+    }
+  }
+}
+
+@include xl {
+  @each $key, $val in $layout-values {
+    .#{$key}-xl {
+      justify-content: $val;
+    }
+  }
+}
+
+/* grid columns classes */
+
+@mixin grid-col($i: 0, $grid-columns: 12) {
+  box-sizing: border-box;
+  flex-grow: 0;
+  width: math.div($i * 100%, $grid-columns);
+}
+
+@include xs {
+  @for $i from 1 through $grid-columns {
+    .col-xs-#{$i} {
+      @include grid-col($i, $grid-columns);
+    }
+
+    .col-#{$i} {
+      @include grid-col($i, $grid-columns);
+    }
+  }
+}
+
+@include sm {
+  @for $i from 1 through $grid-columns {
+    .col-sm-#{$i} {
+      @include grid-col($i, $grid-columns);
+    }
+  }
+}
+
+@include md {
+  @for $i from 1 through $grid-columns {
+    .col-md-#{$i} {
+      @include grid-col($i, $grid-columns);
+    }
+  }
+}
+
+@include lg {
+  @for $i from 1 through $grid-columns {
+    .col-lg-#{$i} {
+      @include grid-col($i, $grid-columns);
+    }
+  }
+}
+
+@include xl {
+  @for $i from 1 through $grid-columns {
+    .col-xl-#{$i} {
+      @include grid-col($i, $grid-columns);
+    }
+  }
+}

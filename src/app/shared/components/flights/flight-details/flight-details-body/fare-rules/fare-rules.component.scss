@@ -1,0 +1,81 @@
+@import '../../../../../../../sass/variables';
+@import '../../../../../../../sass/colors';
+
+.wrapper {
+  margin-top: 40px;
+  gap: 12px;
+}
+
+.fare-section {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+
+    th {
+      background-color: map-get($map: $colors, $key: 'main');
+      color: #fff;
+      text-align: start;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: start;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  }
+}
+
+.paragraph {
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: start;
+  font-weight: 400;
+
+  &:last-child {
+    margin-top: 10px;
+  }
+}
+
+.text-align-start {
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 70px;
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.spinner-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 300px;
+}
+
+@media (max-width:768px){
+  .container{
+    padding: 0 5px;
+  }
+}

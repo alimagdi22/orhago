@@ -1,0 +1,474 @@
+{
+  "navbar": {
+    "signIn": "تسجيل الدخول",
+    "manageBooking": "إدارة الحجز",
+    "userProfile": "الملف الشخصي",
+    "signOut": "تسجيل الخروج",
+    "signOutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟",
+    "cancel": "اغلاق"
+  },
+
+  "footer": {
+    "about": "جوتاج هي وكالة سفر إلكترونية رائدة تقدم تجارب حجز سلسة للرحلات الجوية والفنادق والمزيد. استكشف العالم معنا!",
+    "links": {
+      "home": "الرئيسية",
+      "aboutUs": "من نحن",
+      "application": "التطبيق",
+      "contactUs": "اتصل بنا",
+      "privacyPolicy": "سياسة الخصوصية",
+      "helpCenter": "مركز المساعدة"
+    },
+    "contact": {
+      "email": "info@gootaj.com",
+      "phone": "+965 66414350",
+      "address": "بجوار مطعم جاد، شارع حبيب مناور، الفروانية، الكويت"
+    },
+    "copyright": "&copy; 2025 جوتاج. جميع الحقوق محفوظة."
+  },
+
+  "searchBox": {
+    "oneway": "ذهاب",
+    "roundtrip": "ذهاب وعودة",
+    "multicity": "مدن متعددة",
+    "leaving": "المغادرة",
+    "arriving": "الوصول",
+    "placeholder": "أدخل وجهتك",
+    "noSearchResults": "لا توجد نتائج",
+    "recommendedAirports": "المطارات الموصى بها",
+    "return": "العودة",
+    "depart": "الإقلاع",
+    "returnDate": "تاريخ العودة",
+    "departDate": "تاريخ المغادرة",
+    "travellersCabin": "المسافرين / الدرجة",
+    "adult": "بالغ",
+    "child": "طفل",
+    "infant": "رضيع",
+    "Economy": "إقتصادي",
+    "Premium Economy": "اقتصادية مميزة",
+    "Business": "رجال الأعمال",
+    "First": "الدرجة الأولى",
+    "done": "تم",
+    "close": "إغلاق",
+    "search": "بحث",
+    "datePicker": "اختيار التاريخ",
+    "Destination": "الوجهة",
+    "Entercity": "ادخل اسم المدينة",
+    "hotelHead": "اين تريد الاقامة ؟",
+    "checkIn": "الدخول",
+    "checkOut": "الخروج",
+    "guestsRooms": "النزلاء والغرف",
+    "room": "غرفة",
+    "removeRoom": "إزالة الغرفة",
+    "decreaseAdults": "تقليل عدد البالغين",
+    "increaseAdults": "زيادة عدد البالغين",
+    "decreaseChildren": "تقليل عدد الأطفال",
+    "increaseChildren": "زيادة عدد الأطفال",
+    "childAge": "عمر الطفل",
+    "year": "سنة",
+    "years": "سنوات",
+    "addRoom": "إضافة غرفة",
+    "adults": "بالغين",
+    "children": "أطفال",
+    "rooms": "غرف",
+    "Location": "الموقع",
+    "hotels":"الفنادق",
+    "searchHotels": "بحث الفنادق",
+    "guest" : "نزيل",
+    "guests" : "نزلاء",
+    "dateSelection":"اختر تاريخ"
+  },
+
+  "home": {
+    "bannarTitle": "خطط لخيالك واحجز رحلتك",
+    "search": {
+      "flights": "رحلات الطيران",
+      "oneWay": "ذهاب فقط",
+      "roundTrip": "ذهاب وعودة",
+      "multiCity": "وجهات متعددة",
+      "from": "من",
+      "to": "إلى",
+      "leavingFrom": "المغادرة من",
+      "goingTo": "الذهاب إلى",
+      "depart": "المغادرة",
+      "arrive": "الوصول",
+      "popularDest": "وجهات مشهورة",
+      "selectDate": "اختر تاريخًا",
+      "passenger": "المسافرين",
+      "guest": "راكب",
+      "adult": "بالغ",
+      "child": "طفل",
+      "infant": "رضيع",
+      "Economy": "الدرجة الاقتصادية",
+      "Premium Economy": "الدرجة الاقتصادية الممتازة",
+      "Business": "درجة رجال الأعمال",
+      "First": "الدرجة الأولى",
+      "addReturn": "إضافة رحلة عودة",
+      "done": "تم",
+      "addFlight": "إضافة رحلة",
+      "addFlightNote": "يمكن إضافة 4 رحلات مختلفة كحد أقصى",
+      "searchTicket": "البحث عن تذكرة"
+    },
+    "adContent": {
+      "title": "افتح ميزات حصرية متاحة فقط على تطبيق Travelo. قم بتنزيله الآن!",
+      "features": [
+        "استمتع بأكثر من عشر ميزات عملية مخصصة حصريًا لمستخدمي التطبيق",
+        "احصل على وصول مبكر إلى العروض والخصومات الجديدة",
+        "إدارة الحجوزات الخاصة بك بسهولة باستخدام الأدوات المتقدمة"
+      ],
+      "scanToDownload": "امسح للتنزيل"
+    },
+    "flightDeals": {
+      "title": "أفضل عروض الطيران",
+      "description": "اكتشف وجهاتنا المميزة وابحث عن الرحلة المثالية. سواء كنت تبحث عن الاسترخاء أو المغامرة أو تجربة ثقافية، فإن Travelo لديها ما يناسب كل مسافر."
+    },
+    "hotelDeals": {
+      "title": "البحوثات الأكثر انتشاراً",
+      "description": "اكتشف وجهاتنا المميزة وابحث عن الإقامة المثالية. سواء كنت تبحث عن الراحة، المغامرة، أو تجربة ثقافية، فإن Travelo لديها ما يناسب الجميع."
+    },
+    "populerCities": {
+      "title": "المدن الأكثر شهرة للفنادق"
+    },
+    "populerAirlines": {
+      "title": "شركات الطيران الأكثر شهرة"
+    }
+  },
+
+  "results": {
+    "availableFlights": "الرحلات المتاحة",
+    "loadingMessage": "جاري تحميل نتائج البحث، يرجى الانتظار.",
+
+    "filter": {
+      "price": "السعر",
+      "min": "الحد الأدنى",
+      "max": "الحد الأقصى",
+      "minPrice": "أقل سعر",
+      "maxPrice": "أعلى سعر",
+      "flightSchedules": "جداول الرحلات",
+      "departure": "المغادرة",
+      "arrival": "الوصول",
+      "Morning": "الصباح",
+      "Noon": "الظهر",
+      "Afternoon": "بعد الظهر",
+      "Night": "الليل",
+      "airlines": "شركات الطيران",
+      "refundability": "قابلية الاسترداد",
+      "refundable": "قابل للاسترداد",
+      "nonRefundable": "غير قابل للاسترداد",
+      "stops": "التوقفات",
+      "1 Stop": "توقف واحد",
+      "2 Stops": "توقفان",
+      "Non-Stop": "بدون توقف"
+    },
+
+    "sort": {
+      "Cheapest": "الأرخص",
+      "Fastest": "الأسرع"
+    },
+
+    "card": {
+      "ticketPrice": "سعر التذكرة",
+      "flightDetails": "تفاصيل الرحلة",
+      "refundable": "قابل للاسترداد",
+      "nonRefundable": "غير قابل للاسترداد",
+      "One Stop": "توقف واحد",
+      "Two Stops": "توقفان",
+      "Three Stops": "ثلاث توقفات",
+      "Four Stops": "أربع توقفات",
+      "Non-Stops": "بدون توقف",
+      "select": "اختيار",
+      "duration":"المدة الإجمالية",
+      "transit": "وقت العبور"
+
+    }
+  },
+
+  "flightDetails": {
+    "title": "تفاصيل الرحلة",
+    "pricePerAdult": "السعر لكل بالغ",
+    "select": "اختر",
+
+    "headers": {
+      "Itinerary": "مسار الرحلة",
+      "Fare Rules": "قواعد السفر",
+      "Baggage": "الأمتعة"
+    },
+
+    "itinerary": {
+      "Departure": "الذهاب",
+      "Arrive": "العودة",
+      "One Stop": "توقف واحد",
+      "Two Stops": "توقفان",
+      "Three Stops": "ثلاث توقفات",
+      "Four Stops": "أربع توقفات",
+      "Non-Stops": "مباشر",
+      "Economy": "الدرجة الاقتصادية",
+      "Premium Economy": "الدرجة الاقتصادية الممتازة",
+      "Business": "درجة رجال الأعمال",
+      "First": "الدرجة الأولى",
+      "travelTime": "مدة السفر",
+      "changeIn": "التغيير في",
+      "terminal":"صاله"
+    },
+
+    "fareRules": {
+      "fareBreakup": "تفصيل الأجرة",
+      "cancellationFee": "رسوم الإلغاء:",
+      "baseFare": "الأجرة الأساسية:",
+      "taxesFees": "الضرائب والرسوم:",
+      "totalPrice": "السعر الإجمالي",
+      "fareRules": "قواعد السفر",
+      "sector": "القطاع",
+      "airlineFee": "رسوم شركة الطيران",
+      "adminCharges": "الرسوم الإدارية",
+      "perPassenger": "لكل مسافر",
+      "dateChangeFee": "رسوم تغيير التاريخ:",
+      "allChangesNote": "جميع التغييرات تتم قبل موعد المغادرة المجدول للرحلة الأولى. لا تشمل رسوم عدم الحضور الإضافية.",
+      "pleaseNote": "يرجى الملاحظة: رسوم الخدمات الإضافية، رسوم الراحة، والخصم الذي تلقيته باستخدام رمز القسيمة غير قابلة للاسترداد. سيتم تعديل المبلغ المسترد النهائي وفقًا للخصومات.",
+      "airlinePolicyNote": "*تتوقف شركات الطيران عن قبول طلبات الإلغاء/التغيير قبل 4 - 72 ساعة من موعد مغادرة الرحلة، وذلك حسب شركة الطيران. رسوم شركة الطيران تقديرية بناءً على تفسير آلي لقواعد أجرة الطيران. لا تضمن تاج دقة هذه المعلومات. قد تختلف رسوم التغيير/الإلغاء أيضًا بناءً على تقلبات أسعار صرف العملات. للحصول على رسوم الإلغاء/التغيير الدقيقة، يرجى الاتصال برقم خدمة العملاء لدينا."
+    },
+
+    "baggage": {
+      "title": "الأمتعه",
+      "included": "مشمول",
+      "perPerson": "للشخص الواحد",
+      "adultItems": "أمتعة البالغين",
+      "childItems": "أمتعة الأطفال",
+      "infantItems": "أمتعة الرضع",
+      "cabin":"الأمتعة",
+      "hand":"حقيبة المقصوره",
+      "baggage-allowance":"بدل الأمتعة",
+
+      "notPossible": "قد تختلف سياسة الأمتعة بناءً على الأجرة",
+      "check":"الأمتعة المسجلة عادة تصل إلى 23 كجم",
+      "baggageType": "أمتعة مشحونة",
+      "message": "ستتمكن من إضافة الأمتعة عند تسجيل الوصول أو في المطار.",
+
+      "note": "قد تنطبق بدلات أمتعة مختلفة، نحن نظهر الحد الأدنى المسموح به. راجع خط سير الرحلة للحصول على مزيد من التفاصيل حول الأمتعة."
+    }
+  },
+
+  "checkout": {
+    "Depart": "المغادرة",
+    "Arrival": "الوصول",
+    "Direct": "مباشر",
+    "Transit": "ترانزيت",
+    "seeMoreDetails": "عرض المزيد من التفاصيل",
+    "travelerDetails": "تفاصيل المسافر",
+    "review": "مراجعة",
+    "payment": "الدفع",
+    "contactInfo": "معلومات الاتصال",
+    "contactNumber": "رقم الاتصال",
+    "gmail": "جيميل",
+    "email": "البريد الإلكتروني",
+    "Adult": "بالغ",
+    "Child": "طفل",
+    "Infant": "رضيع",
+    "Male": "ذكر",
+    "Female": "أنثى",
+    "phoneNumber": "رقم الهاتف",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "dateOfBirth": "تاريخ الميلاد",
+    "selectDate": "اختر التاريخ",
+    "passportNumber": "رقم جواز السفر",
+    "country": "الدولة",
+    "selectCountry": "اختر الدولة",
+    "passportExpiry": "تاريخ انتهاء جواز السفر",
+    "previous": "السابق",
+    "next": "التالي",
+    "payWithWhatsapp": "الدفع مع تنبيهات واتساب @",
+    "payWithoutWhatsapp": "الدفع بدون تنبيهات واتساب",
+    "processToPayment":"مواصلة عملية الدفع",
+    "guestDetails":"تفاصيل الضيف"
+  },
+
+  "confirmation": {
+    "emailTicket": "إرسال التذكرة عبر البريد الإلكتروني",
+    "print": "طباعة",
+    "bookingId": "رقم الحجز:                ",
+    "pnr": "سجل بيانات المسافر:",
+    "bookingDate": "تاريخ الحجز: ",
+    "passengerName": "اسم المسافر",
+    "passengerNumber": "رقم المسافر",
+    "ticket": "تذكرة",
+    "airlinePNR": "مرجع الحجز الخاص بشركة الطيران",
+    "flightDetails": "تفاصيل الرحلة",
+    "airlineRef": "مرجع شركة الطيران:",
+    "Departure": "المغادرة",
+    "Arrive": "الوصول",
+    "baggage": "الأمتعة",
+    "perPerson": "لكل شخص",
+    "baggageMessage": "يتحمل الضيوف مسؤولية الحصول على جميع وثائق الدخول والخروج، والصحة، والتأشيرات، وغيرها من المستندات المطلوبة بموجب القوانين واللوائح والأوامر والمتطلبات في الدول التي يسافرون منها أو إليها أو يعبرونها. نحن نحتفظ بالحق في رفض نقل أي ضيف لم يلتزم بهذه القوانين واللوائح والمتطلبات المعمول بها.",
+    "contactInfo": "معلومات الاتصال",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "phoneNumber": "رقم الهاتف",
+    "fareDetails": "تفاصيل السعر",
+    "fare": "السعر   ",
+    "tax": "الضريبة",
+    "total": "الإجمالي  "
+  },
+
+  "about": {
+    "title": "إعادة تعريف تجارب السفر",
+    "gateway": "بوابتك للرحلات التي لا تُنسى",
+    "description": "جوتاج هي منصة سفر إلكترونية موثوقة تربط المسافرين بأفضل خيارات الرحلات الجوية والفنادق في جميع أنحاء العالم. مهمتنا هي جعل التخطيط للسفر سهلاً وممتعًا.",
+    "storyTitle": "قصتنا",
+    "storyDescription": "تأسست جوتاج في عام 2020 بهدف جعل السفر تجربة مريحة وممتعة للجميع. نؤمن بأن الرحلات تبدأ بخطوة بسيطة، ونحن هنا لنكون شريكك الأول في تلك الخطوة.",
+    "advantages": {
+      "exclusiveDeals": "عروض حصرية",
+      "exclusiveDealsDesc": "الوصول إلى أسعار لا تقبل المنافسة على الرحلات الجوية والفنادق وحزم العطلات.",
+      "personalizedRecommendations": "توصيات مخصصة",
+      "personalizedRecommendationsDesc": "اقتراحات سفر مخصصة بناءً على تفضيلاتك واهتماماتك.",
+      "comprehensiveSupport": "دعم شامل",
+      "comprehensiveSupportDesc": "خدمة العملاء على مدار 24/7 لمساعدتك في كل مرحلة من رحلتك."
+    },
+    "missionTitle": "مهمتنا",
+    "missionDescription": "تقديم حلول سفر شاملة تجمع بين الكفاءة والتميز، مع التركيز على راحة العملاء ورضاهم.",
+    "valuesTitle": "قيمنا",
+    "values": {
+      "customerCentric": "العميل في المقام الأول",
+      "customerCentricDesc": "رضاك هو أولويتنا القصوى. نحن ملتزمون بتقديم خدمة ودعم استثنائيين.",
+      "integrity": "النزاهة",
+      "integrityDesc": "نحن نعمل بصدق وشفافية، ونبني الثقة مع عملائنا وشركائنا.",
+      "innovation": "الابتكار",
+      "innovationDesc": "نبحث باستمرار عن حلول مبتكرة لتحسين تجربة سفرك.",
+      "passionForTravel": "شغف بالسفر",
+      "passionForTravelDesc": "حبنا للسفر في صميم كل ما نقوم به، مما يلهمنا لمشاركة شغفنا معك."
+    },
+    "visionTitle": "رؤيتنا",
+    "visionDescription": "أن نكون الخيار الأول لكل مسافر يبحث عن الجودة والراحة والأسعار المناسبة."
+  },
+
+  "user": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "emailLabel": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "errorMessagePlaceholder": "مكان رسالة الخطأ",
+      "invalidUserError": "المستخدم غير صالح أو حدث خطأ ما ..",
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "signIn": "تسجيل الدخول",
+      "signInWithGoogle": "تسجيل الدخول باستخدام جوجل",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "سجل الآن"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "exitIconTitle": "أيقونة الخروج",
+      "firstNameLabel": "الاسم الأول",
+      "firstNamePlaceholder": "أدخل اسمك الأول",
+      "lastNameLabel": "الاسم الأخير",
+      "lastNamePlaceholder": "أدخل اسمك الأخير",
+      "userNameLabel": "اسم المستخدم",
+      "userNamePlaceholder": "أدخل اسمك المستعار",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "phoneNumberLabel": "رقم الهاتف",
+      "phoneNumberPlaceholder": "أدخل رقم هاتفك",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "confirmPasswordLabel": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+      "passwordMismatch": "كلمة المرور غير متطابقة.",
+      "errorMessagePlaceholder": "مكان رسالة الخطأ",
+      "invalidUserError": "مستخدم غير صالح أو حدث خطأ ما ..",
+      "termsAgreement": "أوافق على - و -",
+      "signUp": "إنشاء حساب",
+      "signUpWithGoogle": "التسجيل عبر جوجل",
+      "alreadyHaveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول"
+    },
+
+    "forgetPassword": {
+      "successTitle": "إعادة تعيين كلمة المرور",
+      "successMessage": "تمت إعادة تعيين كلمة المرور بنجاح. اضغط أدناه لتسجيل الدخول.",
+      "continueButton": "متابعة",
+      "backToLogin": "العودة إلى تسجيل الدخول",
+      "backToLoginTitle": "العودة",
+      "setNewPasswordTitle": "تعيين كلمة مرور جديدة",
+      "setNewPasswordMessage": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور السابقة.",
+      "newPasswordLabel": "كلمة المرور الجديدة",
+      "newPasswordPlaceholder": "أدخل كلمة المرور",
+      "confirmPasswordLabel": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+      "passwordMismatchError": "كلمة المرور غير متطابقة.",
+      "generalError": "مستخدم غير صالح أو حدث خطأ ما ..",
+      "resetPasswordButton": "إعادة تعيين كلمة المرور"
+    },
+    "otp": {
+      "title": "كلمة المرور لمرة واحدة",
+      "message": "لقد أرسلنا لك رمز التحقق. يرجى التحقق من بريدك الإلكتروني.",
+      "error": "رمز التحقق غير صالح."
+    },
+
+    "resetPassword": {
+      "emailSentTitle": "تحقق من بريدك الإلكتروني",
+      "emailSentMessage": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى",
+      "openEmailApp": "افتح تطبيق البريد الإلكتروني",
+      "resendEmail": "لم يصلك البريد الإلكتروني؟",
+      "clickResend": " اضغط لإعادة الإرسال",
+      "backToLogin": "العودة إلى تسجيل الدخول",
+      "backToLoginTitle": "العودة",
+      "forgetPasswordTitle": "نسيت كلمة المرور",
+      "forgetPasswordMessage": "لا تقلق، سنرسل لك تعليمات إعادة التعيين.",
+      "emailLabel": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+      "generalError": "مستخدم غير صالح أو حدث خطأ ما ..",
+      "sendButton": "إرسال"
+    },
+
+    "sideNav": {
+      "profile": "ملفي الشخصي",
+      "flight": "حجز الرحلات",
+      "hotels": "حجز الفنادق",
+      "signOut": "تسجيل الخروج"
+    },
+
+    "profile": {
+      "firstName": "الاسم الأول",
+      "firstNamePlaceholder": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "lastNamePlaceholder": "اسم العائلة",
+      "gmail": "جيميل",
+      "emailPlaceholder": "البريد الإلكتروني",
+      "contactNumber": "رقم الاتصال",
+      "privacyPolicy": "أعطي تاج الإذن بإرسال رسائل بريد إلكتروني ورسائل نصية إعلامية وترويجية وفقًا لـ",
+      "privacyPolicyLink": "سياسة الخصوصية",
+      "changePassword": "تغيير كلمة المرور",
+      "save": "حفظ"
+    },
+
+    "changePassword": {
+      "gmail": "جيميل",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+      "save": "حفظ"
+    },
+
+    "hotels": {
+      "empty": "لا توجد حجوزات فنادق لعرضها"
+    },
+
+    "flights": {
+      "empty": "لا توجد حجوزات رحلات لعرضها"
+    },
+    "hotels-filter":{
+      "filter":"Filter",
+      "popular":"Popular Filter",
+      "star":"Star Rate",
+      "location":"Location",
+      "reset":"Reset Filters"
+    }
+  },
+
+  "hotelCard": {
+    "Parking": "موقف سيارات",
+    "Swimming Pool": "حمام سباحة",
+    "Per night": "لكل ليلة",
+    "Show More Results": "عرض المزيد من النتائج",
+    "View Deal": "عرض الصفقة"
+  }
+}

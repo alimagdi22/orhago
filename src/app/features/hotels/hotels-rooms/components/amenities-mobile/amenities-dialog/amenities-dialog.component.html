@@ -1,0 +1,12 @@
+<div class="pop">
+  <h3 class="fw-bold mb-3">All Amenities</h3>
+
+  <div class="row g-2">
+    <div class="col-md-6" *ngFor="let item of data">
+      <div class="amenity-box d-flex align-items-center">
+        <span class="me-2">✔️</span>
+        <span>{{ item.Amenity }}</span>
+      </div>
+    </div>
+  </div>
+</div>

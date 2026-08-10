@@ -1,0 +1,29 @@
+<div class="payment-dialog">
+  <img
+    [src]="'assets/icons/modals-icons/' + (isSuccess ? 'success-payment.svg' : 'unnamed.jpg')"
+    [alt]="isSuccess ? 'Success' : 'Faild'"
+    class="payment-dialog__icon"
+  />
+
+  <div class="payment-dialog__text">
+    <p class="payment-dialog__text__title">{{ isSuccess ? 'You Got the Ticket!' : 'Whoops!' }}</p>
+    <p class="payment-dialog__text__content">
+      {{
+        isSuccess
+          ? 'The ticket purchase was successful.'
+          : 'Purchase failed. Please try again.'
+      }}
+    </p>
+  </div>
+
+  <button
+    class="payment-dialog__btn"
+    [ngClass]="{
+      success: isSuccess,
+      faild: !isSuccess,
+    }"
+    (click)="isSuccess ? placeholder() : goToHomePage()"
+  >
+    {{ isSuccess ? 'See reservation confimation' : 'Let’s try again' }}
+  </button>
+</div>

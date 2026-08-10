@@ -1,0 +1,92 @@
+@if(sharedService.screenWidth > 900){
+  <header class="col-12">
+      <div>
+          <p class="title">{{ roomsData.hotelName }}</p>
+          <div class="wrapper">
+              <div class="stars">
+                  @for (star of stars; track $index) {
+                  <img src="assets/icons/hotel-card/star.svg" />
+                  }
+              </div>
+
+              <p class="location">{{ roomsData.City }}, {{ roomsData.Country }}</p>
+          </div>
+      </div>
+
+      <div class="wrapper">
+          <p>{{ currency | exchange: 'code' }}<span class="price">{{ roomsData.TotalSellPrice | exchange: 'value' | number }}</span></p>
+          <!-- <app-main-button title="Select" [mainButtonInfo]="selectButton" /> -->
+      </div>
+  </header>
+}
+
+<section class="images-section col-lg-9 col-12">
+    @for (image of roomsData.hotelImages | slice: 0 : 6; track $index) {
+        <img [src]="image" [class.main-img]="$first" (click)="openGallery($index)" />
+    }
+    <article (click)="openGallery()">
+        <p>+{{ roomsData.hotelImages.length - 6 }}</p>
+        <img [src]="roomsData.hotelImages[6]" />
+    </article>
+</section>
+
+@if(sharedService.screenWidth < 900){
+  <header class="col-12">
+      <div class="d-flex flex-column gap-2">
+          <p class="title">{{ roomsData.hotelName }}</p>
+          <div class="contain">
+            <div class="wrapper ">
+                <div class="stars">
+                    @for (star of stars; track $index) {
+                    <img src="assets/icons/hotel-card/star.svg" />
+                    }
+                </div>
+
+                <p class="location">{{ roomsData.City }}, {{ roomsData.Country }}</p>
+            </div>
+              <img src="assets/icons/share-square.svg" alt="share" class="share-icon" (click)="copyLink()">
+          </div>
+      </div>
+
+
+  </header>
+}
+
+@if(sharedService.screenWidth > 900){
+
+  <section class="info-section col-lg-3 col-12">
+      <div class="review">
+          <!-- <p><span class="rate">6.4</span> <span class="number">(1234 reviews)</span></p> -->
+          <p>
+              <img src="assets/icons/hotels/smile-face.svg" />
+              {{ "hotelRooms.Good breakfast" | translate }}
+          </p>
+          <p>
+              <img src="assets/icons/hotels/smile-face.svg" />
+              {{ "hotelRooms.Nice pool" | translate }}
+          </p>
+      </div>
+
+      <div class="amenities">
+          <p>{{ "hotelRooms.Popular amenities" | translate }}</p>
+          <p>
+              <img src="assets/icons/hotel-card/parking.svg"/>
+              {{ "hotelRooms.Parking" | translate }}
+          </p>
+          <p>
+              <img src="assets/icons/hotel-card/swimming-pool.svg"/>
+              {{ "hotelRooms.Swimming pool" | translate }}
+          </p>
+      </div>
+
+      <iframe
+          width="600"
+          height="450"
+          class="map"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          [src]="location">
+      </iframe>
+  </section>
+}

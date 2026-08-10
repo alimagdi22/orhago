@@ -1,0 +1,16 @@
+<button mat-button [matMenuTriggerFor]="menu" class="drop-down">
+  {{ userName }}
+</button>
+<mat-menu #menu="matMenu">
+  <a mat-menu-item routerLink="user-management">
+    <img src="assets/icons/userPage/profile-icon.svg" title="Profile Icon" width="20" />
+    {{ 'navbar.userProfile' | translate }}
+  </a>
+
+  <button mat-menu-item (click)="alertTrigger = true">
+    <img src="assets/icons/userPage/logout-icon.svg" title="Sing Out Icon" width="20" />
+    {{ 'navbar.signOut' | translate }}
+  </button>
+</mat-menu>
+
+<app-sign-out-alert-modal (clickCancel)="alertTrigger = false" *ngIf="alertTrigger" @fadeAnimation />

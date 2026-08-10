@@ -1,0 +1,507 @@
+@if (flightCheckoutService.loader || flightResultService.isBrandedFaresLoading) {
+  <app-spinner-loader />
+} @else {
+  <div class="container margin-bottom">
+    <app-flight-info />
+    <app-checkout-steps [id]="0" />
+
+    @if (!sharedService.showPayment) {
+      <ng-container [formGroup]="flightCheckoutService.usersForm">
+        <ng-container formArrayName="users">
+          @for (user of flightCheckoutService.usersArray.controls | slice: 0 : 1; track $index; let i = $index) {
+            <h3 class="col-12">{{ 'checkout.contactInfo' | translate }}</h3>
+
+            <ng-container [formGroupName]="i">
+              <div class="custom-radio-group">
+                <div>
+                  <label>{{ 'checkout.contactNumber' | translate }}</label>
+
+                  @if (sharedService.checkoutSteps >= 1) {
+                    <div class="custom-input-container">
+                      <input
+                        type="text"
+                        [value]="sharedService.users[0].phoneNumber.number"
+                        [title]="'checkout.phoneNumber' | translate"
+                        disabled
+                      />
+                    </div>
+                  } @else {
+                    <ngx-intl-tel-input
+                      name="phone"
+                      [cssClass]="isPhoneNumberInvalid ? 'alert' : 'custom-phone-container'"
+                      [preferredCountries]="['us', 'gb', 'eg', 'sa']"
+                      [enableAutoCountrySelect]="true"
+                      [enablePlaceholder]="true"
+                      [searchCountryFlag]="true"
+                      [searchCountryPlaceholder]="'Search country name, code, or +dial'"
+                      [searchCountryField]="countrySearchFields"
+                      [selectedCountryISO]="CountryISO.Kuwait"
+                      formControlName="phoneNumber"
+                      (input)="checkPhoneNumberValidation()">
+                    </ngx-intl-tel-input>
+                  }
+                  @if (isPhoneNumberInvalid) {
+                    <p
+                      [ngStyle]="{
+                        visibility: 'visible',
+                      }"
+                      class="validation-msg"
+                    >
+                      {{ lang === 'en' ? 'Please enter valid phone number.' : 'من فضلك ادخل رقم هاتف صحيح' }}
+                    </p>
+                  }
+                </div>
+
+                <div>
+                  <label>{{ 'checkout.gmail' | translate }}</label>
+                  <div
+                    class="custom-input-container"
+                    [ngStyle]="{ borderColor: user.get('email')?.invalid && user.get('email')?.touched ? 'red' : '' }"
+                  >
+                    <span class="input-icon">
+                      <img src="assets/icons/email-icon.svg" alt="icon" />
+                    </span>
+                    @if (sharedService.checkoutSteps >= 1) {
+                      <input type="text" [value]="sharedService.users[0].email" title="Email" disabled />
+                    } @else {
+                      <input
+                        type="text"
+                        title="Email"
+                        [placeholder]="'checkout.email' | translate"
+                        formControlName="email"
+                      />
+                    }
+                  </div>
+
+                  @if (user.get('email')?.invalid && user.get('email')?.touched) {
+                    <p
+                      [ngStyle]="{
+                        visibility: 'visible',
+                      }"
+                      class="validation-msg"
+                    >
+                      {{ getErrorMessage(user.get('email')!, 'email', lang) }}
+                    </p>
+                  } @else {
+                    <p
+                      [ngStyle]="{
+                        visibility: 'hidden',
+                      }"
+                      class="validation-msg"
+                    >
+                      Error Message Placeholder
+                    </p>
+                  }
+                </div>
+              </div>
+            </ng-container>
+          }
+
+          @for (user of flightCheckoutService.usersArray.controls; track $index; let i = $index) {
+            <div class="expansion-container">
+              <app-expansion-panel
+                [title]="
+                  ('checkout.' + sharedService.getPassengerTypeName(user.value.PassengerType) | translate) + ' ' + (i + 1)
+                "
+                [id]="i"
+              >
+                @if (sharedService.checkoutSteps === 0) {
+                  <ng-container [formGroupName]="i">
+                    <div class="custom-radio-group">
+                      <label
+                        *ngFor="let option of genderOptions"
+                        class="radio-btn"
+                        [ngStyle]="{ borderColor: isInputValid(user, 'title') ? 'red' : '' }"
+                      >
+                        <input type="radio" [value]="option" formControlName="title" />
+                        {{ 'checkout.' + option | translate }}
+                      </label>
+
+                      <div>
+                        <label>{{ 'checkout.firstName' | translate }}</label>
+
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{ borderColor: isInputValid(user, 'firstName') ? 'red' : '' }"
+                        >
+                          <input
+                            type="text"
+                            [placeholder]="'checkout.firstName' | translate"
+                            formControlName="firstName"
+                          />
+                        </div>
+
+                        @if (user.get('firstName')?.invalid && user.get('firstName')?.touched) {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'visible',
+                            }"
+                            class="validation-msg"
+                          >
+                            {{ getErrorMessage(user.get('firstName')!, 'firstName', lang) }}
+                          </p>
+                        } @else {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'hidden',
+                            }"
+                            class="validation-msg"
+                          >
+                            Error Message Placeholder
+                          </p>
+                        }
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.lastName' | translate }}</label>
+
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{ borderColor: isInputValid(user, 'lastName') ? 'red' : '' }"
+                        >
+                          <input type="text" [placeholder]="'checkout.lastName' | translate" formControlName="lastName" />
+                        </div>
+
+                        @if (user.get('lastName')?.invalid && user.get('lastName')?.touched) {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'visible',
+                            }"
+                            class="validation-msg"
+                          >
+                            {{ getErrorMessage(user.get('lastName')!, 'lastName', lang) }}
+                          </p>
+                        } @else {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'hidden',
+                            }"
+                            class="validation-msg"
+                          >
+                            Error Message Placeholder
+                          </p>
+                        }
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.dateOfBirth' | translate }}</label>
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{ borderColor: isInputValid(user, 'dateOfBirth') ? 'red' : '' }"
+                        >
+                          <span class="input-icon">
+                            <img src="assets/icons/calander-input-icon.svg" alt="icon" />
+                          </span>
+                          <input
+                            matInput
+                            [matDatepicker]="dateOfBirthPicker"
+                            [placeholder]="'checkout.selectDate' | translate"
+                            (click)="dateOfBirthPicker.open()"
+                            formControlName="dateOfBirth"
+                            type="datetime"
+                            [max]="getMaxDate(user.value.PassengerType)"
+                            [min]="getMinDate(user.value.PassengerType)"
+                            readonly
+                          />
+                          <mat-datepicker
+                            #dateOfBirthPicker
+                            startView="multi-year"
+                            panelClass="custom-datepicker-panel"
+                            [startAt]="getMaxDate(user.value.PassengerType)"
+                          >
+                          </mat-datepicker>
+                        </div>
+
+                        @if (user.get('dateOfBirth')?.invalid && user.get('dateOfBirth')?.touched) {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'visible',
+                            }"
+                            class="validation-msg"
+                          >
+                            {{ getErrorMessage(user.get('dateOfBirth')!, 'dateOfBirth', lang) }}
+                          </p>
+                        } @else {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'hidden',
+                            }"
+                            class="validation-msg"
+                          >
+                            Error Message Placeholder
+                          </p>
+                        }
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.passportNumber' | translate }}</label>
+
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{ borderColor: isInputValid(user, 'PassportNumber') ? 'red' : '' }"
+                        >
+                          <input
+                            type="text"
+                            [placeholder]="'checkout.passportNumber' | translate"
+                            formControlName="PassportNumber"
+                          />
+                        </div>
+
+                        @if (user.get('PassportNumber')?.invalid && user.get('PassportNumber')?.touched) {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'visible',
+                            }"
+                            class="validation-msg"
+                          >
+                            {{ getErrorMessage(user.get('PassportNumber')!, 'PassportNumber', lang) }}
+                          </p>
+                        } @else {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'hidden',
+                            }"
+                            class="validation-msg"
+                          >
+                            Error Message Placeholder
+                          </p>
+                        }
+                      </div>
+
+                      <mat-autocomplete
+                        (optionSelected)="assignCountries($event, i)"
+                        #issuedCountryAuto="matAutocomplete"
+                      >
+                        <mat-option
+                          *ngFor="let country of homePageService.allCountries | councode: issuedCountryAutoi.value"
+                          [value]="country.countryName"
+                        >
+                          {{ country.countryName }}
+                        </mat-option>
+                      </mat-autocomplete>
+
+                      <div>
+                        <label>{{ 'checkout.country' | translate }}</label>
+
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{
+                            borderColor:
+                              isInputValid(user, 'IssuedCountry') ||
+                              (!user.value.isIssuedCountrySelected && user.get('IssuedCountry')!.touched)
+                                ? 'red'
+                                : '',
+                          }"
+                        >
+                          <input
+                            class="passengerInput"
+                            type="text"
+                            formControlName="IssuedCountry"
+                            aria-label="country"
+                            [matAutocomplete]="issuedCountryAuto"
+                            #issuedCountryAutoi
+                            [placeholder]="'checkout.selectCountry' | translate"
+                            (input)="onInputIssuedCountry(i)"
+                          />
+                        </div>
+
+                        @if (
+                          isInputValid(user, 'IssuedCountry') ||
+                          (!user.value.isIssuedCountrySelected && user.get('IssuedCountry')!.touched)
+                        ) {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'visible',
+                            }"
+                            class="validation-msg"
+                          >
+                            {{ lang === 'en' ? 'Please select a country.' : 'من فضلك اختر دولة.' }}
+                          </p>
+                        } @else {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'hidden',
+                            }"
+                            class="validation-msg"
+                          >
+                            Error Message Placeholder
+                          </p>
+                        }
+                      </div>
+                      <div>
+                        <label>{{ 'checkout.passportExpiry' | translate }}</label>
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{ borderColor: isInputValid(user, 'PassportExpiry') ? 'red' : '' }"
+                        >
+                          <input
+                            matInput
+                            [matDatepicker]="passportExpiryPicker"
+                            placeholder="MM/YY"
+                            (click)="passportExpiryPicker.open()"
+                            formControlName="PassportExpiry"
+                            readonly
+                            [min]="passportExpiryDate"
+                            appPassportExpiryDate
+                          />
+                          <mat-datepicker
+                            #passportExpiryPicker
+                            startView="multi-year"
+                            panelClass="custom-datepicker-panel"
+                            [startAt]="passportExpiryDate"
+                          >
+                          </mat-datepicker>
+                        </div>
+
+                        @if (user.get('PassportExpiry')?.invalid && user.get('PassportExpiry')?.touched) {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'visible',
+                            }"
+                            class="validation-msg"
+                          >
+                            {{ getErrorMessage(user.get('PassportExpiry')!, 'PassportExpiry', lang) }}
+                          </p>
+                        } @else {
+                          <p
+                            [ngStyle]="{
+                              visibility: 'hidden',
+                            }"
+                            class="validation-msg"
+                          >
+                            Error Message Placeholder
+                          </p>
+                        }
+                      </div>
+                    </div>
+                  </ng-container>
+                } @else if (sharedService.checkoutSteps >= 1) {
+                  <ng-container>
+                    <div class="custom-radio-group">
+                      <label *ngFor="let option of genderOptions" class="radio-btn">
+                        <input
+                          type="radio"
+                          [value]="option"
+                          [checked]="sharedService.users[i].title === option"
+                          disabled
+                        />
+                        {{ option }}
+                      </label>
+
+                      <div>
+                        <label>{{ 'checkout.firstName' | translate }}</label>
+
+                        <div class="custom-input-container">
+                          <input type="text" [value]="sharedService.users[i].firstName" title="First Name" disabled />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.lastName' | translate }}</label>
+
+                        <div class="custom-input-container">
+                          <input type="text" [value]="sharedService.users[i].lastName" title="Last Name" disabled />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.dateOfBirth' | translate }}</label>
+
+                        <div class="custom-input-container">
+                          <span class="input-icon">
+                            <img src="assets/icons/calander-input-icon.svg" alt="icon" />
+                          </span>
+
+                          <input
+                            type="text"
+                            [value]="sharedService.users[i].dateOfBirth | date: 'M/d/yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'"
+                            title="Date of Birth"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.passportNumber' | translate }}</label>
+
+                        <div class="custom-input-container">
+                          <input
+                            type="text"
+                            [value]="sharedService.users[i].PassportNumber"
+                            title="Passport Number"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.country' | translate }}</label>
+
+                        <div class="custom-input-container">
+                          <input
+                            type="text"
+                            [value]="sharedService.users[i].IssuedCountry"
+                            title="Issued Country"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label>{{ 'checkout.passportExpiry' | translate }}</label>
+
+                        <div class="custom-input-container">
+                          <input
+                            type="text"
+                            [value]="sharedService.users[i].PassportExpiry | date: 'MM/dd' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'"
+                            title="Passport Expiry Date"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                }
+              </app-expansion-panel>
+            </div>
+          }
+        </ng-container>
+      </ng-container>
+    }
+
+    @if (sharedService.checkoutSteps >= 2 && sharedService.mySafeUrl) {
+      <app-payment-view />
+    }
+
+    @if (sharedService.checkoutSteps >= 1 && !sharedService.showPayment) {
+      <div class="navigation-btns">
+        <app-secondary-button
+          [title]="'checkout.previous' | translate"
+          [secondaryButtonInfo]="previousButton"
+          (clickSecondaryButton)="sharedService.goToPreviousCheckoutStep()"
+          [ngStyle]="{
+            visibility: sharedService.checkoutSteps === 1 ? 'visible' : 'hidden',
+          }"
+        />
+        <app-main-button
+          [title]="'checkout.next' | translate"
+          [mainButtonInfo]="nextButton"
+          (clickMainButton)="onClickNext()"
+          [isLoading]="flightCheckoutService.saveBookingLoadeer || sharedService.isIframeLoading"
+        />
+      </div>
+    }
+  </div>
+}
+
+@if (sharedService.checkoutSteps < 1) {
+  <app-checkout-footer (choseService)="checkPhoneNumberValidation()" />
+}
+
+@if (sharedService.isPaymentModalShowed) {
+  <div class="overlay">
+    <div class="custom_modal" appClickOutside (clickOutside)="closeModal()">
+      <app-payment-modal [isSuccess]="false" />
+    </div>
+  </div>
+}

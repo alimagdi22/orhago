@@ -1,0 +1,71 @@
+<app-input-header
+[headerTitle]="'searchBox.travellersCabin' | translate"
+(onClickClose)="data.dismiss()"
+/>
+
+<div class="cabin-menu">
+<div class="cabin-menu__guests" (click)="$event.stopPropagation()">
+  <ul class="cabin-menu__guests__list">
+    <li class="cabin-menu__guests__list__item">
+      <span class="cabin-menu__guests__list__item__title">{{ 'searchBox.adult' | translate }}</span>
+      <div class="cabin-menu__guests__list__item__btns">
+        <button class="cabin-menu__guests__list__item__btns__left" (click)="changeAdultValue('decrease')">-</button>
+        <span class="cabin-menu__guests__list__item__btns__counter">
+          {{ flightSearchService.searchFlight.get('passengers')?.get('adults')?.value }}
+        </span>
+        <button class="cabin-menu__guests__list__item__btns__right" (click)="changeAdultValue('increase')">
+          +
+        </button>
+      </div>
+    </li>
+
+    <li class="cabin-menu__guests__list__item">
+      <span class="cabin-menu__guests__list__item__title">{{ 'searchBox.child' | translate }}</span>
+      <div class="cabin-menu__guests__list__item__btns">
+        <button class="cabin-menu__guests__list__item__btns__left" (click)="changeChildValue('decrease')">-</button>
+        <span class="cabin-menu__guests__list__item__btns__counter">
+          {{ flightSearchService.searchFlight.get('passengers')?.get('child')?.value }}
+        </span>
+        <button class="cabin-menu__guests__list__item__btns__right" (click)="changeChildValue('increase')">
+          +
+        </button>
+      </div>
+    </li>
+
+    <li class="cabin-menu__guests__list__item">
+      <span class="cabin-menu__guests__list__item__title">{{ 'searchBox.infant' | translate }}</span>
+      <div class="cabin-menu__guests__list__item__btns">
+        <button class="cabin-menu__guests__list__item__btns__left" (click)="changeInfantValue('decrease')">
+          -
+        </button>
+        <span class="cabin-menu__guests__list__item__btns__counter">
+          {{ flightSearchService.searchFlight.get('passengers')?.get('infant')?.value }}
+        </span>
+        <button class="cabin-menu__guests__list__item__btns__right" (click)="changeInfantValue('increase')">
+          +
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<hr />
+
+<div class="cabin-menu__options" (click)="$event.stopPropagation()">
+  <ul class="cabin-menu__options__list">
+    @for (classType of classTypes; track classType.value) {
+      <li
+        class="cabin-menu__options__list__item"
+        (click)="setClassType(classType.value, classType)"
+        [class.active]="classType.isSelected"
+      >
+        {{ 'searchBox.' + classType.value | translate }}
+      </li>
+    }
+  </ul>
+</div>
+
+<button class="cabin-menu__button" (click)="data.dismiss()">
+  {{ 'searchBox.done' | translate }}
+</button>
+</div>

@@ -1,0 +1,114 @@
+
+<div class="search-box">
+  <div class="container">
+    <div class="d-lg-none">
+      <div *ngIf="isSearchVisible" class="mobile-search-box">
+        @if (sharedService.isCitiesLoading) {
+          <app-skeleton-loader height="200px" />
+        } @else {
+          <app-search-box />
+        }
+      </div>
+    </div>
+
+    <div class="desktop-search-box">
+      @if (sharedService.isCitiesLoading) {
+        <app-skeleton-loader height="200px" />
+      } @else {
+          @if(sharedService.screenWidth > 1000)
+          {
+            <app-search-box />
+          }      }
+    </div>
+  </div>
+</div>
+
+<main class="container content">
+  @if (hotelResultsService.hotelResultsLoader) {
+    <div class="row between gap-4">
+      <app-skeleton-loader class="col-12" height="70px">
+        <div class="loading-msg">
+          <div>
+            <p>{{ 'results.loadingMessage' | translate }}</p>
+            <img src="assets/icons/refresh-icon.svg" title="Refresh Icon" />
+          </div>
+          <mat-progress-bar mode="indeterminate" />
+        </div>
+      </app-skeleton-loader>
+
+      <app-skeleton-loader class="col-lg-3 col-12" height="250px" />
+      <app-skeleton-loader class="col-lg-8 col-12" height="250px" />
+
+      <app-skeleton-loader class="col-lg-3 col-12" height="250px" />
+      <app-skeleton-loader class="col-lg-8 col-12" height="250px" />
+
+      <app-skeleton-loader class="col-lg-3 col-12" height="250px" />
+      <app-skeleton-loader class="col-lg-8 col-12" height="250px" />
+    </div>
+  } @else {
+    @if (hotelResultsService.hotelDataResponse?.HotelResult?.length) {
+      <div class="row between">
+        <button class="filter-toggle d-lg-none" (click)="toggleSidebar()">
+          <img src="assets/icons/svgexport-18.svg" alt="Filter Icon" />
+        </button>
+
+        <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
+
+        <aside class="mobile-sidebar-panel d-lg-none" [class.open]="isSidebarOpen">
+            <app-hotels-filter />
+        </aside>
+
+        <aside class="col-lg-3 desktop-filter">
+            <app-hotels-filter (resetClicked)="onResetFiltersFromFilterComponent()"/>
+        </aside>
+
+        <section class="col-lg-8 col-12">
+          @if (sharedService.screenWidth > 1000) {
+            <p class="available-flights">
+              Showing {{ hotelResultsService.filteredHotels.length }} hotels in {{hotelResultsService.hotelDataResponse?.HotelResult?.[0]?.City}} city
+            </p>
+          }
+
+          @if (sharedService.screenWidth < 1000) {
+            <app-hotels-sort-app/>
+          }@else {
+            <app-hotels-sort />
+          }
+
+          <app-hotels-tags />
+
+          <div class="flight-cards">
+            @for (hotelCard of hotelResultsService.splicedFiltiredHotels; track $index) {
+              @if (sharedService.screenWidth < 1000) {
+                <app-hotel-card-app [hotel]="hotelCard"/>
+              }@else {
+                <app-hotel-card [hotel]="hotelCard" />
+              }
+
+            }
+          </div>
+
+          @if(hotelResultsService.splicedFiltiredHotels.length != hotelResultsService.filteredHotels.length) {
+            <div class="load-more-data-btn">
+              <app-secondary-button
+                [secondaryButtonInfo]="loadMoreDataButton"
+                [title]="'hotelCard.Show More Results' | translate"
+                (clickSecondaryButton)="hotelResultsService.loadMoreData()"
+              />
+            </div>
+          }
+        </section>
+      </div>
+    } @else {
+      <app-no-flights />
+    }
+  }
+</main>
+
+@if (sharedService.isSessionTimeoutModalShowed) {
+  <div class="overlay">
+    <div class="custom_modal">
+      <app-session-timeout (sessionTimeoutClosed)="updateTimeoutSession()" />
+    </div>
+  </div>
+}

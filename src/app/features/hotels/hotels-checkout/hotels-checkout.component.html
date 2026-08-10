@@ -1,0 +1,32 @@
+@if(isLoading && firstLoad) {
+  <app-spinner-loader @fadeInOut />
+} @else {
+  <div class="container wrapper" @fadeInOut>
+    <app-payment-summary [totalPrice]="hotel.TotalSellPrice" />
+
+    @if(!showPayment) {
+      <app-hotel-checkout-preview [nights]="nights" @slideUpDown />
+      @if(sharedService.screenWidth < 1000){
+        <app-hotels-checkout-form-app @slideUpDown/>
+      }@else {
+        <app-hotel-checkout-form @slideUpDown />
+      }
+    }
+
+    @if(mySafeUrl) {
+      <app-payment-view @fadeInOut />
+    }
+  </div>
+
+  @if(!showPayment) {
+      <footer @slideUpDown>
+        <app-secondary-button
+          [secondaryButtonInfo]="processToPayment"
+          [mobileStyles]="processToPaymentMobile"
+          [title]="('checkout.processToPayment' | translate)"
+          (clickSecondaryButton)="onSubmitHotelForm()"
+          [isLoading]="isIframeLoading || isLoading"
+        />
+      </footer>
+  }
+}

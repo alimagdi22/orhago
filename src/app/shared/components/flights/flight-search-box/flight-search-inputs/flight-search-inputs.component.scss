@@ -1,0 +1,314 @@
+@import '../../../../../../sass/variables';
+@import '../../../../../../sass/colors';
+
+@mixin cityInput($width: 100%) {
+  @include inputStyle();
+  width: $width;
+}
+
+@mixin inputStyle {
+  &:focus {
+    border: 1px solid var(--three-color);
+  }
+}
+
+.inputs-container {
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  gap: 15px;
+}
+
+.dest,
+.calander,
+.cabin {
+  height: $inputs-height;
+  display: flex;
+  justify-content: center;
+
+  border: 1px solid map-get($map: $colors, $key: 'gray');
+  transition: all 0.2s;
+  border-radius: $base-radius-small;
+
+  &__devider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__line {
+      background-color: map-get($map: $colors, $key: 'gray');
+      width: 1px;
+      height: 100%;
+    }
+
+    &__icon {
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.dest , .calander{
+  grid-column: span 4;
+}
+
+.cabin , .button {
+  grid-column: span 2;
+}
+
+.dest__from:hover {
+  .dest__from__placeholder__clear {
+    visibility: visible;
+  }
+}
+
+.dest__to:hover {
+  .dest__to__placeholder__clear {
+    visibility: visible;
+  }
+}
+
+.dest,
+.calander {
+  &__from,
+  &__to {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 10px;
+    padding: 10px;
+    font-size: 14px;
+    padding-right: 10px;
+
+    cursor: pointer;
+    &__country,
+    &__date {
+      font-weight: 600;
+      overflow: hidden; // Ensures content is hidden when it overflows
+      text-overflow: ellipsis; // Displays ellipsis for overflowing text
+      white-space: nowrap; // Prevents text wrapping to the next line
+      max-width: 100%; // Restricts the width to its container
+    }
+
+    &__placeholder {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__clear {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 18px;
+        visibility: hidden;
+        color: map-get($map: $colors, $key: 'secondary');
+        transition: all 0.1s;
+
+        &:hover {
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+}
+
+.input {
+  position: absolute;
+  top: 20px;
+}
+
+.custom-input {
+  border: none; /* Remove border */
+  outline: none; /* Remove outline on focus */
+  padding: 0;
+  font-size: 13px; /* Set font size */
+  color: #000; /* Optional: Set font color */
+  background: transparent; /* Optional: Set background to transparent */
+  width: 100%; /* Optional: Adjust width */
+}
+
+.custom-input:focus {
+  box-shadow: none; /* Ensure no box shadow appears */
+}
+
+.firstInput {
+  position: relative;
+  padding-inline-end: 0;
+  .input_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.5rem 0;
+    img {
+      width: 10%;
+      height: 4vh;
+    }
+    .searchIcon,
+    .seatIcon {
+      width: 25%;
+    }
+  }
+  .searchboxInput {
+    @include cityInput;
+    margin-top: 1rem;
+    .calenderInputFormat {
+      color: var(--ten-color);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-wrap: nowrap;
+      direction: ltr;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        align-self: center;
+        margin: auto 2px;
+      }
+      .dateMonth {
+        margin-inline-start: 3px;
+      }
+      .mobilePlaceholder {
+        color: gray;
+        font-size: 1rem;
+      }
+      .dateDay {
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+        margin-inline-end: 0.2rem;
+      }
+    }
+    .inputIcon {
+      margin: 0 0.2rem;
+    }
+  }
+  .addLandDate {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 0.96rem 0;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    img {
+      width: 25px;
+      margin-inline-start: 0.4rem;
+    }
+  }
+}
+
+.button {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+
+  app-main-button {
+    display: block; /* Ensures the button respects width constraints */
+    width: 100%; /* Sets the button's width */
+  }
+}
+
+.dropdown-list {
+  &__item {
+    padding: 8px 16px;
+    box-sizing: border-box; /* Includes padding in width calculation */
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &__text {
+      white-space: nowrap; /* Prevents text wrapping */
+    }
+  }
+}
+
+hr{
+  grid-column: span 12;
+}
+
+.popular-dest {
+  border-radius: 6px;
+  &__title {
+    width: 17rem;
+    font-weight: 700;
+    margin: 7px;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      padding-block: 5px;
+      gap: 8px;
+      font-size: 12px;
+
+      transition: all 0.2s;
+
+      &__icon {
+        margin-left: 15px;
+      }
+
+      &:hover {
+        color: map-get($map: $colors, $key: 'main');
+      }
+    }
+  }
+}
+
+.remove-icon {
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+
+  img {
+    width: 35px;
+    cursor: pointer;
+  }
+}
+
+.multi-city-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  grid-column: span 3;
+
+  .add-flight-info {
+    font-size: 10px;
+    color: #393c43;
+  }
+}
+
+app-date-input,
+app-cabin-class {
+  flex-grow: 1;
+}
+
+
+@media (max-width:768px){
+  .dest , .calander , .cabin , .button{
+    grid-column: span 12;
+  }
+
+}

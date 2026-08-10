@@ -1,0 +1,9 @@
+<div class="hotelSort">
+    <div class="row">
+        <div class="hotelSort__wrapper" *ngFor="let sort of filteredSortedArr; let i = index">
+            <div class="sortedBox" (click)="hotelResults.sorting(originalIndices[i])">
+                {{ sort | translate }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+           <div class="col-12 col-md-9 order-1">
+            <mat-chip-listbox>
+              <mat-chip *ngFor="let tag of selectedTags" [removable]="true" (removed)="removeTag(tag)" class="custom-chip">
+                {{ tag }}
+                <mat-icon matChipRemove>X</mat-icon>
+              </mat-chip>
+            </mat-chip-listbox>

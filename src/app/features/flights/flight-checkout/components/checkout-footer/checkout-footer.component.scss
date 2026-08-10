@@ -1,0 +1,32 @@
+.wrapper {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+}
+
+app-main-button {
+  margin-inline-start: 47px;
+}
+
+@media (max-width:768px){
+  .wrapper{
+    gap: 10px;
+    flex-direction: column;
+    height: 150px;
+  }
+  app-secondary-button{
+    margin-top: 10px;
+  }
+  app-main-button{
+    margin-inline-start: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+}

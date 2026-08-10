@@ -1,0 +1,47 @@
+<div class="row between wrapper gap-4">
+  <div class="airline col-12 col-md-5 col-xl-3">
+    <img [src]="flight.flightAirline.airlineLogo" title="Airline Logo" class="airline__logo" />
+    <div class="airline__info">
+      <span class="airline__info__name">{{
+        flight.flightAirline.airlineName ? flight.flightAirline.airlineName : 'N/A'
+      }}</span>
+      <span class="airline__info__ref"
+        >{{ 'confirmation.airlineRef' | translate }} {{ flight.flightDTO[0].supplierRefID }}</span
+      >
+    </div>
+  </div>
+
+  <div class="path col-12 col-md-5 col-xl-4">
+    <div class="path__left">
+      <span class="path__left__time">{{ flight.flightDTO[0].departureDate | date: 'hh:mm' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</span>
+      <div class="path__left__circle"></div>
+      <span class="path__left__city-code">{{ flight.flightDTO[0].departureTerminalAirport.cityCode }}</span>
+    </div>
+
+    <div class="path__dashed-line"></div>
+    <div class="path__info">
+      <span class="path__info__duration">{{ flight.elapsedTime | hourminute }}</span>
+      <span class="path__info__direct">{{ flight.flightDTO[0].arrivalTerminalAirport.airportCode }}</span>
+    </div>
+    <div class="path__dashed-line"></div>
+
+    <div class="path__right">
+      <span class="path__right__time">{{
+        flight.flightDTO[flight.flightDTO.length - 1].arrivalDate | date: 'hh:mm' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'
+      }}</span>
+      <div class="path__right__circle"></div>
+      <span class="path__right__city-code">{{
+        flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode
+      }}</span>
+    </div>
+  </div>
+
+  @if (flight.stopsNum) {
+    <div class="col-12 col-md-5 col-xl-3">
+      <p>{{ flight.flightDTO[0].arrivalTerminalAirport.airportCode }}</p>
+      <p>({{ flight.flightDTO[0].transitTime }})</p>
+    </div>
+  } @else {
+    <div class="col-12 col-md-5 col-xl-3"></div>
+  }
+</div>

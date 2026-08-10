@@ -1,0 +1,35 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/colors';
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 20px;
+  width: 100vw;
+  box-sizing: border-box;
+
+  button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+    background-color: white;
+    border: none;
+    margin-inline-end: 30px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  span {
+    font-weight: 600;
+    font-size: 24px;
+    color: black;
+  }
+}

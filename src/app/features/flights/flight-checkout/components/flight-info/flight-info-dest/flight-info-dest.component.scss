@@ -1,0 +1,37 @@
+@import '../../../../../../../sass/variables';
+@import '../../../../../../../sass/colors';
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  &__time {
+    font-size: 22px;
+  }
+  &__dest,
+  &__airport {
+    color: map-get($map: $colors, $key: 'gray');
+  }
+
+  &__date,
+  &__airport {
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .info{
+    &__time {
+      font-size: 18px;
+      word-wrap: none;
+    }
+  }
+}

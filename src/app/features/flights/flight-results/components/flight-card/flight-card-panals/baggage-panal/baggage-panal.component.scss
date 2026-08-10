@@ -1,0 +1,26 @@
+@import '../../../../../../../../sass/variables';
+@import '../../../../../../../../sass/colors';
+
+.wrapper {
+  @media (max-width: 1200px) {
+    margin-top: 20px;
+  }
+}
+.price-panal {
+  border-radius: $base-radius-small;
+  background-color: map-get($map: $colors, $key: 'off-white');
+}
+
+.wrapper,
+.baggage-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wrapper {
+  border-radius: $base-radius-small;
+  background-color: map-get($map: $colors, $key: 'off-white');
+  justify-content: space-between;
+  padding: 11px 15px;
+}

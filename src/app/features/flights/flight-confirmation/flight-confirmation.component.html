@@ -1,0 +1,32 @@
+@if (this.confirmationService.loading) {
+  <div class="loader">
+    <mat-spinner />
+  </div>
+} @else {
+  <div class="section">
+    <main class="container">
+      <app-confirmation-header />
+      @if (confirmationService.confirmationData) {
+        <app-booking-info
+          [bookingId]="confirmationService.confirmationData.hgNumber"
+          [pnr]="confirmationService.confirmationData.pnr"
+        />
+      }
+
+      <div class="passengers">
+        @for (passenger of passangers; track $index) {
+          <app-passenger-info [passenger]="passenger" [airlinePNR]="confirmationService.confirmationData.pnr" />
+        }
+      </div>
+
+      <app-confirmation-flight-details [flights]="flights" />
+
+      <app-baggage-info [baggages]="confirmationService.confirmationData.airItineraries[0].baggageInformation" />
+      <app-contact-info [passenger]="passangers[0]" [email]="confirmationService.confirmationData.bookingEmail" />
+      <app-fare-details
+        [totalFare]="confirmationService.confirmationData.airItineraries[0].itinTotalFare"
+        [adds]="confirmationService.confirmationData.additionalServicesAmount"
+      />
+    </main>
+  </div>
+}

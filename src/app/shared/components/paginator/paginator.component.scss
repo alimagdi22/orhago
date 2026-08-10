@@ -1,0 +1,57 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/colors';
+
+@mixin scaleAnimation() {
+  cursor: pointer;
+
+  transition: all 0.1s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  align-items: center;
+}
+
+.pagination {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__numbers {
+    display: flex;
+    gap: 30px;
+    font-size: 20px;
+    font-weight: bold;
+
+    color: map-get($map: $colors, $key: 'gray-dark');
+
+    .active {
+      color: black;
+      text-decoration: underline;
+    }
+
+    span {
+      @include scaleAnimation();
+    }
+  }
+
+  &__icon {
+    @include scaleAnimation();
+  }
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}

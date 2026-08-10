@@ -1,0 +1,30 @@
+<header [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
+  <p class="title">{{ translate.currentLang === 'en' ? 'Branded Fares' : 'أسعار الباقات'}}</p>
+  <!-- @if (!this.flightResultService.isBrandedFaresLoading) {
+    <img src="assets/icons/exit-icon.svg" title="Close Icon" (click)="sharedService.isBrandedFaresShowed = false" />
+  } -->
+</header>
+
+@if (!flightResultService.isBrandedFaresLoading) {
+  <p class="message">{{ translate.currentLang === 'en' ? 'Please select a branded fare to proceed to the checkout page.' : 'الرجاء اختيار فئة السعر للمتابعة إلى صفحة الدفع.'}}</p>
+}
+
+@if (flightResultService.isBrandedFaresLoading) {
+  <div class="loader-wrapper">
+    <mat-spinner />
+  </div>
+} @else {
+
+  @if (flightResultService.currentSelectedBrands.length) {
+    <swiper-container #swiperEl init="false">
+      @for (brand of flightResultService.currentSelectedBrands; track $index) {
+        <swiper-slide>
+          <app-flex-fare-card-app [isActive]="true" [brand]="brand" [totalPassengers]="getTotalPassenger" />
+        </swiper-slide>
+      }
+
+    </swiper-container>
+  } @else {
+    <p>{{ translate.currentLang === 'en' ? 'No Branded Fares To Show' : 'لا يوجد باقات لعرضها' }}</p>
+  }
+}

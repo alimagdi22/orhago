@@ -1,0 +1,13 @@
+<div class="text-wrapper">
+  <h2>{{ 'home.populerAirlines.title' | translate }}</h2>
+</div>
+
+<swiper-container #swiperEl autoplay='{"delay": 3500, "disableOnInteraction": false, "centeredSlides": true}'>
+  @for (airline of popularAirlines; track $index) {
+    <swiper-slide>
+      <div class="airline">
+        <img [src]="airline" title="Airline Logo" />
+      </div>
+    </swiper-slide>
+  }
+</swiper-container>

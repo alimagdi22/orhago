@@ -1,0 +1,82 @@
+@if(isLoading) {
+    <app-spinner-loader />
+} @else if(false) {
+    <div class="error-wrapper">
+        <h2>{{ 'hotelConfirmation.errorNote' | translate }}</h2>
+        <app-main-button [mainButtonInfo]="contactButton" [title]="'hotelConfirmation.contactUs' | translate" (clickMainButton)="onContactUs()" />
+    </div>
+} @else {
+    <header class="confimration-header gap-2 center justify-content-sm-between row">
+        <img src="assets/images/logo.svg" title="Logo" class="confimration-header__logo" />
+        <div class="confimration-header__btns">
+            <app-secondary-button [secondaryButtonInfo]="sendMailButton" [title]="'confirmation.emailTicket' | translate" />
+            <app-main-button [mainButtonInfo]="printButton" [title]="'confirmation.print' | translate" />
+        </div>
+    </header>
+    
+    <ul class="row">
+        <li class="col-12 col-lg-7 row justify-content-between">
+            <span class="col-lg-6 col-12">{{ "hotelCheckout.Check In" | translate }}:</span>
+            <span class="col-lg-6 col-12">{{ confirmationData.hotel.CheckIn | date: 'EEEE, MMMM d, y' }}</span>
+        </li>
+        <li class="col-12 col-lg-7 row justify-content-between">
+            <span class="col-lg-6 col-12">{{ "hotelCheckout.Check Out" | translate }}:</span>
+            <span class="col-lg-6 col-12">{{ confirmationData.hotel.CheckOut | date: 'EEEE, MMMM d, y' }}</span>
+        </li>
+        <li class="col-12 col-lg-7 row justify-content-between">
+            <span class="col-lg-6 col-12">{{ "hotelConfirmation.Guests" | translate }}:</span>
+            <span class="col-lg-6 col-12">2 adults, 2 children</span>
+        </li>
+        <li class="col-12 col-lg-7 row justify-content-between">
+            <span class="col-lg-6 col-12">{{ "hotelConfirmation.Unit" | translate }}:</span>
+            <span class="col-lg-6 col-12">Apartment 3</span>
+        </li>
+    </ul>
+    
+    <section class="payment-summary row">
+        <header class="col-12 row">
+            <span class="title col-lg-8 col-12">{{ 'hotelPayment.Payment Summary' | translate }}</span>
+            <span class="sub-title col-lg-2 col-4">{{ 'hotelPayment.Total' | translate }}</span>
+            <span class="price col-lg-2 col-8">{{ confirmationData.hotel.sellCurrency | exchange: 'code' }} {{ confirmationData.hotel.TotalSellPrice | exchange: 'value' }}</span>
+        </header>
+    
+        <body class="col-12 row">
+            <p class="col-12">{{ 'hotelPayment.Payment Timeline' | translate }}</p>
+            
+            <p class="col-8">{{ 'hotelPayment.Pay now' | translate }}</p>
+            <p class="col-4">{{ confirmationData.hotel.sellCurrency | exchange: 'code' }} {{ confirmationData.hotel.TotalSellPrice | exchange: 'value' }}</p>
+            
+            <!-- <p class="col-12 row">
+                <span class="col-8">{{ 'hotelPayment.Pay at Property' | translate }}</span>
+                <span class="col-4">EGP 988.03</span>
+                
+                <span class="col-8 property-currency">{{ 'hotelPayment.In property curreency' | translate }}</span>
+                <span class="col-4 property-currency">US$20.00</span>
+            </p>  -->
+            
+            <caption class="col-12">{{ 'hotelPayment.note' | translate }}</caption> 
+        </body>
+    </section>
+    
+    <section class="contact-info row">
+        <span class="title col-12">{{ 'hotelConfirmation.Contact Information' | translate }}</span>
+
+        @for (traveller of confirmationData.travellers; track $index) {
+            <p class="col-lg-3 col-12">
+                <span>{{ 'hotelConfirmation.Guest Name' | translate }}</span>
+                <span>{{ traveller.Title }}.  {{ traveller.FirstName }} {{ traveller.LastName }}</span>
+            </p>
+        
+            <p class="col-lg-3 col-12">
+                <span>{{ 'hotelConfirmation.Email Address' | translate }}</span>
+                <span>ahmedmohamed&#64;gmail.com</span>
+            </p>
+        
+            <p class="col-lg-3 col-12">
+                <span>{{ 'hotelConfirmation.Phone Number' | translate }}</span>
+                <span>002 2345456767</span>
+            </p>
+        }
+    
+    </section>
+}

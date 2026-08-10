@@ -1,0 +1,18 @@
+<div class="price-panal">
+  @if (sharedService.screenWidth < 1200) {
+    <app-refundability [isRefundable]="isRefundable" />
+  }
+  <p class="price-panal__title">{{ 'results.card.ticketPrice' | translate }}</p>
+  <p class="price-panal__price">
+    {{ airItinerary.itinTotalFare.amount | exchange: 'value' }}
+    {{ airItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+  </p>
+  <app-main-button
+    [title]="'results.card.select' | translate"
+    [mainButtonInfo]="selectButton"
+    (clickMainButton)="onClickSelect()"
+    [isLoading]="isSelectedButtonLoading"
+    [isDisibled]="flightResultService.isBrandedFaresLoading"
+  />
+</div>
+

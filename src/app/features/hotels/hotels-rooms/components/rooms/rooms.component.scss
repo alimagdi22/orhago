@@ -1,0 +1,215 @@
+section {
+    padding: 15px;
+}
+
+.info-section {
+    .room-image {
+        height: 180px;
+        width: 100%;
+        border-radius: 6px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+}
+
+.book-section {
+    article {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .tag.red {
+            color: #FA4C4C;
+        }
+
+        .tag.green {
+            color: green;
+            img {
+                visibility: hidden;
+            }
+        }
+
+        p {
+            font-size: 12px;
+            font-weight: 400;
+
+            .price {
+                font-size: 32px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    hr {
+        margin-block: 25px;
+    }
+}
+
+.amenities-section {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-top: 1rem;
+    row-gap: 15px;
+    column-gap: 25px;
+
+    p {
+        display: flex;
+        padding: 3px 7px;
+
+        align-items: center;
+        gap: 5px;
+
+        font-size: 14px;
+        font-weight: 400;
+        border: 1px solid #DFDFDF;
+        background-color: #FAFAFA;
+        border-radius: 1px;
+    }
+
+    a {
+        cursor: pointer;
+        flex-basis: 100%;
+        text-decoration: underline;
+    }
+}
+
+::ng-deep .amenities-dialog {
+  z-index: 1000 !important;
+}
+
+
+
+
+
+
+
+
+
+.room-card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  width: 480px;
+  box-sizing: border-box;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.room-title {
+  color: #28a745;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.room-image {
+  width: 120px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.room-info p {
+  margin: 5px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.no-meal {
+  color: #444;
+}
+
+.non-refund {
+  color: #ff3c3c;
+  font-weight: 500;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.feature {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.room-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price-info {
+  line-height: 1.3;
+}
+
+.currency {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.price {
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.details {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.book-btn {
+  background-color: white;
+  color: #28a745;
+  border: 2px solid #28a745;
+  border-radius: 30px;
+  padding: 8px 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #28a745;
+  color: white;
+}
+.total-price{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}

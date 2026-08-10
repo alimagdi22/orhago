@@ -1,0 +1,147 @@
+<div class="baggage-info row justify-content-between gap-3">
+  <section class="inculded-sec col-12">
+    <div class="inculded-sec__header">
+      <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
+      <span>{{ 'flightDetails.baggage.included' | translate }}</span>
+    </div>
+
+<div *ngFor="let item of sharedService.selectedFlightItinerary.allJourney.flights">
+@if (flightResultService.response?.searchCriteria?.adultNum || searchCriteria?.adultNum || flightCheckoutService.selectedFlight?.searchCriteria?.adultNum) {
+<div class="baggage-line">
+  <div class="baggage-type">{{ 'flightDetails.baggage.adultItems' | translate }}</div>
+  <div class="baggage-route">{{ item.flightDTO[0].departureTerminalAirport.cityName }} - {{ item.flightDTO[item.flightDTO.length -1].arrivalTerminalAirport.cityName }}</div>
+
+  <div class="baggage-entry">
+    <img src="assets/icons/travel-bag-icon.svg" alt="">
+    {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].baggage) }}   {{ 'flightDetails.baggage.cabin' | translate }}
+  </div>
+
+  <div class="hand-baggage">
+    <div class="hand-baggage-top">
+      <img src="assets/icons/hand-bag-icon.svg" alt="">
+      1 x {{ 'flightDetails.baggage.hand' | translate }}
+    </div>
+    <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+  </div>
+</div>
+
+}
+
+@if(sharedService.selectedFlightItinerary.baggageInformation[0].childBaggage != null){
+@if (flightResultService.response?.searchCriteria?.childNum || searchCriteria?.childNum || flightCheckoutService.selectedFlight?.searchCriteria?.childNum) {
+<div class="baggage-line">
+  <div class="baggage-type">{{ 'flightDetails.baggage.childItems' | translate }}</div>
+  <div class="baggage-route">{{ item.flightDTO[0].departureTerminalAirport.cityName }} - {{ item.flightDTO[item.flightDTO.length -1].arrivalTerminalAirport.cityName }}</div>
+
+  <div class="baggage-entry">
+    <img src="assets/icons/travel-bag-icon.svg" alt="">
+    {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].childBaggage) }} x Checked Baggage
+  </div>
+
+  <div class="hand-baggage">
+    <div class="hand-baggage-top">
+      <img src="assets/icons/hand-bag-icon.svg" alt="">
+      1 x Cabin Baggage
+    </div>
+    <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+  </div>
+</div>
+}
+}
+
+
+@if(sharedService.selectedFlightItinerary.baggageInformation[0].infantBaggage != null){
+@if (flightResultService.response?.searchCriteria?.infantNum || searchCriteria?.infantNum || flightCheckoutService.selectedFlight?.searchCriteria?.infantNum) {
+<div class="baggage-line">
+  <div class="baggage-type">{{ 'flightDetails.baggage.infantItems' | translate }}</div>
+  <div class="baggage-route">{{ item.flightDTO[0].departureTerminalAirport.cityName }} - {{ item.flightDTO[item.flightDTO.length -1].arrivalTerminalAirport.cityName }}</div>
+
+  <div class="baggage-entry">
+    <img src="assets/icons/travel-bag-icon.svg" alt="">
+    {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].infantBaggage) }} x Checked Baggage
+  </div>
+
+  <div class="hand-baggage">
+    <div class="hand-baggage-top">
+      <img src="assets/icons/hand-bag-icon.svg" alt="">
+      1 x Cabin Baggage
+    </div>
+    <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+  </div>
+</div>
+}
+}
+
+</div>
+
+
+    <!-- <div class="inculded-sec__baggage">
+      @if (flightResultService.response?.searchCriteria?.adultNum) {
+        <div class="inculded-sec__baggage__info">
+          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
+          <div>
+            <p>{{ adultBaggage() }} {{ 'flightDetails.baggage.adultItems' | translate }}</p>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="inculded-sec__baggage">
+      @if (flightResultService.response?.searchCriteria?.childNum) {
+        <div class="inculded-sec__baggage__info">
+          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
+          <div>
+            <p>{{ childBaggage() }} {{ 'flightDetails.baggage.childItems' | translate }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="inculded-sec__baggage">
+      @if (flightResultService.response?.searchCriteria?.infantNum) {
+        <div class="inculded-sec__baggage__info">
+          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
+          <div>
+            <p>{{ infantBaggage() }} {{ 'flightDetails.baggage.infantItems' | translate }}</p>
+          </div>
+        </div>
+      }
+    </div> -->
+
+
+
+
+  </section>
+
+  <!-- <section class="not-possible-sec col-lg-5 col-12">
+    <div class="not-possible-sec__header">
+      <span class="not-possible-sec__header__icon">x</span>
+      <span class="not-possible-sec__header__text">{{ 'flightDetails.baggage.notPossible' | translate }}</span>
+    </div>
+
+    <div class="not-possible-sec__baggage">
+      <img src="assets/icons/bag-icon.svg" title="Bag Icon" class="not-possible-sec__baggage__icon" />
+      <span class="not-possible-sec__baggage__text">{{ 'flightDetails.baggage.baggageType' | translate }}</span>
+    </div>
+
+    <div class="not-possible-sec__info">
+      <img src="assets/icons/checked-icon.svg" title="Checked Icon" class="not-possible-sec__baggage__icon" />
+      <p>{{ 'flightDetails.baggage.message' | translate }}</p>
+    </div>
+  </section>
+
+  <section class="col-lg-3 col-12">
+    <div class="wrapper">
+      <div class="baggage-item">
+        <img src="assets/icons/hand-bag-icon.svg" title="Exclamation Icon" />
+        <span>{{ normalBaggage }} {{ getUnit }}</span>
+      </div>
+    </div>
+    <p *ngIf="getUnit === 'PCs'">{{ 'flightDetails.baggage.check' | translate }}</p>
+  </section>
+</div> -->
+
+<hr />
+
+<p class="text-center">
+  {{ 'flightDetails.baggage.note' | translate }}
+</p>

@@ -1,0 +1,54 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/colors';
+
+.text-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-block: 60px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 120px;
+}
+
+.airline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 80px;
+  width: 160px;
+
+  cursor: pointer;
+
+  border-radius: $base-radius;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  img {
+    height: 50px;
+    width: 125px;
+
+    object-fit: contain;
+  }
+
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+
+.hide {
+  display: none;
+}
+
+swiper-slide {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}

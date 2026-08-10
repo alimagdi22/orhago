@@ -1,0 +1,11 @@
+<swiper-container #swiperEl class="wrapper row center gap-4">
+  @for (card of cards; track $index) {
+    <swiper-slide>
+      <div class="advantage">
+        <img [src]="'assets/icons/home-icons/' + (card[lang]?.image || 'world-icon.svg')" title="World Icon" class="advantage__icon" />
+        <span class="advantage__title">{{ card[lang]?.title }}</span>
+        <p class="advantage__paragraph">{{ card[lang]?.description }}</p>
+      </div>
+    </swiper-slide>
+  }
+</swiper-container>

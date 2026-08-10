@@ -1,0 +1,14 @@
+<div class="text-wrapper">
+  <h2>{{ 'home.populerCities.title' | translate }}</h2>
+</div>
+
+<swiper-container #swiperEl autoplay='{"delay": 3000, "disableOnInteraction": false}'>
+  @for (card of cards; track $index) {
+    <swiper-slide>
+      <div class="popular-cities-card">
+        <img [src]="'assets/images/popular/' + card.image" title="City Image" class="popular-cities-card__img" />
+        <span class="popular-cities-card__name">{{ card.cityName }}</span>
+      </div>
+    </swiper-slide>
+  }
+</swiper-container>

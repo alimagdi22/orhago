@@ -1,0 +1,16 @@
+<article>
+  <img src="assets/icons/userPage/warning-icon.svg" title="Warning Icon" width="50" />
+
+  <div>
+    <p class="title">{{ 'navbar.signOut' | translate }}</p>
+    <p>{{ 'navbar.signOutMessage' | translate }}</p>
+  </div>
+
+  <div class="actions">
+    <button mat-stroked-button (click)="onClickSignOut()">{{ 'navbar.signOut' | translate }}</button>
+
+    <button mat-flat-button color="primary" (click)="onClickCancel()">{{ 'navbar.cancel' | translate }}</button>
+  </div>
+</article>
+
+<div class="background" (click)="onClickCancel()"></div>

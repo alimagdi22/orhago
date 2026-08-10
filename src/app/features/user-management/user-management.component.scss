@@ -1,0 +1,32 @@
+@import '../../../sass/variables';
+@import '../../../sass/colors';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+aside,
+section {
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: $base-radius-small;
+}
+
+section {
+  min-height: 80vh;
+}
+
+
+@media (max-width:768px){
+  section{
+    margin-top: 20px;
+  }
+  aside{
+    margin-top: 20px;
+  }
+}

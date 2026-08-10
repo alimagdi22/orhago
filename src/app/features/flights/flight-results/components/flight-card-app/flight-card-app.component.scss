@@ -1,0 +1,148 @@
+.flight-card {
+  width: 100%;
+  max-width: 750px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  background-color: #fff;
+
+  &__top {
+    display: flex;
+    background: #fff;
+  }
+
+  .flight-info {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+
+  }
+
+  .left {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 16px 16px;
+    gap: 20px;
+
+    .airline-logo {
+      width: 70px;
+      height: auto;
+    }
+
+    .airline-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111;
+    }
+  }
+
+  .flight-info__center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    gap: 0px;
+
+    .flight-time {
+      display: flex;
+      gap: 10px;
+      padding: 16px;
+
+      .time {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .plane-icon {
+        font-size: 16px;
+        color: #2D9F3C;
+      }
+
+      .code {
+        font-size: 12px;
+        color: #555;
+      }
+    }
+
+  }
+
+  .flight-info__right {
+    background-color: #F1FFF4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 20px;
+    width: 17%;
+    position: relative;
+
+    .info-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      background-color: #2D9F3C;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .price {
+      text-align: center;
+
+      .currency {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .amount {
+        font-size: 20px;
+        font-weight: 700;
+        color: #000;
+      }
+    }
+  }
+
+  &__bottom {
+    background-color: #2D9F3C;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+
+    .details {
+      font-weight: 600;
+    }
+    .same-price{
+        .text {
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      font-size: 17px;
+    }
+  }
+
+  .disabled-text {
+    cursor: pointer;
+    color: black;
+  }
+    }
+  }
+}
+.divider {
+  display: block;
+  height: 1px;
+  background-color:#CBCBCB;
+}

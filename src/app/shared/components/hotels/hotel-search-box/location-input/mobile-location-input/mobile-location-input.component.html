@@ -1,0 +1,34 @@
+<header>
+  <span>{{ 'searchBox.Location' | translate }}</span>
+  <button (click)="closeDialog()">{{ 'searchBox.close' | translate }}</button>
+</header>
+
+<div class="form-group location-group" [formGroup]="searchForm" [class.invalid]="locationInvalid">
+  @if(searchForm.get('location')?.value) {
+    <button type="button" class="btn-close btn-close-white"
+            [attr.aria-label]="'searchBox.close' | translate"
+            (click)="clearInput()">
+      <span>&times;</span>
+    </button>
+  }
+
+  <input
+    #locationInput
+    type="text"
+    id="location"
+    class="form-control"
+    formControlName="location"
+    [placeholder]="'searchBox.Entercity' | translate"
+    autocomplete="off"
+    (input)="onLocationChange($event)"
+    (blur)="showValidationErrors = true"
+    [value]="displayCity(searchForm.get('location')?.value) || ''"
+  />
+</div>
+
+<!-- City list dropdown -->
+<ul class="city-dropdown" *ngIf="homePageService.selectAllcities?.length > 0">
+  <li *ngFor="let city of homePageService.selectAllcities" (click)="onCityPicked(city)">
+    {{ city.City }}
+  </li>
+</ul>

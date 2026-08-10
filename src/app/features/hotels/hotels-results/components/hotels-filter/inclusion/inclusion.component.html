@@ -1,0 +1,18 @@
+
+        <!-- <div type="button" class="filter_wrapper" (click)="collapseInclusion.toggle()" [attr.aria-expanded]="!isCollapsedInclusion" aria-controls="collapseExample">
+        </div>
+        <div #collapseInclusion="ngbCollapse" [(ngbCollapse)]="isCollapsedInclusion" ></div> -->
+<form [formGroup]="hotelResults.filterForm">
+              <ng-container formArrayName="inclusions" *ngIf="!hotelResults.hotelResultsLoader">
+                  <ng-container *ngFor="let item of hotelResults.hotelDataResponse?.Inclusion ; let i= index;">
+                      <ng-container>
+                          <div class="hotelFilter_rate">
+                              <input  [formControlName]="i" type="checkbox" class="form-check-input" (change)="this.hotelResults.hotelsFilter()">
+                              <label class="form-check-label">
+                                 {{item}}
+                              </label>
+                          </div>
+                      </ng-container>
+              </ng-container>
+          </ng-container>
+</form>

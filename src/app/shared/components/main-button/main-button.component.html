@@ -1,0 +1,22 @@
+<button
+  mat-flat-button
+  color="primary"
+  (click)="onClick($event)"
+  [disabled]="isDisibled || isLoading"
+  class="gradient-button"
+  [title]="title"
+  [ngStyle]="{
+    width: computedStyles.width,
+    height: computedStyles.height,
+    borderRadius: computedStyles.borderRadius,
+    fontSize: computedStyles.fontSize,
+    padding: computedStyles.padding
+  }"
+  (onClickClose)="sharedService.dialog.closeAll()"
+>
+  @if (isLoading) {
+    <mat-spinner color="accent" diameter="30" />
+  } @else {
+    <span>{{ title }}</span>
+  }
+</button>

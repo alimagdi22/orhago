@@ -1,0 +1,84 @@
+<div
+(click)="onClickInput(index)"
+[matMenuTriggerFor]="sharedService.screenWidth >= 1200 ? calender : null"
+#calenderTrigger
+#value
+class="calander"
+>
+<p class="calander__placeholder">{{ (isReturnDateSelected ? 'home.search.arrive' : 'home.search.depart') | translate }}</p>
+
+@if(isReturnDateSelected) {
+  @if (!flightSearchService.searchFlight.get('returnDate')?.value) {
+    <p class="calander__date">{{ 'home.search.selectDate' | translate }}</p>
+    } @else {
+    <p class="calander__date">
+        {{ flightSearchService.searchFlight.get('returnDate')?.value | date: 'd MMMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+    </p>
+    <p class="calander__day">
+        {{ flightSearchService.searchFlight.get('returnDate')?.value | date: 'EEEE' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+    </p>
+    }
+} @else {
+  @if (!flightSearchService.flightsArray.at(index).get('departingD')?.value) {
+    <p class="calander__date">{{ 'home.search.selectDate' | translate }}</p>
+  } @else {
+    <p class="calander__date">
+      {{ flightSearchService.flightsArray.at(index).get('departingD')?.value | date: 'd MMMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+    </p>
+    <p class="calander__day">
+      {{ flightSearchService.flightsArray.at(index).get('departingD')?.value | date: 'EEEE' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+    </p>
+  }
+}
+</div>
+
+<mat-menu #calender="matMenu" class="calenderMenu" (click)="$event.stopPropagation()">
+    <div class="date-summary">
+      <div
+        class="date-summary__departing"
+        [ngClass]="{
+          'date-summary-full': flightType !== 'round-trip',
+        }"
+      >
+        <p class="date-summary__departing__title">{{ 'home.search.depart' | translate }}</p>
+        <p class="date-summary__departing__date">
+          {{ flightSearchService.flightsArray.at(index).get('departingD')?.value | date: 'EEE, d MMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+        </p>
+      </div>
+
+      @if (flightType === 'round-trip') {
+        <div class="date-summary__landing">
+          <p class="date-summary__landing__title">{{ 'home.search.arrive' | translate }}</p>
+          <p class="date-summary__landing__date">
+            {{ flightSearchService.searchFlight.get('returnDate')?.value | date: 'EEE, d MMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+          </p>
+        </div>
+      }
+    </div>
+
+    <ngb-datepicker
+      class="searchBoxPicker"
+      [displayMonths]="2"
+      (click)="$event.stopPropagation()"
+      navigation="arrows"
+      [dayTemplate]="calendarTemplate"
+      outsideDays="hidden"
+      [minDate]="isReturnDateSelected ? departDate : minDate"
+    />
+
+    <ng-template #calendarTemplate let-date let-focused="focused" (click)="$event.stopPropagation()">
+      <span
+
+        class="custom-day"
+        (click)="onDateSelection(date, index); closeCalendar($event)"
+        [class.focused]="(isReturnDateSelected ? isReturnSelected(date) : false) || isDepartSelected(date, 0)"
+        [class.range]="isReturnDateSelected ? isRange(date) : false"
+        [class.faded]="isHovered(date)"
+        [class.disabled]="isDisabled(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null"
+      >
+        {{ date.day }}
+      </span>
+    </ng-template>
+  </mat-menu>

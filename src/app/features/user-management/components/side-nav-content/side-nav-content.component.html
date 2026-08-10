@@ -1,0 +1,25 @@
+<div class="side-nav-content">
+  <ul>
+    <li>
+      <img src="assets/icons/userPage/navigation/profile-icon.svg" />
+      <a mat-button routerLink="user-profile" routerLinkActive="active">{{ 'user.sideNav.profile' | translate }}</a>
+    </li>
+
+    <li>
+      <img src="assets/icons/userPage/navigation/airplane-icon.svg" />
+      <a mat-button routerLink="flight-booking" routerLinkActive="active">{{ 'user.sideNav.flight' | translate }}</a>
+    </li>
+
+    <li>
+      <img src="assets/icons/userPage/navigation/hotel-icon.svg" />
+      <a mat-button routerLink="hotels-booking" routerLinkActive="active">{{ 'user.sideNav.hotels' | translate }}</a>
+    </li>
+
+    <li>
+      <img src="assets/icons/userPage/navigation/sign-out-icon.svg" />
+      <a mat-button (click)="alertTrigger = true">{{ 'user.sideNav.signOut' | translate }}</a>
+    </li>
+  </ul>
+</div>
+
+<app-sign-out-alert-modal (clickCancel)="alertTrigger = false" *ngIf="alertTrigger" @fadeAnimation />

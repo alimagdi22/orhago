@@ -1,0 +1,19 @@
+<div class="session-timeout-dialog">
+  <img src="assets/icons/modals-icons/clock.svg" class="session-timeout-dialog__icon" />
+
+  <div class="session-timeout-dialog__text">
+    <p class="session-timeout-dialog__text__title">Do you still want to continue searching?</p>
+    <p class="session-timeout-dialog__text__content">
+      These prices may no longer be available. Please refresh the page to see the latest prices.
+    </p>
+  </div>
+
+  <div class="session-timeout-dialog__btns">
+    <app-secondary-button [title]="'Back to Home Page'" [secondaryButtonInfo]="backToHomeButton" [routerLink]="'/'" />
+    <app-main-button
+      [title]="'Update search'"
+      [mainButtonInfo]="updateSeachButton"
+      (clickMainButton)="onClickUpdateSearchButton()"
+    />
+  </div>
+</div>

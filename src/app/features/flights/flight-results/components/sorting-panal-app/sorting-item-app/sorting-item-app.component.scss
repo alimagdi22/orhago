@@ -1,0 +1,62 @@
+.sort-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+margin: 11px 0px;
+  width: 125px;
+  height: 49px;
+  background-color: #F4F4F5;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  padding: 4px 0; /* خفيفة علشان كل حاجة تبان متوسطة تمام */
+
+  &__title {
+    font-weight: 600;
+    color: #000;
+    font-size: 13px;
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+
+    .value {
+      font-size: 13px;
+      color: #333;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .currency {
+      display: block;
+      font-size: 11px;
+      color: #555;
+      margin-top: 1px;
+      line-height: 1;
+    }
+  }
+
+  &.active {
+    background-color: #F1FFF4;
+    border: 1px solid #C2F0C5;
+
+    .sort-item__title,
+    .value,
+    .currency {
+      color: #2D9F3C;
+      font-weight: 600;
+    }
+  }
+
+  &:hover {
+    background-color: #EAEAEB;
+  }
+}

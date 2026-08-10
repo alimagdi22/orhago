@@ -1,0 +1,60 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/colors';
+
+.search-box-header {
+  background-color: white;
+  display: inline-flex;
+  border-radius: 12px 12px 0 0;
+
+  &__list {
+    display: inline-flex;
+    gap: 6px;
+
+    padding: 10px 14px;
+    list-style-type: none;
+    margin: 0;
+
+    @media (max-width: 992px) {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    font-size: 14px;
+    font-weight: 700;
+
+    &__item {
+      cursor: pointer;
+      padding: 7px 18px;
+      border-radius: 20px;
+      transition: all 0.15s;
+      color: #333;
+      background-color: white;
+
+      @media (max-width: 992px) {
+        padding: 4px 10px;
+      }
+
+      &:hover {
+        background-color: map-get($map: $colors, $key: 'secondary');
+        border-color: map-get($map: $colors, $key: 'secondary');
+        color: white;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+
+    &__item.active {
+      background-color: map-get($map: $colors, $key: 'secondary');
+      border-color: map-get($map: $colors, $key: 'secondary');
+      color: white;
+    }
+  }
+}
+
+::ng-deep mat-tab-header {
+  display: none !important; /* Hides the label content */
+}

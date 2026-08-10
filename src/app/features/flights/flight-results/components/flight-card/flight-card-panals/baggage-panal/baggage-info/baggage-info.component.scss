@@ -1,0 +1,126 @@
+@import '../../../../../../../../../sass/variables';
+@import '../../../../../../../../../sass/colors';
+
+.exclamation {
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+::ng-deep .baggage-info-menu {
+  min-width: unset;
+  width: auto;
+  min-width: 316px;
+  padding: 15px;
+  border-radius:10px;
+  &__caption {
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  p {
+    font-weight: 400;
+  }
+
+  hr {
+    margin-block: 17px;
+  }
+
+  .inculded-sec {
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    &__baggage {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &__info {
+        display: flex;
+        align-items: center;
+        flex-grow: 0;
+        padding: 4px;
+        border-radius: $base-radius-tiny;
+        background-color: map-get($map: $colors, $key: 'off-white');
+      }
+
+      &__text {
+        span {
+          color: map-get($map: $colors, $key: 'gray-border');
+          font-weight: 300;
+        }
+      }
+    }
+  }
+
+  .not-possible-sec {
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+
+      &__icon {
+        cursor: default;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        line-height: 0;
+        font-size: 12px;
+
+        width: 20px;
+        height: 20px;
+
+        border-radius: 50%;
+        border: 1px solid black;
+      }
+    }
+
+    &__baggage {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: 30px;
+      margin-block: 10px;
+    }
+
+    &__info {
+      display: flex;
+      align-items: start;
+      gap: 5px;
+      margin-left: 30px;
+      padding: 18px;
+      font-weight: 400;
+      background-color: map-get($map: $colors, $key: 'off-white');
+      border-radius: $base-radius-tiny;
+      border: 1px solid map-get($map: $colors, $key: 'main');
+    }
+  }
+  .baggage-line{
+    font-size: 0.9rem;
+  }
+  .baggage-entry{
+      display: flex;
+    align-items: center;
+  }
+   .hand-baggage{
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    margin-inline-start: 5px;
+    margin-top: 5px;
+  }
+  .hand-baggage-top{
+    display: flex;
+    align-items: center;
+  }
+}

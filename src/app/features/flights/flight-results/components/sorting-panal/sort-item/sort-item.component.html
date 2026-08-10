@@ -1,0 +1,6 @@
+<div class="sort-item" [ngClass]="{ active: sortItem.isActive }">
+  <span class="sort-item__title">{{ 'results.sort.' + sortItem.title | translate }}</span>
+  <span class="sort-item__number"
+    >{{ sortItem.currency | exchange: 'code' }} {{ sortItem.price | exchange: 'value' }}</span
+  >
+</div>

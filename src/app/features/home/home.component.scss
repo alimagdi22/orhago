@@ -1,0 +1,108 @@
+.bannar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url(../../../assets/images/search-box/2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: none;
+  margin: 5%;
+  margin-top: 0;
+  padding: 5%;
+  border-radius: 12px;
+  min-height: 80vh;
+
+  &__text {
+    font-size: 40px;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 30px;
+
+    @media (max-width:1200px){
+      font-size: 20px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .bannar {
+    position: relative;
+    overflow: hidden;
+    margin: 5%;
+    margin-top: 0;
+    padding: 5%;
+    border-radius: 12px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &__bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      z-index: 0;
+    }
+
+    &__bg.active {
+      opacity: 1;
+    }
+
+    &__text {
+      z-index: 1;
+      font-size: 42px;
+      font-weight: 800;
+      color: white;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      margin-bottom: 30px;
+    }
+
+    .regular-search {
+      z-index: 1;
+      width: 100%;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+  }
+}
+
+
+
+.sticky-search-box {
+  background-color: white;
+  width: 80%;
+  margin: auto;
+  border-radius: 15px;
+  position: fixed;
+  left: 50%;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateX(-50%);
+  animation: stickySlideDown 0.25s ease-out;
+}
+
+@keyframes stickySlideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width:1200px){
+  .sticky-search-box{
+    display: none;
+  }
+}

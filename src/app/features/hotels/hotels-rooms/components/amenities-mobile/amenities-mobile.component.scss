@@ -1,0 +1,37 @@
+.section{
+  gap: 10px;
+}
+.amenities-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.amenity-box {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.amenity-box:hover {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.amenity-box span {
+  color: #222;
+}
+
+a.text-success {
+  color: #2ea300 !important;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+a.text-success:hover {
+  text-decoration: underline;
+}

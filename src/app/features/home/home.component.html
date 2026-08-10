@@ -1,0 +1,35 @@
+<main>
+  <div class="bannar" [style.backgroundImage]="'url(' + images[index] + ')'">
+      <div
+    class="bannar__bg"
+    *ngFor="let img of images; let i = index"
+    [ngClass]="{ active: i === index }"
+    [style.backgroundImage]="'url(' + img + ')'"
+  ></div>
+    <p class="bannar__text capitalize">{{ 'home.bannarTitle' | translate }}</p>
+
+    @if (sharedService.isCitiesLoading) {
+      <app-skeleton-loader height="200px" />
+    } @else {
+      <app-search-box class="regular-search" />
+    }
+  </div>
+  @if(showStickySearch && !(flightSearchService.searchFlight.get('flightType')?.value === "MultiCity")){
+    <div class="sticky-search-box">
+      <app-search-box/>
+    </div>
+  }
+
+  <div class="container">
+    @if (
+      !mostSearchedFlightsService.isEmpty && !mostSearchedFlightsService.isError && !mostSearchedFlightsService.isLoading
+    ) {
+      <app-flight-deals />
+    }
+    <app-site-advantages />
+    <app-hotel-deals />
+    <app-app-ad />
+    <app-popular-cities />
+    <app-popular-airlines />
+  </div>
+</main>

@@ -1,0 +1,106 @@
+<form [formGroup]="flightSearchService.searchFlight" (ngSubmit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="inputs-container">
+      <ng-container formArrayName="Flights">
+        @for (
+          item of flightType === 'multi-city'
+            ? flightSearchService.flightsArray['controls']
+            : (flightSearchService.flightsArray['controls'] | slice: 0 : 1);
+          track $index;
+          let i = $index
+        ) {
+          @if($index) {
+            <hr/>
+          }
+          <ng-container [formGroupName]="i">
+            <section
+              class="dest"
+              [ngStyle]="{
+                borderColor:
+                  isDepartingNotValid(i) ||
+                  isLandingNotValid(i) ||
+                  flightSearchService.flightsArray.at(i).errors?.['sameLocation']
+                    ? 'red'
+                    : '',
+              }"
+            >
+            <app-dest-input [index]="i" [flightItem]="item" [destination]="'departing'" class="col-5" (focusDestinationInput)="openlandingDestinationInput = openlandingDestinationInput + 1" />
+
+              <div class="dest__devider col-1">
+                <div class="dest__devider__line"></div>
+                <img
+                  src="../../../../../../assets/icons/switch-icon.svg"
+                  (click)="switchDestination(item, i)"
+                  class="dest__devider__icon"
+                  title="Switch Icon"
+                />
+                <div class="dest__devider__line"></div>
+              </div>
+
+            <app-dest-input [index]="i" [flightItem]="item" [destination]="'landing'" [focus]="openlandingDestinationInput" (focusDateInput)="openDepartingDateCalendar = openDepartingDateCalendar + 1" class="col-5" />
+            </section>
+
+            <section
+              class="calander"
+              [class.col-9]="sharedService.screenWidth < 1200 && $index"
+              [class.col-12]="sharedService.screenWidth > 1200 || !$index"
+              [ngStyle]="{ borderColor: isCalanderNotValid(i) ? 'red' : '' }"
+            >
+            <app-date-input [index]="i" [flightType]="flightType" [isReturnDateSelected]="false" class="col-5" (openRoundTripCalendar)="openReturnDateCalendar = openReturnDateCalendar + 1" [openCalendar]="openDepartingDateCalendar" (openCabinMenu)="openCabinMenu = openCabinMenu + 1" />
+              @if (flightType !== 'multi-city') {
+                <div class="calander__devider col-1">
+                  <div class="calander__devider__line"></div>
+                </div>
+              }
+
+              @if (flightType === 'one-way') {
+                <div
+                  class="calander__to col-5"
+                  [ngStyle]="{ justifyContent: 'center', fontWeight: '600' }"
+                  (click)="onClickAddReturn()"
+                >
+                  <p>+ {{ 'home.search.addReturn' | translate }}</p>
+                </div>
+              } @else if (flightType === 'round-trip') {
+                <app-date-input [index]="i" [flightType]="flightType" [isReturnDateSelected]="true" [openCalendar]="openReturnDateCalendar" (openCabinMenu)="openCabinMenu = openCabinMenu + 1" class="col-5" />
+              }
+            </section>
+
+            @if (!$index) {
+              <section class="cabin">
+                <app-cabin-class [openMenu]="openCabinMenu" />
+              </section>
+
+              @if(sharedService.screenWidth >= 1200) {
+                <section class="button">
+                  <app-main-button [title]="'home.search.searchTicket' | translate" [mainButtonInfo]="searchButton" />
+                </section>
+              }
+            } @else {
+              <div class="remove-icon">
+                <img src="assets/icons/exit-icon.svg" title="Remove Icon" (click)="removeFlight(i)" />
+              </div>
+            }
+            
+          </ng-container>
+        }
+        @if (flightType === 'multi-city' && flightSearchService.flightsArray.length < 4) {
+          <div class="multi-city-action">
+            <app-secondary-button
+              [title]="'+ ' + ('home.search.addFlight' | translate)"
+              [secondaryButtonInfo]="addFlightButton"
+              (clickSecondaryButton)="addFlight()"
+            />
+            <p class="add-flight-info">{{ 'home.search.addFlightNote' | translate }}</p>
+          </div>
+        }
+      </ng-container>
+
+      @if(sharedService.screenWidth < 1200) {
+        <section class="button col-12 col-xl-1">
+          <app-main-button [title]="'home.search.searchTicket' | translate" [mainButtonInfo]="searchButton" />
+        </section>
+      }
+    </div>
+  </div>
+</form>

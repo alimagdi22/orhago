@@ -1,0 +1,22 @@
+@if(baggages) {
+  <div class="baggage">
+    <p class="baggage-title">
+      {{ 'confirmation.baggage' | translate }}
+      <span class="baggage-caption">({{ 'confirmation.perPerson' | translate }}) </span>:
+    </p>
+
+    @for (baggage of baggages; track $index) {
+      @if(baggage.baggage) {
+        <div class="baggage-info">
+          <img src="assets/icons/bags.svg" title="Bag Icon" class="baggage-icon" />
+          <div class="baggage-text" dir="ltr">
+            {{getBaggageCountOnlyOrRaw(baggage.baggage)}}<p> x Cabin Baggage</p>
+            <p>(55 x 38 x 20) . 7kg</p>
+          </div>
+        </div>
+      }
+    }
+  </div>
+}
+
+<p class="paragraph">{{ 'confirmation.baggageMessage' | translate }}</p>

@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <button class="filter-btn">
+    <img src="assets/images/Vector.svg" alt="filter icon" (click)="toggleSidebar()"/>
+  </button>
+      <div class="row between">
+        <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
+        <aside
+          class="mobile-sidebar-panel d-lg-none"
+          [class.open]="isSidebarOpen">
+          <app-filter-panal (click)="filterUpdated()" />
+        </aside>
+      </div>
+
+  @for (sortItem of sortItems; track sortItem.title; let i = $index) {
+    <app-sorting-item-app
+      [sortItem]="sortItem"
+      (click)="onClickSort(sortItem)"
+    />
+  }
+</div>

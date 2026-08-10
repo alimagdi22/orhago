@@ -1,0 +1,15 @@
+  <div class="head">
+<div class="contain">
+  <span class="filter">{{'hotels-filter.filter' | translate}}</span>
+  <button class="btn-reset" (click)="onReset()">{{'hotels-filter.reset' | translate}}</button>
+</div>
+  </div>
+  <app-expansion-panel title="{{'hotels-filter.popular' | translate}}">
+    <app-inclusion/>
+  </app-expansion-panel>
+  <app-expansion-panel title="{{'hotels-filter.star' | translate}}">
+    <app-rate/>
+  </app-expansion-panel>
+  <app-expansion-panel title="{{'hotels-filter.location' | translate}}">
+    <app-location/>
+  </app-expansion-panel>

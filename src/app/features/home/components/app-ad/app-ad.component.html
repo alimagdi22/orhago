@@ -1,0 +1,36 @@
+<div class="ad row center">
+  <img src="assets/images/bannar.jpeg" title="Bannar Image" class="ad__img col-10 col-lg-5" />
+
+  <div class="ad__info col-10 col-lg-5">
+    <p class="ad__info__title">{{ 'home.adContent.title' | translate }}</p>
+
+    <div class="ad__info__paragraphs">
+      @for (feature of features; track $index) {
+        <div class="ad__info__paragraphs__container">
+          <img
+            src="assets/icons/home-icons/check-icon.svg"
+            title="Check Icon"
+            class="ad__info__paragraphs__container__icon"
+          />
+          <p class="ad__info__paragraphs__container__text">{{ feature }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="ad__info__apps">
+      <p class="ad__info__apps__title">{{ 'home.adContent.scanToDownload' | translate }}</p>
+      <div class="ad__info__apps__icons">
+        <img src="assets/icons/home-icons/qr-code-icon.svg" title="QR Code" class="ad__info__apps__icons__qr" />
+        <div class="ad__info__apps__icons__stores">
+          <img
+            src="assets/icons/home-icons/google-play-icon.svg"
+            title="Google Play"
+            class="ad__info__apps__icons__qr"
+          />
+          <img src="assets/icons/home-icons/app-store-icon.svg" title="App Store" class="ad__info__apps__qr" />
+          <img src="assets/icons/home-icons/app-gallery-icon.svg" title="App Gallery" class="ad__info__apps__qr" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+              <form [formGroup]="hotelResults.filterForm">
+              <div *ngIf="!hotelResults.hotelResultsLoader">
+                <ng-container formArrayName="hotelLocations" *ngIf="hotelResults.hotelLocationsArr.length !=0">
+                    <ng-container *ngFor="let item of hotelResults.hotelLocationsArray['controls']; let i= index;">
+                        <ng-container [formGroupName]="i">
+                        <div class="hotelFilter_location" *ngIf="i!=0">
+                            <input formControlName="location"  type="checkbox" class="form-check-input "  (click)="hotelResults.selectLocations(i,hotelResults.hotelLocationsArr[i])">
+                            <label class="form-check-label" >{{hotelResults.hotelLocationsArr[i]}}</label>
+                        </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+</form>

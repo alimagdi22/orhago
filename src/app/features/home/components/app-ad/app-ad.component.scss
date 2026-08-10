@@ -1,0 +1,60 @@
+.ad {
+  position: relative;
+  margin-top: 60px;
+
+  &__img {
+    height: 550px;
+    object-fit: cover;
+    border-radius: 12px;
+    filter: blur(1px);
+  }
+
+  &__info {
+    padding: 4%;
+
+    &__title {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    &__paragraphs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-block: 25px;
+
+      &__container {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+
+    &__apps {
+      &__title {
+        font-size: 12px;
+        margin-bottom: 15px;
+      }
+
+      &__icons {
+        display: flex;
+        gap: 20px;
+
+        &__qr {
+          width: 135px;
+        }
+
+        &__stores {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          img {
+            width: 135px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+<main class="container">
+  <div class="wrapper">
+    @for (flight of sharedService.selectedFlightItinerary.allJourney.flights; track $index) {
+      <div
+        [ngClass]="{
+          border: sharedService.selectedFlightItinerary.allJourney.flights.length > 1,
+          active:
+            sharedService.selectedFlightItinerary.allJourney.flights.length > 1 &&
+            sharedService.selectedItinerary === $index,
+        }"
+        class="itinerary"
+      >
+        @if (flightType === 'roundtrip') {
+          <p class="title">
+            {{ ($index ? 'flightDetails.itinerary.Arrive' : 'flightDetails.itinerary.Departure') | translate }}
+          </p>
+        }
+        <section class="top-info row between gap-2">
+          <div class="top-info__time align-start col-12 col-lg-4">
+            <div class="align-center">
+              <p class="top-info__time__date">
+                {{ flight.flightDTO[0].departureDate | date: 'd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }} -
+                {{ 'flightDetails.itinerary.' + cabinClass | translate }}
+              </p>
+              <p class="top-info__time__time">
+                {{ flight.flightDTO[0].departureDate | date: 'hh:mm a' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }} -
+                {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalDate | date: 'hh:mm a' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+              </p>
+              <p class="top-info__time__cities">
+                {{ flight.flightDTO[0].departureTerminalAirport.cityCode }} -
+                {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
+              </p>
+            </div>
+          </div>
+
+          <div class="top-info__flight align-end col-12 col-lg-4">
+            <div class="align-center">
+              <p class="top-info__flight__duration">Total duration {{ flight.elapsedTime | hourminute }}</p>
+              <img [src]="flight.flightAirline.airlineLogo" class="top-info__flight__logo" title="Logo" />
+              <p class="top-info__flight__stops">
+                {{ 'flightDetails.itinerary.' + getNumberOfStops(flight.stopsNum) | translate }}
+              </p>
+              @for (flights of flight.flightDTO; track $index) {
+                @if ($index < flight.stopsNum) {
+                  <p>{{flights.arrivalTerminalAirport.airportCode}}</p>
+                }
+              }
+            </div>
+          </div>
+        </section>
+
+        <section class="flight-info">
+          @if (flightType !== 'roundtrip') {
+            <p class="flight-info__title">{{ 'flightDetails.itinerary.Departure' | translate }}</p>
+          }
+
+
+          <div class="flight-info__path">
+            <div class="flight-info__path__date">
+              <img
+                src="assets/icons/calander-icon.svg"
+                title="Calander Icon"
+                class="flight-info__path__date__calander"
+              />
+              <p class="flight-info__path__date__text">{{ flight.flightDTO[0].departureDate | date: 'EEEE dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
+            </div>
+
+            @for (flightSegment of flight.flightDTO; track flightSegment; let i = $index) {
+              <app-flight-path
+                [flightSegment]="flightSegment"
+                [cabinClass]="cabinClass"
+                [airlineLogo]="flight.flightAirline.airlineLogo"
+                [airlineName]="flight.flightAirline.airlineName"
+                [terminal]="flight.flightDTO[0].departureTerminalAirport.airportCode"
+              />
+
+              @if (i != flight.flightDTO.length - 1) {
+                <div class="flight-info__path__change">
+                  <div class="flight-info__path__change__time">
+                    <img src="assets/icons/clock-icon.svg" title="Clock Icon" />
+                    <p>
+                      {{ sharedService.convertTimeToDayAndHour(flightSegment.transitTime) }}
+                      {{ 'flightDetails.itinerary.changeIn' | translate }}
+                      {{ flightSegment.arrivalTerminalAirport.cityName }}
+                    </p>
+                  </div>
+                  <div class="flight-info__path__change__date">
+                    <p *ngIf="getDayDiffBetweenSegments(flight.flightDTO[i].arrivalDate, flight.flightDTO[i + 1].departureDate) > 0">
+                      +{{ getDayDiffBetweenSegments(flight.flightDTO[i].arrivalDate, flight.flightDTO[i + 1].departureDate) }}
+                      {{translate.currentLang === 'en' ? 'Day' : 'يوم'}}{{ getDayDiffBetweenSegments(flight.flightDTO[i].arrivalDate, flight.flightDTO[i + 1].departureDate) > 1 ? 's' : '' }}</p>
+                    <p>{{ flight.flightDTO[i + 1].departureDate | date: 'EEEE dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
+                  </div>
+                </div>
+              }
+            }
+          </div>
+        </section>
+      </div>
+    }
+  </div>
+</main>

@@ -1,0 +1,23 @@
+<div class="wrapper">
+  @for (flight of flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights; track $index) {
+    <div class="container margin-top flight-info">
+      <header>{{ flight.flightAirline.airlineName }} ({{ flight.flightAirline.airlineCode }})</header>
+
+      <div class="row between">
+        <app-flight-info-dest class="col-3" [isDepart]="true" [flightSegment]="flight?.flightDTO?.[0] ?? null" />
+        <app-flight-info-path class="col-5" [isDirect]="flight?.stopsNum === 0" [totalDuration]="flight.elapsedTime" [transitTime]="flight.flightDTO[0].transitTime"/>
+        <app-flight-info-dest
+          class="col-3"
+          [isDepart]="false"
+          [flightSegment]="flight?.flightDTO?.[flight.flightDTO.length - 1] ?? null"
+        />
+      </div>
+
+      <footer
+        (click)="showFlightDetails(flightCheckoutService.selectedFlight?.airItineraryDTO ?? null, $event, $index)"
+      >
+        {{ 'checkout.seeMoreDetails' | translate }}
+      </footer>
+    </div>
+  }
+</div>

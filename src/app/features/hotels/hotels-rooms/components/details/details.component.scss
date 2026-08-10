@@ -1,0 +1,41 @@
+.details {
+    padding-inline-end: 40px;
+    
+    p {
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+
+    .read-more {
+        cursor: pointer;
+        color: green;
+    }
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .info-item {
+        display: flex;
+        align-items: start;
+        gap: 10px;
+
+        p {
+            display: flex;
+            flex-direction: column;
+            font-weight: 400;
+            span {
+                font-weight: 600;
+            }
+        }
+    }
+
+    @media (max-width: 960px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+}

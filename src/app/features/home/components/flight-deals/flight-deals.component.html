@@ -1,0 +1,10 @@
+<div class="text-wrapper">
+  <h2>{{ 'home.flightDeals.title' | translate }}</h2>
+  <p class="home-paragraph">{{ 'home.flightDeals.description' | translate }}</p>
+</div>
+
+<swiper-container #swiperEl>
+  <swiper-slide *ngFor="let mostSearchedFlight of mostSearchedFlightsService.mostSearchedFlights; let i = index">
+    <app-flight-deals-card [mostSearchedFlight]="mostSearchedFlight"></app-flight-deals-card>
+  </swiper-slide>
+</swiper-container>

@@ -1,0 +1,183 @@
+<div class="container">
+  @if (flightResultService.isBrandedFaresLoading) {
+    <div class="spinner-loading">
+      <mat-spinner />
+    </div>
+  } @else {
+    <div class="row between wrapper">
+      <div class="fare-section col-12 col-lg-4">
+        <div class="title">
+          <p>{{ 'flightDetails.fareRules.fareBreakup' | translate }}</p>
+          <hr />
+          <div class="hide">{{ 'flightDetails.fareRules.cancellationFee' | translate }}</div>
+        </div>
+
+        <table>
+          <tr>
+            <td>
+              <strong>{{ 'flightDetails.fareRules.baseFare' | translate }}</strong>
+            </td>
+            <td></td>
+          </tr>
+          @for (
+            passengerFareBreakDown of flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
+              .passengerFareBreakDowns;
+            track $index
+          ) {
+            <tr>
+              <td>
+                {{ passengerFareBreakDown.passengerQuantity }}
+                {{ sharedService.getPassengerTypeName(passengerFareBreakDown.passengerType) }} ({{
+                  passengerFareBreakDown.passengerQuantity
+                }}× {{ passengerFareBreakDown.flightFaresDTOs[0].fareAmount | exchange: 'value' }})
+              </td>
+              <td>
+                {{ passengerFareBreakDown.flightFaresDTOs[0].currencyCode | exchange: 'code' }}
+                {{
+                  passengerFareBreakDown.flightFaresDTOs[0].fareAmount * passengerFareBreakDown.passengerQuantity
+                    | exchange: 'value'
+                }}
+              </td>
+            </tr>
+          }
+          <tr>
+            <td>
+              <strong>{{ 'flightDetails.fareRules.taxesFees' | translate }}</strong>
+            </td>
+            <td>
+              {{
+                flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
+                  .flightFaresDTOs[1].currencyCode | exchange: 'code'
+              }}
+              {{ getTotelTaxFare() | exchange: 'value' }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>{{ 'flightDetails.fareRules.totalPrice' | translate }}</strong>
+            </td>
+            <td>
+              <strong
+                >{{
+                  flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
+                    .passengerFareBreakDowns[0].flightFaresDTOs[2].currencyCode | exchange: 'code'
+                }}
+                {{ getTotelBaseFare() | exchange: 'value' }}</strong
+              >
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="fare-section col-12 col-lg-7">
+        <div class="title">
+          <p>{{ 'flightDetails.fareRules.fareRules' | translate }}</p>
+          <hr />
+          <p>{{ 'flightDetails.fareRules.cancellationFee' | translate }}</p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th [ngStyle]="{ width: '100px' }">{{ 'flightDetails.fareRules.sector' | translate }}</th>
+              <th>{{ 'flightDetails.fareRules.airlineFee' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (
+              flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
+                .cancelPenaltyDTOs.length
+            ) {
+              <tr>
+                <td>
+                  @for (
+                    sector of flightResultService.currentSelectedBrands[
+                      sharedService.selectedBrandedIndex
+                    ].passengerFareBreakDowns[0].cancelPenaltyDTOs[0].sector.split(',');
+                    track $index
+                  ) {
+                    <p>{{ sector }}</p>
+                  }
+                </td>
+                <td>
+                  {{
+                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
+                      .passengerFareBreakDowns[0].cancelPenaltyDTOs[0].curency | exchange: 'code'
+                  }}
+                  {{ getCancellationPrice() | exchange: 'value' }}
+                  {{ 'flightDetails.fareRules.perPassenger' | translate }}
+                </td>
+              </tr>
+            }
+
+            @if (flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0]) {
+              <tr>
+                <td>{{ 'flightDetails.fareRules.adminCharges' | translate }}</td>
+                <td>
+                  {{
+                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0]
+                      .curency | exchange: 'code'
+                  }}
+                  {{
+                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0].price
+                      | exchange: 'value'
+                  }}
+                  {{ 'flightDetails.fareRules.perPassenger' | translate }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="paragraph">
+        {{ 'flightDetails.fareRules.allChangesNote' | translate }}
+      </p>
+
+      <div class="fare-section col-12">
+        <p class="text-align-start">{{ 'flightDetails.fareRules.dateChangeFee' | translate }}</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>{{ 'flightDetails.fareRules.sector' | translate }}</th>
+              <th>{{ 'flightDetails.fareRules.airlineFee' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (
+              flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
+                .changePenaltyDTOs.length
+            ) {
+              <tr>
+                <td>
+                  @for (
+                    sector of flightResultService.currentSelectedBrands[
+                      sharedService.selectedBrandedIndex
+                    ].passengerFareBreakDowns[0].changePenaltyDTOs[0].sector.split(',');
+                    track $index
+                  ) {
+                    <p>{{ sector }}</p>
+                  }
+                </td>
+
+                <td>
+                  {{
+                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
+                      .passengerFareBreakDowns[0].changePenaltyDTOs[0].curency | exchange: 'code'
+                  }}
+                  {{ getChangePrice() | exchange: 'value' }} + {{ 'flightDetails.fareRules.perPassenger' | translate }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="paragraph">
+        {{ 'flightDetails.fareRules.pleaseNote' | translate }} <br />
+        {{ 'flightDetails.fareRules.airlinePolicyNote' | translate }}
+      </p>
+    </div>
+  }
+</div>

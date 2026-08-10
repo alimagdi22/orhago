@@ -1,0 +1,74 @@
+@for (itinerary of airItineraries | slice: 0 : (showMoreFlights ? airItineraries.length : 1); track $index) {
+<div class="flight-card">
+  <div class="flight-card__top">
+    <div class="flight-info">
+      <div class="left">
+        <img [src]="airItineraries[0].allJourney.flights[0].flightAirline.airlineLogo" alt="Flynas" class="airline-logo" />
+        <div class="airline-name">{{airItineraries[0].allJourney.flights[0].flightAirline.airlineName}}</div>
+      </div>
+
+      @for (flight of itinerary.allJourney.flights; track $index) {
+          @if ($index) {
+            <div class="col-12 divider"></div>
+          }
+      <div class="flight-info__center">
+        <div class="flight-time">
+          <div class="departure">
+            <div class="time"><app-destination-info-app [flightDTO]="flight.flightDTO[0]" [dest]="'dept'"/></div>
+            <div class="code">{{ flight.flightDTO[0].departureTerminalAirport.cityCode }}</div>
+          </div>
+          <div class="plane-icon"><img src="assets/images/Vectorr.svg" alt=""></div>
+          <div class="arrival">
+            <div class="time"><app-destination-info-app [flightDTO]="flight.flightDTO[0]" [dest]="'land'"/></div>
+            <div class="code">{{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}</div>
+          </div>
+          <div class="departure">
+            <i class="fa-regular fa-clock"></i>
+            <div class="time">{{ flight.elapsedTime| hourminute }}</div>
+            <div class="code"><app-stops-info [flight]="flight" matTooltip=" {{'results.card.transit' | translate}} {{ flight.flightDTO[0].transitTime | timeFormat}}" matTooltipPosition="above" class="col-xl-2 col-lg-12 col-12 stop" /></div>
+          </div>
+        </div>
+
+      </div>
+    }
+    </div>
+
+          <div class="flight-info__right">
+          <app-baggage-info [baggageInfo]="baggageInfo" />
+        <div class="price">
+          <div class="currency">
+              {{airItineraries[0].itinTotalFare.currencyCode| exchange: 'code'}}
+          </div>
+          <div class="amount">
+              {{airItineraries[0].itinTotalFare.amount | exchange: 'value'}}
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="flight-card__bottom">
+    <div class="same-price">
+            @if (!$index && !showMoreFlights && airItineraries.length > 1) {
+        <span class="text" (click)="showMoreFlights = true">{{ translate.currentLang === 'en' ? 'Show More Flights' : 'اعرض المزيد من الرحلات' }}</span>
+      } @else if($index !== airItineraries.length - 1) {
+        <span> </span>
+      }
+
+      @if ($index === airItineraries.length - 1 && showMoreFlights) {
+        <span class="text" (click)="showMoreFlights = false">{{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات اقل' }}</span>
+      }
+    </div>
+
+
+    <div class="details">
+      @if (flightResultService.isBrandedFaresLoading) {
+        <span class="disabled-text">{{ 'results.card.flightDetails' | translate }}</span>
+      } @else {
+        <span class="text" (click)="showFlightDetails(itinerary, $event)">{{
+          'results.card.flightDetails' | translate
+        }}</span>
+      }
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,44 @@
+<div class="reviews-container">
+  <h2 class="title">Guest Reviews</h2>
+
+  <div class="review-box">
+    <div class="review-card">
+      <div class="avatar">A</div>
+      <div class="review-content">
+        <h3 class="name">Adrian</h3>
+        <div class="country">
+          <img src="https://flagcdn.com/w20/ar.png" alt="Argentina flag" />
+          <span>Argentina</span>
+        </div>
+        <p class="text">
+          “A wonderful experience in a special place.<br />
+          Thank you to all the staff.”
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <a class="view-all" (click)="openPopup()">View All Reviews</a>
+
+  <!-- Popup Modal -->
+  <div class="popup-overlay" *ngIf="showPopup">
+    <div class="popup-box">
+      <button class="close-btn" (click)="closePopup()">×</button>
+      <h3 class="popup-title">All Guest Reviews</h3>
+
+      <div class="popup-content">
+        <div class="review-item" *ngFor="let review of reviews">
+          <div class="avatar">{{ review.name[0] }}</div>
+          <div class="review-info">
+            <h4 class="name">{{ review.name }}</h4>
+            <div class="country">
+              <img [src]="review.flag" [alt]="review.country" />
+              <span>{{ review.country }}</span>
+            </div>
+            <p class="text">{{ review.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

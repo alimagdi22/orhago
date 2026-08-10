@@ -1,0 +1,5 @@
+<header [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
+  <button (click)="onClickClose.emit()"><img src="assets/images/close.svg" alt=""></button>
+  <span>{{ headerTitle }}</span>
+
+</header>

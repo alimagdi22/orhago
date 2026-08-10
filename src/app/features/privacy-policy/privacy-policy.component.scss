@@ -1,0 +1,32 @@
+@import '../../../sass/variables';
+
+.privacy-policy {
+  margin-top: 60px;
+  padding: 20px;
+  color: #333;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: $base-radius-small;
+}
+
+h1 {
+  text-align: start;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+section {
+  height: 50vh;
+}

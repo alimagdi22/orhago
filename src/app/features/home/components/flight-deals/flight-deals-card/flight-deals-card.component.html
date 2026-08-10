@@ -1,0 +1,45 @@
+@if (mostSearchedFlight && mostSearchedFlight.searchCriteria) {
+  <div class="flight-deal-card">
+    <img src="assets/images/popular/Dubai.png" title="Photo" class="flight-deal-card__img" />
+
+    <div class="flight-deal-card__body">
+      <div class="flight-deal-card__body__info">
+        <p class="flight-deal-card__body__info__date">
+          {{
+            mostSearchedFlight.searchCriteria.flights[0]?.departingOnDate
+              | date: 'd MMMM' : undefined : (translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
+          }}
+        </p>
+        <p class="flight-deal-card__body__info__flight-type">{{ mostSearchedFlight.searchCriteria.flightType }}</p>
+      </div>
+
+      <p class="flight-deal-card__body__percentage" dir="ltr">{{ mostSearchedFlight.discountPercentage * -1 }}%</p>
+    </div>
+
+    <div class="flight-deal-card__footer">
+      <span class="flight-deal-card__footer__time">
+        {{ mostSearchedFlight.searchCriteria.flights[0]?.departingFrom }}
+        {{ mostSearchedFlight.searchCriteria.flights[0]?.arrivingTo }}
+      </span>
+
+      <div class="flight-deal-card__footer__price">
+        <span class="flight-deal-card__footer__price__old">
+          {{ mostSearchedFlight.searchCriteria.currency | exchange: 'code' }}
+          {{ mostSearchedFlight.originalPrice | exchange: 'value' }}*
+        </span>
+        <span class="flight-deal-card__footer__price__new">
+          {{ mostSearchedFlight.searchCriteria.currency | exchange: 'code' }}
+          {{ mostSearchedFlight.originalPrice | discount: mostSearchedFlight.discountPercentage | exchange: 'value' }}
+        </span>
+      </div>
+
+      <div class="flight-deal-card__footer__action">
+        <app-main-button
+          [mainButtonInfo]="bookButton"
+          title="Book"
+          (clickMainButton)="mostSearchedFlightsService.goToSearchResults(mostSearchedFlight.searchCriteria)"
+        />
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,5 @@
+<section class="wrapper">
+  <h3>{{ date | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</h3>
+  <p>{{ date | date: 'dd MMM, EEE' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
+  <p>{{ airportCode }}</p>
+</section>

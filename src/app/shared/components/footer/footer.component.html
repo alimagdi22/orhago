@@ -1,0 +1,73 @@
+<footer class="footer" [class.checkout]="sharedService.isSegmentPresent(['checkout']) && sharedService.checkoutSteps === 0">
+  <div class="container">
+    <div class="footer-left">
+      <div class="logo">
+        <img src="assets/images/footer-logo.svg" width="150" alt="Travelo Logo" />
+      </div>
+      <p>{{ 'footer.about' | translate }}</p>
+    </div>
+
+    <div class="footer-links">
+      <ul class="flex-grow-1">
+        <li>
+          <a routerLink="" (click)="onNavigate()">{{ 'footer.links.home' | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="about-us" (click)="onNavigate()">{{ 'footer.links.aboutUs' | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="#" (click)="onNavigate()">{{ 'footer.links.application' | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="contact-us" (click)="onNavigate()">{{ 'footer.links.contactUs' | translate }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <ul>
+        <li>
+          <a routerLink="privacy-policy" (click)="onNavigate()">{{ 'footer.links.privacyPolicy' | translate }}</a>
+        </li>
+        <li>
+          <a routerLink="#">{{ 'footer.links.helpCenter' | translate }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <ul>
+        <li>
+          <a href="mailto:{{ 'footer.contact.email' | translate }}">
+            <img src="assets/icons/email-footer-icon.svg" alt="Email" />
+            {{ 'footer.contact.email' | translate }}
+          </a>
+        </li>
+        <li>
+          <a href="tel:{{ 'footer.contact.phone' | translate }}" class="phone-link">
+            <span class="icon">
+              <img src="assets/icons/phone-footer-icon.svg" alt="Phone" />
+            </span>
+            <span class="number" dir="ltr">
+              {{ 'footer.contact.phone' | translate }}
+            </span>
+          </a>
+
+        </li>
+        <li>
+          <img src="assets/icons/location-footer-icon.svg" alt="Location" />
+          {{ 'footer.contact.address' | translate }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p [innerHTML]="'footer.copyright' | translate"></p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com"><img src="assets/icons/facebook-icon.svg" alt="Facebook" /></a>
+      <a href="https://x.com/GootajInfo"><img src="assets/icons/linkedin-icon.svg" alt="LinkedIn" /></a>
+      <a href="https://www.instagram.com/gootajinfo/"><img src="assets/icons/instagram-icon.svg" alt="Instagram" /></a>
+    </div>
+  </div>
+</footer>

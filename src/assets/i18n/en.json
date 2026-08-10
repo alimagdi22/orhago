@@ -1,0 +1,539 @@
+{
+  "navbar": {
+    "signIn": "Sign In",
+    "manageBooking": "Manage Booking",
+    "userProfile": "User Profile",
+    "signOut": "Sign Out",
+    "signOutMessage": "Are you sure you want to sign out of your account?",
+    "cancel": "Cancel"
+  },
+
+  "footer": {
+    "about": "Gootaj is a leading online travel agency offering seamless booking experiences for flights, hotels, and more. Explore the world with us!",
+    "links": {
+      "home": "Home",
+      "aboutUs": "About Us",
+      "application": "Application",
+      "contactUs": "Contact Us",
+      "privacyPolicy": "Privacy Policy",
+      "helpCenter": "Help Center"
+    },
+    "contact": {
+      "email": "info@gootaj.com",
+      "phone": "+965 66414350",
+      "address": "Close to Gad Resturant,Habeeb Munawer St, Al Farwaniyah, Kuwait"
+    },
+    "copyright": "&copy; 2025 Gootaj. All rights reserved."
+  },
+
+    "searchBox": {
+    "oneway": "One Way",
+    "roundtrip": "Round Trip",
+    "multicity": "Multi City",
+    "leaving": "Leaving",
+    "arriving": "Arriving",
+    "placeholder": "Enter your destination",
+    "noSearchResults": "No Search Results",
+    "recommendedAirports": "Recommended Airports",
+    "return": "Return",
+    "depart": "Depart",
+    "returnDate": "Return Date",
+    "departDate": "Depart Date",
+    "travellersCabin": "Travellers/Cabin Class",
+    "adult": "Adult",
+    "child": "Child",
+    "infant": "Infant",
+    "Economy": "Economy",
+    "Premium Economy": "Premium Economy",
+    "Business": "Business",
+    "First": "First Class",
+    "done": "Done",
+    "close": "Close",
+    "search": "Search",
+    "datePicker": "Date Picker",
+    "Destination": "Destination",
+    "Entercity": "Enter city",
+    "hotelHead": "Where do you want to stay?",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "guestsRooms": "Guests & Rooms",
+    "room": "Room",
+    "removeRoom": "Remove room",
+    "decreaseAdults": "Decrease adults",
+    "increaseAdults": "Increase adults",
+    "decreaseChildren": "Decrease children",
+    "increaseChildren": "Increase children",
+    "childAge": "Child Age",
+    "year": "year",
+    "years": "years",
+    "addRoom": "Add Room",
+    "adults": "Adults",
+    "children": "Children",
+    "rooms": "Rooms",
+    "Location": "Location",
+    "hotels":"Hotels",
+    "searchHotels":"Search Hotels",
+    "guest" : "Guest",
+    "guests" : "Guests",
+    "dateSelection":"Select a date"
+
+  },
+
+
+  "home": {
+    "bannarTitle": "Plan your imagination and book it",
+    "search": {
+      "flights": "Flights",
+      "oneWay": "One Way",
+      "roundTrip": "Round Trip",
+      "multiCity": "Multi City",
+      "from": "From",
+      "to": "To",
+      "leavingFrom": "Leaving From",
+      "goingTo": "Going To",
+      "depart": "Depart",
+      "arrive": "Arrive",
+      "popularDest": "Popular destinations",
+      "passenger": "Passenger",
+      "guest": "Guest",
+      "selectDate": "Select a date",
+      "adult": "Adult",
+      "child": "child",
+      "infant": "infant",
+      "Economy": "Economy class",
+      "Premium Economy": "Premium Economy",
+      "Business": "Business",
+      "First": "First Class",
+      "addReturn": "Add Return",
+      "done": "Done",
+      "addFlight": "Add Flight",
+      "addFlightNote": "Maximum of 4 different flights can be added",
+      "searchTicket": "Search Ticket"
+    },
+    "adContent": {
+      "title": "Unlock exclusive features available only on the Travelo app. Download it now!",
+      "features": [
+        "Enjoy more than ten practical features tailored exclusively for app users",
+        "Get early access to new offers and discounts",
+        "Seamlessly manage your bookings with advanced tools"
+      ],
+      "scanToDownload": "Scan to download"
+    },
+    "flightDeals": {
+      "title": "The best Flight deals",
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler"
+    },
+    "hotelDeals": {
+      "title": "Popular Searches",
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler"
+    },
+    "populerCities": {
+      "title": "Popular cities for hotels"
+    },
+    "populerAirlines": {
+      "title": "Popular airlines"
+    }
+  },
+
+  "results": {
+    "availableFlights": "Available Flights",
+    "loadingMessage": "Loading Search results, Please wait.",
+
+    "filter": {
+      "price": "Price",
+      "min": "Min",
+      "max": "Max",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "flightSchedules": "Flight Schedules",
+      "departure": "departure",
+      "arrival": "arrival",
+      "Morning": "Morning",
+      "Noon": "Noon",
+      "Afternoon": "Afternoon",
+      "Night": "Night",
+      "airlines": "Airlines",
+      "refundability": "Refundability",
+      "refundable": "Refundable",
+      "nonRefundable": "Non-Refundable",
+      "stops": "Stops",
+      "1 Stop": "1 Stop",
+      "2 Stops": "2 Stops",
+      "Non-Stop": "Direct"
+    },
+
+    "sort": {
+      "Cheapest": "Cheapest",
+      "Fastest": "Fastest"
+    },
+
+    "card": {
+      "ticketPrice": "Ticket Price",
+      "flightDetails": "Flight Details",
+      "refundable": "Refundable",
+      "nonRefundable": "Non-Refundable",
+      "One Stop": "One Stop",
+      "Two Stops": "Two Stops",
+      "Three Stops": "Three Stops",
+      "Four Stops": "Four Stops",
+      "Non-Stops": "Direct",
+      "select": "Select",
+      "duration":"Total Duration",
+      "transit": "Transit Time"
+    }
+  },
+
+  "flightDetails": {
+    "title": "Flight Details",
+    "pricePerAdult": "Price per adult",
+    "select": "Select",
+
+    "headers": {
+      "Itinerary": "Itinerary",
+      "Fare Rules": "Fare Rules",
+      "Baggage": "Baggage"
+    },
+
+    "itinerary": {
+      "Departure": "Departure",
+      "Arrive": "Return",
+      "One Stop": "One Stop",
+      "Two Stops": "Two Stops",
+      "Three Stops": "Three Stops",
+      "Four Stops": "Four Stops",
+      "Non-Stops": "Direct",
+      "Economy": "Economy",
+      "Premium Economy": "Premium Economy",
+      "Business": "Business",
+      "First": "First Class",
+      "travelTime": "Travel time",
+      "changeIn": "Transit in",
+      "terminal":"Treminal"
+    },
+
+    "fareRules": {
+      "fareBreakup": "Fare Breakup",
+      "cancellationFee": "Cancellation fee:",
+      "baseFare": "Base Fare:",
+      "taxesFees": "Taxes & Fees:",
+      "totalPrice": "Total Price",
+      "fareRules": "Fare Rules",
+      "sector": "Sector",
+      "airlineFee": "Airline Fee",
+      "adminCharges": "Admin Charges",
+      "perPassenger": "per passenger",
+      "dateChangeFee": "Date change fee:",
+      "allChangesNote": "All Changes are prior to scheduled departure of the first flight. Does not include additional no-show charges.",
+      "pleaseNote": "Please Note: The add-on service charges, convenience fee, and the discount you have received using a coupon code is non-refundable. The final refund amount will be adjusted as per the deductions.",
+      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Taj doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
+    },
+
+    "baggage": {
+      "title": "Baggage",
+      "included": "Included",
+      "perPerson": "per person",
+      "adultItems": "Adult items",
+      "childItems": "Child items",
+      "infantItems": "Infant items",
+      "cabin":"Checked Baggage",
+      "hand":"Cabin Baggage",
+      "baggage-allowance":"Baggage Allowance",
+
+      "notPossible": "Baggage policy may vary based on fare",
+      "check":"Checked baggage are usually up to 23KG",
+      "baggageType": "Checked Baggage",
+      "message": "You will be able to add baggage when you check in or at the airport.",
+
+      "note": "Different baggage allowance may apply, we show the minimum allowed. See itinerary for more baggage details."
+    }
+  },
+
+  "checkout": {
+    "Depart": "Depart",
+    "Arrival": "Arrival",
+    "Direct": "Direct",
+    "Transit": "Transit",
+    "seeMoreDetails": "See more details",
+    "travelerDetails": "Traveler Details",
+    "review": "Review",
+    "payment": "Payment",
+    "contactInfo": "Contact Info",
+    "contactNumber": "Contact Number",
+    "gmail": "Gmail",
+    "email": "Email",
+    "Adult": "Adult",
+    "Child": "Child",
+    "Infant": "Infant",
+    "Male": "Male",
+    "Female": "Female",
+    "phoneNumber": "Phone Number",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "dateOfBirth": "Date of Birth",
+    "selectDate": "Select Date",
+    "passportNumber": "Passport Number",
+    "country": "Country",
+    "selectCountry": "Selcet Country",
+    "passportExpiry": "Passport Expiry",
+    "previous": "Previous",
+    "next": "Next",
+    "payWithWhatsapp": "Pay with WhatsApp Alerts @",
+    "payWithoutWhatsapp": "Pay without WhatsApp Alerts",
+    "processToPayment":"Proceed to Payment",
+    "guestDetails":"Guest Details"
+  },
+
+  "confirmation": {
+    "emailTicket": "Email E-ticket",
+    "print": "Print",
+    "bookingId": "Booking ID: ",
+    "pnr": "PNR: ",
+    "bookingDate": "Booking Date: ",
+    "passengerName": "Passenger Name",
+    "passengerNumber": "Passenger Number",
+    "ticket": "Ticket",
+    "airlinePNR": "Airline PNR",
+    "flightDetails": "Flight Details",
+    "airlineRef": "Airline Ref:",
+    "Departure": "Departure",
+    "Arrive": "Arrive",
+    "baggage": "Baggage",
+    "perPerson": "per person",
+    "baggageMessage": "Guests are responsible for obtaining all entry and exit, health, vibes and other documents required by law, regulations. order, demands or  requirements of the countries flown from, into or over. we reserve the right to refuse carriage to any guest eho has not complied to such applicable laws, regulations, orders, demands or requirements.",
+    "contactInfo": "Contact Information",
+    "emailAddress": "Email Address",
+    "phoneNumber": "Phone Number",
+    "fareDetails": "Fare Details",
+    "fare": "Fare",
+    "tax": "Tax",
+    "total": "Total"
+  },
+
+  "about": {
+    "title": "Redefining Travel Experiences",
+    "gateway": "Your Gateway to memorable journeys",
+    "description": "Gootaj is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
+    "storyTitle": "Our Story",
+    "storyDescription": "GOOTAJ was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
+    "advantages": {
+      "exclusiveDeals": "Exclusive Deals",
+      "exclusiveDealsDesc": "Access to unbeatable prices on flights, hotels and vacation packages.",
+      "personalizedRecommendations": "Personalized Recommendations",
+      "personalizedRecommendationsDesc": "Tailored travel suggestions based on your preferences and interests.",
+      "comprehensiveSupport": "Comprehensive Support",
+      "comprehensiveSupportDesc": "24/7 customer service to assist you at every stage of your journey."
+    },
+    "missionTitle": "Our Mission",
+    "missionDescription": "To provide comprehensive travel solutions that combine efficiency and excellence, with a focus on customer comfort and satisfaction.",
+    "valuesTitle": "Our Values",
+    "values": {
+      "customerCentric": "Customer-Centric",
+      "customerCentricDesc": "Your satisfaction is our top priority. We are dedicated to providing exceptional service and support.",
+      "integrity": "Integrity",
+      "integrityDesc": "We operate with honesty and transparency, building trust with our customers and partners.",
+      "innovation": "Innovation",
+      "innovationDesc": "We continually seek innovative solutions to enhance your travel experience.",
+      "passionForTravel": "Passion for Travel",
+      "passionForTravelDesc": "Our love for travel is at the heart of everything we do, inspiring us to share our passion with you."
+    },
+    "visionTitle": "Our Vision",
+    "visionDescription": "To become the first choice for every traveler seeking quality, comfort, and affordable prices."
+  },
+
+  "user": {
+    "login": {
+      "title": "Login",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "errorMessagePlaceholder": "Error Message Placeholder",
+      "invalidUserError": "Invalid user or something went wrong ..",
+      "forgotPassword": "Forget your password?",
+      "signIn": "Sign In",
+      "signInWithGoogle": "Sign In with Google",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up"
+    },
+    "register": {
+      "title": "Create Account",
+      "exitIconTitle": "Exit Icon",
+      "firstNameLabel": "First Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNameLabel": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "userNameLabel": "User Name",
+      "userNamePlaceholder": "Enter your nick name",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "phoneNumberLabel": "Phone Number",
+      "phoneNumberPlaceholder": "Enter your phone number",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "passwordMismatch": "Password does not match.",
+      "errorMessagePlaceholder": "Error Message Placeholder",
+      "invalidUserError": "Invalid user or something went wrong ..",
+      "termsAgreement": "I agree with - and -",
+      "signUp": "Sign Up",
+      "signUpWithGoogle": "Sign Up with Google",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign In"
+    },
+
+    "forgetPassword": {
+      "successTitle": "Password Reset",
+      "successMessage": "Your password has been successfully reset. Click below to login magically.",
+      "continueButton": "Continue",
+      "backToLogin": "Back to login",
+      "backToLoginTitle": "Go Back",
+      "setNewPasswordTitle": "Set New Password",
+      "setNewPasswordMessage": "Your new password must be different from previously used password.",
+      "newPasswordLabel": "New Password",
+      "newPasswordPlaceholder": "Enter your password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "passwordMismatchError": "Password does not match.",
+      "generalError": "Invalid user or something went wrong ..",
+      "resetPasswordButton": "Reset Password"
+    },
+
+    "otp": {
+      "title": "One Time Password",
+      "message": "We send you an OTP. Please, check your email.",
+      "error": "OTP is not valid."
+    },
+
+    "resetPassword": {
+      "emailSentTitle": "Check your email",
+      "emailSentMessage": "We sent a password reset link to",
+      "openEmailApp": "Open email app",
+      "resendEmail": "Didn’t receive the email?",
+      "clickResend": "Click to resend",
+      "backToLogin": "Back to login",
+      "backToLoginTitle": "Go Back",
+      "forgetPasswordTitle": "Forget Password",
+      "forgetPasswordMessage": "No worries, we’ll send you reset instructions.",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "generalError": "Invalid user or something went wrong ..",
+      "sendButton": "Send"
+    },
+
+    "sideNav": {
+      "profile": "My Profile",
+      "flight": "Flight Booking",
+      "hotels": "Hotels Booking",
+      "signOut": "Sign Out"
+    },
+
+    "profile": {
+      "firstName": "First Name",
+      "firstNamePlaceholder": "First Name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Last Name",
+      "gmail": "Gmail",
+      "emailPlaceholder": "Email",
+      "contactNumber": "Contact Number",
+      "privacyPolicy": "I give Taj permission to send me informational and promotional emails and text messages in accordance with the",
+      "privacyPolicyLink": "Privacy Policy",
+      "changePassword": "Change Password",
+      "save": "Save"
+    },
+
+    "changePassword": {
+      "gmail": "Gmail",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmNewPassword": "Confirm New Password",
+      "save": "Save"
+    },
+
+    "hotels": {
+      "empty": "No Hotels Booking to Show"
+    },
+
+    "flights": {
+      "empty": "No Flights Booking to Show"
+    }
+  },
+
+  "hotels-filter":{
+    "filter":"Filter",
+    "popular":"Popular Filters",
+    "star":"Stars Rateing",
+    "location":"Location",
+    "reset":"Reset Filters"
+  },
+
+  "hotelCard": {
+    "Parking": "Parking",
+    "Swimming Pool": "Swimming Pool",
+    "Per night": "Per night",
+    "Show More Results": "Show More Results",
+    "View Deal": "View Deal"
+  },
+
+  "hotelRooms": {
+    "Rooms": "Rooms",
+    "Map": "Map",
+    "Details": "Details",
+    "Good breakfast": "Good breakfast",
+    "Nice pool": "Nice pool",
+    "Popular amenities": "Popular amenities",
+    "Parking": "Parking",
+    "Swimming pool": "Swimming pool",
+    "Read More": "Read More",
+    "Read Less": "Read Less",
+    "Address": "Address",
+    "Check In": "Check In",
+    "Check Out": "Check Out",
+    "No meals included": "No meals included",
+    "Breackfast included": "Breackfast included",
+    "Meals included": "Meals included",
+    "Refundable": "Refundable",
+    "Nun-refundable": "Nun-refundable",
+    "View more amenities": "View more amenities",
+    "Book Now": "Book Now"
+  },
+
+  "hotelCheckout": {
+    "Guest Room": "Guest Room: ",
+    "Special Request": "Special Request (Optional)",
+    "Mr": "Mr",
+    "Mrs": "Mrs",
+    "Ms": "Ms",
+    "Check In": "Check In",
+    "Check Out": "Check Out",
+    "Stay": "Stay",
+    "Room only": "Room only",
+    "Breakfast included": "Breackfast included",
+    "Meals included": "Meals included",
+    "Adult": "Adult",
+    "Child": "Child",
+    "From": "From",
+    "To": "To"
+  },
+
+  "hotelConfirmation": {
+    "Guests": "Guests",
+    "Unit": "Unit",
+    "Contact Information": "Contact Information",
+    "Guest Name": "Guest Name",
+    "Email Address": "Email Address",
+    "Phone Number": "Phone Number",
+    "errorNote": "Something Went Wrong Please Contact Us For More Information",
+    "contactUs": "Contact Us"
+  },
+
+  "hotelPayment": {
+    "Payment Summary": "Payment Summary",
+    "Total": "Total",
+    "Payment Timeline": "Payment Timeline",
+    "Pay now": "Pay now",
+    "Pay at Property": "Pay at Property",
+    "In property curreency": "In property curreency",
+    "note": "This payment is due upon arrival. Exchange rates at the time of payment may differ."
+  }
+}

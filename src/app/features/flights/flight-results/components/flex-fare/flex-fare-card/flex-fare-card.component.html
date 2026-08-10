@@ -1,0 +1,96 @@
+<div
+  class="wrapper"
+  [ngClass]="{
+    active: isActive,
+  }"
+>
+  <div class="main-info">
+    <p class="main-info__price">
+      <span class="main-info__price__value"
+        >
+        {{
+          brand.itinTotalFare.amount | exchange: 'value'
+        }}
+        {{ brand.itinTotalFare.currencyCode | exchange: 'code' }}</span
+      >
+      <span class="main-info__price__info"
+        >{{
+          brand.itinTotalFare.amount | exchange: 'value'
+        }}
+        {{ brand.itinTotalFare.currencyCode | exchange: 'code' }} {{ sharedService.flightType }} for
+        {{ totalPassengers }} {{ totalPassengers > 1 ? 'travelers' : 'traveler' }}</span
+      >
+    </p>
+
+    <p class="main-info__saver">
+      <span class="main-info__saver__type">{{ brand.brandName }}</span>
+      <span class="main-info__saver__cabin-class">{{translate.currentLang === 'en' ? 'Cabin' : 'المقصورة'}}: {{ brand.cabinClasse }}</span>
+    </p>
+  </div>
+
+  <!-- <div class="sub-info">
+        <span class="sub-info__title">Seat</span>
+        <p class="sub-info__value">
+            <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
+            <span>Seat choice for a fee</span>
+        </p>
+    </div> -->
+
+  @if (brand.baggageAllowances) {
+    <div class="sub-info">
+      <span class="sub-info__title">{{ translate.currentLang === 'en' ? 'Bags' : 'حقائب' }}</span>
+
+      @for (baggageAllowanceDetail of brand.baggageAllowances[0].baggageAllowanceDetails; track $index) {
+        <div class="sub-info__value">
+          <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
+          <div>
+            {{ baggageAllowanceDetail.baggage === 'CarryOn' ? (translate.currentLang === 'en' ? 'Carry-on' : 'حقيبة اليد') : (translate.currentLang === 'en' ? 'Checked bags' : 'حقائب الشحن') }} bag included
+            {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
+            {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
+          </div>
+        </div>
+
+        <div
+          [ngStyle]="{
+            marginBottom: '10px',
+          }"
+        >
+          ({{ baggageAllowanceDetail.flightRoute }})
+        </div>
+      }
+    </div>
+  }
+
+  <!-- @if(optionalServices.length) {
+        <div class="sub-info">
+            <span class="sub-info__title">Other Services</span>
+
+            @for(service of optionalServices; track $index) {
+                <p class="sub-info__value">
+                    <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
+                    <span>{{service}}</span>
+                </p>
+            }
+        </div>
+    } -->
+
+  <div class="sub-info">
+    <span class="sub-info__title">{{ translate.currentLang === 'en' ? 'Flexibility' : 'إمكانية التغير' }}</span>
+    <p class="sub-info__value">
+      <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
+      <span>{{
+        brand.passengerFareBreakDowns[0].cancelPenaltyDTOs[0].price
+          ? (translate.currentLang === 'en' ? 'Cancellation fee applies' : 'تُطبق رسوم الإلغاء')
+          : (translate.currentLang === 'en' ? 'Cancellation fee not apply' : 'لا تُطبق رسوم الإلغاء')
+      }}</span>
+    </p>
+    <p class="sub-info__value">
+      <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
+      <span>{{
+        brand.passengerFareBreakDowns[0].changePenaltyDTOs[0].price ? (translate.currentLang === 'en' ? 'Change fee applies' : 'يتم تطبيق رسوم التغيير') : (translate.currentLang === 'en' ? 'Change fee not apply' : 'لا يتم تطبيق رسوم التغيير')
+      }}</span>
+    </p>
+  </div>
+
+  <app-main-button [mainButtonInfo]="selectButton" [title]="translate.currentLang === 'en' ? 'Select' : 'إختر'" (clickMainButton)="onClickSelect()" />
+</div>

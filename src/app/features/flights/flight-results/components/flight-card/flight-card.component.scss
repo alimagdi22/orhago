@@ -1,0 +1,57 @@
+@import '../../../../../../sass/variables';
+@import '../../../../../../sass/colors';
+
+.card {
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: $base-radius-small;
+  padding: 11px 19px;
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-between;
+
+  color: white;
+  background-color: map-get($map: $colors, $key: 'main');
+  border-bottom-left-radius: $base-radius-small;
+  border-bottom-right-radius: $base-radius-small;
+
+  width: 100%;
+  margin: 11px -19px -11px -19px;
+  padding: 5px 19px;
+
+  text-align: end;
+
+  .text {
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      font-size: 17px;
+    }
+  }
+
+  .disabled-text {
+    cursor: pointer;
+    color: black;
+  }
+}
+
+.divider {
+  display: block;
+  margin-block: 20px;
+  height: 1px;
+  background-color: map-get($map: $colors, $key: 'gray');
+}
+
+.stop {
+
+
+  @media (min-width: 1200px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}

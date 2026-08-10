@@ -1,0 +1,16 @@
+@if(sharedService.screenWidth < 1000) {
+    <app-input-header-app (onClickClose)="sharedService.dialog.closeAll()" [headerTitle]="'results.card.flightDetails' | translate" />
+}
+<div [class.flight-details-mobile]="sharedService.screenWidth < 1200">
+    <app-flight-details-header-app />
+    <app-flight-details-body-app />
+
+  <div class="">
+    <div >
+      <app-flex-fare-app />
+    </div>
+  </div>
+
+  <app-main-button [mainButtonInfo]="selectButton" [title]="translate.currentLang === 'en' ? 'Select' : 'إختر'" (clickMainButton)="onClickSelect()" />
+
+</div>

@@ -1,0 +1,49 @@
+<div class="hotel-card row">
+    <img class="hotel-card__image col-md-3 col-12" [src]="hotel.hotelThumb" />
+    
+    <div class="hotel-card__content col-md-6 col-12">
+        <div class="hotel-card__content__stars">
+            @for (star of stars; track $index) {
+                <img src="assets/icons/hotel-card/star.svg" />
+            }
+            <!-- <span>Free trade Zone</span> -->
+        </div>
+        
+        <p class="hotel-card__content__name">{{ hotel.hotelName }}</p>
+        
+        <div class="hotel-card__content__location">
+            <img src="assets/icons/hotel-card/location.svg" />
+            
+            <span>{{ hotel.City }}, {{ hotel.Country }} City</span>
+        </div>
+        
+        <!-- <p class="hotel-card__content__airport-dest">15.44 Km from Kuwait International Airport</p> -->
+        
+        <div class="hotel-card__content__advantages">
+            <div class="hotel-card__content__advantages__item">
+                <img src="assets/icons/hotel-card/parking.svg" />
+                <span>{{ 'hotelCard.Parking' | translate }}</span>
+            </div>
+
+            <div class="hotel-card__content__advantages__item">
+                <img src="assets/icons/hotel-card/swimming-pool.svg" />
+                <span>{{ 'hotelCard.Swimming Pool' | translate }}</span>
+            </div>
+        </div>
+        
+        <div class="hotel-card__content__amenities">
+            @for (amenity of hotel.Amenities | slice: 0 : 5; track $index) {
+                <div class="hotel-card__content__amenities__item">
+                    <img src="assets/icons/hotel-card/check.svg" />
+                    <span>{{ amenity.Amenity }}</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="hotel-card__price col-md-3 col-12">
+        <p class="hotel-card__price__total"><span>{{ hotel.sellCurrency | exchange: 'code' }}</span>  {{ hotel.TotalSellPrice | exchange: 'value' }}</p>
+        <p class="hotel-card__price__per">{{ 'hotelCard.Per night' | translate }}</p>
+        <app-main-button [mainButtonInfo]="viewDealButton" [title]="'hotelCard.View Deal' | translate" (clickMainButton)="onClickViewDeal()" />
+    </div>
+</div>

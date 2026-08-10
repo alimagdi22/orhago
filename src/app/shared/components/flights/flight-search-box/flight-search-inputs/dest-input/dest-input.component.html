@@ -1,0 +1,115 @@
+<ng-container [formGroup]="flightSearchService.searchFlight">
+    <ng-container formArrayName="Flights">
+      <ng-container [formGroupName]="index">
+        <div
+        class="dest"
+        [matMenuTriggerFor]="sharedService.screenWidth >= 1200 ? popularDest : null"
+        #menuTrigger="matMenuTrigger"
+        (click)="sharedService.screenWidth >= 1200 ? focusInput() : onClickInput(index, destination, flightItem)"
+        (menuOpened)="onMenuOpen()"
+        >
+        <div class="dest__placeholder">
+          <span>{{ (destination === 'departing' ? 'home.search.from' : 'home.search.to') | translate }}</span>
+          <div (click)="clearInput(destination === 'departing' ? 'departingCity' : 'landingCity', index)" class="dest__placeholder__clear">x</div>
+        </div>
+
+        @if (sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName) {
+          <!-- City selected: show city name bold + airport identifier below; keep input hidden but bound -->
+          <p class="dest__country" [title]="sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName">
+            {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName }}
+          </p>
+          <p class="dest__airport-id">
+            {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportName }}
+            ({{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportCode }})
+          </p>
+          <!-- Keep input in DOM for form binding but visually hidden -->
+          <input
+            #destinationInput
+            [formControlName]="destination"
+            class="custom-input sr-only-input"
+            type="text"
+            aria-label="City"
+            matInput
+            [matAutocomplete]="autoa"
+            [placeholder]="(destination === 'departing' ? 'home.search.leavingFrom' : 'home.search.goingTo') | translate"
+            (input)="onInputDirection(destination, index)"
+          />
+        } @else {
+          <!-- No city selected: show the text input for searching -->
+          <input
+            #destinationInput
+            [formControlName]="destination"
+            [readonly]="sharedService.screenWidth < 1200"
+            class="custom-input"
+            type="text"
+            aria-label="City"
+            matInput
+            [matAutocomplete]="autoa"
+            [placeholder]="(destination === 'departing' ? 'home.search.leavingFrom' : 'home.search.goingTo') | translate"
+            (input)="onInputDirection(destination, index)"
+          />
+        }
+
+        <mat-autocomplete #autoa="matAutocomplete" class="dropdown-list" panelWidth="28rem">
+          @if (cities) {
+            @for (
+              city of cities | limitTo: 5;
+              track city.airportCode
+            ) {
+              <mat-option
+                [value]="city[sharedService.lang].cityName + ',' + city[sharedService.lang].airportCode"
+                (onSelectionChange)="onSelectDestintation(destination, city, index)"
+                class="dropdown-list__item"
+              >
+                <div class="dropdown-list__item__wrapper">
+                  <img
+                    src="assets/icons/location-icon-active.svg"
+                    title="Location Icon"
+                    class="dropdown-list__item__icon"
+                  />
+                  <div class="dropdown-list__item__text-container">
+                    <p class="dropdown-list__item__text" matTooltip="{{getFullAirportText(city)}}">
+                      <span class="truncate-text">{{ city[sharedService.lang].airportName }}</span>
+                      <span class="separator"> - </span>
+                      <span class="truncate-text">{{ city[sharedService.lang].countryName }}</span>
+                      <span class="airport-code">({{ city[sharedService.lang].airportCode }})</span>
+                    </p>
+                  </div>
+                </div>
+              </mat-option>
+            }
+          }
+        </mat-autocomplete>
+
+        <mat-menu #popularDest="matMenu" class="popular-dest">
+          <p class="popular-dest__title">{{ 'home.search.popularDest' | translate }}</p>
+          <ul class="popular-dest__list">
+            @for (city of sharedService.initialRecommendedAirports; track $index) {
+              <li
+                class="popular-dest__list__item"
+                [ngStyle]="{ borderBottom: '1px solid #CBCBCB' }"
+                (click)="
+                  onSelectPopularDestination(destination, city[sharedService.lang].cityName + ',' + city[sharedService.lang].airportCode, index);
+                  onSelectDestintation(destination, city, index)
+                "
+              >
+                <img
+                  src="assets/icons/location-icon.svg"
+                  title="Location Icon"
+                  class="popular-dest__list__item__icon"
+                />
+                <span class="popular-dest__list__item__location">{{ city[sharedService.lang].cityName }}</span>
+              </li>
+            }
+          </ul>
+        </mat-menu>
+
+        @if(isDestNotValid(index)) {
+          <p class="error-message">
+            {{translate.currentLang === 'en' ? 'Enter your destination city' : 'أدخل وجهتك'}}
+          </p>
+        }
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>

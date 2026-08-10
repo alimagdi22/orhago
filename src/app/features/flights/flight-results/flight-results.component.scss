@@ -1,0 +1,208 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/colors';
+
+.search-box {
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  padding-block: 20px;
+  background-color: white;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.available-flights {
+  font-size: 18px;
+  margin-left: 36px;
+  margin-block: 10px;
+}
+
+.flight-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  margin-top: 23px;
+}
+
+.custom_modal {
+  height: 70%;
+  width: 50%;
+  padding: 55px;
+}
+
+.loading-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+
+  mat-progress-bar {
+    border-radius: 5px;
+  }
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.branded-fares-modal {
+  padding: 20px;
+  max-width: 80%;
+  width: auto;
+  height: auto;
+}
+
+.filter-toggle {
+  position: fixed;
+  left: 10px;
+  left: auto;
+  bottom: 10px;
+  z-index: 1;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  background-color: none;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.mobile-sidebar-panel {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100vh;
+  background: #fff;
+  z-index: 1001;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sidebar-panel.open {
+  left: 0;
+}
+
+
+.mobile-search-box {
+  margin-top: 1rem;
+}
+
+.nav-info{
+background-color: aqua;}
+.airlines-container {
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: white;
+  width: 100%;
+}
+
+.airline-card {
+  flex: 1 1 calc(25% - 10px);
+  width: 100%;
+  border: 1px solid blue;
+  padding: 6px;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.airline-name {
+  font-weight: 600;
+  color: blue;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.price-logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.airline-price {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.airline-logo {
+  height: 1em;
+  object-fit: contain;
+}
+
+.city {
+  font-weight: 400;
+  font-size: 13px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date, .passenger, .search-icon {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 13px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date img{
+  width: 13px;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+@media (max-width:1200px){
+  .search-box{
+    padding: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .desktop-search-box {
+    display: none !important;
+  }
+  .desktop-filter {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .filter-toggle {
+    display: none;
+  }
+  .search-toggle {
+    display: none !important;
+  }
+}

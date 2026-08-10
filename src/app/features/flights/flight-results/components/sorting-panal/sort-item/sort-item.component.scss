@@ -1,0 +1,19 @@
+@import '../../../../../../../sass/variables';
+@import '../../../../../../../sass/colors';
+
+.sort-item {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+
+  border-radius: $base-radius-tiny;
+  margin: 11px;
+  padding: 8px 20px;
+  transition: all 0.2s;
+}
+
+.sort-item:hover,
+.active {
+  background-color: map-get($map: $colors, $key: 'off-white');
+  color: map-get($map: $colors, $key: 'main');
+}

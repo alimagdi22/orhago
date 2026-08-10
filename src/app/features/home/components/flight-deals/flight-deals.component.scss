@@ -1,0 +1,85 @@
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-block: 20px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+::ng-deep swiper-button-next svg, .swiper-button-prev svg {
+    width: 30%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: center;
+}
+swiper-container::part(button-next),
+  swiper-container::part(button-prev) {
+    position: absolute;
+    top: 50%;
+    z-index: 1000;
+    // border: 1px solid #007aff;;
+    // border-radius: 50%;
+    padding: 1px 8px;
+    width: 2%;
+  }
+swiper-container::part(button-next){
+  right:-.5px;
+}
+swiper-container::part(button-prev) {
+  left: -.5px;
+}
+
+/* In your component's SCSS file */
+:host {
+  ::ng-deep {
+    .swiper-button-next, .swiper-button-prev {
+      --swiper-navigation-size: 20%; /* Modern Swiper variable */
+
+      svg {
+        width: var(--swiper-navigation-size) !important;
+        height: auto !important;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  swiper-container::part(button-next),
+  swiper-container::part(button-prev) {
+    position: absolute;
+    top: 50%;
+    z-index: 1000;
+    // border: 1px solid #007aff;;
+    // border-radius: 50%;
+    padding: 1px 8px;
+    width: 4%;
+  }
+  swiper-container::part(button-next){
+    right:0;
+  }
+  swiper-container::part(button-prev) {
+    left: 0;
+  }
+  ::ng-deep .swiper-pagination-bullets{
+    display: none !important;
+  }
+
+
+}

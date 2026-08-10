@@ -1,0 +1,127 @@
+@if(sharedService.screenWidth >= 1200) {
+  <div
+  class="wrapper"
+  [ngClass]="{
+    shadow: sharedService.isSegmentPresent(['flight-results', 'flight-checkout', 'flight-confirmation']),
+    'scroll-background': isScrolled,
+  }"
+>
+  <nav class="container">
+    <img src="assets/images/new-logo.svg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+    <button
+      class="manage-booking-button"
+    >
+      {{ 'navbar.manageBooking' | translate }}
+    </button>
+
+    <div class="actions">
+      <button
+        class="custom-button"
+        [ngClass]="{
+          'scroll-button': isScrolled,
+        }"
+        [matMenuTriggerFor]="langMenu"
+      >
+        {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
+      </button>
+
+      @if (homePageService.loader) {
+        <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '110px' }" />
+      } @else {
+        <button
+          class="custom-button"
+          [ngClass]="{ 'scroll-button': isScrolled }"
+          [ngStyle]="{ width: '110px' }"
+          [matMenuTriggerFor]="currencyMenu"
+          *ngIf="this.homePageService.selectedCurrency"
+        >
+          <img
+            class="flag-icon"
+            width="20"
+            height="15"
+            src="{{ this.homePageService.selectedCurrency['Image_Url'] }}"
+            title="Flag Icon"
+          />
+          {{ this.homePageService.selectedCurrency['Currency_Code'] }}
+          <img src="assets/icons/arrow-down.svg" title="Arrow Down" />
+        </button>
+      }
+
+      @if (isAuthenticated) {
+        <app-drop-down />
+      } @else {
+        <app-main-button
+          [mainButtonInfo]="signInButton"
+          [title]="'navbar.signIn' | translate"
+          (clickMainButton)="onClickSignIn()"
+        />
+      }
+    </div>
+  </nav>
+</div>
+<div class="white-space"></div>
+} @else {
+  <section class="top-nav">
+    <div>
+      <img src="assets/images/new-logo.svg" width="130" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+    </div>
+
+    <input id="menu-toggle" type="checkbox" #burgerMenu />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+      <!-- <li>
+        <span class="mobile-nav-item">
+          {{ 'navbar.manageBooking' | translate }}
+        </span>
+      </li> -->
+
+      <li>
+        <span [matMenuTriggerFor]="langMenu" class="mobile-nav-item">
+          {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
+        </span>
+      </li>
+      <li>
+        @if (homePageService.loader) {
+          <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '110px' }" />
+        } @else {
+          <div class="mobile-nav-item" [matMenuTriggerFor]="currencyMenu">
+            <img
+              class="flag-icon"
+              width="20"
+              height="15"
+              src="{{ this.homePageService.selectedCurrency['Image_Url'] }}"
+              title="Flag Icon"
+            />
+
+            <span *ngIf="this.homePageService.selectedCurrency">
+              {{ this.homePageService.selectedCurrency['Currency_Code'] }}
+            </span>
+          </div>
+        }
+      </li>
+      <li>
+        @if (isAuthenticated) {
+          <app-drop-down />
+        } @else {
+          <span (click)="onClickSignIn(); $event.stopPropagation(); burgerMenu.click()" class="mobile-nav-item">
+            {{ 'navbar.signIn' | translate }}
+          </span>
+        }
+      </li>
+    </ul>
+  </section>
+}
+
+<mat-menu #currencyMenu="matMenu">
+  <button mat-menu-item *ngFor="let currency of this.homePageService.allCurrency" (click)="updateCurrency(currency)">
+    <img width="25" height="25" [src]="currency.Image_Url" title="Currency Icon" />
+    {{ currency['Currency_Code'] }}
+  </button>
+</mat-menu>
+
+<mat-menu #langMenu="matMenu">
+  <button mat-menu-item (click)="updateLang('en')">EN</button>
+  <button mat-menu-item (click)="updateLang('ar')">AR</button>
+</mat-menu>

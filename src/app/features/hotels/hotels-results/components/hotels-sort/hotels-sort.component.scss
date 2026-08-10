@@ -1,0 +1,28 @@
+
+.hotelSort{
+    font-family:var(--font-en);
+    background-color: transparent;
+    width: 100%;
+    &__wrapper{
+        margin: 0.2rem 0;
+        .sortedBox{
+            width: fit-content;
+            color: var(--ten-color);
+            font-size: 16px;
+            font-weight: 400;
+            text-align: center;
+            line-height: 5px;
+            padding: 1rem 1.5rem;
+            border: 1px solid #CBCBCB;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 0px 4px 4px 0px rgba(4, 50, 99, 0.08);
+            cursor: pointer;
+        }
+    }
+}
+.row{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }

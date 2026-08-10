@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <ng-content />
+
+  <div class="pagination" dir="ltr">
+    <img
+      src="assets/icons/left-arrow-icon.svg"
+      title="Left Arrow"
+      class="pagination__icon"
+      (click)="previousPageClicked.emit()"
+      [ngClass]="{
+        hidden: currentPage === 1,
+      }"
+    />
+
+    <div class="pagination__numbers">
+      @for (
+        page of pages | slice: (currentPage > 5 ? currentPage - 5 : 0) : (currentPage > 5 ? currentPage : 5);
+        track $index
+      ) {
+        <span
+          [ngClass]="{
+            active: page === currentPage,
+          }"
+          (click)="pageClicked.emit(page)"
+          >{{ page }}</span
+        >
+      }
+    </div>
+
+    <img
+      src="assets/icons/right-arrow-icon.svg"
+      title="Right Arrow"
+      class="pagination__icon"
+      (click)="nextPageClicked.emit()"
+      [ngClass]="{
+        hidden: currentPage === pages[pages.length - 1],
+      }"
+    />
+  </div>
+</div>

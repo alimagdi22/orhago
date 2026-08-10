@@ -1,0 +1,239 @@
+section {
+    padding: 20px;
+
+    .preview {
+        object-fit: cover;
+        height: 230px;
+        border-radius: 6px;
+    }
+
+    .wrapper {
+        padding-inline-start: 30px;
+    }
+
+    .title {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .sub-title {
+        font-weight: 400;
+        color: #686872;
+    }
+
+    .amenity {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+        .wrapper {
+            padding-inline-start: 0;
+            margin-block: 10px;
+        }
+
+        .amenity {
+            justify-content: center;
+        }
+    }
+}
+
+.upper-section {
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        span:first-child {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        span:nth-child(2) {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        span:nth-child(3) {
+            color: #686872;
+            font-size: 20px;
+            font-weight: 400;
+        }
+    }
+
+    @media (max-width: 768px) {
+        text-align: center;
+
+        .info {
+            margin-top: 20px;
+        }
+    }
+}
+
+hr {
+    margin: 20px;
+}
+
+.lower-section {
+    .amenities {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 25px;
+    }
+
+    .cancellation {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #1F8F0A;
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    @media (max-width: 768px) {
+        .amenities {
+            gap: 15px;
+        }
+
+        .cancellation {
+            margin-top: 30px;
+            font-size: 16px;
+        }
+
+        .amenity:nth-of-type(1),
+        .amenity:nth-of-type(2) {
+            margin-top: 30px;
+        }
+    }
+}
+
+
+
+/* hotel-card.component.css */
+
+.hotel-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Tajawal", sans-serif;
+}
+
+/* ===== القسم الأول ===== */
+.hotel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hotel-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.hotel-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #000;
+}
+
+.hotel-location {
+  font-size: 13px;
+  color: #777;
+  margin-top: 3px;
+}
+
+.hotel-img {
+  width: 115px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* ===== الخدمات ===== */
+.hotel-services {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.service {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #333;
+}
+
+.service i {
+  font-size: 16px;
+  color: #555;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 14px 0;
+}
+
+/* ===== تفاصيل الغرفة ===== */
+.room-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.room-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.room-guests {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #333;
+  font-size: 14px;
+}
+
+.room-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: #444;
+  font-size: 13px;
+}
+
+.room-features div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.room-features i {
+  font-size: 15px;
+  color: #666;
+}
+
+.free-cancel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #21910A;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.free-cancel i {
+  font-size: 16px;
+}

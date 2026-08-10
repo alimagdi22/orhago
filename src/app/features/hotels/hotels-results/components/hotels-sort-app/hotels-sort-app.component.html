@@ -1,0 +1,30 @@
+<div class="hotelSort">
+  <div class="hotelSort__wrapper">
+    <div *ngFor="let sort of filteredSortedArr; let i = index">
+      <div class="sortedBox active" (click)="hotelResults.sorting(originalIndices[i])">
+          {{ sort | translate }}
+      </div>
+    </div>
+      <button class="sortedBox iconBox">
+    <img src="assets/images/vector.svg" alt="filter icon" (click)="toggleSidebar()"/>
+  </button>
+        <div class="row between">
+        <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
+        <aside
+          class="mobile-sidebar-panel d-lg-none"
+          [class.open]="isSidebarOpen">
+            <app-hotels-filter />
+        </aside>
+        </div>
+    <!-- <div class="sortedBox iconBox">
+
+    </div> -->
+  </div>
+</div>
+
+
+
+
+
+
+

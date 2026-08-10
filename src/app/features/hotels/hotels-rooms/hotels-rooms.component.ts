@@ -1,0 +1,114 @@
+import { Component, inject } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { HotelResultsService, HotelRoomsService, HotelSearchService } from 'rp-hotels-ui';
+import { Subscription } from 'rxjs';
+import { SharedService } from '../../../shared/shared.service';
+import { RoomsComponent } from './components/rooms/rooms.component';
+
+@Component({
+  standalone: false,
+  selector: 'app-hotels-rooms',
+  templateUrl: './hotels-rooms.component.html',
+  styleUrl: './hotels-rooms.component.scss'
+})
+export class HotelsRoomsComponent {
+  public sharedService = inject(SharedService);
+  public hotelSearchService = inject(HotelSearchService);
+  public hotelRoomsService = inject(HotelRoomsService);
+  private hotelResultsService = inject(HotelResultsService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private sanitizer = inject(DomSanitizer);
+
+  public isSearchVisible = false;
+  public currency = "";
+  public nightsNum = 0;
+  public location?: SafeResourceUrl;
+  public activeLink = { id: 1, title: 'Rooms' };
+  public links = [
+    { id: 1, title: 'Rooms' },
+    { id: 4, title: 'Map' },
+    { id: 5, title: 'Details' },
+  ];
+
+  private subscription = new Subscription();
+
+  private searchId = "";
+  private hotelId = "";
+  private providerId = "";
+  private cityId = "";
+  private packageKey = "";
+
+  // Custom popup state
+  public isPopupOpen = false;
+
+  ngOnInit() {
+    this.hotelResultsService.destroyer();
+
+    this.route.queryParams.subscribe((params: Params) => {
+      this.searchId = params['searchId'];
+      this.hotelId = params['hotelId'];
+      this.providerId = params['providerId'];
+      this.currency = params['currency'];
+      this.nightsNum = +params['nightsNum'];
+      this.cityId = params['cityId'];
+      this.packageKey = params['packageKey'];
+
+      this.hotelRoomsService.getRooms(this.searchId, this.hotelId, this.providerId);
+    });
+
+    this.subscription.add(
+      this.hotelRoomsService
+        .getRooms(this.searchId, this.hotelId, this.providerId, this.packageKey)
+        .subscribe({
+          next: () => {
+            this.location = this.sanitizer.bypassSecurityTrustResourceUrl(
+              `https://www.google.com/maps?q=${this.hotelRoomsService.roomsData.Lat},${this.hotelRoomsService.roomsData.Lng}&hl=es;z=14&output=embed`
+            );
+          },
+          error: (err) => console.error('get hotel rooms error ->', err)
+        })
+    );
+  }
+
+  goToCheckout(packageid: string) {
+    this.router.navigate([
+      'hotels-checkout',
+      this.providerId,
+      this.searchId,
+      this.hotelId,
+      1,
+      packageid,
+      this.cityId,
+      this.nightsNum
+    ]).then(() => this.sharedService.scrollToTop());
+  }
+
+  get groupedRooms() {
+    return this.hotelRoomsService.groupedRooms;
+  }
+
+  get loader() {
+    return this.hotelRoomsService.roomsLoader;
+  }
+
+  get checkInDate() {
+    return this.hotelSearchService.HotelSearchForm.get('checkIn')?.value;
+  }
+
+  get checkOutDate() {
+    return this.hotelSearchService.HotelSearchForm.get('checkOut')?.value;
+  }
+
+  // Custom popup methods
+  openPopup() {
+    this.isPopupOpen = true;
+    document.body.style.overflow = 'hidden'; // prevent background scroll
+  }
+
+  closePopup() {
+    this.isPopupOpen = false;
+    document.body.style.overflow = ''; // restore scroll
+  }
+}

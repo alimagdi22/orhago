@@ -1,0 +1,240 @@
+@import '../../../../../../../sass/variables';
+@import '../../../../../../../sass/colors';
+
+.dest:hover {
+  .dest__placeholder__clear {
+    visibility: visible;
+  }
+}
+
+img{
+  max-width: 26px !important;
+}
+
+.dest__to:hover {
+  .dest__to__placeholder__clear {
+    visibility: visible;
+  }
+}
+
+.dest {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: text;
+
+    height: $inputs-height - 1px;
+    box-sizing: border-box;
+
+    padding: 8px 12px;
+    font-size: 14px;
+    padding-right: 10px;
+
+    &__country,
+    &__date {
+      font-weight: 700;
+      font-size: 13px;
+      overflow: hidden; // Ensures content is hidden when it overflows
+      text-overflow: ellipsis; // Displays ellipsis for overflowing text
+      white-space: nowrap; // Prevents text wrapping to the next line
+      max-width: 100%; // Restricts the width to its container
+    }
+
+    &__placeholder {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        font-size: 13px;
+        color: #555;
+      }
+
+      &__clear {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        visibility: hidden;
+        color: map-get($map: $colors, $key: 'secondary');
+        transition: all 0.1s;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        &:hover {
+          transform: scale(1.4);
+        }
+      }
+    }
+
+    &__airport-id {
+      font-size: 11px;
+      font-weight: 500;
+      color: #555;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      margin: 0;
+    }
+}
+
+.sr-only-input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.input {
+  position: absolute;
+  top: 20px;
+}
+
+.custom-input {
+  border: none; /* Remove border */
+  outline: none; /* Remove outline on focus */
+  padding: 0;
+  font-size: 13px; /* Set font size */
+  color: #000; /* Optional: Set font color */
+  background: transparent; /* Optional: Set background to transparent */
+  width: 100%; /* Optional: Adjust width */
+}
+
+.custom-input:focus {
+  box-shadow: none; /* Ensure no box shadow appears */
+}
+
+.dropdown-list {
+  &__item {
+    padding: 8px 16px;
+    box-sizing: border-box; /* Includes padding in width calculation */
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &__text {
+      white-space: nowrap; /* Prevents text wrapping */
+    }
+  }
+}
+
+.popular-dest {
+  border-radius: 6px;
+  &__title {
+    width: 17rem;
+    font-weight: 700;
+    margin: 7px;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      padding-block: 5px;
+      gap: 8px;
+      font-size: 16px;
+
+      transition: all 0.2s;
+
+      &__icon {
+        margin-left: 15px;
+      }
+
+      &:hover {
+        color: map-get($map: $colors, $key: 'main');
+      }
+    }
+  }
+}
+
+.remove-icon {
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+
+  img {
+    width: 35px;
+    cursor: pointer;
+  }
+}
+
+.multi-city-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  .add-flight-info {
+    font-size: 10px;
+    color: #393c43;
+  }
+}
+
+.dropdown-list__item__text-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.dropdown-list__item__text {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  width: 100%;
+}
+
+.truncate-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+
+.separator, .airport-code {
+  flex-shrink: 0;
+}
+
+
+.mat-option {
+  max-width: 28rem;
+}
+
+
+::ng-deep .cdk-overlay-pane{
+  width: auto !important;
+}
+
+.error-message {
+    width: 150px;
+
+  position: absolute;
+  font-family: Open Sans;
+
+  font-weight: 400;
+  font-size: 12px;
+
+  color: #EC1B1B;
+  bottom: -20px;
+}

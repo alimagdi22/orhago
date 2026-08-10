@@ -1,0 +1,133 @@
+@if(sharedService.screenWidth>900){
+
+  <section class="info-section col-12 col-lg-4">
+      <img [src]="rooms[0].Images[index]" class="room-image" />
+
+      <p class="title">{{ packageName }}</p>
+  </section>
+
+  <section class="book-section col-12 col-lg-8">
+      @for (room of rooms; track $index) {
+          <article>
+              @switch(room.RoomMeal) {
+                  @case('Room_Only') {
+                      <p class="tag">
+                          <img src="assets/icons/hotels/stop.svg" />
+                          {{ ("hotelRooms.No meals included" | translate) }}
+                      </p>
+                  }
+                  @case('BreakFast') {
+                      <p class="tag">
+                          <img src="assets/icons/hotels/dinnar.svg" />
+                          {{ ("hotelRooms.Breackfast included" | translate) }}
+                      </p>
+                  }
+                  @case('Half_Board') {
+                      <p class="tag">
+                          <img src="assets/icons/hotels/dinnar.svg" />
+                          {{ ("hotelRooms.Meals included" | translate) }}
+                      </p>
+                  }
+              }
+
+              @if(room.IsRefundable) {
+                  <p class="tag green">
+                      <img src="assets/icons/hotels/x-icon.svg" />
+                      {{ ("hotelRooms.Refundable" | translate) }}
+                  </p>
+              } @else {
+                  <p class="tag red">
+                      <img src="assets/icons/hotels/x-icon.svg" />
+                      {{ ("hotelRooms.Nun-refundable" | translate) }}
+                  </p>
+              }
+              <div>
+                  <p>{{ currency | exchange: 'code' }} <span class="price">{{ room.TotalSellPrice | exchange: 'value' | number: '1.0-0' }}</span></p>
+                  <p>{{ nights }}, {{ guests }}</p>
+              </div>
+
+              <app-secondary-button (clickSecondaryButton)="onSelectRoom(room.PackageNO)" [title]="'hotelRooms.Book Now' | translate" [secondaryButtonInfo]="bookNowButton" />
+          </article>
+
+          @if($index !== rooms.length - 1) {
+              <hr />
+          }
+      }
+  </section>
+
+  <section class="amenities-section col-12">
+      @for (amenity of (amenities | slice: 0 : 9); track $index) {
+          <p>
+              <img src="assets/icons/hotels/check.svg" />
+              {{ amenity.Amenity }}
+          </p>
+      }
+
+      <a (click)="showAllAmenities(amenities)">{{ ("hotelRooms.View more amenities" | translate) }}</a>
+  </section>
+
+}@else {
+
+  <div class="room-card">
+      <div class="room-header">
+        <h3 class="room-title">Executive, City View</h3>
+        <img [src]="rooms[0].Images[index]" alt="Room Image" class="room-image">
+      </div>
+
+      <div class="room-info">
+        <p class="no-meal">
+          @for (room of rooms; track $index) {
+            @switch(room.RoomMeal) {
+              @case('Room_Only') {
+                  <p class="tag">
+                      <img src="assets/icons/hotels/stop.svg" />
+                      {{ ("hotelRooms.No meals included" | translate) }}
+                  </p>
+              }
+              @case('BreakFast') {
+                  <p class="tag">
+                      <img src="assets/icons/hotels/dinnar.svg" />
+                      {{ ("hotelRooms.Breackfast included" | translate) }}
+                  </p>
+              }
+              @case('Half_Board') {
+                  <p class="tag">
+                      <img src="assets/icons/hotels/dinnar.svg" />
+                      {{ ("hotelRooms.Meals included" | translate) }}
+                  </p>
+              }
+            }
+          }
+        </p>
+        @for (room of rooms; track $index) {
+          @if(room.IsRefundable) {
+            <p class="non-refund">
+              <span class="icon">❌</span> Non-refundable
+            </p>
+          }
+        }
+      </div>
+
+      <div class="features">
+        @for (amenity of (amenities | slice: 0 : 9); track $index) {
+          <div class="feature"><span><img src="assets/icons/hotels/check.svg" /></span> {{ amenity.Amenity }}</div>
+        }
+      </div>
+
+      @for (room of rooms; track $index) {
+      <div class="room-footer">
+        <div class="price-info">
+          <div class="total-price">
+            <p class="currency">{{ currency | exchange: 'code' }}</p>
+              <h2 class="price">{{ room.TotalSellPrice | exchange: 'value' | number: '1.0-0' }}</h2>
+          </div>
+            <p class="details">{{ nights }}, {{ guests }}</p>
+          </div>
+          <button class="book-btn" (click)="onSelectRoom(room.PackageNO)">Book Now</button>
+        </div>
+      }
+    </div>
+}
+
+
+

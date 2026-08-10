@@ -1,0 +1,90 @@
+@import '../../../../../../../../sass/variables';
+@import '../../../../../../../../sass/colors';
+@import '../../../../../../../../sass/utilities';
+
+.input-wrapper {
+    padding: 10px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  
+    &:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  
+    &::placeholder {
+      color: #6c757d;
+      opacity: 1;
+    }
+  
+    &:disabled, &[readonly] {
+      background-color: #e9ecef;
+      opacity: 1;
+    }
+  }
+  
+  hr {
+    margin-block: 10px;
+  }
+
+  h4 {
+    margin-bottom: 20px;
+    margin-inline: 10px;
+  }
+
+  .airport-item {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    img {
+        margin-inline-end: 10px;
+    }
+  }
+
+  .skeleton-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-inline: 10px;
+  }
+
+  .loader-content {
+    height: 40px;
+    border-radius: 20px;
+    flex-grow: 1;
+  }
+  
+  .loader-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .no-search-results {
+    cursor: default;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    color: gray;
+    height: 50vh;
+  }

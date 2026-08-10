@@ -1,0 +1,77 @@
+
+<h3 class="col-12">{{ 'checkout.contactInfo' | translate }}</h3>
+
+<ng-container [formGroup]="hotelForm">
+    <div class="custom-radio-group">
+        <div>
+            <label>{{ 'checkout.email' | translate }}</label>
+
+            <div class="custom-input-container">
+                <input type="text" [placeholder]="'checkout.email' | translate" formControlName="mail" />
+            </div>
+        </div>
+
+        <ng-container formArrayName="Travellers">
+            <ng-container formGroupName="0">
+                <div>
+                    <label>{{ 'checkout.contactNumber' | translate }}</label>
+
+                    <ngx-intl-tel-input
+                        name="phone"
+                        [cssClass]="isHotelPhoneNumberInvalid ? 'alert' : 'custom-phone-container'"
+                        [preferredCountries]="['us', 'gb', 'eg', 'sa']"
+                        [enableAutoCountrySelect]="true"
+                        [enablePlaceholder]="true"
+                        [searchCountryFlag]="true"
+                        [searchCountryPlaceholder]="'Search country name, code, or +dial'"
+                        [selectedCountryISO]="CountryISO.Kuwait"
+                        formControlName="phonenum"
+                        (input)="checkHotelPhoneNumberValidation()"
+                        >
+                    </ngx-intl-tel-input>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+
+    <ng-container formArrayName="Travellers">
+        @for (guestController of guestsControllers; track $index) {
+            <app-expansion-panel [title]="('hotelCheckout.Guest Room' | translate) + ($index + 1)" [id]="$index">
+                <ng-container [formGroupName]="$index">
+                    <div class="custom-radio-group">
+                        @for (title of titles; track $index) {
+                            <label class="radio-btn" [style.flex-basis]="$index ? '40%' :'100%'">
+                                <input type="radio" [value]="title" formControlName="salutation" />
+                                {{ ("hotelCheckout." + title) | translate }}
+                            </label>
+                        }
+
+                        <div>
+                            <label>{{ 'checkout.firstName' | translate }}</label>
+
+                            <div class="custom-input-container">
+                                <input type="text" [placeholder]="'checkout.firstName' | translate" formControlName="firstName" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>{{ 'checkout.lastName' | translate }}</label>
+
+                            <div class="custom-input-container">
+                                <input type="text" [placeholder]="'checkout.lastName' | translate" formControlName="lastName" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>{{ "hotelCheckout.Special Request" | translate }}</label>
+
+                            <div class="custom-input-container">
+                                <textarea type="text" formControlName="specialRequest" [placeholder]="'hotelCheckout.Special Request' | translate"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </app-expansion-panel>
+        }
+    </ng-container>
+</ng-container>

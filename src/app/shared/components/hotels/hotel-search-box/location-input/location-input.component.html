@@ -1,0 +1,55 @@
+<div class="form-group location-group"
+     [formGroup]="searchForm"
+     [class.invalid]="locationInvalid"
+     (click)="openLocationDialog()"
+     [class.mobile-clickable]="isMobile">
+
+  @if(searchForm.get('location')?.value) {
+    <button type="button" class="btn-close btn-close-white"
+            [attr.aria-label]="'searchBox.close' | translate"
+            (click)="clearInput()"
+            [ngStyle]="currentLang==='ar'?{'left':'2%','right':'90%'}:{}">
+      <span>&times;</span>
+    </button>
+  }
+
+  <label for="location"
+         [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
+    {{ 'searchBox.Destination' | translate }}
+  </label>
+
+  <mat-form-field appearance="outline" class="location-input">
+    <input
+      #locationInput
+      type="text"
+      id="location"
+      matInput
+      formControlName="location"
+      [placeholder]="'searchBox.Entercity' | translate"
+      [matAutocomplete]="auto"
+      autocomplete="off"
+      (input)="onLocationChange($event)"
+      (blur)="showValidationErrors = true"
+      [value]="displayCity(searchForm.get('location')?.value)"
+      #autocompleteTrigger="matAutocompleteTrigger"
+    >
+
+    <mat-autocomplete #auto="matAutocomplete"
+                     (optionSelected)="onCitySelected($event)"
+                     [displayWith]="displayCity">
+        @if (homePageService.selectAllcities?.length > 0) {
+          @for (city of homePageService.selectAllcities; track $index) {
+            <mat-option [value]="city">
+              {{ city.City }}
+            </mat-option>
+          }
+        } @else {
+          <mat-option style="display: none"></mat-option>
+        }
+    </mat-autocomplete>
+
+    <mat-icon matSuffix *ngIf="homePageService.cityLoader">
+        <mat-spinner diameter="20"></mat-spinner>
+    </mat-icon>
+  </mat-form-field>
+</div>

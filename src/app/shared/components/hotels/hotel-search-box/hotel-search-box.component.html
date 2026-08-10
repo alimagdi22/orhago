@@ -1,0 +1,30 @@
+<p [ngStyle]="currentLang ==='en'?{'margin-left':'18px'}:{'margin-right':'18px'}" class="head">{{'searchBox.hotelHead' | translate}}</p>
+<div class="hotel-search-container" [formGroup]="searchForm">
+  <!-- Location Field with Mat-Autocomplete -->
+  <app-location-input/>
+
+  <app-hotel-date-input/>
+
+  <app-guest-room-selector/>
+
+  <!-- Error Message -->
+  <div *ngIf="formError" class="error-message">
+    {{ formError }}
+  </div>
+
+  <!-- Search Button -->
+  <div class="form-group submit-group">
+    <app-main-button
+      [title]="'searchBox.searchHotels' | translate"
+      [mainButtonInfo]="{
+        height: '53px',
+        borderRadius: '16px',
+        fontSize: '16px',
+        padding:'16px 8px',
+        width:'100%'
+      }"
+
+      (clickMainButton)="onSubmit()"
+    ></app-main-button>
+  </div>
+</div>

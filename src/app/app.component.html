@@ -1,0 +1,79 @@
+<app-navbar />
+
+<router-outlet />
+
+<app-footer />
+
+@if (sharedService.isFlightDetailsShowed) {
+  <div class="overlay">
+    <div class="custom_modal flight-details-modal" appClickOutside (clickOutside)="closeModal()">
+      <app-flight-details />
+    </div>
+  </div>
+}
+
+@if (sharedService.isErrorSheetShowed) {
+  <div class="overlay">
+    <div class="custom_modal error-sheet-modal" appClickOutside (clickOutside)="sharedService.hideErrorSheet()">
+      <app-error-sheet />
+    </div>
+  </div>
+}
+
+@if (sharedService.isLogInSheetShowed) {
+  <div class="overlay">
+    <div
+      class="custom_modal user-management-sheet"
+      appClickOutside
+      (clickOutside)="sharedService.isLogInSheetShowed = false"
+    >
+      <app-login />
+    </div>
+  </div>
+}
+
+@if (sharedService.isRegisterSheetShowed) {
+  <div class="overlay">
+    <div
+      class="custom_modal user-management-sheet register"
+      appClickOutside
+      (clickOutside)="sharedService.isRegisterSheetShowed = false"
+    >
+      <app-register />
+    </div>
+  </div>
+}
+
+@if (sharedService.isOTPShowed) {
+  <div class="overlay">
+    <div class="custom_modal user-management-sheet" appClickOutside (clickOutside)="sharedService.isOTPShowed = false">
+      <app-otp />
+    </div>
+  </div>
+}
+
+@if (sharedService.isResetPasswordSheetShowed) {
+  <div class="overlay">
+    <div
+      class="custom_modal user-management-sheet"
+      appClickOutside
+      (clickOutside)="sharedService.isResetPasswordSheetShowed = false"
+    >
+      <app-reset-password />
+    </div>
+  </div>
+}
+
+@if (sharedService.isForgetPasswordSheetShowed) {
+  <div class="overlay">
+    <div
+      class="custom_modal user-management-sheet"
+      appClickOutside
+      (clickOutside)="sharedService.isForgetPasswordSheetShowed = false"
+    >
+      <app-forget-password />
+    </div>
+  </div>
+}
+
+<app-whats-app-button />

@@ -1,0 +1,49 @@
+<div class="datepicker-container">
+  <header>
+    <span>{{ 'searchBox.dateSelection' | translate }}</span>
+    <button (click)="dialogRef.close()">{{ 'searchBox.close' | translate }}</button>
+  </header>
+
+  <div class="calendars-container">
+    <!-- Check-in Calendar -->
+    <ngb-datepicker
+      *ngIf="currentCalendar === 'checkIn'"
+      class="calendar-view"
+      [displayMonths]="2"
+      navigation="arrows"
+      outsideDays="visible"
+      [minDate]="todayNgb"
+      [maxDate]="maxDateNgb"
+      [startDate]="checkInNgb"
+      [dayTemplate]="dayTemplate"
+      [(ngModel)]="selectedCheckIn"
+      (dateSelect)="onDateSelect('checkIn', $event)">
+    </ngb-datepicker>
+
+    <!-- Check-out Calendar -->
+    <ngb-datepicker
+      *ngIf="currentCalendar === 'checkOut'"
+      class="calendar-view"
+      [displayMonths]="2"
+      navigation="arrows"
+      outsideDays="visible"
+      [minDate]="minCheckoutDateNgb"
+      [maxDate]="maxDateNgb"
+      [startDate]="checkOutNgb"
+      [dayTemplate]="dayTemplate"
+      [(ngModel)]="selectedCheckOut"
+      (dateSelect)="onDateSelect('checkOut', $event)">
+    </ngb-datepicker>
+  </div>
+</div>
+
+<ng-template #dayTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected">
+  <div class="custom-day"
+       [class.selected]="isSelectedDate(date)"
+       [class.in-range]="isInRange(date)"
+       [class.check-in]="isCheckInDate(date)"
+       [class.check-out]="isCheckOutDate(date)"
+       [class.outside]="date.month !== currentMonth">
+    {{ date.day }}
+  </div>
+</ng-template>

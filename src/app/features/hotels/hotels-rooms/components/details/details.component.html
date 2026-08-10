@@ -1,0 +1,35 @@
+<div class="details col-lg-9 col-12" #details>
+<p class="title">{{ "hotelRooms.Details" | translate }}</p>
+
+    <p [innerHTML]="hotelDetails | slice: 0 : (readMore ? hotelDetails.length - 1 : 400)"></p>
+    <br />
+    <span class="read-more" (click)="readMore = !readMore">{{ (readMore ? 'hotelRooms.Read Less' : 'hotelRooms.Read More') | translate }}</span>
+</div>
+@if(sharedService.screenWidth>900){
+
+  <div class="info col-lg-3 col-12">
+      <div class="info-item">
+          <img src="assets/icons/hotels/location.svg" class="item-icon" />
+          <p class="item-body">
+              <span>{{ "hotelRooms.Address" | translate }}</span>
+              {{ address }}
+          </p>
+      </div>
+
+      <div class="info-item">
+          <img src="assets/icons/hotels/check-in.svg" class="item-icon" />
+          <p class="item-body">
+              <span>{{ "hotelRooms.Check In" | translate }}</span>
+              {{ checkInDate | date:'hh:mm a' }}
+          </p>
+      </div>
+
+      <div class="info-item">
+          <img src="assets/icons/hotels/check-out.svg" class="item-icon" />
+          <p class="item-body">
+              <span>{{ "hotelRooms.Check Out" | translate }}</span>
+              {{ checkOutDate | date:'hh:mm a' }}
+          </p>
+      </div>
+  </div>
+}

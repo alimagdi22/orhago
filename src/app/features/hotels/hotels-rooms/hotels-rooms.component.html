@@ -1,0 +1,129 @@
+
+<div class="search-box">
+  <div class="container">
+    <div class="d-lg-none">
+      <div *ngIf="isSearchVisible" class="mobile-search-box">
+        @if (sharedService.isCitiesLoading) {
+          <app-skeleton-loader height="200px" />
+        } @else {
+          <app-search-box />
+        }
+      </div>
+    </div>
+
+    <div class="desktop-search-box">
+      @if (sharedService.isCitiesLoading) {
+        <app-skeleton-loader height="200px" />
+      } @else {
+        @if(sharedService.screenWidth > 900){
+          <app-search-box class="regular-search"/>
+        }
+      }
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  @if(loader) {
+    <app-spinner-loader />
+  } @else {
+    <app-gallery [location]="location" [currency]="currency" />
+    @if(sharedService.screenWidth < 900 ){
+      <app-review/>
+      <app-amenities-mobile/>
+      <div class="details">
+        <app-details/>
+      </div>
+      <div class="details">
+        <p class="policies">policies</p>
+        <div class="info-item">
+          <p class="item-body">
+              <span>{{ "hotelRooms.Check In" | translate }}</span>
+              {{ checkInDate | date:'hh:mm a' }}
+          </p>
+        </div>
+
+        <div class="info-item">
+          <p class="item-body">
+              <span>{{ "hotelRooms.Check Out" | translate }}</span>
+              {{ checkOutDate | date:'hh:mm a' }}
+          </p>
+        </div>
+      </div>
+    }@else {
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+        @for (link of links; track link.id) {
+          <a mat-tab-link (click)="activeLink = link" [active]="activeLink === link">
+            {{ ("hotelRooms." + link.title) | translate }}
+          </a>
+        }
+      </nav>
+
+      <mat-tab-nav-panel #tabPanel>
+      @switch (activeLink.id) {
+          @case (1) {
+            @for(package of (groupedRooms | keyvalue); track package.key) {
+              <app-rooms
+              [rooms]="package.value"
+              [packageName]="package.key"
+              [index]="$index"
+              [currency]="currency"
+              [nightsNumber]="nightsNum"
+              (selectRoom)="goToCheckout($event)"
+              />
+            }
+          }
+          @case (2) {
+            <app-guest-rating />
+          }
+          @case (3) {
+            <app-review />
+          }
+          @case (4) {
+            <app-map [location]="location" />
+          }
+          @case (5) {
+            <app-details />
+          }
+      }
+      </mat-tab-nav-panel>
+    }
+  }
+
+</div>
+
+
+@if(sharedService.screenWidth < 900 && !sharedService.isCitiesLoading){
+  <div class="pricing-card">
+    <div class="card-body">
+      <p>{{hotelRoomsService.roomsData.sellCurrency}}
+        <span class="price">{{ hotelRoomsService.roomsData.TotalSellPrice}}</span>
+      </p>
+      <button class="select-button" (click)="openPopup()">Select Rooms</button>
+    </div>
+  </div>
+}
+
+@if(isPopupOpen){
+  <div class="custom-popup-overlay">
+    <div class="custom-popup-content">
+      <div class="popup-header">
+        <h3>Select a Room</h3>
+        <button class="close-btn" (click)="closePopup()">×</button>
+      </div>
+
+      <div class="popup-body">
+        @for(package of (groupedRooms | keyvalue); track package.key) {
+          <app-rooms
+            [rooms]="package.value"
+            [packageName]="package.key"
+            [index]="$index"
+            [currency]="currency"
+            [nightsNumber]="nightsNum"
+            (selectRoom)="goToCheckout($event)"
+          />
+        }
+      </div>
+    </div>
+  </div>
+}

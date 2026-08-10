@@ -1,0 +1,20 @@
+.dest {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__title,
+  &__date {
+    font-weight: bold;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__time {
+    font-size: 12px;
+  }
+}

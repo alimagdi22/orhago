@@ -1,0 +1,27 @@
+<div class="wrapper" (click)="isMobile() && toggle.emit()" >
+    @for (flight of flights; track $index) {
+        <div class="search-summary">
+            <span class="city">
+                {{flight.flightDTO[0].departureTerminalAirport.cityName}} ({{flight.flightDTO[0].departureTerminalAirport.cityCode}})
+            </span>
+        
+            <span class="arrow" [ngClass]="{ 'flip-horizontal': translate.currentLang === 'ar' }">➔</span>
+        
+            <span class="city">
+                {{flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityName}} ({{flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode}})
+            </span>
+        
+            <div dir="ltr">
+                <span> - {{flight.flightDTO[0].departureDate | date: 'dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'}} - {{flight.flightDTO[flight.flightDTO.length - 1].arrivalDate | date: 'dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'}} - </span>
+            </div>
+            
+            <div class="passenger" dir="rtl">
+                {{flightResultService.response?.searchCriteria?.totalPassengersNum}} {{ translate.currentLang === 'en' ? 'Pax' : 'راكب'}}
+            </div>
+        </div>    
+    }
+
+    <button class="search-toggle">
+     <img src="assets/icons/svgexport-17.svg" alt="Search" width="24" />
+    </button>
+</div>

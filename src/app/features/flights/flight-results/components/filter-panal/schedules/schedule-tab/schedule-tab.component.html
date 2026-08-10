@@ -1,0 +1,9 @@
+<header class="tab-group">
+  <span [class.active]="flightTypeIndex === 0" (click)="onSelect(0)">
+    {{ 'results.filter.departure' | translate }}
+  </span>
+  
+  <span [class.active]="flightTypeIndex === 1" (click)="onSelect(1)">
+    {{ 'results.filter.arrival' | translate }}
+  </span>
+</header>

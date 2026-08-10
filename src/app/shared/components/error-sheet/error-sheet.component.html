@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <img src="assets/icons/warning-icon.svg" title="Warning" />
+  <p>{{ sharedService.errorSheetMessage }}</p>
+  <app-main-button
+    [title]="'Okay'"
+    [mainButtonInfo]="okayButtonInfo"
+    (clickMainButton)="sharedService.hideErrorSheet()"
+  />
+</div>

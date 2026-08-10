@@ -1,0 +1,200 @@
+<div
+  class="wrapper"
+  [ngStyle]="{
+    display: isChangePasswordShowed ? 'none' : 'flex',
+  }"
+>
+  <form [formGroup]="profileForm">
+    <div class="custom-radio-group">
+      <div>
+        <label>{{ 'user.profile.firstName' | translate }}</label>
+
+        <div class="custom-input-container">
+          <input
+            type="text"
+            [placeholder]="'user.profile.firstNamePlaceholder' | translate"
+            formControlName="firstName"
+          />
+        </div>
+
+        @if (profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched) {
+          <p
+            [ngStyle]="{
+              visibility: 'visible',
+            }"
+            class="validation-msg"
+          >
+            {{ getFirstNameErrorMessage(profileForm.get('firstName')!, lang) }}
+          </p>
+        } @else {
+          <p
+            [ngStyle]="{
+              visibility: 'hidden',
+            }"
+            class="validation-msg"
+          >
+            Error Message Placeholder
+          </p>
+        }
+      </div>
+
+      <div>
+        <label>{{ 'user.profile.lastName' | translate }}</label>
+
+        <div class="custom-input-container">
+          <input
+            type="text"
+            [placeholder]="'user.profile.lastNamePlaceholder' | translate"
+            formControlName="lastName"
+          />
+        </div>
+
+        @if (profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched) {
+          <p
+            [ngStyle]="{
+              visibility: 'visible',
+            }"
+            class="validation-msg"
+          >
+            {{ getLastNameErrorMessage(profileForm.get('lastName')!, lang) }}
+          </p>
+        } @else {
+          <p
+            [ngStyle]="{
+              visibility: 'hidden',
+            }"
+            class="validation-msg"
+          >
+            Error Message Placeholder
+          </p>
+        }
+      </div>
+    </div>
+
+    <div class="custom-radio-group">
+      <div>
+        <label>{{ 'user.profile.gmail' | translate }}</label>
+        <div class="custom-input-container">
+          <span class="input-icon">
+            <img src="assets/icons/email-icon.svg" alt="icon" />
+          </span>
+
+          <input type="text" [placeholder]="'user.profile.emailPlaceholder' | translate" [value]="email" disabled />
+        </div>
+      </div>
+
+      <div class="phone">
+        <label>{{ 'user.profile.contactNumber' | translate }}</label>
+
+        <ngx-intl-tel-input
+          name="phone"
+          formControlName="userPhoneNumber"
+          [cssClass]="isPhoneNumberInvalid ? 'alert' : 'custom-phone-container'"
+          [preferredCountries]="['us', 'gb', 'eg', 'sa']"
+          [enableAutoCountrySelect]="true"
+          [enablePlaceholder]="true"
+          [selectedCountryISO]="CountryISO.Kuwait"
+          (change)="checkPhoneNumberValidation()"
+        >
+        </ngx-intl-tel-input>
+
+        @if (profileForm.get('userPhoneNumber')?.invalid && profileForm.get('userPhoneNumber')?.touched) {
+          <p
+            [ngStyle]="{
+              visibility: 'visible',
+            }"
+            class="validation-msg"
+          >
+            {{ getPhoneErrorMessage(profileForm.get('userPhoneNumber')!, lang) }}
+          </p>
+        } @else {
+          <p
+            [ngStyle]="{
+              visibility: 'hidden',
+            }"
+            class="validation-msg"
+          >
+            Error Message Placeholder
+          </p>
+        }
+      </div>
+    </div>
+  </form>
+
+  <div class="privacy-policy-paragraph">
+    <mat-checkbox color="primary" />
+    <p>
+      {{ 'user.profile.privacyPolicy' | translate }}
+      <span>{{ 'user.profile.privacyPolicyLink' | translate }}</span>
+    </p>
+  </div>
+
+  <div class="actions">
+    <app-secondary-button
+      [title]="'user.profile.changePassword' | translate"
+      [secondaryButtonInfo]="changePasswordButton"
+      (clickSecondaryButton)="isChangePasswordShowed = true"
+    />
+
+    <button (click)="onSubmit()" [disabled]="isLoading || !profileForm.touched">
+      @if (!isLoading) {
+        {{ 'user.profile.save' | translate }}
+      } @else {
+        <mat-spinner diameter="20" color="accent" />
+      }
+    </button>
+  </div>
+</div>
+
+<div
+  class="wrapper"
+  [ngStyle]="{
+    display: isChangePasswordShowed ? 'flex' : 'none',
+  }"
+>
+  <form [formGroup]="changePasswordForm">
+    <div class="custom-radio-group">
+      <div [ngStyle]="{ flexBasis: '100%' }">
+        <label>{{ 'user.changePassword.gmail' | translate }}</label>
+        <div class="custom-input-container">
+          <span class="input-icon">
+            <img src="assets/icons/email-icon.svg" alt="icon" />
+          </span>
+
+          <input type="text" [placeholder]="'user.profile.emailPlaceholder' | translate" [value]="email" disabled />
+        </div>
+      </div>
+
+      <div [ngStyle]="{ flexBasis: '100%' }">
+        <label>{{ 'user.changePassword.currentPassword' | translate }}</label>
+        <div class="custom-input-container">
+          <input type="password" formControlName="oldPassword" />
+        </div>
+      </div>
+
+      <div>
+        <label>{{ 'user.changePassword.newPassword' | translate }}</label>
+        <div class="custom-input-container">
+          <input type="password" formControlName="newPassword" autocomplete="new-password" />
+        </div>
+      </div>
+
+      <div>
+        <label>{{ 'user.changePassword.confirmNewPassword' | translate }}</label>
+        <div class="custom-input-container">
+          <input type="password" formControlName="confirmPassword" autocomplete="new-password" />
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="actions">
+    <button (click)="onChangePassword()" [disabled]="isLoading">
+      @if (!isLoading) {
+        {{ 'user.changePassword.save' | translate }}
+      } @else {
+        <mat-spinner diameter="20" color="accent" />
+      }
+    </button>
+  </div>
+</div>

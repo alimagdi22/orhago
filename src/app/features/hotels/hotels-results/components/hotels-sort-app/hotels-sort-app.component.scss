@@ -1,0 +1,132 @@
+.hotelSort {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.hotelSort__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  // gap: 8px;
+  padding: 10px 0;
+}
+
+/* الزرار العادي */
+.sortedBox {
+  flex: 1;
+  background-color: #f7f7f7;
+  color: #000;
+  border-radius: 7px;
+  padding: 12px 22px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* الزر الأخضر (أرخص) */
+.sortedBox.cheapest {
+  background-color: #EFFFF1; /* أخضر فاتح جدًا */
+  color: #1E8F0A; /* أخضر غامق */
+}
+
+/* الزر الرمادي (مستحسن) */
+.sortedBox.active {
+  background-color: #f3f3f3;
+  color: #000;
+}
+
+/* مربع الأيقونة */
+.sortedBox.iconBox {
+  flex: 0 0 50px;
+  height: 40px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.sortedBox.iconBox img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* تأثير خفيف عند اللمس */
+.sortedBox:active {
+  transform: scale(0.97);
+}
+
+
+.filter-btn {
+  background-color: #F4F4F5;
+  border: none;
+  border-radius: 10px;
+  width: 49px;
+  height: 49px;
+  padding: 0px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #EAEAEB;
+  }
+
+  img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+}
+.filter-toggle {
+  position: fixed;
+  left: 10px;
+  left: auto;
+  bottom: 10px;
+  z-index: 1;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  background-color: none;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.mobile-sidebar-panel {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100vh;
+  background: #fff;
+  z-index: 1001;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sidebar-panel.open {
+  left: 0;
+}

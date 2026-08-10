@@ -1,0 +1,17 @@
+<app-search-box-header (tabChanged)="onTabChanged($event)" />
+
+<div
+  class="search-box-wrapper"
+  [ngStyle]="{
+    borderRadius: translate.currentLang === 'en' ? '0px 12px 12px 12px' : '12px 0px 12px 12px',
+  }"
+>
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" [selectedIndex]="tabIndex">
+    <mat-tab label="Flights">
+      <app-flight-search-box />
+    </mat-tab>
+    <mat-tab label="Hotels">
+      <app-hotel-search-box/>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,74 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/colors';
+
+.wrapper {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 95%;
+  max-width: 340px;
+  gap: 10px;
+
+  padding: 20px;
+  border: 1px solid map-get($map: $colors, $key: 'gray-border');
+  border-radius: $base-radius-small;
+
+  .main-info {
+    &__price,
+    &__saver {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    &__price {
+      &__value {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      &__info {
+        font-size: 14px;
+      }
+    }
+
+    &__saver {
+      margin-top: 10px;
+      &__type {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .sub-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2px;
+
+    &__title {
+      font-weight: bold;
+    }
+
+    &__value {
+      text-align: start;
+      display: flex;
+      gap: 5px;
+    }
+  }
+
+  app-main-button {
+    width: 100%;
+  }
+}
+
+.active {
+  border: 1px solid map-get($map: $colors, $key: 'main');
+}
+
+@media (max-width: 768px) {
+  .wrapper{
+    max-width: 260px;
+  }
+}

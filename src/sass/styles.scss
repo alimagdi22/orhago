@@ -1,0 +1,344 @@
+@use '@angular/material' as mat;
+
+/* You can add global styles to this file, and also import other style files */
+
+/* variables & functions */
+@import './variables';
+
+/* base & layout */
+@import './breakpoints';
+@import './grid';
+
+/* colors */
+@import './colors';
+
+/* utilities */
+@import './utilities';
+
+* {
+  color: inherit;
+  margin: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  background-color: white;
+}
+
+/* Arabic-specific font */
+body.ar {
+  font-family: 'Noto Sans Arabic', sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Calender */
+.calenderMenu {
+  height: 100%;
+  transform-origin: left top;
+  border-radius: 14px !important;
+  padding: 0.5% 1% !important;
+  display: flex !important;
+  justify-content: space-between;
+  width: 40rem;
+  max-width: unset !important;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+
+  .mat-mdc-menu-content {
+    width: 100%;
+
+    .date-summary {
+      display: flex;
+      margin: 11px;
+
+      &__departing,
+      &__landing {
+        padding: 15px;
+        border: 1px solid map-get($map: $colors, $key: 'gray');
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        &__title {
+          color: map-get($map: $colors, $key: 'gray');
+          font-weight: 600;
+        }
+
+        &__date {
+          font-weight: 600;
+        }
+      }
+
+      &__departing {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+
+      &__landing {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+    }
+
+    .date-summary-full {
+      width: 100%;
+      border-radius: 12px;
+    }
+  }
+
+  .searchBoxPicker {
+    width: 100%;
+    border: none;
+    direction: ltr !important;
+    .ngb-dp-header {
+      background-color: transparent !important;
+      margin-bottom: 2%;
+    }
+
+    .ngb-dp-arrow-btn {
+      color: black;
+      font-family: 'Lato';
+    }
+
+    .ngb-dp-month {
+      width: 100%;
+      .ngb-dp-week {
+        padding-left: 1.25rem;
+        padding-top: 0.3rem;
+      }
+    }
+
+    .ngb-dp-month-name {
+      background-color: transparent;
+      color: black;
+      font-size: 20px;
+      font-family: 'Lato';
+    }
+
+    .ngb-dp-weekdays {
+      background-color: transparent;
+      border: none;
+      padding: 1%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .ngb-dp-weekday {
+      color: black;
+      font-family: Open Sans;
+      font-size: 18px;
+      margin: 0 0.2rem;
+    }
+
+    .ngb-dp-day {
+      margin: 0 0.2rem;
+    }
+  }
+
+  .custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 2rem;
+    width: 2rem;
+
+    border: none;
+    font-family: 'Lato';
+    font-size: 18px;
+    border-radius: 8px;
+  }
+
+  .ngb-dp-day.disabled {
+    color: #808080 !important;
+  }
+
+  .custom-day.focused {
+    background-color: map-get($map: $colors, $key: 'main');
+    color: white;
+  }
+
+  .custom-day:hover {
+    background-color: map-get($map: $colors, $key: 'secondary');
+    color: white;
+  }
+
+  .custom-day.faded {
+    background-color: map-get($map: $colors, $key: 'red');
+    color: #000000;
+  }
+
+  .custom-day.range,
+  .custom-day.focused-range {
+    background-color: map-get($map: $colors, $key: 'off-white');
+    color: map-get($map: $colors, $key: 'main');
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.alert {
+  border: 1px solid red;
+}
+
+.custom-phone-container {
+  border: 1px solid #d3d3d3;
+}
+
+.custom-phone-container,
+.alert {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  width: 100% !important;
+}
+
+ngx-intl-tel-input {
+  .iti__selected-flag {
+    background-color: #e1e7ee;
+    border-radius: 7px 0 0 7px;
+    padding: 5px 10px;
+  }
+
+  .iti {
+    width: 100% !important;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 0 8px;
+    color: #333;
+
+    &::placeholder {
+      color: #aaa;
+      font-size: 14px;
+    }
+  }
+}
+
+.flip-icon {
+  transform: scaleX(-1);
+}
+
+:host ::ng-deep .swiper-wrapper {
+  justify-content: center !important;
+}
+// Define the custom primary palette using your green color
+$green-palette: (
+  50: #e0f7e4,
+  100: #b3ebbd,
+  200: #80de94,
+  300: #4dd06b,
+  400: #26c551,
+  500: #1f8f0a,
+  // Main green
+  600: #1a7e08,
+  700: #156d06,
+  800: #115b05,
+  900: #0a3d03,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+  ),
+);
+
+$yellow-palette: (
+  50: #fff8e1,
+  100: #ffecb3,
+  200: #ffe082,
+  300: #ffd54f,
+  400: #ffca28,
+  500: #d3a939,
+  // Main yellow
+  600: #b78932,
+  700: #9b6a2a,
+  800: #7f4b23,
+  900: #5d311a,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #000,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+  ),
+);
+
+// Define other palettes (e.g., warn palette using red)
+$red-palette: (
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: #ec1b1b,
+  // Main red
+  600: #d01716,
+  700: #c41411,
+  800: #b0140f,
+  900: #930c0c,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+  ),
+);
+
+// Define the palettes
+$custom-primary: mat.m2-define-palette($green-palette);
+$custom-accent: mat.m2-define-palette($yellow-palette);
+$custom-warn: mat.m2-define-palette($red-palette);
+
+// Define the theme
+$custom-theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $custom-primary,
+      accent: $custom-accent,
+      warn: $custom-warn,
+    ),
+  )
+);
+
+@include mat.core(); // Import core styles
+@include mat.all-component-themes($custom-theme); // Apply custom theme

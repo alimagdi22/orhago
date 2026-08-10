@@ -1,0 +1,98 @@
+<!-- guest-room-selector.component.html -->
+<div class="guest-room-selector">
+  <div class="selector-summary" (click)="onSelectorClick($event)" [matMenuTriggerFor]="guestMenu">
+    <div class="head">
+      <p>{{ 'searchBox.guestsRooms' | translate }}</p>
+    </div>
+    <div class="d-flex">
+      <span class="summary-text">{{ summaryText }}</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+  </div>
+
+  <mat-menu #guestMenu="matMenu" class="guest-menu">
+    <div class="configuration-panel" (click)="handleMenuClick($event)">
+      <div class="room-configuration" *ngFor="let room of guestInfo.controls; let i = index">
+        <div class="room-header">
+          <h4>{{ 'searchBox.room' | translate }} {{ i + 1 }}</h4>
+          <button
+            *ngIf="i > 0"
+            class="remove-room-btn"
+            (click)="removeRoom(i)"
+            [attr.aria-label]="'searchBox.removeRoom' | translate "
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="guest-controls">
+          <div class="control-group">
+            <label>{{ 'searchBox.adult' | translate }}</label>
+            <div class="counter">
+              <button
+                (click)="decrementAdult(i)"
+                [disabled]="room.get('adult')?.value === 1"
+                [attr.aria-label]="'searchBox.decreaseAdults' | translate"
+              >−</button>
+              <span class="count">{{ room.get('adult')?.value }}</span>
+              <button
+                (click)="incrementAdult(i)"
+                [disabled]="room.get('adult')?.value === 6"
+                [attr.aria-label]="'searchBox.increaseAdults' | translate"
+              >+</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>{{ 'searchBox.child' | translate }}</label>
+            <div class="counter">
+              <button
+                (click)="decrementChild(i)"
+                [disabled]="room.get('child')?.value === 0"
+                [attr.aria-label]="'searchBox.decreaseChildren' | translate"
+              >−</button>
+              <span class="count">{{ room.get('child')?.value }}</span>
+              <button
+                (click)="incrementChild(i)"
+                [disabled]="room.get('child')?.value === 2"
+                [attr.aria-label]="'searchBox.increaseChildren' | translate "
+              >+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="child-ages" *ngIf="room.get('child')?.value > 0">
+          <div class="age-selector" *ngFor="let child of [].constructor(room.get('child')?.value); let j = index">
+            <label>{{ 'searchBox.childAge' | translate }} {{ j + 1 }}</label>
+            <select
+              (change)="updateChildAge(i, j, $any($event.target).value)"
+              [value]="getChildAge(i, j)"
+            >
+              <option *ngFor="let age of childAges" [value]="age">
+                {{ age }} {{ age === 1 ? ('searchBox.year' | translate) : ('searchBox.years' | translate) }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <button
+          class="add-room-btn"
+          (click)="addRoom()"
+          *ngIf="guestInfo.length < 5"
+          [disabled]="hotelSearchService.allGuest >= 9"
+        >
+          + {{ 'searchBox.addRoom' | translate }}
+        </button>
+
+        <div *ngIf="hotelSearchService.guestMessageError.enMsg" class="error-message">
+          {{ hotelSearchService.guestMessageError.enMsg }}
+        </div>
+        <div *ngIf="hotelSearchService.RoomMessageError.enMsg" class="error-message">
+          {{ hotelSearchService.RoomMessageError.enMsg }}
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+</div>

@@ -1,0 +1,27 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/colors';
+
+form {
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.radio-buttons {
+  display: flex;
+  margin-bottom: 16px;
+  gap: 1%;
+
+  font-size: 16px;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+
+  @media (max-width: 1200px) {
+    justify-content: space-between;
+    font-size: 12px;
+    gap: 0;
+  }
+}
+
+::ng-deep .mdc-form-field > label{
+  margin-inline-start: -10px !important;
+}

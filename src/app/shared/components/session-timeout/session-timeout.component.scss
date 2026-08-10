@@ -1,0 +1,37 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/colors';
+
+.session-timeout-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  &__icon {
+    width: 35%;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 50px;
+
+    &__title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    &__content {
+      font-size: 16px;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 23px;
+  }
+}

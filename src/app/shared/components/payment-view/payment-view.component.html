@@ -1,0 +1,23 @@
+<!-- <ng-container *ngIf="mysafeurl">
+    <div class="payment">
+        <iframe name="myframe" class="paymentFrame" [src]="mysafeurl" frameborder="0" width="100%"
+            allowfullscreen='true' (load)='iframeLoader = false' title="Payment View"></iframe>
+    </div>
+</ng-container> -->
+<ng-container>
+  <div class="payment">
+    <iframe
+      name="myframe"
+      class="paymentFrame"
+      [src]="sharedService.mySafeUrl"
+      frameborder="0"
+      width="100%"
+      allowfullscreen="true"
+      (load)="iframeLoader = false"
+      title="Payment View"
+      [ngStyle]="{
+        display: sharedService.showPayment ? 'block' : 'none',
+      }"
+    ></iframe>
+  </div>
+</ng-container>

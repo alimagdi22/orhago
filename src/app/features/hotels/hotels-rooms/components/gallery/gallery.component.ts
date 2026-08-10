@@ -1,0 +1,66 @@
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { HotelRoomsService } from 'rp-hotels-ui';
+import { IMainButton } from '../../../../../shared/models/flights/mainButton.model';
+import { GalleryDialogComponent } from './gallery-dialog/gallery-dialog.component';
+import { SharedService } from '../../../../../shared/shared.service';
+import Swal from 'sweetalert2';
+
+@Component({
+  standalone: false,
+  selector: 'app-gallery',
+  templateUrl: './gallery.component.html',
+  styleUrl: './gallery.component.scss',
+  host: {
+    class: 'row'
+  }
+})
+export class GalleryComponent implements OnInit {
+  @Input({ required: true }) location?: SafeResourceUrl;
+  @Input({ required: true }) currency?: string;
+
+  private hotelRoomsService = inject(HotelRoomsService);
+  public sharedService = inject(SharedService);
+  public dialog = inject(MatDialog);
+  public selectButton: IMainButton = {
+    height: '45px',
+    borderRadius: '12px',
+  };
+  public stars: number[] = [];
+
+  ngOnInit() {
+    this.stars = Array.from({ length: this.hotelRoomsService.roomsData.hotelStars }, (_, i) => i);
+  }
+
+  openGallery(index = 6) {
+    const images = this.roomsData.hotelImages.slice(index);
+
+    this.dialog.open(GalleryDialogComponent, {
+        data: { images },
+    });
+  }
+
+  get roomsData() {
+    return this.hotelRoomsService.roomsData;
+  }
+
+  async copyLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      Swal.fire({
+        icon: 'success',
+        title: 'Link copied!',
+        text: 'The link has been copied to your clipboard.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    } catch {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Failed to copy link!',
+      });
+    }
+  }
+}
