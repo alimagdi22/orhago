@@ -21,10 +21,12 @@ export class DestinationInfoComponent {
     return this.flightDTO.arrivalDate;
   }
 
-  get airportCode() {
-    if (this.dest === 'dept') {
-      return this.flightDTO.departureTerminalAirport.airportCode;
-    }
-    return this.flightDTO.arrivalTerminalAirport.airportCode;
+  get airportName() {
+    const airport = this.dest === 'dept'
+      ? this.flightDTO.departureTerminalAirport
+      : this.flightDTO.arrivalTerminalAirport;
+
+    if (!airport) return '';
+    return airport.airportName || airport.cityName || airport.airportCode || '';
   }
 }

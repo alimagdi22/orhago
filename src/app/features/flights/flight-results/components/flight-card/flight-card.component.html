@@ -1,56 +1,78 @@
 @for (itinerary of airItineraries | slice: 0 : (showMoreFlights ? airItineraries.length : 1); track $index) {
-  <div class="container card" @flightAnimation>
-    <div class="row between">
-      <div class="row center between col-12 col-lg-9 gap-0-xl gap-2">
-        @for (flight of itinerary.allJourney.flights; track $index) {
-          @if ($index) {
-            <div class="col-12 divider"></div>
+  <div class="card" @flightAnimation>
+    <div class="card-main-content">
+      <div class="legs-section">
+        @for (flight of itinerary.allJourney.flights; track $index; let legIdx = $index) {
+          @if (legIdx > 0) {
+            <div class="leg-divider"></div>
           }
 
-          <app-flight-main-info
-            [flight]="flight"
-            [totalDuration]="flight.elapsedTime"
-            [isRefundable]="itinerary.isRefundable"
-            [showRefundabilty]="itinerary.allJourney.flights.length - 1 === $index"
-            class="col-xl-5 col-lg-4 col-12"
-          />
-          <app-destination-info [flightDTO]="flight.flightDTO[0]" [dest]="'dept'" class="col-xl-3 col-lg-4 col-5" />
-          @if (sharedService.screenWidth < 1200) {
-            <app-stops-info [flight]="flight" [ngStyle]="{ width: '1px' }"/>
-          }
-          <app-destination-info
-            [flightDTO]="flight.flightDTO[flight.flightDTO.length - 1]"
-            [dest]="'land'"
-            class="col-xl-3 col-lg-4 col-5"
-          />
-          @if (itinerary.allJourney.flights.length - 1 === $index && sharedService.screenWidth >= 1200) {
-            <app-refundability [isRefundable]="itinerary.isRefundable" />
-          }
-          @if(sharedService.screenWidth >= 1200) {
-            <app-stops-info [flight]="flight" matTooltip=" {{'results.card.transit' | translate}} {{ flight.flightDTO[0].transitTime | timeFormat}}" matTooltipPosition="above" class="col-xl-2 col-lg-12 col-12 stop" />
-          }
+          <div class="leg-row">
+            <app-flight-main-info
+              [flight]="flight"
+              [totalDuration]="flight.elapsedTime"
+              [isRefundable]="itinerary.isRefundable"
+              class="leg-col col-main"
+            />
+
+            <app-destination-info
+              [flightDTO]="flight.flightDTO[0]"
+              [dest]="'dept'"
+              class="leg-col col-dept"
+            />
+
+            <app-destination-info
+              [flightDTO]="flight.flightDTO[flight.flightDTO.length - 1]"
+              [dest]="'land'"
+              class="leg-col col-land"
+            />
+
+            <app-stops-info
+              [flight]="flight"
+              class="leg-col col-stops"
+            />
+          </div>
         }
+
+        <!-- Refundable Badge -->
+        <div class="refundability-badge-row">
+          @if (itinerary.isRefundable) {
+            <span class="refundable-badge">
+              {{ 'results.card.refundable' | translate }}
+            </span>
+          } @else {
+            <span class="refundable-badge non-refundable">
+              {{ 'results.card.nonRefundable' | translate }}
+            </span>
+          }
+        </div>
       </div>
-      <app-flight-card-panals [airItinerary]="itinerary" class="col-xl-3 col-lg-12 col-12" />
+
+      <div class="price-section">
+        <app-flight-card-panals [airItinerary]="itinerary" />
+      </div>
     </div>
 
-    <div class="flight-details">
-      @if (flightResultService.isBrandedFaresLoading) {
-        <span class="disabled-text">{{ 'results.card.flightDetails' | translate }}</span>
-      } @else {
-        <span class="text" (click)="showFlightDetails(itinerary, $event)">{{
-          'results.card.flightDetails' | translate
-        }}</span>
-      }
-
+    <!-- Solid Green Footer Bar -->
+    <div class="card-footer-bar">
       @if (!$index && !showMoreFlights && airItineraries.length > 1) {
-        <span class="text" (click)="showMoreFlights = true">{{ translate.currentLang === 'en' ? 'Show More Flights' : 'اعرض المزيد من الرحلات' }}</span>
-      } @else if($index !== airItineraries.length - 1) {
-        <span> </span>
+        <span class="footer-action" (click)="showMoreFlights = true">
+          +{{ airItineraries.length - 1 }} {{ translate.currentLang === 'en' ? 'More flights at same price' : 'رحلات إضافية بنفس السعر' }}
+        </span>
+      } @else if ($index === airItineraries.length - 1 && showMoreFlights) {
+        <span class="footer-action" (click)="showMoreFlights = false">
+          {{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات أقل' }}
+        </span>
+      } @else {
+        <span></span>
       }
 
-      @if ($index === airItineraries.length - 1 && showMoreFlights) {
-        <span class="text" (click)="showMoreFlights = false">{{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات اقل' }}</span>
+      @if (flightResultService.isBrandedFaresLoading) {
+        <span class="footer-link disabled-link">{{ 'results.card.flightDetails' | translate }}</span>
+      } @else {
+        <span class="footer-link" (click)="showFlightDetails(itinerary, $event)">
+          {{ 'results.card.flightDetails' | translate }}
+        </span>
       }
     </div>
   </div>

@@ -11,6 +11,10 @@
 
 .content {
   margin-top: 20px;
+  max-width: 85%;
+  @media(max-width:786px){
+    max-width: 100% !important;
+  }
 }
 
 .available-flights {
@@ -30,6 +34,9 @@
   height: 70%;
   width: 50%;
   padding: 55px;
+  @media(max-width:786px){
+    width: 90%;
+  }
 }
 
 .loading-msg {

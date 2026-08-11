@@ -1,35 +1,16 @@
-<section class="wrapper">
-  <div class="main-info">
-    <img [src]="flight.flightAirline.airlineLogo" title="Flight Card Image" />
+<section class="main-info-wrapper">
+  <img
+    [src]="flight.flightAirline.airlineLogo"
+    [alt]="flight.flightAirline.airlineName"
+    class="airline-logo"
+  />
 
-    <div class="info">
-      @if(sharedService.screenWidth >= 1200) {
-        <h3>
-          {{ flight.flightDTO[0].departureTerminalAirport.cityCode }} -
-          {{ flight.flightDTO[this.flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
-        </h3>
-      }
-      <p>{{ flight.flightAirline.airlineName }}</p>
-      @if(sharedService.screenWidth >= 1200) {
-        <p>{{'results.card.duration' | translate}}</p>
-        <p>{{ totalDuration | hourminute }}</p>
-      }
-    </div>
+  <div class="info-text">
+    <h3 class="destinations-text">
+      {{ flight.flightDTO[0].departureTerminalAirport.cityCode }} -
+      {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
+    </h3>
+    <p class="airline-name-text">{{ flight.flightAirline.airlineName }}</p>
+    <p class="duration-text">{{ totalDuration | hourminute }}</p>
   </div>
-
-  @if(sharedService.screenWidth < 1200) {
-    <div class="text-info">
-      <p>
-        {{ flight.flightDTO[0].departureTerminalAirport.cityCode }} -
-        {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
-      </p>
-
-      <p >{{ totalDuration | hourminutee }}</p>
-      <!-- <app-stops-info [flight]="flight" /> -->
-    </div>
-  }
-
-  <!-- @if (showRefundabilty && sharedService.screenWidth >= 1200) {
-    <app-refundability [isRefundable]="isRefundable" />
-  } -->
 </section>

@@ -1,8 +1,10 @@
-<div class="wrapper">
+<div class="sorting-bar">
   @for (sortItem of sortItems; track sortItem.title; let i = $index) {
+    @if (i > 0) {
+      <div class="sort-separator"></div>
+    }
     <app-sort-item
       [sortItem]="sortItem"
-      [ngClass]="{ separator: i != sortItems.length - 1 }"
       (click)="onClickSort(sortItem)"
     />
   }

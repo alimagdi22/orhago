@@ -1,26 +1,39 @@
-@import '../../../../../../../../sass/variables';
-@import '../../../../../../../../sass/colors';
-
-.wrapper {
-  @media (max-width: 1200px) {
-    margin-top: 20px;
-  }
-}
-.price-panal {
-  border-radius: $base-radius-small;
-  background-color: map-get($map: $colors, $key: 'off-white');
-}
-
-.wrapper,
-.baggage-item {
+.baggage-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+  background-color: #e6f9eb;
+  border-radius: 12px;
+  padding: 6px 12px;
+  width: 100%;
+  margin-bottom: 12px;
 
-.wrapper {
-  border-radius: $base-radius-small;
-  background-color: map-get($map: $colors, $key: 'off-white');
-  justify-content: space-between;
-  padding: 11px 15px;
+  .info-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #16a34a;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .baggage-items {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .bag-item {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
 }

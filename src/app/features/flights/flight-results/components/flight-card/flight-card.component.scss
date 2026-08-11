@@ -2,56 +2,117 @@
 @import '../../../../../../sass/colors';
 
 .card {
-  background-color: white;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  border-radius: $base-radius-small;
-  padding: 11px 19px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+  padding: 20px 24px 0 24px;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
-.flight-details {
+.card-main-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  gap: 24px;
+  align-items: stretch;
 
-  color: white;
-  background-color: map-get($map: $colors, $key: 'main');
-  border-bottom-left-radius: $base-radius-small;
-  border-bottom-right-radius: $base-radius-small;
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+}
 
+.legs-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.leg-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding-block: 6px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+.leg-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.leg-divider {
   width: 100%;
-  margin: 11px -19px -11px -19px;
-  padding: 5px 19px;
+  height: 1px;
+  background-color: #e2e8f0;
+  margin-block: 14px;
+}
 
-  text-align: end;
+.refundability-badge-row {
+  margin-top: 14px;
 
-  .text {
+  .refundable-badge {
+    display: inline-block;
+    background-color: #eefcf0;
+    color: #1eb026;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 12px;
+
+    &.non-refundable {
+      background-color: #fff1f2;
+      color: #e11d48;
+    }
+  }
+}
+
+.price-section {
+  width: 240px;
+  min-width: 240px;
+
+  @media (max-width: 991px) {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+.card-footer-bar {
+  background-color: #1e8e19;
+  color: #ffffff;
+  padding: 12px 24px;
+  margin: 20px -24px 0 -24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+
+  .footer-action,
+  .footer-link {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: opacity 0.2s ease;
 
     &:hover {
-      font-size: 17px;
+      opacity: 0.85;
+      text-decoration: underline;
     }
   }
 
-  .disabled-text {
-    cursor: pointer;
-    color: black;
+  .disabled-link {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
-}
-
-.divider {
-  display: block;
-  margin-block: 20px;
-  height: 1px;
-  background-color: map-get($map: $colors, $key: 'gray');
-}
-
-.stop {
-
-
-  @media (min-width: 1200px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
 }

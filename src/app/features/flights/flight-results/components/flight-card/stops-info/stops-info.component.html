@@ -1,13 +1,19 @@
-<section class="wrapper">
-  <app-number-of-stops [stopsNum]="flight.stopsNum" />
+<section class="stops-info-wrapper">
+  <p class="stop-title">
+    @if (flight.stopsNum === 0) {
+      Direct
+    } @else if (flight.stopsNum === 1) {
+      One Stop
+    } @else {
+      {{ flight.stopsNum }} Stops
+    }
+  </p>
 
-@for (segment of flight.flightDTO; track $index) {
-  @if ($index < flight.stopsNum) {
-    <p>
-      {{ segment.arrivalTerminalAirport.airportCode }}
-    </p>
+  @for (segment of flight.flightDTO; track $index) {
+    @if ($index < flight.stopsNum) {
+      <p class="stop-airport">
+        {{ segment.arrivalTerminalAirport.airportCode }}
+      </p>
+    }
   }
-}
-
-
 </section>

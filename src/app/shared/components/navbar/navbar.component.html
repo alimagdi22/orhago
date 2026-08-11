@@ -1,92 +1,36 @@
 @if(sharedService.screenWidth >= 1200) {
   <div
-  class="wrapper"
-  [ngClass]="{
-    shadow: sharedService.isSegmentPresent(['flight-results', 'flight-checkout', 'flight-confirmation']),
-    'scroll-background': isScrolled,
-  }"
->
-  <nav class="container">
-    <img src="assets/images/new-logo.svg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-    <button
-      class="manage-booking-button"
-    >
-      {{ 'navbar.manageBooking' | translate }}
-    </button>
-
-    <div class="actions">
-      <button
-        class="custom-button"
-        [ngClass]="{
-          'scroll-button': isScrolled,
-        }"
-        [matMenuTriggerFor]="langMenu"
-      >
-        {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
+    class="wrapper"
+    [ngClass]="{
+      shadow: sharedService.isSegmentPresent(['flight-results', 'flight-checkout', 'flight-confirmation']),
+      'scroll-background': isScrolled,
+    }"
+  >
+    <nav class="container">
+      <img src="assets/images/new-logo.svg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+      <button class="manage-booking-button">
+        {{ 'navbar.manageBooking' | translate }}
       </button>
 
-      @if (homePageService.loader) {
-        <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '110px' }" />
-      } @else {
+      <div class="actions">
         <button
           class="custom-button"
           [ngClass]="{ 'scroll-button': isScrolled }"
-          [ngStyle]="{ width: '110px' }"
-          [matMenuTriggerFor]="currencyMenu"
-          *ngIf="this.homePageService.selectedCurrency"
+          [matMenuTriggerFor]="langMenu"
         >
-          <img
-            class="flag-icon"
-            width="20"
-            height="15"
-            src="{{ this.homePageService.selectedCurrency['Image_Url'] }}"
-            title="Flag Icon"
-          />
-          {{ this.homePageService.selectedCurrency['Currency_Code'] }}
-          <img src="assets/icons/arrow-down.svg" title="Arrow Down" />
-        </button>
-      }
-
-      @if (isAuthenticated) {
-        <app-drop-down />
-      } @else {
-        <app-main-button
-          [mainButtonInfo]="signInButton"
-          [title]="'navbar.signIn' | translate"
-          (clickMainButton)="onClickSignIn()"
-        />
-      }
-    </div>
-  </nav>
-</div>
-<div class="white-space"></div>
-} @else {
-  <section class="top-nav">
-    <div>
-      <img src="assets/images/new-logo.svg" width="130" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-    </div>
-
-    <input id="menu-toggle" type="checkbox" #burgerMenu />
-    <label class='menu-button-container' for="menu-toggle">
-    <div class='menu-button'></div>
-  </label>
-    <ul class="menu">
-      <!-- <li>
-        <span class="mobile-nav-item">
-          {{ 'navbar.manageBooking' | translate }}
-        </span>
-      </li> -->
-
-      <li>
-        <span [matMenuTriggerFor]="langMenu" class="mobile-nav-item">
           {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
-        </span>
-      </li>
-      <li>
+        </button>
+
         @if (homePageService.loader) {
           <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '110px' }" />
         } @else {
-          <div class="mobile-nav-item" [matMenuTriggerFor]="currencyMenu">
+          <button
+            class="custom-button"
+            [ngClass]="{ 'scroll-button': isScrolled }"
+            [ngStyle]="{ width: '110px' }"
+            [matMenuTriggerFor]="currencyMenu"
+            *ngIf="this.homePageService.selectedCurrency"
+          >
             <img
               class="flag-icon"
               width="20"
@@ -94,26 +38,96 @@
               src="{{ this.homePageService.selectedCurrency['Image_Url'] }}"
               title="Flag Icon"
             />
-
-            <span *ngIf="this.homePageService.selectedCurrency">
-              {{ this.homePageService.selectedCurrency['Currency_Code'] }}
-            </span>
-          </div>
+            {{ this.homePageService.selectedCurrency['Currency_Code'] }}
+            <img src="assets/icons/arrow-down.svg" title="Arrow Down" />
+          </button>
         }
-      </li>
-      <li>
+
         @if (isAuthenticated) {
           <app-drop-down />
         } @else {
-          <span (click)="onClickSignIn(); $event.stopPropagation(); burgerMenu.click()" class="mobile-nav-item">
-            {{ 'navbar.signIn' | translate }}
-          </span>
+          <app-main-button
+            [mainButtonInfo]="signInButton"
+            [title]="'navbar.signIn' | translate"
+            (clickMainButton)="onClickSignIn()"
+          />
         }
-      </li>
-    </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="white-space"></div>
+} @else {
+  <section class="top-nav">
+    <div>
+      <img src="assets/images/new-logo.svg" width="130" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+    </div>
+
+    <button type="button" class="burger-btn" (click)="toggleSidebar()" aria-label="Toggle Menu">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+    </button>
   </section>
+
+  <!-- Mobile Sidebar Drawer -->
+  @if (isSidebarOpen) {
+    <div class="sidebar-backdrop" (click)="closeSidebar()"></div>
+    <aside class="sidebar-drawer">
+      <div class="sidebar-header">
+        <img src="assets/images/new-logo.svg" width="120" title="Logo" class="logo" routerLink="/" (click)="closeSidebar()" />
+        <button type="button" class="close-btn" (click)="closeSidebar()">&times;</button>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li (click)="openLangPopup()">
+          <div class="menu-item-content">
+            <span class="menu-icon">🌐</span>
+            <span class="menu-label">{{ translate.currentLang === 'en' ? 'Language' : 'اللغة' }}</span>
+          </div>
+          <div class="menu-item-value">
+            {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
+            <span class="arrow-icon">›</span>
+          </div>
+        </li>
+
+        <li (click)="openCurrencyPopup()">
+          <div class="menu-item-content">
+            @if (homePageService.selectedCurrency) {
+              <img
+                class="flag-icon"
+                width="22"
+                height="16"
+                [src]="this.homePageService.selectedCurrency['Image_Url']"
+                title="Flag Icon"
+              />
+            }
+            <span class="menu-label">{{ translate.currentLang === 'en' ? 'Currency' : 'العملة' }}</span>
+          </div>
+          <div class="menu-item-value">
+            {{ this.homePageService.selectedCurrency?.['Currency_Code'] }}
+            <span class="arrow-icon">›</span>
+          </div>
+        </li>
+
+        @if (isAuthenticated) {
+          <li class="user-profile-item">
+            <app-drop-down />
+          </li>
+        } @else {
+          <li (click)="onClickSignInMobile()">
+            <div class="menu-item-content">
+              <span class="menu-icon">👤</span>
+              <span class="menu-label">{{ 'navbar.signIn' | translate }}</span>
+            </div>
+            <span class="arrow-icon">›</span>
+          </li>
+        }
+      </ul>
+    </aside>
+  }
 }
 
+<!-- Desktop Mat-Menus -->
 <mat-menu #currencyMenu="matMenu">
   <button mat-menu-item *ngFor="let currency of this.homePageService.allCurrency" (click)="updateCurrency(currency)">
     <img width="25" height="25" [src]="currency.Image_Url" title="Currency Icon" />
@@ -125,3 +139,69 @@
   <button mat-menu-item (click)="updateLang('en')">EN</button>
   <button mat-menu-item (click)="updateLang('ar')">AR</button>
 </mat-menu>
+
+<!-- Language Popup Dialog -->
+@if (isLangPopupOpen) {
+  <div class="popup-backdrop" (click)="closeLangPopup()">
+    <div class="popup-card" (click)="$event.stopPropagation()">
+      <div class="popup-header">
+        <h3>{{ translate.currentLang === 'en' ? 'Select Language' : 'اختر اللغة' }}</h3>
+        <button type="button" class="popup-close-btn" (click)="closeLangPopup()">&times;</button>
+      </div>
+
+      <div class="popup-body">
+        <div
+          class="popup-option"
+          [class.selected]="translate.currentLang === 'en'"
+          (click)="selectLang('en')"
+        >
+          <span class="option-name">English (EN)</span>
+          @if (translate.currentLang === 'en') {
+            <span class="check-mark">✓</span>
+          }
+        </div>
+
+        <div
+          class="popup-option"
+          [class.selected]="translate.currentLang === 'ar'"
+          (click)="selectLang('ar')"
+        >
+          <span class="option-name">العربية (AR)</span>
+          @if (translate.currentLang === 'ar') {
+            <span class="check-mark">✓</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Currency Popup Dialog -->
+@if (isCurrencyPopupOpen) {
+  <div class="popup-backdrop" (click)="closeCurrencyPopup()">
+    <div class="popup-card" (click)="$event.stopPropagation()">
+      <div class="popup-header">
+        <h3>{{ translate.currentLang === 'en' ? 'Select Currency' : 'اختر العملة' }}</h3>
+        <button type="button" class="popup-close-btn" (click)="closeCurrencyPopup()">&times;</button>
+      </div>
+
+      <div class="popup-body currency-list">
+        @for (currency of homePageService.allCurrency; track currency.Currency_Code) {
+          <div
+            class="popup-option"
+            [class.selected]="homePageService.selectedCurrency?.Currency_Code === currency.Currency_Code"
+            (click)="selectCurrency(currency)"
+          >
+            <div class="currency-info">
+              <img width="24" height="18" [src]="currency.Image_Url" [alt]="currency.Currency_Code" class="flag-img" />
+              <span class="currency-code">{{ currency.Currency_Code }}</span>
+            </div>
+            @if (homePageService.selectedCurrency?.Currency_Code === currency.Currency_Code) {
+              <span class="check-mark">✓</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

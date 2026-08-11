@@ -1,18 +1,8 @@
-<div class="wrapper">
-  <app-baggage-info [baggageInfo]="baggageInfo" />
-
-  <div class="baggage-item">
-    <img src="assets/icons/bag-icon.svg" title="Exclamation Icon" />
-    <span dir="ltr">{{getBaggageCountOnlyOrRaw(baggageInfo.baggage)  }}</span>
+<div class="baggage-bar">
+  <span class="info-badge" title="Baggage Policy">i</span>
+  <div class="baggage-items">
+    <span class="bag-item" title="Cabin Bag">💼 1</span>
+    <span class="bag-item" title="Checked Bag">🧳 1</span>
+    <span class="bag-item" title="Personal Item">👜 1</span>
   </div>
-
-  <!-- <div class="baggage-item">
-        <img src="assets/icons/travel-bag-icon.svg" title="Exclamation Icon" />
-        <span>{{childBaggage}}</span>
-    </div>
-
-    <div class="baggage-item">
-        <img src="assets/icons/hand-bag-icon.svg" title="Exclamation Icon" />
-        <span>{{infantBaggage}}</span>
-    </div> -->
 </div>

@@ -62,7 +62,7 @@
             <app-hotels-filter (resetClicked)="onResetFiltersFromFilterComponent()"/>
         </aside>
 
-        <section class="col-lg-8 col-12">
+        <section class="col-lg-9 col-12">
           @if (sharedService.screenWidth > 1000) {
             <p class="available-flights">
               Showing {{ hotelResultsService.filteredHotels.length }} hotels in {{hotelResultsService.hotelDataResponse?.HotelResult?.[0]?.City}} city

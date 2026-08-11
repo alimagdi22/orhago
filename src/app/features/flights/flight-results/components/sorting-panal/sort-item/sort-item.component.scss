@@ -1,19 +1,36 @@
-@import '../../../../../../../sass/variables';
-@import '../../../../../../../sass/colors';
-
 .sort-item {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding: 10px 24px;
+  border-radius: 12px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 16px;
 
-  border-radius: $base-radius-tiny;
-  margin: 11px;
-  padding: 8px 20px;
-  transition: all 0.2s;
-}
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
 
-.sort-item:hover,
-.active {
-  background-color: map-get($map: $colors, $key: 'off-white');
-  color: map-get($map: $colors, $key: 'main');
+  &__number {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  &.active {
+    background-color: #effdf2;
+
+    .sort-item__title,
+    .sort-item__number {
+      color: #16a34a;
+      font-weight: 700;
+    }
+  }
+
+  &:hover:not(.active) {
+    background-color: #f8fafc;
+  }
 }

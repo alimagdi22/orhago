@@ -6,7 +6,6 @@
   z-index: 5;
   width: 100%;
   padding-block: 10px;
-
   transition: all 0.2s;
 
   nav {
@@ -18,12 +17,6 @@
 
 .actions {
   display: flex;
-  gap: 11px;
-}
-
-.actions-mobile {
-  display: flex;
-  flex-direction: column;
   gap: 11px;
 }
 
@@ -64,13 +57,11 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
-
-  border: 1.5px solid #333  ;
+  border: 1.5px solid #333;
   border-radius: 6px;
   padding: 8px 14px;
   background: transparent;
   color: #333;
-
   transition: all 0.3s ease;
 
   &:hover {
@@ -101,141 +92,292 @@
   }
 }
 
+/* Mobile Navbar Header */
 .top-nav {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: #ffffff;
+  color: #0f172a;
+  height: 60px;
+  padding: 0 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
-  color: black;
-  height: 50px;
-  padding: 1em;
-}
-
-.menu {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
-  z-index: 1000;
-}
-
-.menu > li {
-  overflow: hidden;
-}
-
-.menu-button-container {
-  display: none;
-  height: 100%;
-  width: 30px;
-  cursor: pointer;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#menu-toggle {
-  display: none;
-}
-
-.menu-button,
-.menu-button::before,
-.menu-button::after {
-  display: block;
-  background-color: map-get($map: $colors, $key: 'main');
-  position: absolute;
-  height: 4px;
-  width: 30px;
-  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-  border-radius: 2px;
-}
-
-.menu-button::before {
-  content: '';
-  margin-top: -8px;
-}
-
-.menu-button::after {
-  content: '';
-  margin-top: 8px;
-}
-
-#menu-toggle:checked + .menu-button-container .menu-button::before {
-  margin-top: 0px;
-  transform: rotate(405deg);
-}
-
-#menu-toggle:checked + .menu-button-container .menu-button {
-  background: rgba(255, 255, 255, 0);
-}
-
-#menu-toggle:checked + .menu-button-container .menu-button::after {
-  margin-top: 0px;
-  transform: rotate(-405deg);
-}
-
-::ng-deep .gradient-button{
-  border-radius:6px
-}
-
-@media (max-width: 1200px) {
-  .menu-button-container {
+  .burger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
     display: flex;
-  }
-  .menu {
-    position: absolute;
-    top: 0;
-    margin-top: 70px;
-    left: 0;
     flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  #menu-toggle ~ .menu li {
-    height: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  #menu-toggle:checked ~ .menu li {
-    border: 1px solid #333;
-    height: 3.5em;
-    padding: 0.5em;
-    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .menu > li {
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0.5em 0;
-    color: black;
-    width: 100%;
-    background-color: #222;
-  }
-  .menu > li:not(:last-child) {
-    border-bottom: 1px solid #444;
+    gap: 5px;
+    padding: 6px;
+
+    .burger-bar {
+      width: 24px;
+      height: 3px;
+      background-color: map-get($map: $colors, $key: 'main');
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
   }
 }
 
-.mobile-nav-item {
-  cursor: pointer;
+/* Mobile Sidebar Drawer Overlay */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.25s ease-out;
+}
+
+.sidebar-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  width: 290px;
+  max-width: 85vw;
+  background-color: #ffffff;
+  z-index: 1001;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  animation: slideDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #f1f5f9;
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      color: #64748b;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+
+      &:hover {
+        color: #0f172a;
+      }
+    }
+  }
+
+  .sidebar-menu {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid #f8fafc;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f8fafc;
+      }
+
+      .menu-item-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .menu-icon {
+          font-size: 18px;
+        }
+
+        .flag-icon {
+          border-radius: 3px;
+        }
+
+        .menu-label {
+          font-size: 15px;
+          font-weight: 600;
+          color: #1e293b;
+        }
+      }
+
+      .menu-item-value {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #64748b;
+
+        .arrow-icon {
+          font-size: 18px;
+          color: #94a3b8;
+        }
+      }
+
+      .arrow-icon {
+        font-size: 18px;
+        color: #94a3b8;
+      }
+    }
+  }
+}
+
+/* Popup Modal Backdrop & Card */
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  z-index: 1100;
+  display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.2s ease-out;
+}
 
-  color: white;
-  font-weight: bold;
+.popup-card {
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: scalePopup 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
-  transition: all 0.2s;
+  .popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f1f5f9;
 
-  &:hover {
-    transform: scale(1.1);
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .popup-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 26px;
+      color: #64748b;
+      cursor: pointer;
+      line-height: 1;
+
+      &:hover {
+        color: #0f172a;
+      }
+    }
+  }
+
+  .popup-body {
+    padding: 12px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &.currency-list {
+      max-height: 360px;
+    }
+
+    .popup-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+
+      &:hover {
+        background-color: #f1f5f9;
+      }
+
+      &.selected {
+        background-color: #f0fdf4;
+        color: #16a34a;
+
+        .option-name,
+        .currency-code {
+          font-weight: 700;
+          color: #16a34a;
+        }
+      }
+
+      .currency-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .flag-img {
+          border-radius: 3px;
+          object-fit: cover;
+        }
+
+        .currency-code {
+          font-size: 15px;
+          font-weight: 600;
+          color: #1e293b;
+        }
+      }
+
+      .option-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .check-mark {
+        font-size: 16px;
+        font-weight: 800;
+        color: #16a34a;
+      }
+    }
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDrawer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scalePopup {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }

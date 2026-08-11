@@ -44,6 +44,10 @@ export class NavbarComponent implements OnInit {
   isScrolled = false;
   selectedLang = 'EN';
 
+  isSidebarOpen = false;
+  isLangPopupOpen = false;
+  isCurrencyPopupOpen = false;
+
   subscription = new Subscription();
 
   ngOnInit(): void {
@@ -51,7 +55,7 @@ export class NavbarComponent implements OnInit {
       this.homePageService.getCurrency('KWD');
       this.homePageService.getPointOfSale();
 
-      if (typeof localStorage !== 'undefined' && (typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null)) {
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('token')) {
         this.isAuthenticated = true;
         this.userProfileService.getUserProfile();
       }
@@ -59,7 +63,7 @@ export class NavbarComponent implements OnInit {
       this.subscription.add(
         this.authService.notify.subscribe({
           next: (status) => {
-            if (typeof localStorage !== 'undefined' && (typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null)) {
+            if (typeof localStorage !== 'undefined' && localStorage.getItem('token')) {
               this.userProfileService.getUserProfile();
               this.isAuthenticated = true;
             } else {
@@ -98,6 +102,47 @@ export class NavbarComponent implements OnInit {
 
   onClickSignIn() {
     this.sharedService.isLogInSheetShowed = true;
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
+
+  openLangPopup() {
+    this.isLangPopupOpen = true;
+  }
+
+  closeLangPopup() {
+    this.isLangPopupOpen = false;
+  }
+
+  selectLang(lang: 'ar' | 'en') {
+    this.updateLang(lang);
+    this.closeLangPopup();
+    this.closeSidebar();
+  }
+
+  openCurrencyPopup() {
+    this.isCurrencyPopupOpen = true;
+  }
+
+  closeCurrencyPopup() {
+    this.isCurrencyPopupOpen = false;
+  }
+
+  selectCurrency(currency: currencyModel) {
+    this.updateCurrency(currency);
+    this.closeCurrencyPopup();
+    this.closeSidebar();
+  }
+
+  onClickSignInMobile() {
+    this.closeSidebar();
+    this.onClickSignIn();
   }
 
   ngOnDestroy(): void {
