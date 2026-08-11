@@ -22,7 +22,7 @@ img{
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     cursor: text;
 
     height: $inputs-height - 1px;
@@ -35,11 +35,13 @@ img{
     &__country,
     &__date {
       font-weight: 700;
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: bold;
       overflow: hidden; // Ensures content is hidden when it overflows
       text-overflow: ellipsis; // Displays ellipsis for overflowing text
       white-space: nowrap; // Prevents text wrapping to the next line
       max-width: 100%; // Restricts the width to its container
+      margin-bottom: 0 !important;
     }
 
     &__placeholder {
@@ -48,8 +50,14 @@ img{
       align-items: center;
 
       span {
-        font-size: 13px;
         color: #555;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 14px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
+
       }
 
       &__clear {
@@ -74,8 +82,8 @@ img{
     }
 
     &__airport-id {
-      font-size: 11px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
       color: #555;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -237,4 +245,8 @@ img{
 
   color: #EC1B1B;
   bottom: -20px;
+}
+
+p{
+  margin-bottom: 0 !important;
 }

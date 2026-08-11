@@ -1,22 +1,52 @@
-<div class="text-wrapper">
-  <h2>{{ 'home.hotelDeals.title' | translate }}</h2>
-  <p class="home-paragraph">{{ 'home.hotelDeals.description' | translate }}</p>
+<div class="hotel-deals-container">
+  <div class="text-wrapper">
+    <h2 class="title">{{ 'home.hotelDeals.title' | translate }}</h2>
+    <p class="description">{{ 'home.hotelDeals.description' | translate }}</p>
+  </div>
+
+  <div class="deals-grid">
+    @for (deal of currentDeals; track $index) {
+      <div class="grid-item">
+        <app-hotel-deals-card [deal]="deal"></app-hotel-deals-card>
+      </div>
+    }
+  </div>
+
+  <div class="pagination-wrapper">
+    <button
+      type="button"
+      class="nav-btn prev-btn"
+      [disabled]="currentPage === 1"
+      (click)="prevPage()"
+      aria-label="Previous Page"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="page-numbers">
+      @for (page of pages; track page) {
+        <span
+          class="page-num"
+          [class.active]="page === currentPage"
+          (click)="setPage(page)"
+        >
+          {{ page }}
+        </span>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="nav-btn next-btn"
+      [disabled]="currentPage === totalPages"
+      (click)="nextPage()"
+      aria-label="Next Page"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
 </div>
-
-<swiper-container #swiperEl>
-  <swiper-slide *ngFor="let img of images">
-    <app-hotel-deals-card [image]="img"></app-hotel-deals-card>
-  </swiper-slide>
-
-  <swiper-slide *ngFor="let img of images">
-    <app-hotel-deals-card [image]="img"></app-hotel-deals-card>
-  </swiper-slide>
-
-  <swiper-slide *ngFor="let img of images">
-    <app-hotel-deals-card [image]="img"></app-hotel-deals-card>
-  </swiper-slide>
-
-  <swiper-slide *ngFor="let img of images">
-    <app-hotel-deals-card [image]="img"></app-hotel-deals-card>
-  </swiper-slide>
-</swiper-container>

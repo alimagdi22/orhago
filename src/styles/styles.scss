@@ -365,3 +365,8 @@ mat-checkbox.mat-primary {
   --mdc-checkbox-unselected-icon-color: #{map.get($blue, 'one')} !important;
   --mdc-checkbox-unselected-pressed-outline-color: #{map.get($blue, 'one')} !important;
 }
+
+
+p{
+  margin-bottom: 0 !important;
+}

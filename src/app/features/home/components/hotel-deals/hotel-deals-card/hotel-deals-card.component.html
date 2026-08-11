@@ -1,13 +1,19 @@
-<div class="hotel-deal-card row">
-  <img [src]="image" title="Photo" class="hotel-deal-card__img col-12 col-lg-5" />
+<div class="hotel-deal-card">
+  <div class="hotel-deal-card__img-container">
+    <img
+      [src]="deal?.image || image || 'assets/images/popular/Dubai 3.png'"
+      [title]="deal?.name || 'Hotel Photo'"
+      class="hotel-deal-card__img"
+    />
+  </div>
 
-  <div class="hotel-deal-card__info col-12 col-lg-7">
+  <div class="hotel-deal-card__info">
     <div class="hotel-deal-card__info__header">
-      <p class="hotel-deal-card__info__header__hotel-type">Luxury</p>
-      <p class="hotel-deal-card__info__header__percentage">-30%</p>
+      <span class="hotel-deal-card__info__header__hotel-type">{{ deal?.type || 'Luxury' }}</span>
+      <span class="hotel-deal-card__info__header__percentage">{{ deal?.discount || '-30%' }}</span>
     </div>
 
-    <p class="hotel-deal-card__info__hotel-name">Fairmont Resort, Dubai United Arab Emirates</p>
+    <h3 class="hotel-deal-card__info__hotel-name">{{ deal?.name || 'Fairmont Resort, Dubai United Arab Emirates' }}</h3>
 
     <div class="hotel-deal-card__info__location">
       <img
@@ -15,12 +21,12 @@
         alt="Location Icon"
         class="hotel-deal-card__info__location__icon"
       />
-      <span class="hotel-deal-card__info__location__text">Dubai, UAE</span>
+      <span class="hotel-deal-card__info__location__text">{{ deal?.location || 'Dubai, UAE' }}</span>
     </div>
 
     <div class="hotel-deal-card__info__footer">
-      <span class="hotel-deal-card__info__footer__price">48.25$/Night</span>
-      <button class="hotel-deal-card__info__footer__btn">Book now</button>
+      <span class="hotel-deal-card__info__footer__price">{{ deal?.price || '48.25$' }}/Night</span>
+      <button type="button" class="hotel-deal-card__info__footer__btn">Book now</button>
     </div>
   </div>
 </div>
