@@ -51,15 +51,13 @@
         }
 
         <mat-autocomplete #autoa="matAutocomplete" class="dropdown-list" panelWidth="28rem">
-          @if (cities) {
-            @for (
-              city of cities | limitTo: 5;
-              track city.airportCode
-            ) {
+          @if (cities && cities.length) {
+            @for (group of getGroupedCities(); track group.city) {
+              <!-- City Option (All Airports) -->
               <mat-option
-                [value]="city[sharedService.lang].cityName + ',' + city[sharedService.lang].airportCode"
-                (onSelectionChange)="onSelectDestintation(destination, city, index)"
-                class="dropdown-list__item"
+                [value]="group.airports[0][sharedService.lang].cityName + ',' + group.airports[0][sharedService.lang].cityCode"
+                (onSelectionChange)="onSelectCity(destination, group.airports[0], index)"
+                class="dropdown-list__item city-option"
               >
                 <div class="dropdown-list__item__wrapper">
                   <img
@@ -67,16 +65,43 @@
                     title="Location Icon"
                     class="dropdown-list__item__icon"
                   />
-                  <div class="dropdown-list__item__text-container">
-                    <p class="dropdown-list__item__text" matTooltip="{{getFullAirportText(city)}}">
-                      <span class="truncate-text">{{ city[sharedService.lang].airportName }}</span>
-                      <span class="separator"> - </span>
-                      <span class="truncate-text">{{ city[sharedService.lang].countryName }}</span>
-                      <span class="airport-code">({{ city[sharedService.lang].airportCode }})</span>
+                  <div class="dropdown-list__item__text-container d-flex justify-content-between align-items-center w-100 me-2 ms-2">
+                    <p class="dropdown-list__item__text mb-0 fw-bold">
+                      <span class="truncate-text">{{ group.city }}</span>
+                      <span class="separator">, </span>
+                      <span class="truncate-text">{{ group.country }}</span>
                     </p>
+                    @if (group.airports.length > 1) {
+                      <span class="city-code-option badge text-muted font-weight-normal">({{ 'searchBox.allAirports' | translate }})</span>
+                    }
                   </div>
                 </div>
               </mat-option>
+
+              <!-- Airport Options under City -->
+              @for (airport of group.airports; track airport[sharedService.lang].airportCode) {
+                <mat-option
+                  [value]="airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode"
+                  (onSelectionChange)="onSelectDestintation(destination, airport, index, false)"
+                  class="dropdown-list__item airport-option"
+                >
+                  <div class="dropdown-list__item__wrapper">
+                    <img
+                      src="assets/icons/location-icon.svg"
+                      title="Airport Icon"
+                      class="dropdown-list__item__icon"
+                    />
+                    <div class="dropdown-list__item__text-container">
+                      <p class="dropdown-list__item__text" matTooltip="{{getFullAirportText(airport[sharedService.lang])}}">
+                        <span class="truncate-text">{{ airport[sharedService.lang].airportName }}</span>
+                        <span class="separator"> - </span>
+                        <span class="truncate-text">{{ airport[sharedService.lang].countryName }}</span>
+                        <span class="airport-code">({{ airport[sharedService.lang].airportCode }})</span>
+                      </p>
+                    </div>
+                  </div>
+                </mat-option>
+              }
             }
           }
         </mat-autocomplete>

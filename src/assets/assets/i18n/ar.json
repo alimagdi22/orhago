@@ -27,6 +27,7 @@
   },
 
   "searchBox": {
+    "allAirports": "جميع المطارات",
     "oneway": "ذهاب",
     "roundtrip": "ذهاب وعودة",
     "multicity": "مدن متعددة",

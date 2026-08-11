@@ -39,6 +39,7 @@ export class SessionTimeoutComponent {
     let serachId = this.route.snapshot.params['searchId'];
     let passengers = this.route.snapshot.params['passengers'];
     let Cclass = this.route.snapshot.params['Cclass'];
+    let destinationType = this.route.snapshot.params['destinationType'];
     let showDirect: boolean = this.route.snapshot.params['directOnly'] !== 'false';
 
     this.sharedService.flightType = flightType?.toLowerCase() || '';
@@ -53,6 +54,7 @@ export class SessionTimeoutComponent {
       passengers,
       Cclass,
       showDirect,
+      destinationType || 'Airport_Airport',
       5,
       2,
     );

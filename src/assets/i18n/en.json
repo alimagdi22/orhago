@@ -27,6 +27,7 @@
   },
 
     "searchBox": {
+    "allAirports": "All Airports",
     "oneway": "One Way",
     "roundtrip": "Round Trip",
     "multicity": "Multi City",

@@ -167,7 +167,8 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       .at(index)
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(true);
-    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(city[this.sharedService.lang].cityName + ',' + city[this.sharedService.lang].airportCode);
+    const code = isCitySelection ? city[this.sharedService.lang].cityCode : city[this.sharedService.lang].airportCode;
+    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(city[this.sharedService.lang].cityName + ',' + code);
 
     const type = isCitySelection ? 'City' : 'Airport';
     this.destinationTypeChange.emit({ dest, type });
@@ -185,6 +186,26 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
   onSelectCity(dest: TDestinations, city: IAirPortTranslated, index: number) {
     this.onSelectDestintation(dest, city, index, true);
+  }
+
+  getGroupedCities(): { city: string; country: string; airports: IAirPortTranslated[] }[] {
+    const groups: { [key: string]: { city: string; country: string; airports: IAirPortTranslated[] } } = {};
+    
+    this.cities.forEach(airport => {
+      const lang = this.sharedService.lang;
+      const cityKey = airport[lang].cityName + '|' + airport[lang].countryName;
+      
+      if (!groups[cityKey]) {
+        groups[cityKey] = {
+          city: airport[lang].cityName,
+          country: airport[lang].countryName,
+          airports: []
+        };
+      }
+      groups[cityKey].airports.push(airport);
+    });
+
+    return Object.values(groups);
   }
 
   onSelectPopularDestination(dest: string, value: string, index: number) {

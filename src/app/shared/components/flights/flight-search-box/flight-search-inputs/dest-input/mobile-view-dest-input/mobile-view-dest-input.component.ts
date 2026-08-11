@@ -55,17 +55,41 @@ export class MobileViewDestInputComponent {
     return this.sharedService.initialRecommendedAirports;
   }
 
-  assignCountriesForMobile(country: string, dest: TDestinations, city: IAirPortTranslated, index: number) {
+  getGroupedCities(): { city: string; country: string; airports: IAirPortTranslated[] }[] {
+    const groups: { [key: string]: { city: string; country: string; airports: IAirPortTranslated[] } } = {};
+    
+    this.cities.forEach(airport => {
+      const lang = this.sharedService.lang;
+      const cityKey = airport[lang].cityName + '|' + airport[lang].countryName;
+      
+      if (!groups[cityKey]) {
+        groups[cityKey] = {
+          city: airport[lang].cityName,
+          country: airport[lang].countryName,
+          airports: []
+        };
+      }
+      groups[cityKey].airports.push(airport);
+    });
+
+    return Object.values(groups);
+  }
+
+  assignCountriesForMobile(country: string, dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false) {
     const airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(dest) : null) ?? '[]');
 
-    airports[index] = city;
+    airports[index] = {
+      ...city,
+      _isCitySelection: isCitySelection
+    };
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.setItem(dest, JSON.stringify(airports));
     }
 
     this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = city[this.sharedService.lang];
-    this.data.flightItem.get(dest)?.setValue(country);
+    const code = isCitySelection ? city[this.sharedService.lang].cityCode : city[this.sharedService.lang].airportCode;
+    this.data.flightItem.get(dest)?.setValue(city[this.sharedService.lang].cityName + ',' + code);
     this.flightSearchService.flightsArray
     .at(index)
     .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')

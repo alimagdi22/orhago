@@ -27,39 +27,74 @@
 } @else {
   @if (!cities.length || !data.flightItem.get(data.destination)?.value) {
     <h4 class="text-center">{{ 'searchBox.recommendedAirports' | translate }}</h4>
-  }
-
-  @for (airport of (cities.length && data.flightItem.get(data.destination)?.value
-      ? cities
-      : getRecommendedAirports()
-    ) | limitTo: 5; track $index) {
-    <mat-option
-      [value]="airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode"
-      (click)="assignCountriesForMobile(airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode, data.destination, airport, data.index)"
-    >
-      <div class="airport-item" [dir]="translate.currentLang === 'en' ? 'ltr' : 'rtl'">
+    @for (airport of getRecommendedAirports() | limitTo: 5; track $index) {
+      <mat-option
+        [value]="airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode"
+        (click)="assignCountriesForMobile(airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode, data.destination, airport, data.index, false)"
+      >
+        <div class="airport-item" [dir]="translate.currentLang === 'en' ? 'ltr' : 'rtl'">
           <img
-          width="40"
+            width="40"
             [src]="
               data.destination === 'departing'
                 ? 'assets/images/search-box/depart-icon.png'
                 : 'assets/images/search-box/landing-icon.png'
             "
           />
-
-        <span>
-          (
-          <span [innerHTML]="airport[sharedService.lang].airportCode | highlighter: data.flightItem.get(data.destination)?.value"></span>
-          )
-        </span>
-        <span>-</span>
-        <span [innerHTML]="airport[sharedService.lang].airportName | highlighter: data.flightItem.get(data.destination)?.value"></span>
-        <!-- -
-        <span [innerHTML]="airport.countryName | highlighter: data.flightItem.get(data.destination)?.value"></span> -->
-      </div>
-    </mat-option>
-  } @empty {
-    <div class="no-search-results">{{ 'searchBox.noSearchResults' | translate }}</div>
+          <span>
+            (
+            <span [innerHTML]="airport[sharedService.lang].airportCode | highlighter: data.flightItem.get(data.destination)?.value"></span>
+            )
+          </span>
+          <span>-</span>
+          <span [innerHTML]="airport[sharedService.lang].airportName | highlighter: data.flightItem.get(data.destination)?.value"></span>
+        </div>
+      </mat-option>
+    } @empty {
+      <div class="no-search-results">{{ 'searchBox.noSearchResults' | translate }}</div>
+    }
+  } @else {
+    @for (group of getGroupedCities(); track group.city) {
+      @if (group.airports.length > 1) {
+        <!-- City Option (All Airports) -->
+        <mat-option
+          (click)="assignCountriesForMobile(group.airports[0][sharedService.lang].cityName + ',' + group.airports[0][sharedService.lang].cityCode, data.destination, group.airports[0], data.index, true)"
+        >
+          <div class="airport-item d-flex align-items-center justify-content-between" [dir]="translate.currentLang === 'en' ? 'ltr' : 'rtl'">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt"></i>
+              <span class="fw-bold">{{ group.city }}, {{ group.country }}</span>
+            </div>
+            <span class="badge bg-light text-dark">({{ 'searchBox.allAirports' | translate }})</span>
+          </div>
+        </mat-option>
+      }
+      
+      <!-- Airport Options -->
+      @for (airport of group.airports; track airport[sharedService.lang].airportCode) {
+        <mat-option
+          (click)="assignCountriesForMobile(airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode, data.destination, airport, data.index, false)"
+        >
+          <div class="airport-item" [dir]="translate.currentLang === 'en' ? 'ltr' : 'rtl'">
+            <img
+              width="40"
+              [src]="
+                data.destination === 'departing'
+                  ? 'assets/images/search-box/depart-icon.png'
+                  : 'assets/images/search-box/landing-icon.png'
+              "
+            />
+            <span>
+              (
+              <span [innerHTML]="airport[sharedService.lang].airportCode | highlighter: data.flightItem.get(data.destination)?.value"></span>
+              )
+            </span>
+            <span>-</span>
+            <span [innerHTML]="airport[sharedService.lang].airportName | highlighter: data.flightItem.get(data.destination)?.value"></span>
+          </div>
+        </mat-option>
+      }
+    }
   }
 }
 </div>

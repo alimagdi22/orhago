@@ -72,6 +72,7 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
       let serachId = params['searchId'];
       let passengers = params['passengers'];
       let Cclass = params['Cclass'];
+      let destinationType = params['destinationType'];
       let showDirect: boolean;
 
       if (params['directOnly'] == 'false') {
@@ -91,6 +92,7 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
         passengers,
         Cclass,
         showDirect,
+        destinationType || 'Airport_Airport',
         5,
         2,
       );

@@ -4,7 +4,7 @@ import { FlightResultsComponent } from './flight-results.component';
 
 const routes: Routes = [
   {
-    path: ':language/:currency/:SearchPoint/:flightType/:flightInfo/:searchId/:passengers/:Cclass/:directOnly',
+    path: ':language/:currency/:SearchPoint/:flightType/:flightInfo/:searchId/:passengers/:Cclass/:directOnly/:destinationType',
     component: FlightResultsComponent,
     pathMatch: 'full',
   },

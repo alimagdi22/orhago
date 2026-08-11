@@ -183,6 +183,7 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
       currency,
       this.homePageService.pointOfSale ? this.homePageService.pointOfSale.country! : 'KW',
       ',',
+      this.sharedService.destinationType || this.destinationType,
     );
     let splittedLink = resultLink.toString().split('/');
 
