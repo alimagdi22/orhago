@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FlightResultService, FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../../shared/shared.service';
 import { ISortItem } from './models/sortItem.model';
+
 @Component({
   standalone: false,
   selector: 'app-flight-results',
@@ -28,11 +29,10 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
   falseLoading = false;
   showStickySearch = false;
   private scrollThreshold = 180;
-  public translate = inject(TranslateService)
+  public translate = inject(TranslateService);
   public flightSearchService = inject(FlightSearchService);
 
   currentLang = this.translate.currentLang;
-  isFirstRequest = true;
 
   sortItems: ISortItem[] = [
     {
@@ -57,19 +57,17 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    // Add scroll listener using Renderer2
-    this.renderer.listen('window', 'scroll', this.scrollHandler);
+    if (typeof window !== 'undefined') {
+      this.renderer.listen('window', 'scroll', this.scrollHandler);
+      this.updateTimeoutSession();
+    }
+
     this.route.params.subscribe((params: Params) => {
-      if(this.isFirstRequest) {
-        this.isFirstRequest = false;
-        return
-      }
       let lang = params['language'];
       let currency = params['currency'];
       let pointOfReservation = params['SearchPoint'];
       let flightType = params['flightType'];
       let flightsInfo = params['flightInfo'];
-
 
       let serachId = params['searchId'];
       let passengers = params['passengers'];
@@ -81,7 +79,7 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
       } else {
         showDirect = true;
       }
-      this.sharedService.flightType = flightType.toLowerCase();
+      this.sharedService.flightType = flightType ? flightType.toLowerCase() : 'oneway';
       this.searchId = params['searchId'];
       this.flightResultService.getDataFromUrl(
         lang,
@@ -102,27 +100,27 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
       next: () => {
         this.totalPages = Math.ceil(this.flightResultService.orgnizedResponce.length / this.itemsPerPage);
         this.sortItems.forEach(e => {
-          if(this.flightResultService.orgnizedResponce.length) {
+          if (this.flightResultService.orgnizedResponce.length) {
             this.flightResultService.sortMyResult(e.sortCode);
             e.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
             e.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
           }
-        })
+        });
         this.flightResultService.sortMyResult(1);
       },
     });
-
-    this.updateTimeoutSession();
   }
 
   ngAfterViewInit(): void {
     this.sharedService.scrollToTop();
   }
-  
+
   updateTimeoutSession() {
-    this.timeoutId = setTimeout(() => {
-      this.sharedService.isSessionTimeoutModalShowed = true;
-    }, 1200000);
+    if (typeof window !== 'undefined') {
+      this.timeoutId = setTimeout(() => {
+        this.sharedService.isSessionTimeoutModalShowed = true;
+      }, 1200000);
+    }
   }
 
   updateIndexes() {
@@ -143,7 +141,12 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
   nextPage() {
     this.falseLoading = true;
 
-    setTimeout(() => (this.falseLoading = false), 1000);
+    if (typeof window !== 'undefined') {
+      setTimeout(() => (this.falseLoading = false), 1000);
+    } else {
+      this.falseLoading = false;
+    }
+
     if (this.currentPageflightCards < this.flightResultService.orgnizedResponce.length) {
       this.currentPageflightCards++;
 
@@ -167,25 +170,18 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
     this.isSearchVisible = !this.isSearchVisible;
   }
 
-  /**
-     * Handles window scroll events to show/hide sticky search box
-     *
-     * 1. Gets the regular search box element using Angular's Renderer2
-     * 2. Calculates its position relative to viewport
-     * 3. Shows sticky search when regular search scrolls 200px past viewport top
-     * 4. Uses Renderer2 instead of direct DOM access for better Angular compatibility
-     */
   private scrollHandler = () => {
+    if (typeof window === 'undefined') return;
     const regularSearch = this.elementRef.nativeElement.querySelector('.regular-search');
     if (!regularSearch) return;
     const searchBoxRect = regularSearch.getBoundingClientRect();
     this.showStickySearch = searchBoxRect.top < -this.scrollThreshold;
   };
 
-
-
   ngOnDestroy(): void {
-    clearTimeout(this.timeoutId);
+    if (typeof window !== 'undefined' && this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
     this.sharedService.isBrandedFaresShowed = false;
     this.sharedService.isSessionTimeoutModalShowed = false;
     this.flightResultService.destroyer();

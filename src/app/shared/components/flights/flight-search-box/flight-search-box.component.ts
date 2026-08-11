@@ -1,7 +1,9 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../../shared.service';
 import { Validators } from '@angular/forms';
+import { FlightSearchInputsComponent } from './flight-search-inputs/flight-search-inputs.component';
 
 @Component({
   standalone: false,
@@ -9,36 +11,38 @@ import { Validators } from '@angular/forms';
   templateUrl: './flight-search-box.component.html',
   styleUrls: ['./flight-search-box.component.scss'],
 })
-export class FlightSearchBoxComponent {
+export class FlightSearchBoxComponent implements OnInit {
   public flightSearchService = inject(FlightSearchService);
   sharedService = inject(SharedService);
 
+  private platformId = inject(PLATFORM_ID);
+  public isBrowser = isPlatformBrowser(this.platformId);
+
   @ViewChild('roundTripRadio') roundTripRadio!: ElementRef;
+  @ViewChild(FlightSearchInputsComponent) flightSearchInputs?: FlightSearchInputsComponent;
 
   ngOnInit(): void {
     let form: any = null;
     let flightType: string | null = null;
 
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    if (this.isBrowser) {
       try {
         form = JSON.parse(localStorage.getItem('form') as string);
         flightType = localStorage.getItem('flightType');
       } catch (e) {}
     }
 
-    //check if local storage have value
-    if (form) {
+    if (form && this.isBrowser) {
       let cityPattern = form.Flights?.[0]?.departing;
       let pattern = /,/;
-      //check pattern of depart and land cities if it doesn't match remove the form from local storage
       if (cityPattern && !pattern.test(cityPattern)) {
-        if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-          localStorage.removeItem('form');
-        }
+        localStorage.removeItem('form');
+        form = null;
       }
     }
+
     this.flightSearchService.initSearchForm(form);
-    //If There is no data in local storage then set the initial form type to One way
+
     if (!form) {
       this.flightSearchService.searchFlight?.get('flightType')?.setValue('OneWay');
     }
@@ -62,7 +66,8 @@ export class FlightSearchBoxComponent {
     }
 
     this.flightSearchService.searchFlight?.get('returnDate')?.updateValueAndValidity();
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+
+    if (this.isBrowser) {
       localStorage.setItem('flightType', flightType);
     }
   }
@@ -70,5 +75,9 @@ export class FlightSearchBoxComponent {
   onAddReturnClicked() {
     this.selectFlightType('RoundTrip');
     this.sharedService.isAddReturnClicked = true;
+  }
+
+  onSubmit() {
+    this.flightSearchInputs?.onSubmit();
   }
 }

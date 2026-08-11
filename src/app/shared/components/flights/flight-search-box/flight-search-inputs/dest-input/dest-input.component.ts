@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Input, OnChanges, OnDestroy, OnInit, output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, OnChanges, OnDestroy, OnInit, output, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -26,6 +26,11 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   @Input({ required: true }) index = -1;
   @Input() focus = 0;
 
+  @Output() destinationTypeChange = new EventEmitter<{
+    dest: 'departing' | 'landing';
+    type: 'City' | 'Airport';
+  }>();
+
   focusDestinationInput = output<void>();
   focusDateInput = output<void>();
 
@@ -50,10 +55,15 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    let airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.destination) : null) as string) as IAirPortTranslated[];
+    let airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.destination) : null) as string) as (IAirPortTranslated & { _isCitySelection?: boolean })[];
 
-    if(airports) {
-      this.onSelectDestintation(this.destination, airports[this.index], this.index)
+    if (airports && airports[this.index]) {
+      const cachedAirport = airports[this.index];
+      if (cachedAirport._isCitySelection) {
+        this.onSelectCity(this.destination, cachedAirport, this.index);
+      } else {
+        this.onSelectDestintation(this.destination, cachedAirport, this.index);
+      }
     }
 
     this.subscription.add(
@@ -66,7 +76,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       })
     )
 
-    if(this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
+    if (this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
       const kuwaitAirport = this.sharedService.initialRecommendedAirports[1];
       this.onSelectDestintation(this.destination, kuwaitAirport, this.index);
     }
@@ -138,37 +148,43 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-
-  onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number) {
-    const airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(dest) : null) ?? '[]');
-
-    airports[index] = city;
-
-    if(!city) {
+  onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false) {
+    if (!city) {
       return;
     }
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const airports = JSON.parse(localStorage.getItem(dest) ?? '[]');
+      airports[index] = {
+        ...city,
+        _isCitySelection: isCitySelection
+      };
       localStorage.setItem(dest, JSON.stringify(airports));
     }
 
     this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = city[this.sharedService.lang];
-    console.log(this.sharedService.selectedDestions[index])
     this.flightSearchService.flightsArray
       .at(index)
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(true);
-    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(city[this.sharedService.lang].cityName + ',' + city[this.sharedService.lang].airportCode)
+    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(city[this.sharedService.lang].cityName + ',' + city[this.sharedService.lang].airportCode);
 
-    if(this.sharedService.flightType === 'multi-city') {
+    const type = isCitySelection ? 'City' : 'Airport';
+    this.destinationTypeChange.emit({ dest, type });
+
+    if (this.sharedService.flightType === 'multi-city') {
       return;
     }
       
-    if(this.destination === 'landing' ) {
+    if (this.destination === 'landing') {
       this.focusDateInput.emit();
     } else {
       this.focusDestinationInput.emit();
     }
+  }
+
+  onSelectCity(dest: TDestinations, city: IAirPortTranslated, index: number) {
+    this.onSelectDestintation(dest, city, index, true);
   }
 
   onSelectPopularDestination(dest: string, value: string, index: number) {

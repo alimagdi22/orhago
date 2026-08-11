@@ -10,4 +10,5 @@ export interface IResultLink {
   passengers: string;
   cabinClass: string;
   directOnly: boolean;
+  destinationType?: string;
 }

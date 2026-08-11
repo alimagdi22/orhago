@@ -52,6 +52,7 @@ export class SharedService {
   sanitizer = inject(DomSanitizer);
   translate = inject(TranslateService);
 
+  destinationType?: string;
   landCity: string = '';
   phonenumber: string = '';
   calenderClicked: boolean = false; //used when click round trip calender in searchbox one way component (+ sign)
