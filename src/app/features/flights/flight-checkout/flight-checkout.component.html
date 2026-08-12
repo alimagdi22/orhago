@@ -469,11 +469,11 @@
       </ng-container>
     }
 
-    @if (sharedService.checkoutSteps >= 2 && sharedService.mySafeUrl) {
-      <app-payment-view />
+    @if (sharedService.checkoutSteps >= 2) {
+      <app-payment-method [brandedFareId]="brandedFareId" />
     }
 
-    @if (sharedService.checkoutSteps >= 1 && !sharedService.showPayment) {
+    @if (sharedService.checkoutSteps === 1 && !sharedService.showPayment) {
       <div class="navigation-btns">
         <app-secondary-button
           [title]="'checkout.previous' | translate"
@@ -498,10 +498,11 @@
   <app-checkout-footer (choseService)="checkPhoneNumberValidation()" />
 }
 
-@if (sharedService.isPaymentModalShowed) {
+@if (sharedService.isPaymentModalShowed || flightCheckoutService.paymentError) {
   <div class="overlay">
     <div class="custom_modal" appClickOutside (clickOutside)="closeModal()">
       <app-payment-modal [isSuccess]="false" />
     </div>
   </div>
 }
+

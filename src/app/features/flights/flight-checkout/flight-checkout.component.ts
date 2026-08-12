@@ -34,26 +34,17 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
   sessionExpired: boolean = false;
   isPhoneNumberInvalid = false;
 
-  /* Start of Date Properties */
-
   passportExpiryDate = new Date();
-
   maxAdultBirthDate = new Date();
-
   minChildBirthDate = new Date();
   maxChildBirthDate = new Date();
-
   minInfantBirthDate = new Date();
   maxInfantBirthDate = new Date();
 
   genderOptions = ['Male', 'Female'];
   selectedGender: string = '';
-
-  /* End of Date Properties */
-
   countryList = ['USA', 'Canada', 'Mexico'];
   selectedCountry: string = '';
-
   expiryDate: Date | null = null;
   CountryISO = CountryISO;
 
@@ -69,7 +60,7 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
     borderRadius: '12px',
   };
 
-  brandedFareId = 0 ;
+  brandedFareId = 0;
 
   ngOnInit(): void {
     this.homePageService.getCountries('en');
@@ -79,14 +70,10 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
         next: () => {
           if (this.brandedFareId) {
             const brandIndex = this.flightResultService.currentSelectedBrands.findIndex(
-              (brand) => {
-                console.log(+brand.brandId, +this.brandedFareId)
-                return +brand.brandId === +this.brandedFareId;
-              },
+              (brand) => +brand.brandId === +this.brandedFareId,
             );
 
-
-            if (brandIndex != -1) {
+            if (brandIndex !== -1) {
               this.sharedService.selectedBrandedIndex = brandIndex;
             }
           }
@@ -103,20 +90,12 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
           false,
           String(params['sid']).split('_')[1],
         );
-        console.log(this.flightCheckoutService.selectedFlight);
 
-
-        if(this.homePageService.pointOfSale?.country){
-          this.flightCheckoutService.getAllOfflineServices(String(params["sid"]).split('_')[0],this.homePageService.pointOfSale.country,true)
-        }else{
-          this.flightCheckoutService.getAllOfflineServices(String(params["sid"]).split('_')[0],'KW',true)
+        if (this.homePageService.pointOfSale?.country) {
+          this.flightCheckoutService.getAllOfflineServices(String(params['sid']).split('_')[0], this.homePageService.pointOfSale.country, true);
+        } else {
+          this.flightCheckoutService.getAllOfflineServices(String(params['sid']).split('_')[0], 'KW', true);
         }
-
-        this.flightCheckoutService.getAllOfflineServices(
-          params['sid'].split('_')[0],
-          this.homePageService.pointOfSale?.country || 'KW',
-          true,
-        );
 
         this.flightCheckoutService.pcc = String(params['sid']).split('_')[1];
 
@@ -168,32 +147,20 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
 
             this.passportExpiryDate.setDate(arrivalDate.getDate() + 3);
 
-            // Calculate Adult Birthdate Range
             this.maxAdultBirthDate = new Date(arrivalDate);
             this.maxAdultBirthDate.setFullYear(this.maxAdultBirthDate.getFullYear() - 12);
 
-            // Calculate Child Birthdate Range
             this.maxChildBirthDate = new Date(arrivalDate);
             this.maxChildBirthDate.setFullYear(this.maxChildBirthDate.getFullYear() - 2);
 
             this.minChildBirthDate = new Date(this.maxAdultBirthDate);
             this.minChildBirthDate.setDate(this.minChildBirthDate.getDate() + 1);
 
-            // Calculate Infant Birthdate Range
             this.maxInfantBirthDate = new Date(arrivalDate);
 
             this.minInfantBirthDate = new Date(this.maxChildBirthDate);
             this.minInfantBirthDate.setDate(this.minInfantBirthDate.getDate() + 1);
           }
-        },
-      }),
-    );
-
-    this.subscription.add(
-      this.flightCheckoutService.paymentLink.asObservable().subscribe({
-        next: (res) => {
-          this.sharedService.setPaymentLink(res);
-          this.sharedService.isIframeLoading = true;
         },
       }),
     );
@@ -207,31 +174,26 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
     );
   }
 
-   countrySearchFields: SearchCountryField[] = [
+  countrySearchFields: SearchCountryField[] = [
     SearchCountryField.Name,
     SearchCountryField.Iso2,
-    SearchCountryField.DialCode
+    SearchCountryField.DialCode,
   ];
 
-  // Add this method to customize search behavior
   customSearchFn = (query: string, countries: any[]): any[] => {
     if (!query) return countries;
 
     const lowerQuery = query.toLowerCase();
-    const exactMatches:any = [];
-    const partialMatches:any = [];
+    const exactMatches: any = [];
+    const partialMatches: any = [];
 
-    countries.forEach(country => {
-      const matches = [
-        country.name.toLowerCase(),
-        country.iso2.toLowerCase(),
-        `+${country.dialCode}`
-      ].some(text => text.includes(lowerQuery));
+    countries.forEach((country) => {
+      const matches = [country.name.toLowerCase(), country.iso2.toLowerCase(), `+${country.dialCode}`].some((text) =>
+        text.includes(lowerQuery),
+      );
 
       if (matches) {
-        // Prioritize exact matches at the beginning
-        if (country.name.toLowerCase().startsWith(lowerQuery) ||
-            `+${country.dialCode}`.startsWith(lowerQuery)) {
+        if (country.name.toLowerCase().startsWith(lowerQuery) || `+${country.dialCode}`.startsWith(lowerQuery)) {
           exactMatches.push(country);
         } else {
           partialMatches.push(country);
@@ -249,7 +211,6 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
       case 'INF':
         return this.minInfantBirthDate;
     }
-
     return null;
   }
 
@@ -260,7 +221,6 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
       case 'INF':
         return this.maxInfantBirthDate;
     }
-
     return this.maxAdultBirthDate;
   }
 
@@ -275,7 +235,7 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
   }
 
   isInputValid(user: AbstractControl, formControllerName: string) {
-    return user.get(formControllerName)!.touched && user.get(formControllerName)!.status == 'INVALID';
+    return user.get(formControllerName)!.touched && user.get(formControllerName)!.status === 'INVALID';
   }
 
   closeModal() {
@@ -298,22 +258,7 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
         this.flightCheckoutService.usersArray.at(i).markAllAsTouched();
       }
     } else {
-      if (this.sharedService.checkoutSteps === 1) {
-        this.flightCheckoutService.saveBooking(
-          this.homePageService.selectedCurrency.Currency_Code,
-          'notPremium',
-          this.flightCheckoutService.pcc,
-          this.brandedFareId,
-        );
-      }
       this.sharedService.goToNextCheckoutStep();
-    }
-  }
-
-  scrollTo() {
-    const element = document.getElementById('2');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 

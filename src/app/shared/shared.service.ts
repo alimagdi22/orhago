@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { HotelCheckoutService } from 'rp-hotels-ui';
 import { FlightDetailsAppComponent } from './components/flights/flight-details-app/flight-details-app.component';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,7 +25,6 @@ export class SharedService {
   selectedDestions: ISelectedDest[] = [];
 
   isBrandedFaresShowed = false;
-
   isFlightDetailsShowed = false;
   selectedItinerary = -1;
   selectedBrandedIndex = 0;
@@ -35,6 +35,10 @@ export class SharedService {
   flightType = 'oneway';
   showPayment = false;
   isIframeLoading = false;
+  selectedGateway: any = null;
+  userForm: any = { valid: true };
+
+  triggerSubmit() {}
 
   isAddReturnClicked = false;
   users: any = [];
@@ -55,7 +59,7 @@ export class SharedService {
   destinationType?: string;
   landCity: string = '';
   phonenumber: string = '';
-  calenderClicked: boolean = false; //used when click round trip calender in searchbox one way component (+ sign)
+  calenderClicked: boolean = false;
   headerView: boolean = true;
   roundTripDatepickerMobileView: boolean = false;
 
@@ -66,7 +70,7 @@ export class SharedService {
 
   sessionExpired: boolean = false;
   sessionTimeLeft: string = '30:00';
-  duration: number = 30 * 60; // 30 minutes in seconds
+  duration: number = 30 * 60;
   minutes: number = 30;
   seconds: number = 0;
   timerSubscription!: Subscription;
@@ -103,10 +107,11 @@ export class SharedService {
         width: '100vw',
         height: '100vh',
         maxWidth: '100vw',
-        hasBackdrop: true
+        hasBackdrop: true,
       });
     }
   }
+
   public showFlightDetailsApp(airItinerary: IAirItinerary | null): void {
     if (airItinerary) {
       this.selectedFlightItinerary = airItinerary;
@@ -122,7 +127,7 @@ export class SharedService {
         width: '100vw',
         height: '100vh',
         maxWidth: '100vw',
-        hasBackdrop: true
+        hasBackdrop: true,
       });
     }
   }
@@ -138,7 +143,7 @@ export class SharedService {
       this.onSelectFlight(airItinerary.sequenceNum, airItinerary.pcc, airItinerary.pKey);
     }
 
-    if(this.screenWidth >= 1200) {
+    if (this.screenWidth >= 1200) {
       this.isFlightDetailsShowed = false;
     } else {
       this.dialog.closeAll();
@@ -170,7 +175,6 @@ export class SharedService {
     return this.http.get<IDestinationCard>(Api);
   }
 
-  // Start or continue the timer
   startTimer() {
     this.sessionExpired = false;
     this.timerSubscription = interval(1000).subscribe(() => {
@@ -183,35 +187,32 @@ export class SharedService {
         alert('Session Ended!');
         if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
           localStorage.removeItem(this.TIMER_STORAGE_KEY);
-        } // Clear storage on timer end
+        }
         this.sessionExpired = true;
       }
     });
   }
 
-  // Update the displayed time in minutes and seconds
   updateTime() {
     this.minutes = Math.floor(this.duration / 60);
     this.seconds = this.duration % 60;
     this.sessionTimeLeft = this.minutes + ':' + this.seconds;
   }
 
-  // Save the remaining time to localStorage
   saveTimer() {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.setItem(this.TIMER_STORAGE_KEY, this.duration.toString());
     }
   }
 
-  // Load the remaining time from localStorage
   loadTimer() {
-    const savedDuration = (typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.TIMER_STORAGE_KEY) : null);
+    const savedDuration = typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.TIMER_STORAGE_KEY) : null;
     if (savedDuration) {
       this.duration = parseInt(savedDuration, 10);
     } else {
-      this.duration = 30 * 60; // If no saved time, start from 30 minutes
+      this.duration = 30 * 60;
     }
-    this.updateTime(); // Update the displayed time
+    this.updateTime();
   }
 
   isSegmentPresent(segments: string[]): boolean {
@@ -225,7 +226,6 @@ export class SharedService {
 
   convertTimeToDayAndHour(time: string): string {
     const [hours, minutes] = time.split(':').map(Number);
-
     return `${hours}h ${minutes}m`;
   }
 
@@ -257,7 +257,6 @@ export class SharedService {
       case 'INF':
         return 'Infant';
     }
-
     return 'Adult';
   }
 

@@ -149,9 +149,12 @@ label {
 .custom_modal {
   padding: 0 60px;
   min-width: 250px;
-  width: 21%;
+  width: 60%;
   height: 70%;
   border-radius: 20px;
+  @media(max-width:786px){
+    width: 90%;
+  }
 }
 
 .navigation-btns {

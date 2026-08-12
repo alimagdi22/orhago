@@ -1,5 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../../../shared/shared.service';
+import { FlightCheckoutService } from 'rp-travel-ui';
 
 @Component({
   standalone: false,
@@ -11,8 +13,16 @@ export class PaymentModalComponent {
   @Input({ required: true }) isSuccess = true;
 
   router = inject(Router);
+  sharedService = inject(SharedService);
+  flightCheckoutService = inject(FlightCheckoutService);
+
+  closeModal() {
+    this.sharedService.isPaymentModalShowed = false;
+    this.flightCheckoutService.paymentError = false;
+  }
 
   goToHomePage() {
+    this.closeModal();
     this.router.navigate(['/']);
   }
 

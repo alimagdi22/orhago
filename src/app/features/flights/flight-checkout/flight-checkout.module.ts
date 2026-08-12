@@ -14,6 +14,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { CheckoutFooterComponent } from './components/checkout-footer/checkout-footer.component';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
+import { PaymentMethodComponent } from './components/payment-method/payment-method.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     TravelerComponent,
     CheckoutFooterComponent,
     PaymentModalComponent,
+    PaymentMethodComponent,
   ],
   imports: [CommonModule, FormsModule, FlightCheckoutRoutingModule, SharedModule],
 })
 export class FlightCheckoutModule {}
+

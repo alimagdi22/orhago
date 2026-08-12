@@ -1,0 +1,121 @@
+<div class="payment-card-container">
+  <h2 class="payment-card-title">{{ 'checkout.payment.chooseCard' | translate }}</h2>
+
+  <div class="section" *ngIf="paymentData$ | async as paymentData; else loading">
+    <!-- Payment Options / Card Logos -->
+    <div class="payment-method-options d-flex gap-3 mb-4">
+      <div *ngFor="let gateway of paymentData; let i = index">
+        <div
+          class="gateway-option"
+          [ngClass]="{ selected: selectedOption === i }"
+          (click)="selectOption(i, gateway)"
+        >
+          <img [alt]="gateway.PaymentMethod" [src]="gateway.cardImg" class="gateway-card-img" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading spinner inside Choose Card if MPGS loading -->
+    <div *ngIf="showMPGSPayment && !mpgsSessionInitialized" class="center-spinner-container my-4">
+      <mat-spinner diameter="50" color="primary"></mat-spinner>
+    </div>
+
+    <!-- MPGS Card Form -->
+    <div [style.display]="showMPGSPayment ? 'block' : 'none'" class="payment-session container">
+      <div class="card-form-grid" [ngClass]="{ 'invisible-section': !mpgsSessionInitialized }">
+        <div class="form-group full-width mb-3">
+          <label class="form-label">{{ 'checkout.payment.cardNumber' | translate }}</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="card-number"
+              placeholder="12345678987"
+              class="form-control custom-payment-input"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-6">
+            <label class="form-label">{{ 'checkout.payment.expiration' | translate }}</label>
+            <div class="d-flex gap-2">
+              <input type="text" id="expiry-month" placeholder="MM" class="form-control custom-payment-input" readonly />
+              <input type="text" id="expiry-year" placeholder="YY" class="form-control custom-payment-input" readonly />
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">{{ 'checkout.payment.cvc' | translate }}</label>
+            <input
+              type="text"
+              id="security-code"
+              placeholder="3 or 4 digits"
+              class="form-control custom-payment-input"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="form-group full-width mb-3">
+          <label class="form-label">{{ 'checkout.payment.nameOnCard' | translate }}</label>
+          <input
+            type="text"
+            id="cardholder-name"
+            placeholder="{{ 'checkout.payment.nameOnCardPlaceholder' | translate }}"
+            class="form-control custom-payment-input"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Agreement Checkbox -->
+    <div class="terms-agreement-row d-flex align-items-center mt-3 gap-2">
+      <label class="custom-checkbox-label d-flex align-items-center gap-2">
+        <input type="checkbox" [(ngModel)]="checked" class="form-check-input" />
+        <span class="terms-text">
+          {{ 'checkout.payment.conditionStart' | translate }}
+          <a class="terms-link text-decoration-underline" [routerLink]="['/terms']" target="_blank">
+            {{ 'checkout.payment.conditionEnd' | translate }}
+          </a>
+        </span>
+      </label>
+    </div>
+
+    <!-- Price and Pay Button -->
+    <div class="payment-action-footer d-flex align-items-center justify-content-between mt-4">
+      <div class="payment-total-price fw-bold fs-4">
+        <span>
+          {{
+            (selectedFlight?.airItineraryDTO?.itinTotalFare?.amount || 0) +
+              (sharedService.selectedGateway ? sharedService.selectedGateway.Amount : 0) | exchange: 'value'
+          }}
+          {{ selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode | exchange: 'code' }}
+        </span>
+      </div>
+
+      <button
+        class="pay-btn btn btn-success px-5 py-2 fw-semibold rounded-3"
+        (click)="submit(selectedGatway)"
+        [disabled]="!checked || !selectedGatway || flightCheckoutService.saveBookingLoadeer"
+      >
+        <span *ngIf="!flightCheckoutService.saveBookingLoadeer">
+          {{ 'checkout.payment.pay' | translate }}
+        </span>
+        <mat-progress-spinner
+          *ngIf="flightCheckoutService.saveBookingLoadeer"
+          diameter="24"
+          mode="indeterminate"
+          color="accent"
+          class="d-inline-block"
+        ></mat-progress-spinner>
+      </button>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="center-spinner-container my-5 text-center">
+      <mat-spinner diameter="50" color="primary" class="mx-auto"></mat-spinner>
+    </div>
+  </ng-template>
+</div>
