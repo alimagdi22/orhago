@@ -1,20 +1,22 @@
 <ng-container [formGroup]="flightSearchService.searchFlight">
-    <ng-container formArrayName="Flights">
-      <ng-container [formGroupName]="index">
-        <div
+  <ng-container formArrayName="Flights">
+    <ng-container [formGroupName]="index">
+      <div
         class="dest"
-        [matMenuTriggerFor]="sharedService.screenWidth >= 1200 ? popularDest : null"
+        [matMenuTriggerFor]="(sharedService.screenWidth >= 1200 && !isLoading) ? popularDest : null"
         #menuTrigger="matMenuTrigger"
-        (click)="sharedService.screenWidth >= 1200 ? focusInput() : onClickInput(index, destination, flightItem)"
+        (click)="onClickDestBox()"
         (menuOpened)="onMenuOpen()"
-        >
+      >
         <div class="dest__placeholder">
           <span>{{ (destination === 'departing' ? 'home.search.from' : 'home.search.to') | translate }}</span>
-          <div (click)="clearInput(destination === 'departing' ? 'departingCity' : 'landingCity', index)" class="dest__placeholder__clear">x</div>
+          @if (hasValue()) {
+            <div (click)="clearInput(destination === 'departing' ? 'departingCity' : 'landingCity', index); $event.stopPropagation()" class="dest__placeholder__clear">x</div>
+          }
         </div>
 
-        @if (sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName) {
-          <!-- City selected: show city name bold + airport identifier below; keep input hidden but bound -->
+        @if (sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName && !isFocused) {
+          <!-- City selected & not focused: show original city name bold + airport identifier below -->
           <p class="dest__country" [title]="sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName">
             {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName }}
           </p>
@@ -22,7 +24,6 @@
             {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportName }}
             ({{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportCode }})
           </p>
-          <!-- Keep input in DOM for form binding but visually hidden -->
           <input
             #destinationInput
             [formControlName]="destination"
@@ -33,25 +34,33 @@
             [matAutocomplete]="autoa"
             [placeholder]="(destination === 'departing' ? 'home.search.leavingFrom' : 'home.search.goingTo') | translate"
             (input)="onInputDirection(destination, index)"
+            (focus)="onInputFocus()"
           />
         } @else {
-          <!-- No city selected: show the text input for searching -->
-          <input
-            #destinationInput
-            [formControlName]="destination"
-            [readonly]="sharedService.screenWidth < 1200"
-            class="custom-input"
-            type="text"
-            aria-label="City"
-            matInput
-            [matAutocomplete]="autoa"
-            [placeholder]="(destination === 'departing' ? 'home.search.leavingFrom' : 'home.search.goingTo') | translate"
-            (input)="onInputDirection(destination, index)"
-          />
+          <!-- Focused or no city selected: show the text input for active typing -->
+          <div class="input-wrapper d-flex align-items-center position-relative w-100">
+            <input
+              #destinationInput
+              [formControlName]="destination"
+              [readonly]="sharedService.screenWidth < 1200"
+              class="custom-input w-100"
+              type="text"
+              aria-label="City"
+              matInput
+              [matAutocomplete]="autoa"
+              [placeholder]="(destination === 'departing' ? 'home.search.leavingFrom' : 'home.search.goingTo') | translate"
+              (input)="onInputDirection(destination, index)"
+              (focus)="onInputFocus()"
+              (blur)="onInputBlur()"
+            />
+            @if (isLoading) {
+              <mat-spinner diameter="18" color="primary" class="input-spinner-loader"></mat-spinner>
+            }
+          </div>
         }
 
         <mat-autocomplete #autoa="matAutocomplete" class="dropdown-list" panelWidth="28rem">
-          @if (cities && cities.length) {
+          @if (!isLoading && cities && cities.length) {
             @for (group of getGroupedCities(); track group.city) {
               <!-- City Option (All Airports) -->
               <mat-option
@@ -134,7 +143,7 @@
             {{translate.currentLang === 'en' ? 'Enter your destination city' : 'أدخل وجهتك'}}
           </p>
         }
-        </div>
-      </ng-container>
+      </div>
     </ng-container>
   </ng-container>
+</ng-container>

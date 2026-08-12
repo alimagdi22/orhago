@@ -7,7 +7,7 @@
   }
 }
 
-img{
+img {
   max-width: 26px !important;
 }
 
@@ -18,79 +18,83 @@ img{
 }
 
 .dest {
-    flex-grow: 1;
-    position: relative;
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: text;
+
+  height: $inputs-height - 1px;
+  box-sizing: border-box;
+
+  padding: 8px 12px;
+  font-size: 14px;
+  padding-right: 10px;
+
+  &__country,
+  &__date {
+    font-weight: 700;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  &__placeholder {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    cursor: text;
+    justify-content: space-between;
+    align-items: center;
 
-    height: $inputs-height - 1px;
-    box-sizing: border-box;
-
-    padding: 8px 12px;
-    font-size: 14px;
-    padding-right: 10px;
-
-    &__country,
-    &__date {
-      font-weight: 700;
-      font-size: 14px;
-      font-weight: bold;
-      overflow: hidden; // Ensures content is hidden when it overflows
-      text-overflow: ellipsis; // Displays ellipsis for overflowing text
-      white-space: nowrap; // Prevents text wrapping to the next line
-      max-width: 100%; // Restricts the width to its container
-      margin-bottom: 0 !important;
-    }
-
-    &__placeholder {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      span {
-        color: #555;
-        font-weight: 600;
-        font-style: SemiBold;
-        font-size: 14px;
-        leading-trim: NONE;
-        line-height: 100%;
-        letter-spacing: 0%;
-
-      }
-
-      &__clear {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        font-size: 16px;
-        visibility: hidden;
-        color: map-get($map: $colors, $key: 'secondary');
-        transition: all 0.1s;
-        cursor: pointer;
-        position: relative;
-        z-index: 1;
-        &:hover {
-          transform: scale(1.4);
-        }
-      }
-    }
-
-    &__airport-id {
-      font-size: 12px;
-      font-weight: 600;
+    span {
+      font-size: 13px;
       color: #555;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 100%;
-      margin: 0;
     }
+
+    &__clear {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 16px;
+      visibility: hidden;
+      color: map-get($map: $colors, $key: 'secondary');
+      transition: all 0.1s;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      &:hover {
+        transform: scale(1.4);
+      }
+    }
+  }
+
+  &__airport-id {
+    font-size: 11px;
+    font-weight: 500;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-spinner-loader {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .sr-only-input {
@@ -112,23 +116,23 @@ img{
 }
 
 .custom-input {
-  border: none; /* Remove border */
-  outline: none; /* Remove outline on focus */
+  border: none;
+  outline: none;
   padding: 0;
-  font-size: 13px; /* Set font size */
-  color: #000; /* Optional: Set font color */
-  background: transparent; /* Optional: Set background to transparent */
-  width: 100%; /* Optional: Adjust width */
-}
+  font-size: 13px;
+  color: #000;
+  background: transparent;
+  width: 100%;
 
-.custom-input:focus {
-  box-shadow: none; /* Ensure no box shadow appears */
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .dropdown-list {
   &__item {
     padding: 8px 16px;
-    box-sizing: border-box; /* Includes padding in width calculation */
+    box-sizing: border-box;
 
     &__wrapper {
       display: flex;
@@ -137,7 +141,7 @@ img{
     }
 
     &__text {
-      white-space: nowrap; /* Prevents text wrapping */
+      white-space: nowrap;
     }
   }
 }
@@ -224,29 +228,24 @@ img{
   flex-shrink: 0;
 }
 
-
 .mat-option {
   max-width: 28rem;
 }
 
-
-::ng-deep .cdk-overlay-pane{
+::ng-deep .cdk-overlay-pane {
   width: auto !important;
 }
 
 .error-message {
-    width: 150px;
-
+  width: 150px;
   position: absolute;
   font-family: Open Sans;
-
   font-weight: 400;
   font-size: 12px;
-
   color: #EC1B1B;
   bottom: -20px;
 }
 
-p{
+p {
   margin-bottom: 0 !important;
 }

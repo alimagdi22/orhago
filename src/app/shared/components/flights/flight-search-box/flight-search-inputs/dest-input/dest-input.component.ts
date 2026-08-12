@@ -4,9 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { TranslateService } from '@ngx-translate/core';
 import { FlightSearchService } from 'rp-travel-ui';
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, Subscription, switchMap } from 'rxjs';
 import { IAirPort } from '../../../../../models/flights/airport.model';
-import { ICity } from '../../../../../models/flights/city.model';
 import { ISelectedDest } from '../../../../../models/flights/selectedDest.model';
 import { SharedService } from '../../../../../shared.service';
 import { MobileViewDestInputComponent } from './mobile-view-dest-input/mobile-view-dest-input.component';
@@ -38,6 +37,8 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('destinationInput') destinationInput!: ElementRef<HTMLInputElement>;
 
   public cities: IAirPortTranslated[] = [];
+  public isLoading = false;
+  public isFocused = false;
 
   private subscription = new Subscription();
   private searchSubject = new Subject<string>();
@@ -49,8 +50,8 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['focus']) {
-      this.focusInput()
+    if (changes['focus'] && !changes['focus'].firstChange) {
+      this.focusInput();
     }
   }
 
@@ -64,22 +65,90 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       } else {
         this.onSelectDestintation(this.destination, cachedAirport, this.index);
       }
-    }
-
-    this.subscription.add(
-      this.searchSubject.pipe(debounceTime(500), distinctUntilChanged()).subscribe((searchTerm) => {
-        this.flightSearchService.getAirports(searchTerm).subscribe({
-          next: (data) => {
-            this.cities = data as IAirPortTranslated[];
-          },
-        });
-      })
-    )
-
-    if (this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
+    } else if (this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
       const kuwaitAirport = this.sharedService.initialRecommendedAirports[1];
       this.onSelectDestintation(this.destination, kuwaitAirport, this.index);
     }
+
+    this.subscription.add(
+      this.searchSubject
+        .pipe(
+          debounceTime(300),
+          distinctUntilChanged(),
+          switchMap((searchTerm) => {
+            if (!searchTerm || !searchTerm.trim()) {
+              this.isLoading = false;
+              this.cities = [];
+              return of([]);
+            }
+            this.isLoading = true;
+            return this.flightSearchService.getAirports(searchTerm).pipe(
+              catchError(() => {
+                this.isLoading = false;
+                this.cities = [];
+                return of([]);
+              })
+            );
+          })
+        )
+        .subscribe({
+          next: (data: any) => {
+            this.isLoading = false;
+            this.cities = data as IAirPortTranslated[];
+          },
+          error: () => {
+            this.isLoading = false;
+            this.cities = [];
+          }
+        })
+    );
+  }
+
+  hasValue(): boolean {
+    return !!(
+      this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName ||
+      this.flightItem.get(this.destination)?.value
+    );
+  }
+
+  onClickDestBox() {
+    if (this.sharedService.screenWidth < 1200) {
+      this.onClickInput(this.index, this.destination, this.flightItem);
+      return;
+    }
+
+    this.isFocused = true;
+    setTimeout(() => {
+      if (this.destinationInput?.nativeElement) {
+        this.destinationInput.nativeElement.focus();
+        this.destinationInput.nativeElement.select();
+      }
+
+      if (this.isLoading) {
+        return;
+      }
+
+      const inputValue = this.flightItem.get(this.destination)?.value;
+      if (!inputValue || !this.cities.length) {
+        const trigger = this.menuTrigger?.toArray()[this.index];
+        if (trigger && !trigger.menuOpen) {
+          trigger.openMenu();
+        }
+      }
+    }, 0);
+  }
+
+  onInputFocus() {
+    this.isFocused = true;
+  }
+
+  onInputBlur() {
+    setTimeout(() => {
+      const selected = this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity'];
+      if (selected?.cityName) {
+        this.isFocused = false;
+      }
+    }, 200);
   }
 
   clearInput(dest: keyof ISelectedDest, index: number) {
@@ -94,58 +163,77 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       .at(index)
       .get(dest === 'departingCity' ? 'departing' : 'landing')
       ?.setValue('');
+
+    this.cities = [];
+    this.isLoading = false;
+    this.isFocused = true;
+
+    setTimeout(() => {
+      if (this.destinationInput?.nativeElement) {
+        this.destinationInput.nativeElement.value = '';
+        this.destinationInput.nativeElement.focus();
+      }
+    }, 0);
   }
 
   focusInput() {
-    if (this.destinationInput?.nativeElement) {
-      this.destinationInput.nativeElement.focus();
-      this.destinationInput.nativeElement.select();
-
-      const inputValue = this.flightItem.get(this.destination)?.value;
-      if (!inputValue) {
-        const menuTrigger = this.menuTrigger.toArray()[this.index];
-        if (menuTrigger && !menuTrigger.menuOpen) {
-          menuTrigger.openMenu();
-        }
-      }
-    }
+    this.onClickDestBox();
   }
-  
+
   getFullAirportText(city: IAirPort): string {
     return `${city.airportName} - ${city.countryName} (${city.airportCode})`;
   }
 
   onMenuOpen() {
-    const inputValue = this.flightItem.get(this.destination)?.value;
-    if (inputValue) {
-      const menuTrigger = this.menuTrigger.toArray()[this.index];
-      if (menuTrigger && menuTrigger.menuOpen) {
-        menuTrigger.closeMenu();
+    if (this.isLoading) {
+      const trigger = this.menuTrigger?.toArray()[this.index];
+      if (trigger && trigger.menuOpen) {
+        trigger.closeMenu();
+      }
+      return;
+    }
+
+    const selected = this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity'];
+    if (selected?.cityName && this.isFocused) {
+      const trigger = this.menuTrigger?.toArray()[this.index];
+      if (trigger && trigger.menuOpen) {
+        trigger.closeMenu();
       }
     }
   }
 
   onInputDirection(dest: TDestinations, index: number): void {
-    if(this.sharedService.screenWidth < 1200) {
+    if (this.sharedService.screenWidth < 1200) {
       return;
     }
+
+    this.isFocused = true;
 
     this.flightSearchService.flightsArray
       .at(index)
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(false);
 
-    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = null;
-
     const searchString = this.flightSearchService.flightsArray.at(index).get(dest)?.value;
 
-    this.searchSubject.next(searchString);
-
-    const menuTrigger = this.menuTrigger?.toArray()[index];
-
-    if (menuTrigger?.menuOpen) {
-      menuTrigger.closeMenu();
+    if (!searchString) {
+      this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = null;
     }
+
+    const trigger = this.menuTrigger?.toArray()[index];
+    if (trigger?.menuOpen) {
+      trigger.closeMenu();
+    }
+
+    if (searchString && searchString.trim()) {
+      this.isLoading = true;
+      this.cities = [];
+    } else {
+      this.isLoading = false;
+      this.cities = [];
+    }
+
+    this.searchSubject.next(searchString);
   }
 
   onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false) {
@@ -162,13 +250,23 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       localStorage.setItem(dest, JSON.stringify(airports));
     }
 
-    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = city[this.sharedService.lang];
+    const langObj = city[this.sharedService.lang];
+    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = langObj;
+
     this.flightSearchService.flightsArray
       .at(index)
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(true);
-    const code = isCitySelection ? city[this.sharedService.lang].cityCode : city[this.sharedService.lang].airportCode;
-    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(city[this.sharedService.lang].cityName + ',' + code);
+
+    const code = isCitySelection ? langObj.cityCode : langObj.airportCode;
+    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(langObj.cityName + ',' + code);
+
+    this.isFocused = false;
+
+    const trigger = this.menuTrigger?.toArray()[index];
+    if (trigger?.menuOpen) {
+      trigger.closeMenu();
+    }
 
     const type = isCitySelection ? 'City' : 'Airport';
     this.destinationTypeChange.emit({ dest, type });
@@ -176,7 +274,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     if (this.sharedService.flightType === 'multi-city') {
       return;
     }
-      
+
     if (this.destination === 'landing') {
       this.focusDateInput.emit();
     } else {
@@ -190,11 +288,11 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
   getGroupedCities(): { city: string; country: string; airports: IAirPortTranslated[] }[] {
     const groups: { [key: string]: { city: string; country: string; airports: IAirPortTranslated[] } } = {};
-    
-    this.cities.forEach(airport => {
+
+    this.cities.forEach((airport) => {
       const lang = this.sharedService.lang;
       const cityKey = airport[lang].cityName + '|' + airport[lang].countryName;
-      
+
       if (!groups[cityKey]) {
         groups[cityKey] = {
           city: airport[lang].cityName,
@@ -210,12 +308,12 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
   onSelectPopularDestination(dest: string, value: string, index: number) {
     this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(value);
-    
-    if(this.sharedService.flightType === 'multi-city') {
+
+    if (this.sharedService.flightType === 'multi-city') {
       return;
     }
 
-    if(this.destination === 'landing') {
+    if (this.destination === 'landing') {
       this.focusDateInput.emit();
     } else {
       this.focusDestinationInput.emit();
@@ -223,8 +321,8 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onClickInput(index: number, destination: string, flightItem: AbstractControl) {
-    if(this.sharedService.screenWidth >= 1200) {
-      return
+    if (this.sharedService.screenWidth >= 1200) {
+      return;
     }
 
     this.dialog.open(MobileViewDestInputComponent, {
