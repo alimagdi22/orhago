@@ -233,21 +233,26 @@
       "title": "Baggage",
       "included": "Included",
       "perPerson": "per person",
+      "personalItem": "Personal item",
+      "cabinBaggage": "Cabin Baggage",
+      "checkedBaggage": "Checked Baggage",
       "adultItems": "Adult items",
       "childItems": "Child items",
       "infantItems": "Infant items",
-      "cabin":"Checked Baggage",
-      "hand":"Cabin Baggage",
-      "baggage-allowance":"Baggage Allowance",
+      "cabin": "Checked Baggage",
+      "hand": "Cabin Baggage",
+      "baggage-allowance": "Baggage Allowance",
 
       "notPossible": "Baggage policy may vary based on fare",
-      "check":"Checked baggage are usually up to 23KG",
+      "notPossibleAdd": "Not possible to add with us",
+      "check": "Checked baggage are usually up to 23KG",
       "baggageType": "Checked Baggage",
       "message": "You will be able to add baggage when you check in or at the airport.",
 
       "note": "Different baggage allowance may apply, we show the minimum allowed. See itinerary for more baggage details."
     }
   },
+
 
   "checkout": {
     "Depart": "Depart",

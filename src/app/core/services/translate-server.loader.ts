@@ -11,8 +11,8 @@ export class TranslateServerLoader implements TranslateLoader {
           const path = req('path');
 
           const possiblePaths = [
-            path.resolve(process.cwd(), `dist/orahio/browser/assets/i18n/${lang}.json`),
-            path.resolve(process.cwd(), `dist/orahio/browser/public/assets/i18n/${lang}.json`),
+            path.resolve(process.cwd(), `dist/orhago/browser/assets/i18n/${lang}.json`),
+            path.resolve(process.cwd(), `dist/orhago/browser/public/assets/i18n/${lang}.json`),
             path.resolve(process.cwd(), `public/assets/i18n/${lang}.json`),
             path.resolve(process.cwd(), `src/assets/i18n/${lang}.json`),
           ];

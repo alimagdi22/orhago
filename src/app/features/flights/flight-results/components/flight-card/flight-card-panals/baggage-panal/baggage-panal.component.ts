@@ -10,25 +10,28 @@ export class BaggagePanalComponent {
   @Input() baggageInfo: IBaggageInformation = BAGGAGE_INFORMATION_DEFAULT;
 
   get normalBaggage() {
+    if (!this.baggageInfo?.baggage) return '1';
     const baggage = this.baggageInfo.baggage.split(' ');
 
-    if (baggage[1] === 'Kilograms') {
+    if (baggage && baggage[1] === 'Kilograms') {
       return baggage[0];
     }
 
-    return baggage[0];
+    return baggage ? baggage[0] : '1';
   }
 
   get getUnit() {
+    if (!this.baggageInfo?.baggage) return 'PCs';
     const baggage = this.baggageInfo.baggage.split(' ');
 
-    if (baggage[1] === 'Kilograms') {
+    if (baggage && baggage[1] === 'Kilograms') {
       return 'KGs';
     }
 
     return 'PCs';
   }
- getBaggageCountOnlyOrRaw(baggage: string): string {
+
+  getBaggageCountOnlyOrRaw(baggage: string): string {
     if (!baggage) return '';
 
     const [countStr, unit] = baggage.split(' ');
@@ -45,10 +48,12 @@ export class BaggagePanalComponent {
 
     return baggage;
   }
-  childBaggage() {
-    const baggage = this.baggageInfo.childBaggage?.split(' ');
 
-    if(baggage) {
+  childBaggage() {
+    if (!this.baggageInfo?.childBaggage) return 'N/A';
+    const baggage = this.baggageInfo.childBaggage.split(' ');
+
+    if (baggage) {
       if (baggage[1] === 'Kilograms') {
         return baggage[0];
       }
@@ -60,9 +65,10 @@ export class BaggagePanalComponent {
   }
 
   infantBaggage() {
-    const baggage = this.baggageInfo.infantBaggage?.split(' ');
+    if (!this.baggageInfo?.infantBaggage) return 'N/A';
+    const baggage = this.baggageInfo.infantBaggage.split(' ');
 
-    if(baggage) {
+    if (baggage) {
       if (baggage[1] === 'Kilograms') {
         return baggage[0];
       }

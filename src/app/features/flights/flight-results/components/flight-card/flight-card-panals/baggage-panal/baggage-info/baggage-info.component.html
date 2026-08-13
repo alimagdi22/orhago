@@ -1,149 +1,89 @@
 <img
   src="assets/icons/exclamation-icon.svg"
-  title="More Info"
+  title="Baggage Policy"
   class="exclamation"
   #icon
   [matMenuTriggerFor]="baggageInfoMenu"
   #baggageInfoTrigger="matMenuTrigger"
   (mouseenter)="!isMobile() && openBaggageInfo()"
+  (mouseleave)="!isMobile() && closeBaggageInfoWithDelay()"
   (click)="isMobile() && openBaggageInfo(); $event.preventDefault()"
 />
 
-<mat-menu #baggageInfoMenu="matMenu" class="baggage-info-menu">
-
- <section class="inculded-sec">
-
-   <div class="baggage-line">
-     <div class="baggage-entry">
-       <img src="assets/icons/travel-bag-icon.svg" alt="bag icon" >
-       <div class="text">
-        {{getBaggageCountOnlyOrRaw(baggageInfo.baggage)  }}
-       {{ 'flightDetails.baggage.cabin' | translate }}
-       </div>
-       
-     </div>
-   </div>
-
-  <div class="hand-baggage mt-2">
-    <div class="hand-baggage-top">
-      <img src="assets/icons/hand-bag-icon.svg" alt="" >
-      <div class="text"> 1 x {{ 'flightDetails.baggage.hand' | translate }}</div>
-     
-    </div>
-    <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
-  </div>
-<!-- </div> -->
-
-<!-- } -->
-<!-- </div> -->
-</section>
-    <!-- <div class="inculded-sec__header">
-      <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
-      <span>{{ 'flightDetails.baggage.included' | translate }}</span>
+<mat-menu #baggageInfoMenu="matMenu" class="baggage-info-popover-menu">
+  <div
+    class="baggage-popover-content"
+    [ngClass]="translate.currentLang === 'ar'?'ar':'en'"
+    (mouseenter)="!isMobile() && cancelCloseBaggageInfo()"
+    (mouseleave)="!isMobile() && closeBaggageInfoWithDelay()"
+  >
+    <!-- Header -->
+    <div class="popover-header">
+      <h3 class="popover-title">{{ 'flightDetails.baggage.title' | translate }}</h3>
+      <span class="popover-subtitle">{{ 'flightDetails.baggage.perPerson' | translate }}</span>
     </div>
 
-    @if (baggageInfo.baggage) {
-      <p>total checked baggage</p>
-      <div class="inculded-sec__baggage">
-        <div class="inculded-sec__baggage__info">
-          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
-          <span class="inculded-sec__baggage__info__number">{{getBaggageCountOnlyOrRaw(normalBaggage()) }}</span>
-        </div>
-        <div class="inculded-sec__baggage__text">
-          <p>{{'flightDetails.baggage.check' | translate}}</p>
-        </div>
+    <!-- Section 1: Included -->
+    <div class="popover-section">
+      <div class="section-title-row">
+        <img src="assets/icons/checked-icon.svg" class="status-icon" alt="Included" />
+        <span class="section-title text-included">{{ 'flightDetails.baggage.included' | translate }}</span>
       </div>
-    }
 
-            <div class="inculded-sec__baggage">
-            <div class="inculded-sec__baggage__info">
-              <img src="assets/icons/hand-bag-icon.svg" alt="" class="inculded-sec__baggage__info__icon"/>
-              <span class="inculded-sec__baggage__info__number">7 kg</span>
+      <div class="items-list">
+        <!-- Personal Item -->
+        <div class="baggage-item-row">
+          <div class="baggage-row d-flex">
+            <span class="item-qty">1</span>
+            <img src="assets/icons/hand-bag-icon.svg" class="item-icon" alt="Personal item" />
+          </div>
+          <span class="item-text">X {{ 'flightDetails.baggage.personalItem' | translate }}</span>
+        </div>
+
+        <!-- Cabin Baggage -->
+        <div class="baggage-item-row has-subtitle">
+          <div class="item-main-line">
+            <div class="baggage-row d-flex">
+              <span class="item-qty">{{ normalBaggage() }}</span>
+              <img src="assets/icons/travel-bag-icon.svg" class="item-icon" alt="Cabin baggage" />
             </div>
-            <p>
-               cabin baggage
-            </p>
-            <div class="inculded-sec__baggage__text__caption">1 piece</div>
-          </div> -->
-
-  <!-- <h3>{{ 'flightDetails.baggage.title' | translate }}</h3>
-  <span class="baggage-info-menu__caption">{{ 'flightDetails.baggage.perPerson' | translate }}</span>
-
-  <section class="inculded-sec">
-    <div class="inculded-sec__header">
-      <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
-      <span>{{ 'flightDetails.baggage.included' | translate }}</span>
+            <span class="item-text">X {{ 'flightDetails.baggage.cabinBaggage' | translate }}</span>
+          </div>
+          <div class="item-sub-text">(45 x 38 x 23) · 6 kg</div>
+        </div>
+      </div>
     </div>
 
-    @if (baggageInfo.baggage) {
-      <div class="inculded-sec__baggage">
-        <div class="inculded-sec__baggage__info">
-          <span class="inculded-sec__baggage__info__number">{{ normalBaggage() }}</span>
-          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
-        </div>
+    <div class="popover-divider"></div>
 
-        <div class="inculded-sec__baggage__text">
-          <p>{{ 'flightDetails.baggage.adultItems' | translate }}</p> -->
-          <!-- <span class="inculded-sec__baggage__text__caption">(45 x 38 23) . 6 kg</span> -->
-        <!-- </div>
+    <!-- Section 2: Not possible to add with us -->
+    <div class="popover-section">
+      <div class="section-title-row">
+        <div class="cancel-circle">&times;</div>
+        <span class="section-title text-not-possible">{{ 'flightDetails.baggage.notPossibleAdd' | translate }}</span>
       </div>
-    } -->
 
-    <!-- @if (baggageInfo.childBaggage) {
-      <div class="inculded-sec__baggage">
-        <div class="inculded-sec__baggage__info">
-          <span class="inculded-sec__baggage__info__number">{{ childBaggage() }}</span>
-          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
+      <div class="items-list">
+        <!-- Checked Baggage -->
+        <div class="baggage-item-row">
+          <img src="assets/icons/bag-icon.svg" class="item-icon" alt="Checked baggage" />
+          <span class="item-text text-dark-bold">{{ 'flightDetails.baggage.checkedBaggage' | translate }}</span>
         </div>
-
-        <div class="inculded-sec__baggage__text">
-          <p>{{ 'flightDetails.baggage.childItems' | translate }}</p> -->
-          <!-- <span class="inculded-sec__baggage__text__caption">(45 x 38 23) . 6 kg</span> -->
-        <!-- </div>
       </div>
-    } -->
 
-    <!-- @if (baggageInfo.infantBaggage) {
-      <div class="inculded-sec__baggage">
-        <div class="inculded-sec__baggage__info">
-          <span class="inculded-sec__baggage__info__number">{{ infantBaggage() }}</span>
-          <img src="assets/icons/travel-bag-icon.svg" title="Bag Icon" class="inculded-sec__baggage__info__icon" />
-        </div>
-
-        <div class="inculded-sec__baggage__text">
-          <p>{{ 'flightDetails.baggage.infantItems' | translate }}</p> -->
-          <!-- <span class="inculded-sec__baggage__text__caption">(45 x 38 23) . 6 kg</span> -->
-        <!-- </div>
+      <!-- Info Alert Box -->
+      <div class="info-alert-box">
+        <img src="assets/icons/exclamation-icon.svg" class="alert-info-icon" alt="Info" />
+        <p class="alert-message">{{ 'flightDetails.baggage.message' | translate }}</p>
       </div>
-    }
-    @if (shouldShowBaggageNote(baggageInfo)) {
-  <div class="inculded-sec__baggage__note">
-      <p>{{'flightDetails.baggage.check'| translate}}</p>
+    </div>
+
+    <div class="popover-divider"></div>
+
+    <!-- Footer Note -->
+    <p class="popover-footer-note">
+      {{ 'flightDetails.baggage.note' | translate }}
+    </p>
   </div>
-}
-  </section>
-
-  <hr />
-
-  <section class="not-possible-sec">
-    <div class="not-possible-sec__header">
-      <div class="not-possible-sec__header__icon">x</div>
-      <span class="not-possible-sec__header__text">{{'flightDetails.baggage.notPossible'| translate}}</span>
-    </div>
-
-    <div class="not-possible-sec__baggage">
-      <img src="assets/icons/bag-icon.svg" title="Bag Icon" class="not-possible-sec__baggage__icon" />
-      <span class="not-possible-sec__baggage__text">{{ 'flightDetails.baggage.baggageType' | translate }}</span>
-    </div>
-
-    <div class="not-possible-sec__info">
-      <img src="assets/icons/checked-icon.svg" title="Checked Icon" class="not-possible-sec__baggage__icon" />
-
-      <p>{{ 'flightDetails.baggage.message' | translate }}</p>
-    </div>
-  </section>
-
-  <hr />
-
-  <p>{{ 'flightDetails.baggage.note' | translate }}</p> -->
 </mat-menu>
+

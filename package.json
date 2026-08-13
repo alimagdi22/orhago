@@ -1,5 +1,5 @@
 {
-  "name": "orahio-clean",
+  "name": "orhago",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier --write .",
-    "serve:ssr": "node dist/orahio-clean/server/server.mjs"
+    "serve:ssr": "node dist/orhago/server/server.mjs"
   },
   "private": true,
   "dependencies": {

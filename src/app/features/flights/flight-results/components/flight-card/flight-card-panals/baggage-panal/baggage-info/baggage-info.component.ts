@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, OnDestroy, inject } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { TranslateService } from '@ngx-translate/core';
 import { BAGGAGE_INFORMATION_DEFAULT, IBaggageInformation } from 'rp-travel-ui';
 
 @Component({
@@ -8,19 +9,29 @@ import { BAGGAGE_INFORMATION_DEFAULT, IBaggageInformation } from 'rp-travel-ui';
   templateUrl: './baggage-info.component.html',
   styleUrl: './baggage-info.component.scss',
 })
-export class BaggageInfoComponent  {
+export class BaggageInfoComponent implements OnDestroy {
   @Input() baggageInfo: IBaggageInformation = BAGGAGE_INFORMATION_DEFAULT;
   @ViewChild('icon') icon!: ElementRef;
   @ViewChild('baggageInfoTrigger') baggageInfoTrigger!: MatMenuTrigger;
+  translate = inject(TranslateService);
+  private closeTimer: any;
+
+  ngOnDestroy(): void {
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+    }
+  }
 
   normalBaggage() {
     const baggage = this.baggageInfo?.baggage?.split(' ');
 
+    if (!baggage || baggage.length === 0) return '1';
+
     if (baggage[1] === 'Kilograms') {
-      return Math.floor(parseInt(baggage[0]) / 7);
+      return Math.floor(parseInt(baggage[0]) / 7) || '1';
     }
 
-    return baggage[0];
+    return baggage[0] || '1';
   }
 
   childBaggage() {
@@ -52,7 +63,26 @@ export class BaggageInfoComponent  {
   }
 
   openBaggageInfo() {
-    this.baggageInfoTrigger.openMenu();
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+    }
+    if (this.baggageInfoTrigger && !this.baggageInfoTrigger.menuOpen) {
+      this.baggageInfoTrigger.openMenu();
+    }
+  }
+
+  closeBaggageInfoWithDelay() {
+    this.closeTimer = setTimeout(() => {
+      if (this.baggageInfoTrigger && this.baggageInfoTrigger.menuOpen) {
+        this.baggageInfoTrigger.closeMenu();
+      }
+    }, 200);
+  }
+
+  cancelCloseBaggageInfo() {
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+    }
   }
 
   onClickDone() {
@@ -60,6 +90,7 @@ export class BaggageInfoComponent  {
       this.baggageInfoTrigger.closeMenu();
     }
   }
+
   shouldShowBaggageNote(baggageInfo: any): boolean {
     return ['baggage', 'childBaggage', 'infantBaggage'].some((key) =>
       baggageInfo[key]?.toLowerCase().includes('piece')
@@ -67,35 +98,30 @@ export class BaggageInfoComponent  {
   }
 
   isMobile() {
-    return window.innerWidth < 1080;
+    return typeof window !== 'undefined' && window.innerWidth < 1080;
   }
 
-getBaggageCountOnlyOrRaw(baggage: string | number): string {
-  if (!baggage) return '';
+  getBaggageCountOnlyOrRaw(baggage: string | number): string {
+    if (!baggage) return '';
 
-  const baggageStr = baggage.toString().trim();
-  const [countStr, unitRaw] = baggageStr.split(' ');
-  const unit = unitRaw?.toLowerCase();
+    const baggageStr = baggage.toString().trim();
+    const [countStr, unitRaw] = baggageStr.split(' ');
+    const unit = unitRaw?.toLowerCase();
 
-  const isPieceUnit = ['piece', 'pieces', 'pc', 'pcs'].includes(unit);
+    const isPieceUnit = ['piece', 'pieces', 'pc', 'pcs'].includes(unit);
 
-  const count = parseInt(countStr, 10);
+    const count = parseInt(countStr, 10);
 
-  if (isNaN(count)) return '';
+    if (isNaN(count)) return baggageStr;
 
-  if (isPieceUnit) {
-    return count === 0 ? '0 PCs' : `${count} x 23KG`;
+    if (isPieceUnit) {
+      return count === 0 ? '0 PCs' : `${count} x 23KG`;
+    }
+
+    if (unit === 'kilograms' || unit === 'kg') {
+      return `${count} KG`;
+    }
+
+    return baggageStr;
   }
-
-  if (unit === 'kilograms' || unit === 'kg') {
-    return `${count} KG`;
-  }
-
-
-
-  return baggageStr;
-}
-
-
-
 }
