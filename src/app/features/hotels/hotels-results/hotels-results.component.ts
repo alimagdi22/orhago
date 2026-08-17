@@ -53,7 +53,7 @@ export class HotelsResultsComponent {
           POS: hotelUrlParams[4],
           sID: hotelUrlParams[5],
           CityName: hotelUrlParams[6],
-          Nat: hotelUrlParams[8],
+          Nat: hotelUrlParams[7].split(',')[1],
           DateFrom: hotelUrlParams[9].replace(new RegExp('%20','g'),' '),
           DateTo: hotelUrlParams[10].replace(new RegExp('%20','g'),' '),
           Source:'Direct',

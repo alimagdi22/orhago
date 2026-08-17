@@ -1,6 +1,25 @@
 @import '../../../../sass/variables';
 @import '../../../../sass/colors';
 
+/* Media queries for instant CSS-driven responsiveness without JS hydration delay */
+@media (max-width: 1199px) {
+  .desktop-nav-wrapper {
+    display: none !important;
+  }
+  .mobile-nav-wrapper {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .desktop-nav-wrapper {
+    display: block !important;
+  }
+  .mobile-nav-wrapper {
+    display: none !important;
+  }
+}
+
 .wrapper {
   position: fixed;
   z-index: 5;
@@ -14,6 +33,7 @@
     align-items: center;
   }
 }
+
 
 .actions {
   display: flex;

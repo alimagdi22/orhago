@@ -1,4 +1,4 @@
-@if(sharedService.screenWidth >= 1200) {
+<div class="desktop-nav-wrapper">
   <div
     class="wrapper"
     [ngClass]="{
@@ -56,7 +56,9 @@
     </nav>
   </div>
   <div class="white-space"></div>
-} @else {
+</div>
+
+<div class="mobile-nav-wrapper">
   <section class="top-nav">
     <div>
       <img src="assets/images/new-logo.svg" width="130" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
@@ -68,6 +70,7 @@
       <span class="burger-bar"></span>
     </button>
   </section>
+</div>
 
   <!-- Mobile Sidebar Drawer -->
   @if (isSidebarOpen) {
@@ -125,7 +128,6 @@
       </ul>
     </aside>
   }
-}
 
 <!-- Desktop Mat-Menus -->
 <mat-menu #currencyMenu="matMenu">
