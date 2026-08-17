@@ -6,13 +6,23 @@
 }
 
 .form-group {
+  position: relative;
+  width: 50% !important;
+  all: unset;
   display: flex;
   flex-direction: column;
-  position: relative;
+  justify-content: space-between;
+  align-items: start;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
   height: 52px;
-  padding: 10px;
-  width: 50%;
-
+  cursor: pointer;
+  font-family: Open Sans;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
   label {
     margin-bottom: 8px;
     font-family: Open Sans;

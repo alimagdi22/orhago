@@ -74,7 +74,7 @@ export class MobileLocationInputComponent implements OnInit {
 
   onLocationChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const value = input.value.trim();
+    const value = input.value;
 
     if (this.selectedCity && this.selectedCity.City !== value) {
       this.selectedCity = null;
@@ -82,7 +82,7 @@ export class MobileLocationInputComponent implements OnInit {
 
     this.showValidationErrors = true;
 
-    if (value.length === 0) {
+    if (value.trim().length === 0) {
       // Clear form control and cities when input is empty
       this.homePageService.selectAllcities = [];
       this.searchForm.get('location')?.setValue(null);
@@ -95,7 +95,7 @@ export class MobileLocationInputComponent implements OnInit {
       return;
     }
 
-    if (value.length >= 2) {
+    if (value.trim().length >= 2) {
       this.homePageService.getCitiesById(value);
     } else {
       this.homePageService.selectAllcities = [];
@@ -108,9 +108,10 @@ export class MobileLocationInputComponent implements OnInit {
     this.searchForm.get('location')?.updateValueAndValidity();
   }
 
-
-  displayCity(city: hotelCities | null): string {
-    return city?.City || '';
+  displayCity(city: hotelCities | string | null): string {
+    if (!city) return '';
+    if (typeof city === 'string') return city;
+    return city.City || '';
   }
 
   get locationInvalid(): boolean {

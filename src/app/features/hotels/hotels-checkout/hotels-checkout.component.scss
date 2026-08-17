@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 140px;
 }
 
 footer  {
@@ -22,6 +23,9 @@ app-main-button {
 }
 
 @media (max-width:768px){
+  .wrapper {
+    margin-bottom: 170px;
+  }
   footer {
     gap: 10px;
     flex-direction: column;

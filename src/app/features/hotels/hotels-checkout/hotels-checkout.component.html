@@ -2,10 +2,12 @@
   <app-spinner-loader @fadeInOut />
 } @else {
   <div class="container wrapper" @fadeInOut>
-    <app-payment-summary [totalPrice]="hotel.TotalSellPrice" />
+    <app-payment-summary [totalPrice]="hotel?.TotalSellPrice" />
 
     @if(!showPayment) {
-      <app-hotel-checkout-preview [nights]="nights" @slideUpDown />
+      @if (hotel) {
+        <app-hotel-checkout-preview [nights]="nights" @slideUpDown />
+      }
       @if(sharedService.screenWidth < 1000){
         <app-hotels-checkout-form-app @slideUpDown/>
       }@else {

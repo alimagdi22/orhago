@@ -3,7 +3,7 @@ import { HotelSearchService } from 'rp-hotels-ui';
 import { HomePageService } from 'rp-hotels-ui';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { hotelCities } from 'rp-hotels-ui';
-import { Observable, startWith, debounceTime, distinctUntilChanged, switchMap, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
@@ -61,8 +61,10 @@ export class HotelSearchBoxComponent implements OnInit {
     );
   }
 
-  displayCity(city: hotelCities): string {
-    return city ? `${city.City}, ${city.Country}` : '';
+  displayCity(city: hotelCities | string | null): string {
+    if (!city) return '';
+    if (typeof city === 'string') return city;
+    return `${city.City}, ${city.Country}`;
   }
 
   onCitySelected(event: MatAutocompleteSelectedEvent): void {

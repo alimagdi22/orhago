@@ -58,6 +58,9 @@ export class HotelsCheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
     this.hotelCheckoutService.searchId = this.route.snapshot.params['sId'];
     this.hotelCheckoutService.providerId = this.route.snapshot.params['pId'];
     this.hotelCheckoutService.hotelCode = this.route.snapshot.params['hotelId'];
@@ -91,11 +94,13 @@ export class HotelsCheckoutComponent implements OnInit, OnDestroy {
     if (this.hotelCheckoutService.HotelForm.invalid) {
       for (var i = 0; i < (<FormArray>this.hotelCheckoutService.HotelForm.get('Travellers'))['controls'].length; i++) {
         if ((<FormArray>this.hotelCheckoutService.HotelForm.get('Travellers')).at(i)?.invalid) {
-          const element = document.getElementById(i.toString());
+          if (typeof document !== 'undefined') {
+            const element = document.getElementById(i.toString());
 
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            element.click();
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              element.click();
+            }
           }
 
           // (<FormArray>this.hotelCheckoutService.HotelForm.get('Travellers')).at(i).markAllAsTouched();
@@ -133,10 +138,13 @@ export class HotelsCheckoutComponent implements OnInit, OnDestroy {
   }
 
   get hotel() {
-    return this.hotelCheckoutService.RequiredHotel;
+    return this.hotelCheckoutService?.RequiredHotel;
   }
 
   ngOnDestroy(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
     this.sharedService.showPayment = false;
     // this.hotelCheckoutService.destroyer();
     this.subscriptions.unsubscribe();

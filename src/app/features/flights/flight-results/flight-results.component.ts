@@ -68,7 +68,6 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
       let pointOfReservation = params['SearchPoint'];
       let flightType = params['flightType'];
       let flightsInfo = params['flightInfo'];
-
       let serachId = params['searchId'];
       let passengers = params['passengers'];
       let Cclass = params['Cclass'];

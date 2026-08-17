@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HotelResultsService, HotelRoomsService, HotelSearchService } from 'rp-hotels-ui';
@@ -12,7 +12,7 @@ import { RoomsComponent } from './components/rooms/rooms.component';
   templateUrl: './hotels-rooms.component.html',
   styleUrl: './hotels-rooms.component.scss'
 })
-export class HotelsRoomsComponent {
+export class HotelsRoomsComponent implements OnInit, OnDestroy {
   public sharedService = inject(SharedService);
   public hotelSearchService = inject(HotelSearchService);
   public hotelRoomsService = inject(HotelRoomsService);
@@ -73,6 +73,7 @@ export class HotelsRoomsComponent {
   }
 
   goToCheckout(packageid: string) {
+    this.closePopup();
     this.router.navigate([
       'hotels-checkout',
       this.providerId,
@@ -104,11 +105,22 @@ export class HotelsRoomsComponent {
   // Custom popup methods
   openPopup() {
     this.isPopupOpen = true;
-    document.body.style.overflow = 'hidden'; // prevent background scroll
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden'; // prevent background scroll
+    }
   }
 
   closePopup() {
     this.isPopupOpen = false;
-    document.body.style.overflow = ''; // restore scroll
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = ''; // restore scroll
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
+    this.subscription.unsubscribe();
   }
 }
