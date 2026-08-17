@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { HotelResultsService, HotelRoomsService, HotelSearchService } from 'rp-hotels-ui';
+import { HotelResultsService, HotelRoomsService, HotelSearchService, packages } from 'rp-hotels-ui';
 import { Subscription } from 'rxjs';
 import { SharedService } from '../../../shared/shared.service';
 import { RoomsComponent } from './components/rooms/rooms.component';
@@ -84,6 +84,10 @@ export class HotelsRoomsComponent implements OnInit, OnDestroy {
       this.cityId,
       this.nightsNum
     ]).then(() => this.sharedService.scrollToTop());
+  }
+
+  get packages(): packages[] {
+    return this.hotelRoomsService.roomsData?.Packages || [];
   }
 
   get groupedRooms() {

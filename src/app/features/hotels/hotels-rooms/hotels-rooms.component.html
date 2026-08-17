@@ -29,6 +29,17 @@
   } @else {
     <app-gallery [location]="location" [currency]="currency" />
     @if(sharedService.screenWidth < 900 ){
+      <div class="mobile-rooms-container my-3">
+        @for(package of packages; track package.PackageKey) {
+          <app-rooms
+            [package]="package"
+            [index]="$index"
+            [currency]="currency"
+            [nightsNumber]="nightsNum"
+            (selectRoom)="goToCheckout($event)"
+          />
+        }
+      </div>
       <app-review/>
       <app-amenities-mobile/>
       <div class="details">
@@ -62,10 +73,9 @@
       <mat-tab-nav-panel #tabPanel>
       @switch (activeLink.id) {
           @case (1) {
-            @for(package of (groupedRooms | keyvalue); track package.key) {
+            @for(package of packages; track package.PackageKey) {
               <app-rooms
-              [rooms]="package.value"
-              [packageName]="package.key"
+              [package]="package"
               [index]="$index"
               [currency]="currency"
               [nightsNumber]="nightsNum"
@@ -93,7 +103,7 @@
 </div>
 
 
-@if(sharedService.screenWidth < 900 && !sharedService.isCitiesLoading){
+<!-- @if(sharedService.screenWidth < 900 && !sharedService.isCitiesLoading){
   <div class="pricing-card">
     <div class="card-body">
       <p>{{hotelRoomsService.roomsData.sellCurrency}}
@@ -102,7 +112,7 @@
       <button class="select-button" (click)="openPopup()">Select Rooms</button>
     </div>
   </div>
-}
+} -->
 
 @if(isPopupOpen){
   <div class="custom-popup-overlay">
@@ -113,10 +123,9 @@
       </div>
 
       <div class="popup-body">
-        @for(package of (groupedRooms | keyvalue); track package.key) {
+        @for(package of packages; track package.PackageKey) {
           <app-rooms
-            [rooms]="package.value"
-            [packageName]="package.key"
+            [package]="package"
             [index]="$index"
             [currency]="currency"
             [nightsNumber]="nightsNum"
