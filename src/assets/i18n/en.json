@@ -9,7 +9,7 @@
   },
 
   "footer": {
-    "about": "Gootaj is a leading online travel agency offering seamless booking experiences for flights, hotels, and more. Explore the world with us!",
+    "about": "Orhago is a leading online travel agency offering seamless booking experiences for flights, hotels, and more. Explore the world with us!",
     "links": {
       "home": "Home",
       "aboutUs": "About Us",
@@ -19,11 +19,11 @@
       "helpCenter": "Help Center"
     },
     "contact": {
-      "email": "info@gootaj.com",
+      "email": "info@orhago.com",
       "phone": "+965 66414350",
       "address": "Close to Gad Resturant,Habeeb Munawer St, Al Farwaniyah, Kuwait"
     },
-    "copyright": "&copy; 2025 Gootaj. All rights reserved."
+    "copyright": "&copy; 2025 Orhago. All rights reserved."
   },
 
     "searchBox": {
@@ -335,9 +335,9 @@
   "about": {
     "title": "Redefining Travel Experiences",
     "gateway": "Your Gateway to memorable journeys",
-    "description": "Gootaj is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
+    "description": "Orhago is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
     "storyTitle": "Our Story",
-    "storyDescription": "GOOTAJ was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
+    "storyDescription": "ORHAGO was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
     "advantages": {
       "exclusiveDeals": "Exclusive Deals",
       "exclusiveDealsDesc": "Access to unbeatable prices on flights, hotels and vacation packages.",
@@ -487,7 +487,8 @@
     "popular":"Popular Filters",
     "star":"Stars Rateing",
     "location":"Location",
-    "reset":"Reset Filters"
+    "reset":"Reset Filters",
+    "PropertySearch":"Search"
   },
 
   "hotelCard": {
@@ -518,10 +519,14 @@
     "Refundable": "Refundable",
     "Nun-refundable": "Nun-refundable",
     "View more amenities": "View more amenities",
-    "Book Now": "Book Now"
+    "Book Now": "Book Now",
+    "errorMessage": "Something went wrong while fetching hotel rooms. Please try again later.",
+    "goHome": "Go to Home"
   },
 
   "hotelCheckout": {
+    "Includes": "Includes",
+    "guests": "guests",
     "Guest Room": "Guest Room: ",
     "Special Request": "Special Request (Optional)",
     "Mr": "Mr",

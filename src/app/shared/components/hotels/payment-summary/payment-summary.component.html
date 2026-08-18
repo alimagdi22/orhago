@@ -15,22 +15,14 @@
     </div>
   }
 </header>
+
 @if(sharedService.screenWidth > 900){
+  <div class="payment-body col-12 row">
+      <!-- <p class="col-12">{{ 'hotelPayment.Payment Timeline' | translate }}</p> -->
 
-  <body class="col-12 row">
-      <p class="col-12">{{ 'hotelPayment.Payment Timeline' | translate }}</p>
+      <!-- <p class="col-8">{{ 'hotelPayment.Pay now' | translate }}</p>
+      <p class="col-4">{{ currency | exchange: 'code' }} {{ totalPrice | exchange: 'value' }}</p> -->
 
-      <p class="col-8">{{ 'hotelPayment.Pay now' | translate }}</p>
-      <p class="col-4">{{ currency | exchange: 'code' }} {{ totalPrice | exchange: 'value' }}</p>
-
-      <!-- <p class="col-12 row">
-          <span class="col-8">{{ 'hotelPayment.Pay at Property' | translate }}</span>
-          <span class="col-4">EGP 988.03</span>
-
-          <span class="col-8 property-currency">{{ 'hotelPayment.In property curreency' | translate }}</span>
-          <span class="col-4 property-currency">US$20.00</span>
-      </p>  -->
-
-      <caption class="col-12">{{ 'hotelPayment.note' | translate }}</caption>
-  </body>
+      <span class="col-12 note-caption">{{ 'hotelPayment.note' | translate }}</span>
+  </div>
 }

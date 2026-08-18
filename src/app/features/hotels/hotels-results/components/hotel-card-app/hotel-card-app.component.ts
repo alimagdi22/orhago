@@ -12,13 +12,12 @@ import { hotel, HotelResultsService } from 'rp-hotels-ui';
   styleUrl: './hotel-card-app.component.scss'
 })
 export class HotelCardAppComponent {
-@Input({ required: false }) hotel!: hotel;
+  @Input({ required: false }) hotel!: hotel;
 
   private hotelResultsService = inject(HotelResultsService);
   private sharedService = inject(SharedService);
   private route = inject(ActivatedRoute);
 
-  public stars: number[] = [];
   public translate = inject(TranslateService);
   public viewDealButton: IMainButton = {
     borderRadius: '12px',
@@ -26,8 +25,9 @@ export class HotelCardAppComponent {
     width: '100%'
   }
 
-  ngOnInit(): void {
-    for(let i = 0; i < this.hotel.hotelStars; i++) this.stars.push(1);
+  get stars(): number[] {
+    const starCount = Number(this.hotel?.hotelStars) || 0;
+    return Array.from({ length: starCount }, (_, i) => i);
   }
 
   onClickViewDeal() {

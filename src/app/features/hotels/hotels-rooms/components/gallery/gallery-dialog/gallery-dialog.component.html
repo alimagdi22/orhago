@@ -1,0 +1,11 @@
+<div class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()" aria-label="Close">×</button>
+    <img [src]="images[currentIndex]" alt="Hotel image" class="gallery-img" />
+    <button class="arrow left" (click)="prevImage()" *ngIf="images.length > 1" aria-label="Previous">‹</button>
+    <button class="arrow right" (click)="nextImage()" *ngIf="images.length > 1" aria-label="Next">›</button>
+    <div class="counter" *ngIf="images.length > 0">
+      {{ currentIndex + 1 }} / {{ images.length }}
+    </div>
+  </div>
+</div>

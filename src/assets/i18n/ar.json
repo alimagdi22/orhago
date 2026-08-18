@@ -19,7 +19,7 @@
       "helpCenter": "مركز المساعدة"
     },
     "contact": {
-      "email": "info@gootaj.com",
+      "email": "info@orhago.com",
       "phone": "+965 66414350",
       "address": "بجوار مطعم جاد، شارع حبيب مناور، الفروانية، الكويت"
     },
@@ -479,12 +479,21 @@
       "empty": "لا توجد حجوزات رحلات لعرضها"
     },
     "hotels-filter":{
-      "filter":"Filter",
-      "popular":"Popular Filter",
-      "star":"Star Rate",
-      "location":"Location",
-      "reset":"Reset Filters"
+      "filter": "Filter",
+      "popular": "Popular Filter",
+      "star": "Star Rate",
+      "location": "Location",
+      "reset": "Reset Filters",
+      "PropertSearch": "بحث"
     }
+  },
+  "hotels-filter":{
+    "filter": "Filter",
+    "popular": "Popular Filter",
+    "star": "Star Rate",
+    "location": "Location",
+    "reset": "Reset Filters",
+    "PropertySearch": "بحث"
   },
 
   "hotelCard": {
@@ -493,5 +502,50 @@
     "Per night": "لكل ليلة",
     "Show More Results": "عرض المزيد من النتائج",
     "View Deal": "عرض الصفقة"
+  },
+
+  "hotelCheckout": {
+    "Includes": "يشمل",
+    "guests": "ضيوف",
+    "Guest Room": "غرفة النزيل: ",
+    "Special Request": "طلب خاص (اختياري)",
+    "Mr": "السيد",
+    "Mrs": "السيدة",
+    "Ms": "الآنسة",
+    "Check In": "تسجيل الوصول",
+    "Check Out": "المغادرة",
+    "Stay": "الإقامة",
+    "Room only": "غرفة فقط",
+    "Breakfast included": "الإفطار مشمول",
+    "Meals included": "الوجبات مشمولة",
+    "Adult": "بالغ",
+    "Child": "طفل",
+    "From": "من",
+    "To": "إلى"
+  },
+
+  "hotelRooms": {
+    "Rooms": "الغرف",
+    "Map": "الخريطة",
+    "Details": "التفاصيل",
+    "Good breakfast": "إفطار جيد",
+    "Nice pool": "مسبح لطيف",
+    "Popular amenities": "المرافق الشائعة",
+    "Parking": "موقف سيارات",
+    "Swimming pool": "حمام سباحة",
+    "Read More": "قراءة المزيد",
+    "Read Less": "قراءة أقل",
+    "Address": "العنوان",
+    "Check In": "تسجيل الوصول",
+    "Check Out": "المغادرة",
+    "No meals included": "بدون وجبات",
+    "Breackfast included": "الإفطار مشمول",
+    "Meals included": "الوجبات مشمولة",
+    "Refundable": "مستردة",
+    "Nun-refundable": "غير مستردة",
+    "View more amenities": "عرض المزيد من المرافق",
+    "Book Now": "احجز الآن",
+    "errorMessage": "حدث خطأ أثناء جلب غرف الفندق. يرجى المحاولة مرة أخرى لاحقاً.",
+    "goHome": "العودة إلى الرئيسية"
   }
 }

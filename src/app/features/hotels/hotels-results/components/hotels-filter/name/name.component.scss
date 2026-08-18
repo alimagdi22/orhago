@@ -1,0 +1,38 @@
+.name-search-form {
+  width: 100%;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+
+  .search-input {
+    border-radius: 12px;
+    border: 1px solid #DFDFDF;
+    background: #ffffff;
+    padding-right: 40px;
+    height: 44px;
+    font-size: 14px;
+    color: #333;
+
+    &::placeholder {
+      color: #999;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      border-color: #80bdff;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 16px;
+    pointer-events: none;
+  }
+}

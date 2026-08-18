@@ -5,6 +5,7 @@ import { HotelResultsService, HotelRoomsService, HotelSearchService, packages } 
 import { Subscription } from 'rxjs';
 import { SharedService } from '../../../shared/shared.service';
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { IMainButton } from '../../../shared/models/flights/mainButton.model';
 
 @Component({
   standalone: false,
@@ -32,6 +33,12 @@ export class HotelsRoomsComponent implements OnInit, OnDestroy {
     { id: 5, title: 'Details' },
   ];
 
+  public goHomeButtonInfo: IMainButton = {
+    width: '200px',
+    height: '48px',
+    borderRadius: '8px'
+  };
+
   private subscription = new Subscription();
 
   private searchId = "";
@@ -46,30 +53,36 @@ export class HotelsRoomsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.hotelResultsService.destroyer();
 
-    this.route.queryParams.subscribe((params: Params) => {
-      this.searchId = params['searchId'];
-      this.hotelId = params['hotelId'];
-      this.providerId = params['providerId'];
-      this.currency = params['currency'];
-      this.nightsNum = +params['nightsNum'];
-      this.cityId = params['cityId'];
-      this.packageKey = params['packageKey'];
-
-      this.hotelRoomsService.getRooms(this.searchId, this.hotelId, this.providerId);
-    });
-
     this.subscription.add(
-      this.hotelRoomsService
-        .getRooms(this.searchId, this.hotelId, this.providerId, this.packageKey)
-        .subscribe({
-          next: () => {
-            this.location = this.sanitizer.bypassSecurityTrustResourceUrl(
-              `https://www.google.com/maps?q=${this.hotelRoomsService.roomsData.Lat},${this.hotelRoomsService.roomsData.Lng}&hl=es;z=14&output=embed`
-            );
-          },
-          error: (err) => console.error('get hotel rooms error ->', err)
-        })
+      this.route.queryParams.subscribe((params: Params) => {
+        this.searchId = params['searchId'];
+        this.hotelId = params['hotelId'];
+        this.providerId = params['providerId'];
+        this.currency = params['currency'];
+        this.nightsNum = +params['nightsNum'];
+        this.cityId = params['cityId'];
+        this.packageKey = params['packageKey'];
+
+        if (this.searchId && this.hotelId && this.providerId) {
+          this.hotelRoomsService
+            .getRooms(this.searchId, this.hotelId, this.providerId, this.packageKey)
+            .subscribe({
+              next: (data) => {
+                if (data && this.hotelRoomsService.roomsData?.Lat != null && this.hotelRoomsService.roomsData?.Lng != null) {
+                  this.location = this.sanitizer.bypassSecurityTrustResourceUrl(
+                    `https://www.google.com/maps?q=${this.hotelRoomsService.roomsData.Lat},${this.hotelRoomsService.roomsData.Lng}&hl=es;z=14&output=embed`
+                  );
+                }
+              },
+              error: (err) => console.error('get hotel rooms error ->', err)
+            });
+        }
+      })
     );
+  }
+
+  goHome() {
+    this.router.navigate(['/']);
   }
 
   goToCheckout(packageid: string) {

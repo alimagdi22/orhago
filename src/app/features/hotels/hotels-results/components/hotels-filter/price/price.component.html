@@ -1,0 +1,34 @@
+@if (hotelResults.filterForm && !hotelResults.hotelResultsLoader) {
+  <form [formGroup]="hotelResults.filterForm" class="price-filter-container">
+    @if (hotelResults.hotelDataResponse?.HotelResult?.length) {
+      <div class="price-values d-flex justify-content-between align-items-center mb-3">
+        <div class="price-box min-price">
+          <span class="label">{{ 'results.filter.min' | translate }}: </span>
+          <span class="val fw-bold">{{ (hotelResults.filterForm.get('hotelPriceMin')?.value || 0) | exchange : 'value' | number: '1.0-0' }}</span>
+          <span class="curr ms-1">{{ hotelResults.hotelDataResponse?.HotelResult?.[0]?.sellCurrency | exchange : 'code' }}</span>
+        </div>
+        <div class="price-box max-price">
+          <span class="label">{{ 'results.filter.max' | translate }}: </span>
+          <span class="val fw-bold">{{ (hotelResults.filterForm.get('hotelPriceMax')?.value || 0) | exchange : 'value' | number: '1.0-0' }}</span>
+          <span class="curr ms-1">{{ hotelResults.hotelDataResponse?.HotelResult?.[0]?.sellCurrency | exchange : 'code' }}</span>
+        </div>
+      </div>
+    }
+
+    <mat-slider
+      class="w-100 price-slider"
+      [min]="hotelResults.minPriceValueForSlider"
+      [max]="hotelResults.maxPriceValueForSlider"
+      discrete="false"
+    >
+      <input
+        matSliderStartThumb
+        formControlName="hotelPriceMin"
+      />
+      <input
+        matSliderEndThumb
+        formControlName="hotelPriceMax"
+      />
+    </mat-slider>
+  </form>
+}

@@ -32,7 +32,7 @@
   },
 
   "home": {
-    "promo":"24/7 Support , Best Rates. Zero Stress",
+    "promo": "24/7 Support , Best Rates. Zero Stress",
     "title": "Discover Your Life, Travel Where You Want",
     "bookWithUs": "Book With flytoall for better deals, and unforgettable experience",
     "mostSearched": "Most searched flights",
@@ -54,6 +54,15 @@
       ],
       "scanToDownload": "Scan to download"
     }
+  },
+
+  "hotels-filter": {
+    "filter": "Filter",
+    "popular": "Popular Filters",
+    "star": "Stars Rateing",
+    "location": "Location",
+    "reset": "Reset Filters",
+    "PropertySearch": "Search"
   },
 
   "searchBox": {
@@ -89,8 +98,8 @@
     "addReturn": "+ Add return",
     "addFlightNote": "Maximum of 4 different flights can be added",
     "allAirports": "All Airports",
-    "recommendedAirportsHeading":"FlyToAll suggests — you decide",
-    "recommendedAirportsHeading2":"Or type your own destination"
+    "recommendedAirportsHeading": "FlyToAll suggests — you decide",
+    "recommendedAirportsHeading2": "Or type your own destination"
   },
 
   "footer": {
@@ -358,7 +367,6 @@
       "note": "Different baggage allowance may apply, we show the minimum allowed. See itinerary for more baggage details."
     }
   },
-
 
   "checkout": {
     "Depart": "Depart",

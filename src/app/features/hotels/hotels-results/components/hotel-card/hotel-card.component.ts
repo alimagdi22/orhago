@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { hotel, HotelResultsService } from 'rp-hotels-ui';
@@ -11,14 +11,13 @@ import { SharedService } from '../../../../../shared/shared.service';
   templateUrl: './hotel-card.component.html',
   styleUrl: './hotel-card.component.scss'
 })
-export class HotelCardComponent implements OnInit {
+export class HotelCardComponent {
   @Input({ required: false }) hotel!: hotel;
 
   private hotelResultsService = inject(HotelResultsService);
   public sharedService = inject(SharedService);
   private route = inject(ActivatedRoute);
   
-  public stars: number[] = [];
   public translate = inject(TranslateService);
   public viewDealButton: IMainButton = {
     borderRadius: '12px',
@@ -26,10 +25,9 @@ export class HotelCardComponent implements OnInit {
     width: '100%'
   }
 
-  ngOnInit(): void {
-    if (this.hotel) {
-      for(let i = 0; i < this.hotel.hotelStars; i++) this.stars.push(1);
-    }
+  get stars(): number[] {
+    const starCount = Number(this.hotel?.hotelStars) || 0;
+    return Array.from({ length: starCount }, (_, i) => i);
   }
 
   onClickViewDeal() {

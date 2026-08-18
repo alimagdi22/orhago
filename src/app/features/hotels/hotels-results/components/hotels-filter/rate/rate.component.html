@@ -1,21 +1,5 @@
-<!-- <form [formGroup]="hotelResults.filterForm">
-<ng-container formArrayName="hotelRates" *ngIf="!hotelResults.hotelResultsLoader">
-                <ng-container *ngFor="let item of hotelResults.hotelRatesArray['controls'] ; let i= index;">
-                    <ng-container [formGroupName]="i">
-                        <div class="hotelFilter_rate">
-                            <input formControlName="rate"  type="checkbox" class="form-check-input"  (click)="hotelResults.selectHotelRates(i)">
-                            <label class="form-check-label">
-                                 <app-star-rate [hotelRate]="i+1"/>
-                            </label>
-                        </div>
-                    </ng-container>
-                </ng-container>
-            </ng-container>
-</form> -->
-
-
 <form [formGroup]="hotelResults.filterForm">
-  <ng-container formArrayName="hotelRates" *ngIf="!hotelResults.hotelResultsLoader">
+  <ng-container formArrayName="hotelRates" *ngIf="!hotelResults.hotelResultsLoader && hotelResults.hotelRatesArray">
     <div class="rate-chip-wrapper">
       <ng-container *ngFor="let item of hotelResults.hotelRatesArray.controls; let i = index">
         <ng-container [formGroupName]="i">
@@ -23,7 +7,7 @@
             <input
               formControlName="rate"
               type="checkbox"
-              (click)="hotelResults.selectHotelRates(i)"
+              (click)="onRateClick(i)"
               hidden
             />
             <span class="star-label">
@@ -38,4 +22,3 @@
     </div>
   </ng-container>
 </form>
-

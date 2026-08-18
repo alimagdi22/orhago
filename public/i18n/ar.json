@@ -552,5 +552,15 @@
   "maxPrice": "السعر الاعلي",
   "flightDetailsTitle": "تفاصيل الرحلة",
   "Show Less": "عرض أقل",
-  "MoreFlightsSamePrice": "+{{count}} رحلات أخرى بنفس السعر"
+  "MoreFlightsSamePrice": "+{{count}} رحلات أخرى بنفس السعر",
+
+  "hotels-filter":{
+    "filter": "Filter",
+    "popular": "Popular Filter",
+    "star": "Star Rate",
+    "location": "Location",
+    "reset": "Reset Filters",
+    "PropertySearch": "بحث"
+  }
+
 }

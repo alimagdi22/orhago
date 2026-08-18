@@ -70,8 +70,8 @@ export class HotelsCheckoutComponent implements OnInit, OnDestroy {
 
     console.log(this.nights)
 
+    this.hotelCheckoutService.initalCkeckoutForm(Number(cityId));
     this.hotelCheckoutService.loadDataCard(this.hotelCheckoutService.providerId, this.hotelCheckoutService.searchId, this.hotelCheckoutService.hotelCode, this.hotelCheckoutService.packageKey);
-    this.hotelCheckoutService.initalCkeckoutForm(Number(cityId))
 
     this.subscriptions.add(
       this.hotelCheckoutService.paymentLink.subscribe((data: any)=>{

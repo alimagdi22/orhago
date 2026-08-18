@@ -30,14 +30,17 @@ export class GalleryComponent implements OnInit {
   public stars: number[] = [];
 
   ngOnInit() {
-    this.stars = Array.from({ length: this.hotelRoomsService.roomsData.hotelStars }, (_, i) => i);
+    this.stars = Array.from({ length: this.hotelRoomsService.roomsData?.hotelStars || 0 }, (_, i) => i);
   }
 
-  openGallery(index = 6) {
-    const images = this.roomsData.hotelImages.slice(index);
+  openGallery(index = 0) {
+    const images = this.roomsData?.hotelImages || [];
 
     this.dialog.open(GalleryDialogComponent, {
-        data: { images },
+      data: { images, startIndex: index },
+      panelClass: 'gallery-dialog-panel',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
     });
   }
 

@@ -1,15 +1,24 @@
-  <div class="head">
-<div class="contain">
-  <span class="filter">{{'hotels-filter.filter' | translate}}</span>
-  <button class="btn-reset" (click)="onReset()">{{'hotels-filter.reset' | translate}}</button>
-</div>
+<div class="head">
+  <div class="contain">
+    <span class="filter">{{'hotels-filter.filter' | translate}}</span>
+    <button class="btn-reset" (click)="onReset()">{{'hotels-filter.reset' | translate}}</button>
   </div>
-  <app-expansion-panel title="{{'hotels-filter.popular' | translate}}">
-    <app-inclusion/>
-  </app-expansion-panel>
-  <app-expansion-panel title="{{'hotels-filter.star' | translate}}">
-    <app-rate/>
-  </app-expansion-panel>
-  <app-expansion-panel title="{{'hotels-filter.location' | translate}}">
-    <app-location/>
-  </app-expansion-panel>
+</div>
+
+<div class="mb-3">
+  <app-name />
+</div>
+
+<app-expansion-panel title="{{'results.filter.price' | translate}}">
+  <app-price />
+</app-expansion-panel>
+
+<app-expansion-panel title="{{'hotels-filter.popular' | translate}}">
+  <app-inclusion/>
+</app-expansion-panel>
+<app-expansion-panel title="{{'hotels-filter.star' | translate}}">
+  <app-rate/>
+</app-expansion-panel>
+<app-expansion-panel title="{{'hotels-filter.location' | translate}}">
+  <app-location/>
+</app-expansion-panel>

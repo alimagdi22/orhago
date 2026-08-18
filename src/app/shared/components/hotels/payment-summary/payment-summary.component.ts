@@ -1,4 +1,3 @@
-import { style } from '@angular/animations';
 import { Component, inject, Input } from '@angular/core';
 import { HomePageService } from 'rp-hotels-ui';
 import { SharedService } from '../../../shared.service';
@@ -10,11 +9,12 @@ import { SharedService } from '../../../shared.service';
   styleUrl: './payment-summary.component.scss',
   host: {
     class: 'row',
+    'ngSkipHydration': 'true'
   }
 })
 export class PaymentSummaryComponent {
   @Input({ required: true }) totalPrice = 0;
-  public sharedService = inject(SharedService)
+  public sharedService = inject(SharedService);
   private homeService = inject(HomePageService);
 
   get currency() {

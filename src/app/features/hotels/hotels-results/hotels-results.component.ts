@@ -93,6 +93,7 @@ export class HotelsResultsComponent {
   }
 
   onResetFiltersFromFilterComponent() {
-    this.hotelsTagsComponent.removeAllFilters();
+    this.hotelResultsService.resetHotelForm();
+    this.hotelsTagsComponent?.removeAllFilters();
   }
 }

@@ -26,6 +26,16 @@
 <div class="container">
   @if(loader) {
     <app-spinner-loader />
+  } @else if (hotelRoomsService.error || (!loader && !hotelRoomsService.roomsData)) {
+    <div class="error-container">
+      <img src="assets/icons/not-found-icon.svg" title="Error Icon" alt="Error Icon" />
+      <p class="error-message">{{ 'hotelRooms.errorMessage' | translate }}</p>
+      <app-main-button
+        [title]="'hotelRooms.goHome' | translate"
+        [mainButtonInfo]="goHomeButtonInfo"
+        (clickMainButton)="goHome()"
+      />
+    </div>
   } @else {
     <app-gallery [location]="location" [currency]="currency" />
     @if(sharedService.screenWidth < 900 ){
