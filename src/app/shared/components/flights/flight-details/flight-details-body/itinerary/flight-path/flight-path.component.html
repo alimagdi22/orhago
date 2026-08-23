@@ -9,6 +9,7 @@
       <img [src]="airlineLogo" title="Airport Logo" class="flight-path__right__airport__logo" />
       <div class="flight-path__right__airport__text">
         <p class="flight-path__right__airport__text__title">{{ airlineName }}</p>
+        <P class="flight-path__right__airport__text__class">{{flightSegment.flightAirline.airlineCode}} - {{flightSegment.flightInfo.flightNumber}}</P>
         <p class="flight-path__right__airport__text__class">
           {{ 'flightDetails.itinerary.' + cabinClass | translate }}
         </p>
@@ -22,8 +23,6 @@
   </div>
 
   <div class="flight-path__middle">
-    <div class="flight-path__middle__dashed-line"></div>
-
     <div class="flight-path__middle__circle"></div>
     <div class="flight-path__middle__line"></div>
     <img src="assets/icons/flight-icon.svg" title="Flight Icon" class="flight-path__middle__flight-icon" />

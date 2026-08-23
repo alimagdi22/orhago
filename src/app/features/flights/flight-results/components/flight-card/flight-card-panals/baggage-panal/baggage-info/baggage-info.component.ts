@@ -15,6 +15,8 @@ export class BaggageInfoComponent implements OnDestroy {
   @ViewChild('baggageInfoTrigger') baggageInfoTrigger!: MatMenuTrigger;
   translate = inject(TranslateService);
   private closeTimer: any;
+  isHoveringIcon = false;
+  isHoveringContent = false;
 
   ngOnDestroy(): void {
     if (this.closeTimer) {
@@ -37,7 +39,7 @@ export class BaggageInfoComponent implements OnDestroy {
   childBaggage() {
     const baggage = this.baggageInfo?.childBaggage?.split(' ');
 
-    if(baggage) {
+    if (baggage) {
       if (baggage[1] === 'Kilograms') {
         return Math.floor(parseInt(baggage[0]) / 7);
       }
@@ -51,7 +53,7 @@ export class BaggageInfoComponent implements OnDestroy {
   infantBaggage() {
     const baggage = this.baggageInfo?.infantBaggage?.split(' ');
 
-    if(baggage) {
+    if (baggage) {
       if (baggage[1] === 'Kilograms') {
         return Math.floor(parseInt(baggage[0]) / 7);
       }
@@ -62,21 +64,48 @@ export class BaggageInfoComponent implements OnDestroy {
     return 'N/A';
   }
 
+  onIconMouseEnter() {
+    this.isHoveringIcon = true;
+    this.openBaggageInfo();
+  }
+
+  onIconMouseLeave() {
+    this.isHoveringIcon = false;
+    this.closeBaggageInfoWithDelay();
+  }
+
+  onContentMouseEnter() {
+    this.isHoveringContent = true;
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+    }
+  }
+
+  onContentMouseLeave() {
+    this.isHoveringContent = false;
+    this.closeBaggageInfoWithDelay();
+  }
+
   openBaggageInfo() {
     if (this.closeTimer) {
       clearTimeout(this.closeTimer);
     }
-    if (this.baggageInfoTrigger && !this.baggageInfoTrigger.menuOpen) {
+    if (this.baggageInfoTrigger) {
       this.baggageInfoTrigger.openMenu();
     }
   }
 
   closeBaggageInfoWithDelay() {
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+    }
     this.closeTimer = setTimeout(() => {
-      if (this.baggageInfoTrigger && this.baggageInfoTrigger.menuOpen) {
-        this.baggageInfoTrigger.closeMenu();
+      if (!this.isHoveringIcon && !this.isHoveringContent) {
+        if (this.baggageInfoTrigger && this.baggageInfoTrigger.menuOpen) {
+          this.baggageInfoTrigger.closeMenu();
+        }
       }
-    }, 200);
+    }, 300);
   }
 
   cancelCloseBaggageInfo() {
@@ -98,7 +127,7 @@ export class BaggageInfoComponent implements OnDestroy {
   }
 
   isMobile() {
-    return typeof window !== 'undefined' && window.innerWidth < 1080;
+    return typeof window !== 'undefined' && window.innerWidth < 768;
   }
 
   getBaggageCountOnlyOrRaw(baggage: string | number): string {

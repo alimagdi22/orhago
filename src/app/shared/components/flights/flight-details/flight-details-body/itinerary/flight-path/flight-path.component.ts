@@ -37,5 +37,7 @@ export class FlightPathComponent implements OnInit {
     this.arrivalAirportName = this.flightSegment.arrivalTerminalAirport.airportName;
 
     this.segmentDuration = this.flightSegment.durationPerLeg;
+    console.log(this.cabinClass , 'class');
+    
   }
 }

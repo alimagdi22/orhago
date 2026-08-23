@@ -22,8 +22,6 @@
   </div>
 
   <div class="flight-path__middle">
-    <div class="flight-path__middle__dashed-line"></div>
-
     <div class="flight-path__middle__circle"></div>
     <div class="flight-path__middle__line"></div>
     <img src="assets/icons/flight-icon.svg" title="Flight Icon" class="flight-path__middle__flight-icon" />
@@ -35,6 +33,5 @@
     <p class="flight-path__left__time">{{ deptDate | date: 'hh:mm a' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
     <p class="flight-path__left__duration">{{ segmentDuration | hourminute }}</p>
     <p class="flight-path__left__timee">{{ landDate | date: 'hh:mm a' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
-    <p></p>
   </div>
 </div>

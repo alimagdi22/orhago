@@ -8,10 +8,12 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: start;
-
-  margin-bottom: 70px;
-
-  gap: 10px;
+  gap: 12px;
+  min-height: 220px;
+  p {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
   &__right,
   &__middle,
@@ -19,28 +21,36 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 25px;
   }
 
   &__right {
     align-items: start;
+    flex: 1;
 
     &__city {
       text-align: start;
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: -45px;
+
+      &__name {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.2;
+        margin: 0 !important;
+      }
 
       &__airport {
         font-size: 14px;
         font-weight: 400;
+        line-height: 1.2;
+        margin: 0 !important;
+        margin-top: 2px !important;
       }
     }
 
     &__airport {
       display: flex;
-      gap: 5px;
-      margin-bottom: -45px;
+      align-items: center;
+      gap: 8px;
+      margin-block: 15px;
 
       &__logo {
         width: 32px;
@@ -50,43 +60,59 @@
 
       &__text {
         text-align: start;
+
+        &__title {
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 1.2;
+          margin: 0 !important;
+        }
+
         &__class {
           font-weight: 400;
+          font-size: 13px;
+          line-height: 1.2;
+          margin: 0 !important;
         }
       }
     }
   }
 
   &__middle {
-    gap: 0;
-    padding-block: 2%;
     align-items: center;
-    &__circle,
-    &__line,
-    &__flight-icon {
-      z-index: 2;
-    }
-
-    &__dashed-line {
-      position: absolute;
-      z-index: 1;
-      height: 100%;
-      width: 0;
-      border-left: 1px dashed map-get($map: $colors, $key: 'gray-border');
-    }
+    padding-top: 0;
+    padding-bottom: 0;
+    gap: 2px;
 
     &__circle {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-
       background-color: map-get($map: $colors, $key: 'main');
+      flex-shrink: 0;
+      z-index: 2;
+
+      &:first-child {
+        margin-top: 6px;
+      }
+
+      &:last-child {
+        margin-bottom: 12px;
+      }
     }
 
     &__line {
-      width: 1px;
+      width: 1.5px;
       flex-grow: 1;
+      min-height: 20px;
       background-color: map-get($map: $colors, $key: 'main');
+    }
+
+    &__flight-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      z-index: 2;
     }
   }
 
@@ -95,42 +121,72 @@
 
     &__time {
       font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 0 !important;
     }
 
     &__duration {
-      margin-top: 25px;
-      margin-bottom: 20px;
+      font-size: 14px;
       font-weight: 400;
+      color: map-get($map: $colors, $key: 'black-light');
+      margin-block: auto !important;
     }
-    &__timee{
+
+    &__timee {
       font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 0 !important;
+      margin-bottom: 12px !important;
     }
   }
 }
 
+@media (max-width: 768px) {
+  .flight-path {
+    gap: 8px;
 
-@media (max-width:768px){
-  .flight-path{
-    &__left{
-      &__time{
-        margin-top: 0px;
+    &__left {
+      width: 75px;
+
+      &__time,
+      &__timee {
         font-size: 17px;
         font-weight: 600;
       }
-      &__duration{
-        margin-top: 40px;
-        margin-bottom: 30px;
+
+      &__timee {
+        margin-bottom: 10px !important;
       }
-      &__timee{
-        font-size: 17px;
-        font-weight: 600;
+
+      &__duration {
+        font-size: 13px;
+      }
+    }
+
+    &__middle {
+      &__circle {
+        &:first-child {
+          margin-top: 5px;
+        }
+        &:last-child {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    &__right {
+      &__city {
+        &__name {
+          font-size: 16px;
+        }
+        &__airport {
+          font-size: 13px;
+        }
       }
     }
   }
-}
-
-P{
-  margin-bottom: 0 !important;
 }
 
 .terminal-style {

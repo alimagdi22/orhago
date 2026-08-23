@@ -5,17 +5,17 @@
   #icon
   [matMenuTriggerFor]="baggageInfoMenu"
   #baggageInfoTrigger="matMenuTrigger"
-  (mouseenter)="!isMobile() && openBaggageInfo()"
-  (mouseleave)="!isMobile() && closeBaggageInfoWithDelay()"
-  (click)="isMobile() && openBaggageInfo(); $event.preventDefault()"
+  (mouseenter)="onIconMouseEnter()"
+  (mouseleave)="onIconMouseLeave()"
+  (click)="openBaggageInfo(); $event.stopPropagation()"
 />
 
-<mat-menu #baggageInfoMenu="matMenu" class="baggage-info-popover-menu">
+<mat-menu #baggageInfoMenu="matMenu" [hasBackdrop]="false" class="baggage-info-popover-menu">
   <div
     class="baggage-popover-content"
-    [ngClass]="translate.currentLang === 'ar'?'ar':'en'"
-    (mouseenter)="!isMobile() && cancelCloseBaggageInfo()"
-    (mouseleave)="!isMobile() && closeBaggageInfoWithDelay()"
+    [ngClass]="translate.currentLang === 'ar' ? 'ar' : 'en'"
+    (mouseenter)="onContentMouseEnter()"
+    (mouseleave)="onContentMouseLeave()"
   >
     <!-- Header -->
     <div class="popover-header">
@@ -86,4 +86,3 @@
     </p>
   </div>
 </mat-menu>
-

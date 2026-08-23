@@ -46,15 +46,19 @@
   <div class="login__actions">
     <p (click)="goToRestPassword($event)">{{ 'user.login.forgotPassword' | translate }}</p>
     <button (click)="onSubmit()" [disabled]="isLoading || loginForm.invalid">
-      @if (!isLoading) {
+      @if (!isLoggingIn && !authService.isLoading) {
         {{ 'user.login.signIn' | translate }}
       } @else {
         <mat-spinner diameter="20" color="accent"></mat-spinner>
       }
     </button>
-    <button class="google" (click)="googleLoginSubmit()">
-      <img src="assets/icons/google-icon.svg" title="Google Icon" />
-      {{ 'user.login.signInWithGoogle' | translate }}
+    <button class="google" (click)="googleLoginSubmit()" [disabled]="isLoading">
+      @if (!isGoogleLoading) {
+        <img src="assets/icons/google-icon.svg" title="Google Icon" />
+        {{ 'user.login.signInWithGoogle' | translate }}
+      } @else {
+        <mat-spinner diameter="20" color="accent"></mat-spinner>
+      }
     </button>
   </div>
 

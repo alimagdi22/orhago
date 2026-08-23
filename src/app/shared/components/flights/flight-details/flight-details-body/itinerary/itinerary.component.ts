@@ -20,6 +20,10 @@ export class ItineraryComponent {
 
     this.cabinClass = flightItinerary.cabinClass;
     this.flightType = this.sharedService.flightType ?? '';
+    console.log(this.sharedService.selectedFlightItinerary,'iten');
+    
+    console.log(this.cabinClass , 'cabin parent ');
+    
   }
 
   getNumberOfStops(numberOfStops: number) {

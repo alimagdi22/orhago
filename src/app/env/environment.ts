@@ -1,11 +1,13 @@
 export const environment = {
-production: false,
-firebaseConfig: {
-apiKey: "AIzaSyBZZHgce6_2QEOqYbZ5YiVwwptAIGdfEUc",
-authDomain: "tajj-2378c.firebaseapp.com",
-projectId: "tajj-2378c",
-storageBucket: "tajj.appspot.com",
-messagingSenderId: "328673155466",
-appId: "1:328673155466:web:2b9b3f11d617e1d1b3d073"
-}
+    production: false,
+    firebaseConfig: {
+        apiKey: 'AIzaSyAMCEVaw7wYfpouaK_TdNphXVyK05GtKhU',
+        authDomain: 'roundpixel-login.firebaseapp.com',
+        projectId: 'roundpixel-login',
+        storageBucket: 'roundpixel-login.firebasestorage.app',
+        messagingSenderId: '610383860782',
+        appId: '1:610383860782:web:9425d8f3df1239ad96fbbf',
+        measurementId: 'G-B0QTWNVJD3',
+        googleClientId: '610383860782-vifipvu63oj564q0v9jht26r2ubqbamt.apps.googleusercontent.com',
+    }
 };

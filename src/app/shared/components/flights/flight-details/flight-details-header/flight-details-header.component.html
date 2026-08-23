@@ -1,5 +1,5 @@
 <header class="row between gap-2">
-  <div class="titles col-6 col-md-5 col-xl-3">
+  <div class="titles col-6 col-md-5 col-xl-3 ">
     <p class="titles__main">{{ 'flightDetails.title' | translate }}</p>
     <p class="titles__secondayr">
       {{ sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO[0].departureTerminalAirport.cityName }} -
@@ -35,12 +35,14 @@
     />
     }
   } @else {
-    <div class="price col-4">
-      <p class="price__text">
-        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-        {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' }}
-      </p>
-      <p class="price__caption">Price per adult</p>
+    <div class="price col-4 align-items-end">
+      <div class="d-flex flex-column align-items-center justify-content-center w-50">
+        <p class="price__text">
+          {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+          {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' }}
+        </p>
+        <p class="price__caption">Price per adult</p>
+      </div>
     </div>
 
     <div class="info-action col-12 col-md-6 col-xl-4">
