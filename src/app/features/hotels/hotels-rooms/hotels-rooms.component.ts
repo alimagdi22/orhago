@@ -4,7 +4,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HotelResultsService, HotelRoomsService, HotelSearchService, packages } from 'rp-hotels-ui';
 import { Subscription } from 'rxjs';
 import { SharedService } from '../../../shared/shared.service';
-import { RoomsComponent } from './components/rooms/rooms.component';
 import { IMainButton } from '../../../shared/models/flights/mainButton.model';
 
 @Component({
@@ -67,18 +66,40 @@ export class HotelsRoomsComponent implements OnInit, OnDestroy {
           this.hotelRoomsService
             .getRooms(this.searchId, this.hotelId, this.providerId, this.packageKey)
             .subscribe({
-              next: (data) => {
-                if (data && this.hotelRoomsService.roomsData?.Lat != null && this.hotelRoomsService.roomsData?.Lng != null) {
-                  this.location = this.sanitizer.bypassSecurityTrustResourceUrl(
-                    `https://www.google.com/maps?q=${this.hotelRoomsService.roomsData.Lat},${this.hotelRoomsService.roomsData.Lng}&hl=es;z=14&output=embed`
-                  );
-                }
+              next: () => {
+                this.updateLocation();
               },
               error: (err) => console.error('get hotel rooms error ->', err)
             });
         }
       })
     );
+  }
+
+  private updateLocation() {
+    const data = this.hotelRoomsService.roomsData;
+    if (!data) {
+      this.location = undefined;
+      return;
+    }
+
+    let query = '';
+    const lat = data.Lat;
+    const lng = data.Lng;
+
+    if (lat && lng && String(lat).trim() !== '' && String(lng).trim() !== '' && String(lat) !== '0' && String(lng) !== '0') {
+      query = `${lat},${lng}`;
+    } else if (data.Address && String(data.Address).trim() !== '') {
+      query = `${data.Address}, ${data.City || ''}, ${data.Country || ''}`;
+    } else if (data.hotelName && String(data.hotelName).trim() !== '') {
+      query = `${data.hotelName}, ${data.City || ''}, ${data.Country || ''}`;
+    } else {
+      this.location = undefined;
+      return;
+    }
+
+    const url = `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+    this.location = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   goHome() {
@@ -119,18 +140,17 @@ export class HotelsRoomsComponent implements OnInit, OnDestroy {
     return this.hotelSearchService.HotelSearchForm.get('checkOut')?.value;
   }
 
-  // Custom popup methods
   openPopup() {
     this.isPopupOpen = true;
     if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'hidden'; // prevent background scroll
+      document.body.style.overflow = 'hidden';
     }
   }
 
   closePopup() {
     this.isPopupOpen = false;
     if (typeof document !== 'undefined') {
-      document.body.style.overflow = ''; // restore scroll
+      document.body.style.overflow = '';
     }
   }
 
