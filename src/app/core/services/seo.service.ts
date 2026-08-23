@@ -29,11 +29,11 @@ export class SeoService {
   private router = inject(Router);
 
   private defaultSeo: SeoConfig = {
-    title: 'orhago - Search & Book Flights and Hotels Worldwide',
-    description: 'Search, compare, and book cheap flights and hotels to your favorite destinations worldwide with orhago.',
-    keywords: 'flights, hotels, cheap flights, flight booking, travel, airline tickets, hotel booking, orhago',
-    ogTitle: 'orhago - Search & Book Flights and Hotels Worldwide',
-    ogDescription: 'Search, compare, and book cheap flights and hotels to your favorite destinations worldwide with orhago.',
+    title: 'orhas - Search & Book Flights and Hotels Worldwide',
+    description: 'Search, compare, and book cheap flights and hotels to your favorite destinations worldwide with orhas.',
+    keywords: 'flights, hotels, cheap flights, flight booking, travel, airline tickets, hotel booking, orhas',
+    ogTitle: 'orhas - Search & Book Flights and Hotels Worldwide',
+    ogDescription: 'Search, compare, and book cheap flights and hotels to your favorite destinations worldwide with orhas.',
     ogImage: 'images/og-home.jpg',
     twitterCard: 'summary_large_image',
     robots: 'index, follow',

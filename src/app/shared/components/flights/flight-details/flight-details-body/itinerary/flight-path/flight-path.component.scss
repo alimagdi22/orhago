@@ -9,6 +9,8 @@
   flex-direction: row-reverse;
   justify-content: start;
 
+  margin-bottom: 70px;
+
   gap: 10px;
 
   &__right,
@@ -27,6 +29,7 @@
       text-align: start;
       font-size: 18px;
       font-weight: 600;
+      margin-bottom: -45px;
 
       &__airport {
         font-size: 14px;
@@ -37,6 +40,7 @@
     &__airport {
       display: flex;
       gap: 5px;
+      margin-bottom: -45px;
 
       &__logo {
         width: 32px;
@@ -90,7 +94,6 @@
     width: 100px;
 
     &__time {
-      margin-top: 10px;
       font-size: 22px;
     }
 
@@ -124,6 +127,10 @@
       }
     }
   }
+}
+
+P{
+  margin-bottom: 0 !important;
 }
 
 .terminal-style {

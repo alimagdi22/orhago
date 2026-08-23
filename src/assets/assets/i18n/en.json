@@ -9,7 +9,7 @@
   },
 
   "footer": {
-    "about": "Orhago is a leading online travel agency offering seamless booking experiences for flights, hotels, and more. Explore the world with us!",
+    "about": "orhas is a leading online travel agency offering seamless booking experiences for flights, hotels, and more. Explore the world with us!",
     "links": {
       "home": "Home",
       "aboutUs": "About Us",
@@ -19,11 +19,11 @@
       "helpCenter": "Help Center"
     },
     "contact": {
-      "email": "info@orhago.com",
-      "phone": "+965 66414350",
-      "address": "Close to Gad Resturant,Habeeb Munawer St, Al Farwaniyah, Kuwait"
+      "email": "info@orhas.com",
+      "phone": "+971 66414350",
+      "address": "UAE - Dubai"
     },
-    "copyright": "&copy; 2025 Orhago. All rights reserved."
+    "copyright": "&copy; 2025 orhas. All rights reserved."
   },
 
     "searchBox": {
@@ -82,7 +82,7 @@
 
 
   "home": {
-    "bannarTitle": "Everything is ready... pack your bags and leave the rest to ORHAGO",
+    "bannarTitle": "Everything is ready... pack your bags and leave the rest to orhas",
     "search": {
       "flights": "Flights",
       "oneWay": "One Way",
@@ -318,9 +318,9 @@
   "about": {
     "title": "Redefining Travel Experiences",
     "gateway": "Your Gateway to memorable journeys",
-    "description": "Orhago is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
+    "description": "orhas is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
     "storyTitle": "Our Story",
-    "storyDescription": "ORHAGO was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
+    "storyDescription": "orhas was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
     "advantages": {
       "exclusiveDeals": "Exclusive Deals",
       "exclusiveDealsDesc": "Access to unbeatable prices on flights, hotels and vacation packages.",

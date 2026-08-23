@@ -1,5 +1,5 @@
 {
-  "name": "orhago",
+  "name": "orhas",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier --write .",
-    "serve:ssr": "node dist/orhago/server/server.mjs"
+    "serve:ssr": "node dist/orhas/server/server.mjs"
   },
   "private": true,
   "dependencies": {

@@ -47,8 +47,20 @@ export class NavbarComponent implements OnInit {
   isSidebarOpen = false;
   isLangPopupOpen = false;
   isCurrencyPopupOpen = false;
+  isRegionalPopupOpen = false;
+  activePopupTab: 'lang' | 'currency' = 'currency';
+  currencySearchQuery = '';
 
   subscription = new Subscription();
+
+  get filteredCurrencies(): currencyModel[] {
+    if (!this.homePageService.allCurrency) return [];
+    if (!this.currencySearchQuery.trim()) return this.homePageService.allCurrency;
+    const q = this.currencySearchQuery.toLowerCase().trim();
+    return this.homePageService.allCurrency.filter((c) =>
+      c.Currency_Code?.toLowerCase().includes(q)
+    );
+  }
 
   ngOnInit(): void {
     if (this.isBrowser) {
@@ -112,31 +124,46 @@ export class NavbarComponent implements OnInit {
     this.isSidebarOpen = false;
   }
 
+  openRegionalPopup(tab: 'lang' | 'currency' = 'currency') {
+    this.activePopupTab = tab;
+    this.currencySearchQuery = '';
+    this.isRegionalPopupOpen = true;
+  }
+
+  closeRegionalPopup() {
+    this.isRegionalPopupOpen = false;
+    this.currencySearchQuery = '';
+  }
+
+  setActivePopupTab(tab: 'lang' | 'currency') {
+    this.activePopupTab = tab;
+  }
+
   openLangPopup() {
-    this.isLangPopupOpen = true;
+    this.openRegionalPopup('lang');
   }
 
   closeLangPopup() {
-    this.isLangPopupOpen = false;
+    this.closeRegionalPopup();
   }
 
   selectLang(lang: 'ar' | 'en') {
     this.updateLang(lang);
-    this.closeLangPopup();
+    this.closeRegionalPopup();
     this.closeSidebar();
   }
 
   openCurrencyPopup() {
-    this.isCurrencyPopupOpen = true;
+    this.openRegionalPopup('currency');
   }
 
   closeCurrencyPopup() {
-    this.isCurrencyPopupOpen = false;
+    this.closeRegionalPopup();
   }
 
   selectCurrency(currency: currencyModel) {
     this.updateCurrency(currency);
-    this.closeCurrencyPopup();
+    this.closeRegionalPopup();
     this.closeSidebar();
   }
 

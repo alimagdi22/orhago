@@ -15,7 +15,7 @@
             {{ ($index ? 'flightDetails.itinerary.Arrive' : 'flightDetails.itinerary.Departure') | translate }}
           </p>
         }
-        <section class="top-info row between gap-2">
+        <!-- <section class="top-info row between gap-2">
           <div class="top-info__time align-start col-12 col-lg-4">
             <div class="align-center">
               <p class="top-info__time__date">
@@ -47,7 +47,7 @@
               }
             </div>
           </div>
-        </section>
+        </section> -->
 
         <section class="flight-info">
           @if (flightType !== 'roundtrip') {
@@ -62,7 +62,7 @@
                 title="Calander Icon"
                 class="flight-info__path__date__calander"
               />
-              <p class="flight-info__path__date__text">{{ flight.flightDTO[0].departureDate | date: 'EEEE dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
+              <p class="flight-info__path__date__text mb-0">{{ flight.flightDTO[0].departureDate | date: 'EEEE dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
             </div>
 
             @for (flightSegment of flight.flightDTO; track flightSegment; let i = $index) {
@@ -78,17 +78,22 @@
                 <div class="flight-info__path__change">
                   <div class="flight-info__path__change__time">
                     <img src="assets/icons/clock-icon.svg" title="Clock Icon" />
-                    <p>
+                    <p class="mb-0">
                       {{ sharedService.convertTimeToDayAndHour(flightSegment.transitTime) }}
                       {{ 'flightDetails.itinerary.changeIn' | translate }}
                       {{ flightSegment.arrivalTerminalAirport.cityName }}
                     </p>
                   </div>
                   <div class="flight-info__path__change__date">
+                    <img
+                      src="assets/icons/calander-icon.svg"
+                      title="Calander Icon"
+                      class="flight-info__path__date__calander"
+                    />
                     <p *ngIf="getDayDiffBetweenSegments(flight.flightDTO[i].arrivalDate, flight.flightDTO[i + 1].departureDate) > 0">
                       +{{ getDayDiffBetweenSegments(flight.flightDTO[i].arrivalDate, flight.flightDTO[i + 1].departureDate) }}
                       {{translate.currentLang === 'en' ? 'Day' : 'يوم'}}{{ getDayDiffBetweenSegments(flight.flightDTO[i].arrivalDate, flight.flightDTO[i + 1].departureDate) > 1 ? 's' : '' }}</p>
-                    <p>{{ flight.flightDTO[i + 1].departureDate | date: 'EEEE dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
+                    <p class="mb-0">{{ flight.flightDTO[i + 1].departureDate | date: 'EEEE dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
                   </div>
                 </div>
               }

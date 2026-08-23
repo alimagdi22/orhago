@@ -2,9 +2,11 @@
 @import '../../../../../sass/colors';
 
 .search-box-header {
-  background-color: white;
-  display: inline-flex;
-  border-radius: 12px 12px 0 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
 
   &__list {
     display: inline-flex;

@@ -27,6 +27,6 @@ export class DestinationInfoComponent {
       : this.flightDTO.arrivalTerminalAirport;
 
     if (!airport) return '';
-    return airport.airportName || airport.cityName || airport.airportCode || '';
+    return airport.airportCode || airport.airportName || airport.cityName || '';
   }
 }

@@ -79,11 +79,18 @@
     margin-left: 33px;
 
     &__date {
+      position: relative;
       z-index: 2;
-      margin-left: 110px;
+
       display: flex;
-      gap: 15px;
-      margin-bottom: 10px;
+      align-items: center;
+      gap: 20px;
+      padding: 10px;
+
+      border-bottom-left-radius: $base-radius-small;
+      border-bottom-right-radius: $base-radius-small;
+
+      background-color: map-get($map: $colors, $key: 'off-white');
     }
 
     &__change {
@@ -93,7 +100,6 @@
       &__time {
         display: flex;
         gap: 3px;
-        margin-left: 140px;
         margin-bottom: 10px;
       }
 
@@ -102,8 +108,8 @@
         z-index: 2;
 
         display: flex;
-        gap: 40px;
-        padding: 10px 10px 10px 50px;
+        gap: 20px;
+        padding: 20px;
 
         border-bottom-left-radius: $base-radius-small;
         border-bottom-right-radius: $base-radius-small;
