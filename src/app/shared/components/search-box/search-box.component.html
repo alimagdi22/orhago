@@ -1,14 +1,20 @@
-<app-search-box-header (tabChanged)="onTabChanged($event)" />
-
+@if (!isFlightResults) {
+  <app-search-box-header (tabChanged)="onTabChanged($event)" />
+}
 <div
   class="search-box-wrapper"
 >
-  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" [selectedIndex]="tabIndex">
-    <mat-tab label="Flights">
-      <app-flight-search-box />
-    </mat-tab>
-    <mat-tab label="Hotels">
-      <app-hotel-search-box/>
-    </mat-tab>
-  </mat-tab-group>
+  @if (isFlightResults) {
+    <app-flight-search-box />
+  } @else {
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" [selectedIndex]="tabIndex">
+      <mat-tab label="Flights">
+        <app-flight-search-box />
+      </mat-tab>
+      <mat-tab label="Hotels">
+        <app-hotel-search-box/>
+      </mat-tab>
+    </mat-tab-group>
+  }
 </div>
+

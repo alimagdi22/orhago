@@ -1,4 +1,4 @@
-<div class="wrapper" (click)="isMobile() && toggle.emit()" >
+<div class="wrapper" (click)="toggle.emit()">
     @for (flight of flights; track $index) {
         <div class="search-summary">
             <span class="city">
@@ -21,7 +21,7 @@
         </div>    
     }
 
-    <button class="search-toggle">
+    <button class="search-toggle" type="button" aria-label="Toggle Search">
      <img src="assets/icons/svgexport-17.svg" alt="Search" width="24" />
     </button>
 </div>

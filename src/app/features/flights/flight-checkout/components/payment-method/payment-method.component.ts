@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../../../shared/shared.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { FlightCheckoutApiService, FlightCheckoutService, HomePageService, IAirItinerary, mergedGates } from 'rp-travel-ui';
+import { FlightCheckoutApiService, FlightCheckoutService, flightOfflineService, FlightResultService, HomePageService, IAirItinerary, mergedGates } from 'rp-travel-ui';
 
 declare var PaymentSession: any;
 
@@ -18,6 +18,7 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
   private translateService = inject(TranslateService);
   private route = inject(ActivatedRoute);
   public flightCheckoutService = inject(FlightCheckoutService);
+  public flightResultService = inject(FlightResultService);
   private flightCheckoutApiService = inject(FlightCheckoutApiService);
   private cdRef = inject(ChangeDetectorRef);
   private router = inject(Router);
@@ -103,13 +104,51 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     });
   }
 
+  get totalFlightAmount(): number {
+    const brandedBrand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
+    if (this.sharedService.selectedBrandedIndex !== -1 && brandedBrand?.itinTotalFare?.amount) {
+      return brandedBrand.itinTotalFare.amount;
+    }
+    return (
+      this.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount ||
+      this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount ||
+      0
+    );
+  }
+
+  get gatewayAmount(): number {
+    return this.sharedService.selectedGateway?.Amount || 0;
+  }
+
+  get offlineServiceAmount(): number {
+    const service: flightOfflineService | undefined = this.flightCheckoutService.organizedOfllineServices?.[2];
+    const selectedServices: string[] = this.flightCheckoutService.selectedOfflineServices || [];
+    if (!service || !selectedServices.length) return 0;
+
+    const isSelected = (service.serviceCode && selectedServices.includes(service.serviceCode)) || selectedServices.length > 0;
+
+    return isSelected && service.servicePrice ? service.servicePrice : 0;
+  }
+
+  get totalPaymentAmount(): number {
+    return this.totalFlightAmount + this.gatewayAmount + this.offlineServiceAmount;
+  }
+
+  get totalCurrencyCode(): string {
+    return (
+      this.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
+      this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
+      'KWD'
+    );
+  }
+
   selectOption(index: number, gateway: any): void {
     this.selectedGatway = gateway;
     this.selectedOption = index;
     this.sharedService.selectedGateway = gateway;
     if (gateway.GatewayType === 'MPGS') {
-      this.amount = this.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount;
-      this.currency = this.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode;
+      this.amount = this.totalFlightAmount;
+      this.currency = this.totalCurrencyCode;
 
       this.showMPGSPayment = true;
 

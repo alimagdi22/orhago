@@ -146,6 +146,14 @@ label {
   margin-bottom: 40px;
 }
 
+.info-action {
+  &__icon{
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 7%;
+  }
+}
+
 .custom_modal {
   padding: 0 60px;
   min-width: 250px;

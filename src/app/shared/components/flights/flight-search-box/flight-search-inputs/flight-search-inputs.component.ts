@@ -90,10 +90,6 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
 
     let form = this.isBrowser ? JSON.parse(localStorage.getItem('form') as string) : null;
 
-    if (form && this.sharedService.isSegmentPresent(['flight-results'])) {
-      this.onSubmit();
-    }
-
     if (this.isBrowser) {
       this.restoreDestinationTypeFromCache();
     }

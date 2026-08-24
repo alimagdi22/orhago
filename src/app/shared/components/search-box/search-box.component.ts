@@ -16,8 +16,14 @@ export class SearchBoxComponent implements OnInit {
 
   tabIndex = 0;
 
+  get isFlightResults(): boolean {
+    return this.router.url.includes('flight-results');
+  }
+
   ngOnInit(): void {
     const url = this.router.url.toLowerCase();
+    console.log(this.isFlightResults,'flight');
+    
     if (url.includes('hotels')) {
       this.tabIndex = 1;
     }

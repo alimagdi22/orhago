@@ -18,8 +18,4 @@ export class FlightSummaryComponent {
   departingSegment: IFlightDTO = this.flightResultService.orgnizedResponce[0][0].allJourney.flights[0].flightDTO[0];
   
   flights: IFlight[] = this.flightResultService.orgnizedResponce[0][0].allJourney.flights;
-  
-  isMobile(): boolean {
-    return window.innerWidth <= 768;
-  }
 }

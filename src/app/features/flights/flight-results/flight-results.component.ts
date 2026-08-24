@@ -63,6 +63,7 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     this.route.params.subscribe((params: Params) => {
+      this.isSearchVisible = false;
       let lang = params['language'];
       let currency = params['currency'];
       let pointOfReservation = params['SearchPoint'];
@@ -169,6 +170,18 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
 
   toggleSearch() {
     this.isSearchVisible = !this.isSearchVisible;
+  }
+
+  onSummaryToggle() {
+    if (typeof window !== 'undefined') {
+      const isScrolled = window.scrollY > 50 || document.documentElement.scrollTop > 50;
+      if (isScrolled) {
+        this.isSearchVisible = true;
+        this.sharedService.scrollToTop();
+        return;
+      }
+    }
+    this.toggleSearch();
   }
 
   private scrollHandler = () => {

@@ -86,11 +86,8 @@
     <div class="payment-action-footer d-flex align-items-center justify-content-between mt-4">
       <div class="payment-total-price fw-bold fs-4">
         <span>
-          {{
-            (selectedFlight?.airItineraryDTO?.itinTotalFare?.amount || 0) +
-              (sharedService.selectedGateway ? sharedService.selectedGateway.Amount : 0) | exchange: 'value'
-          }}
-          {{ selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode | exchange: 'code' }}
+          {{ totalPaymentAmount | exchange: 'value' }}
+          {{ totalCurrencyCode | exchange: 'code' }}
         </span>
       </div>
 

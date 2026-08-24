@@ -144,6 +144,30 @@ export class AppComponent implements OnInit {
       },
     };
 
+    let envTransarabian = {
+      offlineSeats: "http://154.41.209.93:7025",
+      brandedFairs: "https://flightprov.travelnow.global",
+      searchflow: "https://flightsearch.travelnow.global",
+      BookingFlow: "https://flightflow.travelnow.global",
+      FareRules: "https://flightprov.travelnow.global",
+      asm: "https://backofficeapi.travelnow.global",
+      Apihotels: "https://hotels.travelnow.global",
+      users: "https://flightsearch.travelnow.global",
+      admin: "https://adminapi.travelnow.global/",
+      getDPayment: "https://adminapi.travelnow.global/",
+      bookHotels: "https://hotels.travelnow.global",
+      hotelPrepay: "https://prepayapi.travelnow.global",
+      backOffice: "https://backofficeapi.travelnow.global",
+      FlightTop: "https://flightsearch.travelnow.global",
+      prepay: 'https://prepayapi.flytoall.com',
+      offers: {
+        getAll: "http://154.41.209.93:7893/api/GetAllOffersAPI?POS=",
+        getByID: "http://154.41.209.93:7893/api/GetOfferByIdAPI?OfferId=",
+        BookOffer: "http://154.41.209.93:7895/api/BookOffer",
+        RetriveItineraryDetails: "/api/Admin/RetriveItineraryDetails",
+      },
+    };
+
     let envFly = {
       offlineSeats: 'http://41.223.55.14:7025',
       searchflow: 'https://flightsearch.flytoall.com',
@@ -167,7 +191,7 @@ export class AppComponent implements OnInit {
       },
     };
 
-    this.environment.envConfiguration(envFly);
+    this.environment.envConfiguration(envTransarabian);
     this.hotelEnvironmentService.envConfiguration(envRP);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {
