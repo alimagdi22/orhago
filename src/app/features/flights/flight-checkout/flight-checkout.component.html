@@ -3,7 +3,7 @@
 } @else {
   <div class="container margin-bottom">
     <app-flight-info />
-    <app-checkout-steps [id]="0" />
+    <!-- <app-checkout-steps [id]="0" /> -->
 
     @if (!sharedService.showPayment) {
       <ng-container [formGroup]="flightCheckoutService.usersForm">

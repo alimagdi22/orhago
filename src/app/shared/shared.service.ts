@@ -46,6 +46,11 @@ export class SharedService {
   isErrorSheetShowed = false;
   errorSheetMessage = '';
   userManagementNotifier = new Subject<any>();
+  toggleFlightSearchNotifier = new Subject<void>();
+
+  onToggleFlightSearch() {
+    this.toggleFlightSearchNotifier.next();
+  }
 
   isCitiesLoading = false;
   isHotelPhoneNumberInvalid = false;

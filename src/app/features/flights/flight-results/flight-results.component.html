@@ -1,7 +1,5 @@
 
 @if (!flightResultService.loading && flightResultService.orgnizedResponce.length) {
-  <app-flight-summary (toggle)="onSummaryToggle()" />
-
   @if (isSearchVisible) {
     <div class="search-box">
       <div class="container">

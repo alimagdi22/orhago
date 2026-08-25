@@ -9,13 +9,21 @@ import { FlightResultService, IFlight, IFlightDTO } from 'rp-travel-ui';
   styleUrl: './flight-summary.component.scss'
 })
 export class FlightSummaryComponent {
+  @Input() isScrolled = false;
   toggle = output<void>();
   translate = inject(TranslateService);
   flightResultService = inject(FlightResultService);
 
-  landingSegment: IFlightDTO = this.flightResultService.orgnizedResponce[0][0].allJourney.flights[0].flightDTO[this.flightResultService.orgnizedResponce[0][0].allJourney.flights[0].flightDTO.length - 1];
+  get flights(): IFlight[] {
+    return this.flightResultService.orgnizedResponce?.[0]?.[0]?.allJourney?.flights || [];
+  }
 
-  departingSegment: IFlightDTO = this.flightResultService.orgnizedResponce[0][0].allJourney.flights[0].flightDTO[0];
-  
-  flights: IFlight[] = this.flightResultService.orgnizedResponce[0][0].allJourney.flights;
+  get departingSegment(): IFlightDTO | null {
+    return this.flights?.[0]?.flightDTO?.[0] || null;
+  }
+
+  get landingSegment(): IFlightDTO | null {
+    const flightDTOs = this.flights?.[0]?.flightDTO;
+    return flightDTOs ? flightDTOs[flightDTOs.length - 1] : null;
+  }
 }

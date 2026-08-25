@@ -1,6 +1,11 @@
 @if (mostSearchedFlight && mostSearchedFlight.searchCriteria) {
   <div class="flight-deal-card">
-    <img src="assets/images/popular/Dubai.png" title="Photo" class="flight-deal-card__img" />
+    <img
+      [src]="displayImage"
+      (error)="onImgError()"
+      title="Photo"
+      class="flight-deal-card__img"
+    />
 
     <div class="flight-deal-card__body">
       <div class="flight-deal-card__body__info">

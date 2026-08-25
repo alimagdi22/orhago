@@ -8,14 +8,20 @@
   >
     <nav class="container">
       <img src="assets/images/new-logo.svg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-      <button
-        class="manage-booking-button"
-        [ngClass]="{ 'scroll-button': isScrolled }"
-        (click)="onManageBooking()"
-        type="button"
-      >
-        {{ 'navbar.manageBooking' | translate }}
-      </button>
+      @if (sharedService.isSegmentPresent(['flight-results'])) {
+        <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
+      } @else if (sharedService.isSegmentPresent(['flight-checkout'])) {
+        <app-checkout-steps [isScrolled]="isScrolled"/>
+      } @else {
+        <button
+          class="manage-booking-button"
+          [ngClass]="{ 'scroll-button': isScrolled }"
+          (click)="onManageBooking()"
+          type="button"
+        >
+          {{ 'navbar.manageBooking' | translate }}
+        </button>
+      }
 
       <div class="actions">
         @if (homePageService.loader) {

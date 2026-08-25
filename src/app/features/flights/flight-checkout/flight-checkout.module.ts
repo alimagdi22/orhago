@@ -6,7 +6,6 @@ import { FlightCheckoutComponent } from './flight-checkout.component';
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 import { FlightInfoDestComponent } from './components/flight-info/flight-info-dest/flight-info-dest.component';
 import { FlightInfoPathComponent } from './components/flight-info/flight-info-path/flight-info-path.component';
-import { CheckoutStepsComponent } from './components/checkout-steps/checkout-steps.component';
 import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 import { ContactNumberComponent } from './components/contact-info/contact-number/contact-number.component';
 import { TravelerComponent } from './components/traveler/traveler.component';
@@ -22,7 +21,6 @@ import { PaymentMethodComponent } from './components/payment-method/payment-meth
     FlightInfoComponent,
     FlightInfoDestComponent,
     FlightInfoPathComponent,
-    CheckoutStepsComponent,
     ContactInfoComponent,
     ContactNumberComponent,
     TravelerComponent,

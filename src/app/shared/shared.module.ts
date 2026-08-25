@@ -101,6 +101,8 @@ import { FlightPathAppComponent } from './components/flights/flight-details-app/
 import { BaggageDetailsAppComponent } from './components/flights/flight-details-app/flight-details-body-app/baggage-details-app/baggage-details-app.component';
 import { FlexFareAppComponent } from './components/flex-fare-app/flex-fare-app.component';
 import { FlexFareCardAppComponent } from './components/flex-fare-app/flex-fare-card-app/flex-fare-card-app.component';
+import { FlightSummaryComponent } from './components/flights/flight-summary/flight-summary.component';
+import { CheckoutStepsComponent } from './components/flights/checkout-steps/checkout-steps.component';
 
 export const MatrialComponents = [
   MatButtonModule,
@@ -178,7 +180,9 @@ export const SharedComponents = [
   NoFlightsComponent,
   MobileDateInputComponent,
   PaymentSummaryComponent,
-  PaymentViewComponent
+  PaymentViewComponent,
+  FlightSummaryComponent,
+  CheckoutStepsComponent
 ];
 
 export const SharedDirectives = [

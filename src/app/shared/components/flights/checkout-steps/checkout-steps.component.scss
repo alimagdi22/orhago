@@ -1,0 +1,28 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/colors';
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 20px;
+  color: black;
+  border: 1.5px solid black;
+  border-radius: 8px;
+  &.isScrolled{
+    border-color: white;
+    color: white;
+  }
+}
+
+p{
+  margin-bottom: 0 !important;
+}
+
+// &.isScrolled{
+//   color: #3b82f6;
+// }
+.activated {
+  color: map-get($map: $colors, $key: 'main');
+}

@@ -30,7 +30,6 @@ import { NoFlightsComponent } from './components/no-flights/no-flights.component
 import { FlexFareComponent } from './components/flex-fare/flex-fare.component';
 import { FlexFareCardComponent } from './components/flex-fare/flex-fare-card/flex-fare-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlightSummaryComponent } from './components/flight-summary/flight-summary.component';
 import { HourMinutePipe } from '../../../shared/pipes/hourMinute.pipe';
 import { SortingPanalAppComponent } from './components/sorting-panal-app/sorting-panal-app.component';
 import { SortingItemAppComponent } from './components/sorting-panal-app/sorting-item-app/sorting-item-app.component';
@@ -64,7 +63,6 @@ import { DestinationInfoAppComponent } from './components/destination-info-app/d
     StopsFilterComponent,
     FlexFareComponent,
     FlexFareCardComponent,
-    FlightSummaryComponent,
     HourMinutePipe,
     SortingPanalAppComponent,
     SortingItemAppComponent,

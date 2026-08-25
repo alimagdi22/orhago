@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, Render
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FlightResultService, FlightSearchService } from 'rp-travel-ui';
+import { Subscription } from 'rxjs';
 import { SharedService } from '../../../shared/shared.service';
 import { ISortItem } from './models/sortItem.model';
 
@@ -12,6 +13,7 @@ import { ISortItem } from './models/sortItem.model';
   styleUrl: './flight-results.component.scss',
 })
 export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy {
+  subscription = new Subscription();
   route = inject(ActivatedRoute);
   flightResultService = inject(FlightResultService);
   sharedService = inject(SharedService);
@@ -98,19 +100,27 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
       );
     });
 
-    this.flightResultService.notify.subscribe({
-      next: () => {
-        this.totalPages = Math.ceil(this.flightResultService.orgnizedResponce.length / this.itemsPerPage);
-        this.sortItems.forEach(e => {
-          if (this.flightResultService.orgnizedResponce.length) {
-            this.flightResultService.sortMyResult(e.sortCode);
-            e.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
-            e.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
-          }
-        });
-        this.flightResultService.sortMyResult(1);
-      },
-    });
+    this.subscription.add(
+      this.sharedService.toggleFlightSearchNotifier.subscribe(() => {
+        this.onSummaryToggle();
+      })
+    );
+
+    this.subscription.add(
+      this.flightResultService.notify.subscribe({
+        next: () => {
+          this.totalPages = Math.ceil(this.flightResultService.orgnizedResponce.length / this.itemsPerPage);
+          this.sortItems.forEach(e => {
+            if (this.flightResultService.orgnizedResponce.length) {
+              this.flightResultService.sortMyResult(e.sortCode);
+              e.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
+              e.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
+            }
+          });
+          this.flightResultService.sortMyResult(1);
+        },
+      })
+    );
   }
 
   ngAfterViewInit(): void {
@@ -193,6 +203,7 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
   };
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
     if (typeof window !== 'undefined' && this.timeoutId) {
       clearTimeout(this.timeoutId);
     }

@@ -66,7 +66,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      this.homePageService.getCurrency('KWD');
+      this.homePageService.getCurrency('AED');
       this.homePageService.getPointOfSale();
 
       if (typeof localStorage !== 'undefined' && localStorage.getItem('token')) {
