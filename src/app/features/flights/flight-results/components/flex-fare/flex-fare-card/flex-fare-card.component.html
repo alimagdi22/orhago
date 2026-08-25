@@ -42,21 +42,21 @@
 
       @for (baggageAllowanceDetail of brand.baggageAllowances[0].baggageAllowanceDetails; track $index) {
         <div class="sub-info__value">
-          <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
           <div>
+            <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
             {{ baggageAllowanceDetail.baggage === 'CarryOn' ? (translate.currentLang === 'en' ? 'Carry-on' : 'حقيبة اليد') : (translate.currentLang === 'en' ? 'Checked bags' : 'حقائب الشحن') }} bag included
             {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
             {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
+            <div
+              [ngStyle]="{
+                marginBottom: '10px',
+              }"
+            >
+              ({{ baggageAllowanceDetail.flightRoute }})
+            </div>
           </div>
         </div>
 
-        <div
-          [ngStyle]="{
-            marginBottom: '10px',
-          }"
-        >
-          ({{ baggageAllowanceDetail.flightRoute }})
-        </div>
       }
     </div>
   }

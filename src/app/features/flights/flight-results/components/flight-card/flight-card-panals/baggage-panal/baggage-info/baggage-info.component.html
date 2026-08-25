@@ -31,6 +31,18 @@
       </div>
 
       <div class="items-list">
+
+        <!-- Cabin Baggage -->
+        <div class="baggage-item-row has-subtitle">
+          <div class="item-main-line">
+            <div class="baggage-row d-flex">
+              <span class="item-qty">{{ normalBaggage() }}</span>
+              <img src="assets/icons/travel-bag-icon.svg" class="item-icon" alt="Cabin baggage" />
+            </div>
+            <span class="item-text">X {{ 'flightDetails.baggage.checkedBaggage' | translate }}</span>
+          </div>
+        </div>
+
         <!-- Personal Item -->
         <div class="baggage-item-row">
           <div class="baggage-row d-flex">
@@ -44,12 +56,12 @@
         <div class="baggage-item-row has-subtitle">
           <div class="item-main-line">
             <div class="baggage-row d-flex">
-              <span class="item-qty">{{ normalBaggage() }}</span>
+              <span class="item-qty">1</span>
               <img src="assets/icons/travel-bag-icon.svg" class="item-icon" alt="Cabin baggage" />
             </div>
-            <span class="item-text">X {{ 'flightDetails.baggage.cabinBaggage' | translate }}</span>
+            <span class="item-text"> X {{ 'flightDetails.baggage.cabinBaggage' | translate }}</span>
           </div>
-          <div class="item-sub-text">(45 x 38 x 23) · 6 kg</div>
+          <div class="item-sub-text">(45 x 38 x 23) · 7 kg</div>
         </div>
       </div>
     </div>
