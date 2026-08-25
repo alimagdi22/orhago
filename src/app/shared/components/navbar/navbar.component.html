@@ -8,7 +8,12 @@
   >
     <nav class="container">
       <img src="assets/images/new-logo.svg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-      <button class="manage-booking-button">
+      <button
+        class="manage-booking-button"
+        [ngClass]="{ 'scroll-button': isScrolled }"
+        (click)="onManageBooking()"
+        type="button"
+      >
         {{ 'navbar.manageBooking' | translate }}
       </button>
 
@@ -76,6 +81,14 @@
       </div>
 
       <ul class="sidebar-menu">
+        <li (click)="onManageBookingMobile()">
+          <div class="menu-item-content">
+            <span class="menu-icon">📋</span>
+            <span class="menu-label">{{ 'navbar.manageBooking' | translate }}</span>
+          </div>
+          <span class="arrow-icon">›</span>
+        </li>
+
         <li (click)="openLangPopup()">
           <div class="menu-item-content">
             <span class="menu-icon">🌐</span>

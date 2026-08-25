@@ -1,4 +1,12 @@
 {
+  "navbar": {
+    "signIn": "تسجيل الدخول",
+    "manageBooking": "إدارة الحجز",
+    "userProfile": "الملف الشخصي",
+    "signOut": "تسجيل الخروج",
+    "signOutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟",
+    "cancel": "اغلاق"
+  },
   "header": {
     "language": "اللغة",
     "currency": "العملة",

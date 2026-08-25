@@ -103,12 +103,12 @@
 }
 
 .scroll-button {
-  color: white;
-  background-color: black;
-  border-color: black;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  background-color: transparent;
 
   &:hover {
-    background-color: rgb(41, 41, 41);
+    background-color: rgba(255, 255, 255, 0.15) !important;
   }
 }
 

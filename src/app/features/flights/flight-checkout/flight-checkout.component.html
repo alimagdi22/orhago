@@ -101,7 +101,7 @@
             <div class="expansion-container">
               <app-expansion-panel
                 [title]="
-                  ('checkout.' + sharedService.getPassengerTypeName(user.value.PassengerType) | translate) + ' ' + (i + 1)
+                  ('checkout.' + sharedService.getPassengerTypeName(user.value.PassengerType) | translate) + ' ' + getPassengerNumber(i)
                 "
                 [id]="i"
               >

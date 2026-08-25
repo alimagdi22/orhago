@@ -18,7 +18,7 @@ export class StopsInfoComponent {
     const parts = [];
 
     if (hours > 0) parts.push(`${hours} h`);
-    if (minutes > 0) parts.push(`${minutes} min`);
+    if (minutes > 0) parts.push(`${minutes} m`);
 
     return parts.join(' ');
   }

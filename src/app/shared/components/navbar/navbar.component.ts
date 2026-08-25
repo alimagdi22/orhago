@@ -1,5 +1,6 @@
 import { Component, HostListener, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {
   AuthService,
@@ -21,6 +22,7 @@ import { SharedService } from '../../shared.service';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
+  router = inject(Router);
   sharedService = inject(SharedService);
   translate = inject(TranslateService);
   homePageService = inject(HomePageService);
@@ -114,6 +116,19 @@ export class NavbarComponent implements OnInit {
 
   onClickSignIn() {
     this.sharedService.isLogInSheetShowed = true;
+  }
+
+  onManageBooking() {
+    if (this.isAuthenticated) {
+      this.router.navigate(['/user-management/user-profile']);
+    } else {
+      this.onClickSignIn();
+    }
+  }
+
+  onManageBookingMobile() {
+    this.closeSidebar();
+    this.onManageBooking();
   }
 
   toggleSidebar() {

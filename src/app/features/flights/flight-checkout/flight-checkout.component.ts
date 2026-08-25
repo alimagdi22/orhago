@@ -172,6 +172,8 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
         },
       }),
     );
+    console.log(this.flightCheckoutService.usersArray.controls,'users');
+    
   }
 
   countrySearchFields: SearchCountryField[] = [
@@ -268,6 +270,23 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
 
   get lang() {
     return this.translate.currentLang === 'en' ? 'en' : 'ar';
+  }
+
+  getPassengerNumber(index: number): number {
+    const controls = this.flightCheckoutService.usersArray?.controls;
+    if (!controls || index < 0 || index >= controls.length) {
+      return index + 1;
+    }
+
+    const currentType = this.sharedService.getPassengerTypeName(controls[index].value?.PassengerType);
+    let count = 0;
+    for (let i = 0; i <= index; i++) {
+      const type = this.sharedService.getPassengerTypeName(controls[i].value?.PassengerType);
+      if (type === currentType) {
+        count++;
+      }
+    }
+    return count;
   }
 
   ngOnDestroy(): void {
