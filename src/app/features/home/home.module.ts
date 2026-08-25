@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -13,6 +14,7 @@ import { SiteAdvantagesComponent } from './components/site-advantages/site-advan
 import { FlightDealsCardComponent } from './components/flight-deals/flight-deals-card/flight-deals-card.component';
 import { HotelDealsCardComponent } from './components/hotel-deals/hotel-deals-card/hotel-deals-card.component';
 import { CalcDiscountPipe } from './components/flight-deals/calc-discount.pipe';
+import { AirlineInfoComponent } from './components/airline-info/airline-info.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,10 @@ import { CalcDiscountPipe } from './components/flight-deals/calc-discount.pipe';
     SiteAdvantagesComponent,
     FlightDealsCardComponent,
     HotelDealsCardComponent,
-    CalcDiscountPipe
+    CalcDiscountPipe,
+    AirlineInfoComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  imports: [CommonModule, HomeRoutingModule, SharedModule, MatExpansionModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeModule {}

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { SharedService } from '../../shared.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './search-box.component.scss',
 })
 export class SearchBoxComponent implements OnInit {
+  @Input() airlineLogo?: string;
   translate = inject(TranslateService);
   sharedService = inject(SharedService);
   router = inject(Router);
@@ -22,8 +23,8 @@ export class SearchBoxComponent implements OnInit {
 
   ngOnInit(): void {
     const url = this.router.url.toLowerCase();
-    console.log(this.isFlightResults,'flight');
-    
+    console.log(this.isFlightResults, 'flight');
+
     if (url.includes('hotels')) {
       this.tabIndex = 1;
     }

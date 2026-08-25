@@ -1,0 +1,143 @@
+<div class="hero-wrapper">
+  <div class="container py-5">
+    <app-search-box [airlineLogo]="airlineLogo"></app-search-box>
+  </div>
+</div>
+
+@if (isLoading) {
+  <div class="container my-5">
+    <app-skeleton-loader height="250px" borderRadius="12px" />
+    <div class="mt-4">
+      <app-skeleton-loader height="180px" borderRadius="12px" />
+    </div>
+  </div>
+} @else if (airlineInfo) {
+  <div class="container my-5">
+    <!-- About Title -->
+    @if (airlineInfoDto && airlineInfoDto.length) {
+      <h1 class="title mb-4 fw-bold fs-3">
+        <span>{{ langIndex ? "عن" : "About" }} </span>
+        <span class="text-uppercase">{{ airlineInfoDto[langIndex]?.airlineName || airlineInfoDto[0]?.airlineName }}</span>
+      </h1>
+    }
+
+    <!-- Specifications Table -->
+    <table class="table table-bordered mb-5">
+      @if (iataCode) {
+        <tr>
+          <th style="width: 220px;">{{ "popularAirlines.table.iataCode" | translate }}</th>
+          <td>{{ iataCode }}</td>
+        </tr>
+      }
+      @if (icaoCode) {
+        <tr>
+          <th>{{ "popularAirlines.table.icaoCode" | translate }}</th>
+          <td>{{ icaoCode }}</td>
+        </tr>
+      }
+      @if (currentAirlineInfoDetail?.headquarters) {
+        <tr>
+          <th>{{ "popularAirlines.table.headquarters" | translate }}</th>
+          <td>{{ currentAirlineInfoDetail?.headquarters }}</td>
+        </tr>
+      }
+      @if (numberOfDestinations) {
+        <tr>
+          <th>{{ "popularAirlines.table.numberOfDestinations" | translate }}</th>
+          <td>
+            {{ "popularAirlines.table.destinationsWorldwide" | translate }}
+            {{ numberOfDestinations }}
+          </td>
+        </tr>
+      }
+      @if (mostPopularDestinations) {
+        <tr>
+          <th>{{ "popularAirlines.table.mostPopularDestinations" | translate }}</th>
+          <td>{{ mostPopularDestinations }}</td>
+        </tr>
+      }
+      @if (yearOfEstablishment) {
+        <tr>
+          <th>{{ "popularAirlines.table.yearOfEstablishment" | translate }}</th>
+          <td>{{ yearOfEstablishment }}</td>
+        </tr>
+      }
+      @if (currentAirlineInfoDetail?.parentCompany) {
+        <tr>
+          <th>{{ "popularAirlines.table.parentCompany" | translate }}</th>
+          <td>{{ currentAirlineInfoDetail?.parentCompany }}</td>
+        </tr>
+      }
+      @if (currentAirlineInfoDetail?.contactInformation) {
+        <tr>
+          <th>{{ "popularAirlines.table.contactInformation" | translate }}</th>
+          <td>{{ currentAirlineInfoDetail?.contactInformation }}</td>
+        </tr>
+      }
+    </table>
+
+    <!-- Content Sections -->
+    @if (sections && sections.length) {
+      <div class="info-container mb-5">
+        <h2 class="main-title fs-4 fw-bold mb-3">{{ sections[0].category }}</h2>
+        <h3 class="sub-title fs-5 fw-bold mb-2">{{ sections[0].sectionTitle }}</h3>
+        <div [innerHTML]="sections[0].content"></div>
+
+        @if (!isExpanded) {
+          <a (click)="toggleShowMore()" class="text-primary fw-bold cursor-pointer mt-2 d-inline-block">Show More</a>
+        }
+
+        @if (isExpanded) {
+          @for (section of sections.slice(1); track $index) {
+            <div class="mt-4">
+              <h3 class="sub-title fs-5 fw-bold mb-2">{{ section.sectionTitle }}</h3>
+              <div [innerHTML]="section.content"></div>
+            </div>
+          }
+          <a (click)="toggleShowMore()" class="text-primary fw-bold mt-2 d-inline-block cursor-pointer">Show Less</a>
+        }
+      </div>
+    }
+
+    <!-- FAQs -->
+    @if (faqs && faqs.length) {
+      <div class="faq-container mb-5">
+        <h2 class="title fs-4 fw-bold mb-4">
+          {{ translate.currentLang === "en" ? "Frequently Asked Questions" : "الأسئلة الشائعة" }}
+        </h2>
+        <div class="d-flex flex-column gap-2">
+          @for (question of faqs; track $index) {
+            <mat-expansion-panel class="custom-border">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ question.question }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>{{ question.answer }}</p>
+            </mat-expansion-panel>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Similar Airlines -->
+    @if (allAirlines && allAirlines.length) {
+      <div class="similar-airlines-container mb-5">
+        <h2 class="title fs-4 fw-bold mb-4">
+          {{ translate.currentLang === "en" ? "Similar Airlines" : "خطوط طيران مشابهة" }}
+        </h2>
+        <div class="w-100 d-flex flex-wrap justify-content-center align-items-center gap-4">
+          @for (airline of allAirlines; track $index) {
+            <div
+              class="airline-card d-flex justify-content-center align-items-center gap-2 cursor-pointer"
+              (click)="navigateToAirline(airline.slug)"
+            >
+              <img [src]="airline.airlineLogo" title="airline logo" width="50" />
+              <span>{{ airline.allAirlineInfoDtos?.[langIndex]?.airlineName || airline.allAirlineInfoDtos?.[0]?.airlineName }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}

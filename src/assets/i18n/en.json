@@ -132,7 +132,12 @@
       "title": "Popular cities for hotels"
     },
     "populerAirlines": {
-      "title": "Popular airlines"
+      "title": "The most popular airlines",
+      "text": "Book the best airline"
+    },
+    "topAirlines": {
+      "title": "The most popular airlines",
+      "text": "Book the best airline"
     }
   },
 
@@ -563,5 +568,22 @@
     "Pay at Property": "Pay at Property",
     "In property curreency": "In property curreency",
     "note": "This payment is due upon arrival. Exchange rates at the time of payment may differ."
+  },
+
+  "popularAirlines": {
+    "table": {
+      "iataCode": "IATA Code",
+      "icaoCode": "ICAO Code",
+      "headquarters": "Headquarters",
+      "numberOfDestinations": "Number of Destinations",
+      "mainOperationalAirport": "Main Operational Airport",
+      "mostPopularDestinations": "Most Popular Destinations",
+      "yearOfEstablishment": "Year of Establishment",
+      "keyRoutes": "Key Routes",
+      "fleetComposition": "Fleet Composition",
+      "parentCompany": "Parent Company",
+      "contactInformation": "Contact Information",
+      "destinationsWorldwide": "Destinations Worldwide"
+    }
   }
 }

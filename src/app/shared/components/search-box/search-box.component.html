@@ -9,7 +9,7 @@
   } @else {
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" [selectedIndex]="tabIndex">
       <mat-tab label="Flights">
-        <app-flight-search-box />
+        <app-flight-search-box [airlineLogo]="airlineLogo"/>
       </mat-tab>
       <mat-tab label="Hotels">
         <app-hotel-search-box/>

@@ -130,7 +130,12 @@
       "title": "المدن الأكثر شهرة للفنادق"
     },
     "populerAirlines": {
-      "title": "شركات الطيران الأكثر شهرة"
+      "title": "أشهر شركات الطيران",
+      "text": "احجز أفضل شركة طيران"
+    },
+    "topAirlines": {
+      "title": "أشهر شركات الطيران",
+      "text": "احجز أفضل شركة طيران"
     }
   },
 
@@ -556,5 +561,22 @@
     "Pay at Property": "الدفع في مكان الإقامة",
     "In property curreency": "بعملة مكان الإقامة",
     "note": "هذا المبلغ مستحق عند الوصول. قد تختلف أسعار الصرف وقت الدفع."
+  },
+
+  "popularAirlines": {
+    "table": {
+      "iataCode": "رمز إياتا",
+      "icaoCode": "رمز إيكاو",
+      "headquarters": "المقر الرئيسي",
+      "numberOfDestinations": "عدد الوجهات",
+      "mainOperationalAirport": "المطار الرئيسي",
+      "mostPopularDestinations": "الوجهات الأكثر شهرة",
+      "yearOfEstablishment": "سنة التأسيس",
+      "keyRoutes": "المسارات الرئيسية",
+      "fleetComposition": "تكوين الأسطول",
+      "parentCompany": "الشركة الأم",
+      "contactInformation": "معلومات الاتصال",
+      "destinationsWorldwide": "وجه حول العالم"
+    }
   }
 }

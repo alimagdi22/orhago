@@ -10,6 +10,11 @@
       <mat-radio-button value="MultiCity" (click)="selectFlightType('MultiCity')">{{
         'home.search.multiCity' | translate
       }}</mat-radio-button>
+      @if(airlineLogo){
+        <div class="airline-logo">
+          <img [src]="airlineLogo" alt="airlineLogo">
+        </div>
+      }
     </mat-radio-group>
   </div>
   <div class="mt-3 mb-4">

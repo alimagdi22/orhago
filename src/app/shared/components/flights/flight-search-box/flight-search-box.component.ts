@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../../shared.service';
@@ -12,6 +12,7 @@ import { FlightSearchInputsComponent } from './flight-search-inputs/flight-searc
   styleUrls: ['./flight-search-box.component.scss'],
 })
 export class FlightSearchBoxComponent implements OnInit {
+  @Input() airlineLogo?: string;
   public flightSearchService = inject(FlightSearchService);
   sharedService = inject(SharedService);
 
@@ -22,6 +23,8 @@ export class FlightSearchBoxComponent implements OnInit {
   @ViewChild(FlightSearchInputsComponent) flightSearchInputs?: FlightSearchInputsComponent;
 
   ngOnInit(): void {
+    console.log(this.airlineLogo);
+    
     let form: any = null;
     let flightType: string | null = null;
 
@@ -46,7 +49,7 @@ export class FlightSearchBoxComponent implements OnInit {
     if (!form) {
       this.flightSearchService.searchFlight?.get('flightType')?.setValue('OneWay');
     }
-    
+
     if (flightType) {
       this.flightSearchService.searchFlight?.get('flightType')?.setValue(flightType);
     }

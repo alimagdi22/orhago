@@ -1,0 +1,74 @@
+.hero-wrapper {
+  width: 100%;
+  background: url('../../../../../assets/images/search-box/2.png') no-repeat fixed;
+  background-size: cover;
+  background-position: center;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  min-height: 320px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+
+  span {
+    text-transform: uppercase;
+  }
+}
+
+table {
+  width: 100%;
+
+  th,
+  td {
+    border: 1px solid #808080;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    width: 220px;
+  }
+}
+
+.info-container {
+  margin-top: 50px;
+
+  .main-title {
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  .sub-title {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.custom-border {
+  border: 1px solid #808080;
+  border-radius: 10px;
+}
+
+.airline-card {
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: all 0.2s ease-in-out;
+  height: 80px;
+  min-width: 220px;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

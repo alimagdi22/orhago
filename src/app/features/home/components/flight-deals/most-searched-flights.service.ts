@@ -39,11 +39,10 @@ export class MostSearchedFlightsService {
     this.http
       .get<MostSearchedFlightsResponse[]>('https://flightsearch.flytoall.com/api/GetCheapestFlights?resCount=5')
       .pipe(
-        timeout(4000),
+        timeout(10000),
         retry(1),
         take(1),
-        catchError((err) => {
-          console.warn('Most searched flights request timed out or failed:', err);
+        catchError(() => {
           return of([]);
         }),
       )

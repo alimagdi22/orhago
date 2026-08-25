@@ -6,6 +6,19 @@ form {
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
+.airline-logo{
+  position: absolute;
+  right: 0;
+}
+
+.airline-logo img{
+  width: 150px;
+  height: auto;
+  max-height: 75px;
+  object-fit: contain;
+  margin-top: -7px;
+}
+
 .radio-buttons {
   display: flex;
   margin-bottom: 16px;
