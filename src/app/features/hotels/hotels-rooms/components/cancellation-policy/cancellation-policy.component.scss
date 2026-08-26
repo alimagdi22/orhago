@@ -1,0 +1,93 @@
+@import '../../../../../../sass/variables';
+@import '../../../../../../sass/colors';
+
+.cancellation-dialog-container {
+  padding: 20px;
+
+  .dialog-header {
+    h3 {
+      font-weight: 700;
+      color: map-get($colors, 'main');
+      font-size: 1.25rem;
+    }
+    .btn-close {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+  }
+
+  .rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .rule-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    transition: all 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-color: map-get($colors, 'main');
+    }
+
+    &.free {
+      border-left: 5px solid #28a745;
+      background-color: #f8fff9;
+    }
+
+    &:not(.free) {
+      border-left: 5px solid #f58220;
+      background-color: #fffaf5;
+    }
+
+    .rule-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .rule-content {
+      flex-grow: 1;
+
+      .rule-text {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #444;
+      }
+
+      .rule-penalty {
+        font-size: 13px;
+        .penalty-label {
+          color: #777;
+          margin-inline-end: 4px;
+        }
+        .penalty-amount {
+          color: #dc3545;
+        }
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: map-get($colors, 'main');
+    border-color: map-get($colors, 'main');
+    color: #fff;
+    font-weight: 600;
+  }
+}

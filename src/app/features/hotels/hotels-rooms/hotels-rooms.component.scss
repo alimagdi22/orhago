@@ -2,13 +2,52 @@
 @import '../../../../sass/colors';
 
 
-::ng-deep .mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
-    flex-grow: 0 !important;
+::ng-deep {
+    .mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
+        flex-grow: 0 !important;
+    }
+
+    .mat-mdc-tab-link {
+        font-weight: 500 !important;
+        font-size: 16px !important;
+        color: map-get($map: $colors, $key: 'gray-dark') !important;
+        padding: 12px 24px !important;
+        opacity: 0.75;
+        transition: all 0.2s ease-in-out;
+        border-bottom: 3px solid transparent !important;
+
+        &:hover {
+            opacity: 1;
+            color: map-get($map: $colors, $key: 'main') !important;
+        }
+
+        &.mdc-tab--active,
+        &.active-tab,
+        &[aria-current="true"] {
+            font-weight: 700 !important;
+            color: map-get($map: $colors, $key: 'main') !important;
+            opacity: 1 !important;
+            border-bottom: 1px solid map-get($map: $colors, $key: 'main') !important;
+
+            .mdc-tab__text-label {
+                color: map-get($map: $colors, $key: 'main') !important;
+                font-weight: 700 !important;
+            }
+        }
+    }
+
+    .mat-mdc-tab-nav-bar .mdc-tab-indicator__content--underline {
+        border-color: map-get($map: $colors, $key: 'main') !important;
+        border-top-width: 3px !important;
+    }
+}
+
+::ng-deep .cdk-overlay-pane{
+  width: 300px !important;
 }
 
 nav {
-    margin-block: 50px;
-    border-bottom: 1px solid #DFDFDF;
+    margin: 50px 0 10px;
 }
 
 .pricing-card {

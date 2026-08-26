@@ -551,7 +551,13 @@
     "View more amenities": "عرض المزيد من المرافق",
     "Book Now": "احجز الآن",
     "errorMessage": "حدث خطأ أثناء جلب غرف الفندق. يرجى المحاولة مرة أخرى لاحقاً.",
-    "goHome": "العودة إلى الرئيسية"
+    "goHome": "العودة إلى الرئيسية",
+    "Cancellation Policy": "سياسة الإلغاء",
+    "From": "من",
+    "To": "إلى",
+    "Penalty": "الغرامة",
+    "Free": "مجاني",
+    "Close": "إغلاق"
   },
   "hotelPayment": {
     "Payment Summary": "ملخص الدفع",

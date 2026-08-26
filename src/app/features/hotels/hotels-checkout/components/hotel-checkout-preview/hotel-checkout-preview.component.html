@@ -1,10 +1,10 @@
 @if(sharedService.screenWidth > 1000){
 
   <section class="upper-section col-12 row">
-      <img [src]="hotel.hotelImages[0]" class="col-lg-3 col-12 preview" />
+      <img [src]="hotel.hotelImages[0] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" class="col-lg-3 col-12 preview" />
 
       <div class="col-lg-9 col-12 row wrapper">
-          <span class="title col-12">{{ hotel.hotelName }}</span>
+          <span class="title col-12">{{ hotel.hotelName }} - {{ hotel.Package.Rooms[0].RoomType }}</span>
           <span class="sub-title col-12">{{ hotel.City }}, {{ hotel.Country }}</span>
 
           @for (amenity of hotel.Amenities | slice: 0: 2; track $index) {
@@ -38,7 +38,7 @@
   @if(sharedService.screenWidth > 1000){
     <hr class="col-12" />
     <section class="lower-section col-12 row">
-        <img [src]="room.Images[$index + 2]" class="col-lg-3 col-12 preview" />
+        <img [src]="room.Images[$index + 2] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" class="col-lg-3 col-12 preview" />
 
         <div class="col-lg-9 col-12 row wrapper">
             <span class="title col-12">{{ room.RoomCode }}</span>
@@ -64,8 +64,41 @@
                     <p class="amenity"><img src="assets/icons/hotel-card/check.svg" />{{ amenity.Amenity }}</p>
                 }
             </div>
-
-            <p class="col-12 cancellation"><img src="assets/icons/hotel-card/check.svg" /> Free cancellation until 20 Jul, 12:00 PM</p>
+            @for (rule of cancellationRules; track $index) {
+              <div class="col-12 cancellation">
+                <div class="rule-item d-flex gap-1" [class.free]="isFreeCancellation(rule)">
+                  <div class="rule-icon">
+                    <img [src]="isFreeCancellation(rule) ? 'assets/icons/hotel-card/check.svg' : 'assets/icons/hotels/stop.svg'" alt="Icon" />
+                  </div>
+                  <div class="rule-content">
+                    <div class="rule-text">
+                      @if(rule.FromDate || rule.fromDate){
+                        {{'hotelRooms.From' | translate}}
+                        {{ (rule.FromDate || rule.fromDate) | date: 'dd/MM/yyyy' }} 
+                      }
+                      @if(rule.ToDate || rule.toDate){
+                        @if(rule.FromDate || rule.fromDate){
+                          - 
+                        } 
+                        {{'hotelRooms.To' | translate}}
+                        {{ (rule.ToDate || rule.toDate) | date: 'dd/MM/yyyy' }}
+                      }
+                    </div>
+                    @if (!isFreeCancellation(rule)) {
+                      <div class="rule-penalty mt-1">
+                        <span class="penalty-label">{{ 'hotelRooms.Penalty' | translate }}:</span>
+                        <span class="penalty-amount fw-bold">{{ rule.Price || rule.Cost || rule.price || rule.cost }} {{ rule.Curency || rule.currency || '' }}</span>
+                      </div>
+                    } @else {
+                      <div class="rule-penalty mt-1">
+                        <span class="penalty-label">{{ 'hotelRooms.Penalty' | translate }}:</span>
+                        <span class="penalty-amount fw-bold text-success">{{ 'hotelRooms.Free' | translate }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            }
         </div>
     </section>
 
@@ -80,7 +113,7 @@
       <h3 class="hotel-name">{{ hotel.hotelName }}</h3>
       <p class="hotel-location">{{ hotel.City }}, {{ hotel.Country }}</p>
     </div>
-    <img class="hotel-img" [src]="room.Images[$index + 2]"alt="hotel" />
+    <img class="hotel-img" [src]="room.Images[$index + 2] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" alt="hotel" />
   </div>
 
   <div class="hotel-services">

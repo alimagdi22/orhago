@@ -526,7 +526,13 @@
     "View more amenities": "View more amenities",
     "Book Now": "Book Now",
     "errorMessage": "Something went wrong while fetching hotel rooms. Please try again later.",
-    "goHome": "Go to Home"
+    "goHome": "Go to Home",
+    "Cancellation Policy": "Cancellation Policy",
+    "From": "From",
+    "To": "To",
+    "Penalty": "Penalty",
+    "Free": "Free",
+    "Close": "Close"
   },
 
   "hotelCheckout": {

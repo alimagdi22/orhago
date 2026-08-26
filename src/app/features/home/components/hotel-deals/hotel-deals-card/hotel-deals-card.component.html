@@ -1,7 +1,8 @@
 <div class="hotel-deal-card">
   <div class="hotel-deal-card__img-container">
     <img
-      [src]="deal?.image || image || 'assets/images/popular/Dubai 3.png'"
+      [src]="deal?.image || image || 'assets/images/hotels/hotel-replacement.webp'"
+      (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'"
       [title]="deal?.name || 'Hotel Photo'"
       class="hotel-deal-card__img"
     />

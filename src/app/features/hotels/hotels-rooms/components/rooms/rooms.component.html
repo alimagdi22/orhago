@@ -1,5 +1,5 @@
 <section class="info-section col-12 col-lg-4">
-    <img [src]="package?.Rooms?.[0]?.Images?.[index < (package?.Rooms?.[0]?.Images?.length || 0) ? index : 0] || package?.Rooms?.[0]?.Images?.[0]" class="room-image" />
+    <img [src]="package?.Rooms?.[0]?.Images?.[index < (package?.Rooms?.[0]?.Images?.length || 0) ? index : 0] || package?.Rooms?.[0]?.Images?.[0] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" class="room-image" />
 
     <p class="title">{{ package?.Rooms?.[0]?.RoomType }}</p>
 </section>
@@ -43,6 +43,12 @@
                 <p class="tag red">
                     <img src="assets/icons/hotels/x-icon.svg" />
                     {{ ("hotelRooms.Nun-refundable" | translate) }}
+                </p>
+            }
+
+            @if (getCancellationRules(room); as rules) {
+                <p class="tag blue cursor-pointer" (click)="openCancellationModal(rules)" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                    <span class="text-decoration-underline">{{ ("hotelRooms.Cancellation Policy" | translate) }}</span>
                 </p>
             }
             <div>

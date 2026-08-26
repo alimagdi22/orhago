@@ -28,12 +28,24 @@ export class GalleryComponent implements OnInit {
     borderRadius: '12px',
   };
   public stars: number[] = [];
+  public showSingleFallback = false;
+  private failedImagesCount = 0;
 
   ngOnInit() {
     this.stars = Array.from({ length: this.hotelRoomsService.roomsData?.hotelStars || 0 }, (_, i) => i);
   }
 
+  onImageError(index: number): void {
+    this.failedImagesCount++;
+    const totalImages = this.roomsData?.hotelImages?.length || 1;
+    if (index === 0 || this.failedImagesCount >= totalImages) {
+      this.showSingleFallback = true;
+    }
+  }
+
   openGallery(index = 0) {
+    if (this.showSingleFallback) return;
+
     const images = this.roomsData?.hotelImages || [];
 
     this.dialog.open(GalleryDialogComponent, {

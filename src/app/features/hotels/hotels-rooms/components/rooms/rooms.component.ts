@@ -3,6 +3,7 @@ import { HotelRoomsService, HotelSearchService, packages, room, amenties } from 
 import { IMainButton } from '../../../../../shared/models/flights/mainButton.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AmenitiesComponent } from './amenities/amenities.component';
+import { CancellationPolicyComponent } from '../cancellation-policy/cancellation-policy.component';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedService } from '../../../../../shared/shared.service';
 
@@ -75,6 +76,42 @@ export class RoomsComponent implements OnInit {
       width: '50vw',
       height: '80vh',
       minWidth: '350px'
+    });
+  }
+
+  getCancellationRules(targetRoom: any): any[] | null {
+    if (!targetRoom) return null;
+    const rules =
+      targetRoom.cancellationRules ||
+      targetRoom.CancellationRules ||
+      targetRoom.CancelPolicies ||
+      targetRoom.cancelPolicies ||
+      targetRoom.CancellationPolicies ||
+      targetRoom.cancellationPolicies ||
+      targetRoom.CancellationPolicyDtos ||
+      targetRoom.cancellationPolicyDtos ||
+      (this.package as any)?.CancellationRules ||
+      (this.package as any)?.cancellationRules ||
+      (this.package as any)?.CancelPolicies;
+
+    if (rules && rules.length) {
+      return rules;
+    }
+
+    if (targetRoom.IsRefundable) {
+      return [{ Cost: 0, Price: 0, Curency: this.currency }];
+    }
+
+    return null;
+  }
+
+  openCancellationModal(rules: any[]): void {
+    if (!rules || !rules.length) return;
+    this.dialog.open(CancellationPolicyComponent, {
+      data: rules,
+      width: '90%',
+      maxWidth: '600px',
+      autoFocus: false,
     });
   }
 

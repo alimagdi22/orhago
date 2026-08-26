@@ -1,5 +1,5 @@
 <div class="hotel-card row">
-    <img class="hotel-card__image col-md-3 col-12" [src]="hotel.hotelThumb" />
+    <img class="hotel-card__image col-md-3 col-12" [src]="hotel.hotelThumb || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" />
     
     <div class="hotel-card__content col-md-6 col-12">
         <div class="hotel-card__content__stars">

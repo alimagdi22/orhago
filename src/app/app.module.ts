@@ -47,7 +47,7 @@ export function createTranslateLoader(http: HttpClient, platformId: object) {
     SharedModule,
     HotelsRoomsModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: 'ar',
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,

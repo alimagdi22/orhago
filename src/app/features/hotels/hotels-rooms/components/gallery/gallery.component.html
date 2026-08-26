@@ -20,17 +20,36 @@
   </header>
 }
 
-<section class="images-section col-lg-9 col-12" *ngIf="roomsData?.hotelImages?.length">
-    @for (image of roomsData.hotelImages | slice: 0 : 6; track $index) {
-        <img [src]="image" [class.main-img]="$first" (click)="openGallery($index)" style="cursor: pointer;" />
-    }
-    @if (roomsData.hotelImages.length > 6) {
-      <article (click)="openGallery(6)" style="cursor: pointer;">
-          <p>+{{ roomsData.hotelImages.length - 6 }}</p>
-          <img [src]="roomsData.hotelImages[6]" />
-      </article>
+<section class="images-section col-lg-9 col-12" *ngIf="roomsData?.hotelImages?.length; else fallbackSection">
+    @if (showSingleFallback) {
+      <img src="assets/images/hotels/hotel-replacement.webp" class="single-fallback-img" alt="Hotel Replacement Image" />
+    } @else {
+      @for (image of roomsData.hotelImages | slice: 0 : 6; track $index) {
+          <img
+            [src]="image"
+            [class.main-img]="$first"
+            (error)="onImageError($index)"
+            (click)="openGallery($index)"
+            style="cursor: pointer;"
+          />
+      }
+      @if (roomsData.hotelImages.length > 6) {
+        <article (click)="openGallery(6)" style="cursor: pointer;">
+            <p>+{{ roomsData.hotelImages.length - 6 }}</p>
+            <img
+              [src]="roomsData.hotelImages[6]"
+              (error)="onImageError(6)"
+            />
+        </article>
+      }
     }
 </section>
+
+<ng-template #fallbackSection>
+  <section class="images-section col-lg-9 col-12">
+    <img src="assets/images/hotels/hotel-replacement.webp" class="single-fallback-img" alt="Hotel Replacement Image" />
+  </section>
+</ng-template>
 
 @if(sharedService.screenWidth < 900){
   <header class="col-12">

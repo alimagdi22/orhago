@@ -41,7 +41,7 @@
                 <ng-container [formGroupName]="$index">
                     <div class="custom-radio-group">
                         @for (title of titles; track $index) {
-                            <label class="radio-btn" [style.flex-basis]="$index ? '40%' :'100%'">
+                            <label class="radio-btn" [style.flex-basis]="'20%'">
                                 <input type="radio" [value]="title" formControlName="salutation" />
                                 {{ ("hotelCheckout." + title) | translate }}
                             </label>

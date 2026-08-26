@@ -16,6 +16,8 @@ import { DetailsComponent } from './components/details/details.component';
 import { AmenitiesComponent } from './components/rooms/amenities/amenities.component';
 import { AmenitiesDialogComponent } from './components/amenities-mobile/amenities-dialog/amenities-dialog.component';
 import { AmenitiesMobileComponent } from './components/amenities-mobile/amenities-mobile.component';
+import { CancellationPolicyComponent } from './components/cancellation-policy/cancellation-policy.component';
+
 @NgModule({
   declarations: [
     HotelsRoomsComponent,
@@ -28,6 +30,7 @@ import { AmenitiesMobileComponent } from './components/amenities-mobile/amenitie
     AmenitiesComponent,
     AmenitiesDialogComponent,
     AmenitiesMobileComponent,
+    CancellationPolicyComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,8 @@ import { AmenitiesMobileComponent } from './components/amenities-mobile/amenitie
     GalleryDialogComponent
   ],
   exports: [
-    GalleryDialogComponent
+    GalleryDialogComponent,
+    CancellationPolicyComponent
   ],
   providers: [
     {
