@@ -246,6 +246,18 @@ export class HotelDateInputComponent implements OnInit {
     return current > checkInDate && current < checkOutDate;
   }
 
+  isDisabled(date: NgbDateStruct): boolean {
+    const jsDate = this.convertToDate(date);
+    if (this.currentCalendar === 'checkOut') {
+      const minDate = this.convertToDate(this.minCheckoutDateNgb);
+      const maxDate = this.convertToDate(this.maxDateNgb);
+      return jsDate < minDate || jsDate > maxDate;
+    }
+    const today = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+    const maxDate = this.convertToDate(this.maxDateNgb);
+    return jsDate < today || jsDate > maxDate;
+  }
+
   validateDates(): void {
     const checkIn = this.checkInControl.value ? new Date(this.checkInControl.value) : null;
     const checkOut = this.checkOutControl.value ? new Date(this.checkOutControl.value) : null;

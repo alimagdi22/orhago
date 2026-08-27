@@ -21,6 +21,10 @@ export class SearchBoxComponent implements OnInit {
     return this.router.url.includes('flight-results');
   }
 
+  get isHotelResults(): boolean{
+    return this.router.url.includes('hotels-results') || this.router.url.includes('hotels-rooms');
+  }
+
   ngOnInit(): void {
     const url = this.router.url.toLowerCase();
     console.log(this.isFlightResults, 'flight');

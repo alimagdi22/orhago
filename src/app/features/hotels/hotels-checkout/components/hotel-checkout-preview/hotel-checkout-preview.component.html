@@ -64,39 +64,11 @@
                     <p class="amenity"><img src="assets/icons/hotel-card/check.svg" />{{ amenity.Amenity }}</p>
                 }
             </div>
-            @for (rule of cancellationRules; track $index) {
-              <div class="col-12 cancellation">
-                <div class="rule-item d-flex gap-1" [class.free]="isFreeCancellation(rule)">
-                  <div class="rule-icon">
-                    <img [src]="isFreeCancellation(rule) ? 'assets/icons/hotel-card/check.svg' : 'assets/icons/hotels/stop.svg'" alt="Icon" />
-                  </div>
-                  <div class="rule-content">
-                    <div class="rule-text">
-                      @if(rule.FromDate || rule.fromDate){
-                        {{'hotelRooms.From' | translate}}
-                        {{ (rule.FromDate || rule.fromDate) | date: 'dd/MM/yyyy' }} 
-                      }
-                      @if(rule.ToDate || rule.toDate){
-                        @if(rule.FromDate || rule.fromDate){
-                          - 
-                        } 
-                        {{'hotelRooms.To' | translate}}
-                        {{ (rule.ToDate || rule.toDate) | date: 'dd/MM/yyyy' }}
-                      }
-                    </div>
-                    @if (!isFreeCancellation(rule)) {
-                      <div class="rule-penalty mt-1">
-                        <span class="penalty-label">{{ 'hotelRooms.Penalty' | translate }}:</span>
-                        <span class="penalty-amount fw-bold">{{ rule.Price || rule.Cost || rule.price || rule.cost }} {{ rule.Curency || rule.currency || '' }}</span>
-                      </div>
-                    } @else {
-                      <div class="rule-penalty mt-1">
-                        <span class="penalty-label">{{ 'hotelRooms.Penalty' | translate }}:</span>
-                        <span class="penalty-amount fw-bold text-success">{{ 'hotelRooms.Free' | translate }}</span>
-                      </div>
-                    }
-                  </div>
-                </div>
+            @if (cancellationRules.length) {
+              <div class="col-12 mt-2">
+                <p class="tag blue cursor-pointer" (click)="openCancellationModal()" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                  <span class="text-decoration-underline text-primary fw-bold" style="cursor: pointer; font-size: 14px; font-weight: 600; text-decoration: underline;">{{ ("hotelRooms.Cancellation Policy" | translate) }}</span>
+                </p>
               </div>
             }
         </div>
@@ -148,10 +120,11 @@
                 }
     </div>
 
-    <!-- <div class="free-cancel">
-      <i class="bi bi-check2"></i>
-      <span>إلغاء مجاني حتى 20 يوليو الساعة 12:00 ظهرًا</span>
-    </div> -->
+    @if (cancellationRules.length) {
+      <div class="free-cancel cursor-pointer mt-2" (click)="openCancellationModal()" style="cursor: pointer;">
+        <span class="text-decoration-underline text-primary fw-bold" style="font-size: 14px; font-weight: 600; text-decoration: underline;">{{ ("hotelRooms.Cancellation Policy" | translate) }}</span>
+      </div>
+    }
   </div>
 </div>
   }

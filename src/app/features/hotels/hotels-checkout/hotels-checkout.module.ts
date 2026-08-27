@@ -6,7 +6,7 @@ import { HotelsCheckoutComponent } from './hotels-checkout.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { HotelCheckoutPreviewComponent } from './components/hotel-checkout-preview/hotel-checkout-preview.component';
 import { HotelCheckoutFormComponent } from './components/hotel-checkout-form/hotel-checkout-form.component';
-import { HotelsCheckoutFormAppComponent } from './components/hotels-checkout-form-app/hotels-checkout-form-app.component';
+import { HotelsCheckoutFormAppComponent } from './components/hotels-checkout-form-app/hotels-checkout-form-app.component';import { HotelsRoomsModule } from '../hotels-rooms/hotels-rooms.module';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { HotelsCheckoutFormAppComponent } from './components/hotels-checkout-for
   imports: [
     CommonModule,
     HotelsCheckoutRoutingModule,
-    SharedModule
+    SharedModule,
+    HotelsRoomsModule
   ]
 })
 export class HotelsCheckoutModule { }

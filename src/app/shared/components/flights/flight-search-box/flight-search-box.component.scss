@@ -9,6 +9,11 @@ form {
 .airline-logo{
   position: absolute;
   right: 0;
+
+  &.ar{
+    right: auto !important;
+    left: 0;
+  }
 }
 
 .airline-logo img{

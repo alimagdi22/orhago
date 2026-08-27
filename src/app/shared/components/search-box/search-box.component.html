@@ -1,4 +1,4 @@
-@if (!isFlightResults) {
+@if (!isFlightResults && !isHotelResults) {
   <app-search-box-header (tabChanged)="onTabChanged($event)" />
 }
 <div
@@ -6,7 +6,9 @@
 >
   @if (isFlightResults) {
     <app-flight-search-box />
-  } @else {
+  }@else if(isHotelResults){  
+    <app-hotel-search-box/>
+  }@else {
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" [selectedIndex]="tabIndex">
       <mat-tab label="Flights">
         <app-flight-search-box [airlineLogo]="airlineLogo"/>

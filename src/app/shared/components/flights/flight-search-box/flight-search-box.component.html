@@ -11,7 +11,7 @@
         'home.search.multiCity' | translate
       }}</mat-radio-button>
       @if(airlineLogo){
-        <div class="airline-logo">
+        <div class="airline-logo" [class.ar]="lang.currentLang === 'ar'">
           <img [src]="airlineLogo" alt="airlineLogo">
         </div>
       }

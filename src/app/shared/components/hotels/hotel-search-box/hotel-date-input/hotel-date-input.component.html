@@ -34,88 +34,61 @@
   </div>
 </div>
 
-<mat-menu #dateMenu="matMenu" class="datepicker-menu" [overlapTrigger]="false" (closed)="onMenuClosed()" [ngStyle]="sharedService.screenWidth < 768 ?{'display':'none'}:{}"
->
-  <div class="datepicker-container" (click)="$event.stopPropagation()" #datepickerContainer>
-    <div class="datepicker-header">
-      <div class="date-group">
-        <!-- Check-in Date -->
-        <div class="form-group checkin-group"
-            [class.invalid]="checkInInvalid"
-            [ngStyle]="currentLang === 'en' ? {'border-radius': '10px 0 0 10px'} : {'border-radius': '10px 0px 0px 10px'}">
-          <label for="checkIn" [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
-            {{ 'searchBox.checkIn' | translate }}
-          </label>
-
-          <div class="input-group">
-            <div class="date-display">
-              {{ checkInControl.value | date:'d MMMM yyyy' }}
-            </div>
-          </div>
-        </div>
-
-        <!-- Check-out Date -->
-        <div class="form-group checkout-group"
-            [class.invalid]="checkOutInvalid"
-            [ngStyle]="currentLang === 'en' ? {'border-radius': '0 10px 10px 0'} : {'border-radius': '0px 10px 10px 0px'}">
-          <label for="checkOut" [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
-            {{ 'searchBox.checkOut' | translate }}
-          </label>
-
-          <div class="input-group">
-            <div class="date-display">
-              {{ checkOutControl.value | date:'d MMMM yyyy' }}
-            </div>
-          </div>
-        </div>
-      </div>
+<mat-menu #dateMenu="matMenu" class="calenderMenu" (closed)="onMenuClosed()" (click)="$event.stopPropagation()">
+  <div class="date-summary">
+    <div class="date-summary__departing">
+      <p class="date-summary__departing__title">{{ 'searchBox.checkIn' | translate }}</p>
+      <p class="date-summary__departing__date">
+        {{ checkInControl.value | date: 'EEE, d MMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+      </p>
     </div>
 
-    <div class="calendars-container">
-      <!-- Check-in Calendar -->
-      <ngb-datepicker
-        *ngIf="currentCalendar === 'checkIn'"
-        #checkinDatepicker
-        class="checkin-calendar"
-        [displayMonths]="2"
-        navigation="arrows"
-        outsideDays="visible"
-        [minDate]="todayNgb"
-        [maxDate]="maxDateNgb"
-        [startDate]="checkInNgb"
-        [dayTemplate]="dayTemplate"
-        [(ngModel)]="selectedCheckIn"
-        (dateSelect)="onDateSelect('checkIn', $event)"
-        [ngStyle]="sharedService.screenWidth < 768 ?{'display':'none'}:{}"
-      ></ngb-datepicker>
-
-      <!-- Check-out Calendar -->
-      <ngb-datepicker
-        *ngIf="currentCalendar === 'checkOut'"
-        #checkoutDatepicker
-        class="checkout-calendar"
-        [displayMonths]="2"
-        navigation="arrows"
-        outsideDays="visible"
-        [minDate]="minCheckoutDateNgb"
-        [maxDate]="maxDateNgb"
-        [startDate]="checkOutNgb"
-        [dayTemplate]="dayTemplate"
-        [(ngModel)]="selectedCheckOut"
-        (dateSelect)="onDateSelect('checkOut', $event)"
-        [ngStyle]="sharedService.screenWidth < 768 ?{'display':'none'}:{}"
-      ></ngb-datepicker>
+    <div class="date-summary__landing">
+      <p class="date-summary__landing__title">{{ 'searchBox.checkOut' | translate }}</p>
+      <p class="date-summary__landing__date">
+        {{ checkOutControl.value | date: 'EEE, d MMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+      </p>
     </div>
   </div>
+
+  <ngb-datepicker
+    *ngIf="currentCalendar === 'checkIn'"
+    #checkinDatepicker
+    class="searchBoxPicker"
+    [displayMonths]="2"
+    navigation="arrows"
+    outsideDays="hidden"
+    [minDate]="todayNgb"
+    [maxDate]="maxDateNgb"
+    [startDate]="checkInNgb"
+    [dayTemplate]="calendarTemplate"
+    [(ngModel)]="selectedCheckIn"
+    (dateSelect)="onDateSelect('checkIn', $event)"
+  ></ngb-datepicker>
+
+  <ngb-datepicker
+    *ngIf="currentCalendar === 'checkOut'"
+    #checkoutDatepicker
+    class="searchBoxPicker"
+    [displayMonths]="2"
+    navigation="arrows"
+    outsideDays="hidden"
+    [minDate]="minCheckoutDateNgb"
+    [maxDate]="maxDateNgb"
+    [startDate]="checkOutNgb"
+    [dayTemplate]="calendarTemplate"
+    [(ngModel)]="selectedCheckOut"
+    (dateSelect)="onDateSelect('checkOut', $event)"
+  ></ngb-datepicker>
+
+  <ng-template #calendarTemplate let-date let-focused="focused">
+    <span
+      class="custom-day"
+      [class.focused]="isSelectedDate(date)"
+      [class.range]="isInRange(date)"
+      [class.disabled]="isDisabled(date)"
+    >
+      {{ date.day }}
+    </span>
+  </ng-template>
 </mat-menu>
-
-<ng-template #dayTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected">
-  <div class="custom-day"
-       [class.selected]="isSelectedDate(date)"
-       [class.in-range]="isInRange(date)"
-       [class.check-in]="isCheckInDate(date)"
-       [class.check-out]="isCheckOutDate(date)"
-       [class.outside]="date.month !== currentMonth">
-    {{ date.day }}
-  </div>
-</ng-template>

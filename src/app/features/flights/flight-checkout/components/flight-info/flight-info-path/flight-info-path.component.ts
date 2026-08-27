@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: false,
@@ -10,4 +11,5 @@ export class FlightInfoPathComponent {
   @Input() totalDuration = 0;
   @Input() transitTime = '';
   @Input() isDirect = false;
+  translate = inject(TranslateService)
 }

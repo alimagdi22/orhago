@@ -199,6 +199,10 @@ export class AirlineInfoComponent implements OnInit, OnDestroy {
   navigateToAirline(slug: string): void {
     if (slug) {
       this.router.navigate([`/airlines/${slug}`]);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
   }
 }

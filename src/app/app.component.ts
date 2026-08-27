@@ -93,34 +93,35 @@ export class AppComponent implements OnInit {
     //   rate: 1,
     // };
 
-    const currentLang = typeof localStorage !== 'undefined' ? (typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem('lang') : null) : null;
+    const currentLang = typeof localStorage !== 'undefined' && typeof window !== 'undefined' ? localStorage.getItem('lang') : null;
+    const activeLang = currentLang || 'en';
 
-    if (currentLang) {
-      this.translate.use(currentLang);
-
-      this.document.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
-      this.translate.onLangChange.subscribe(event => {
-        if (typeof document !== 'undefined') {
-          const html = document.querySelector('html');
-          html?.setAttribute('lang', event.lang);
-        }
-
-        // Add or remove 'ar' class on body
-        if (event.lang === 'ar') {
-          this.renderer.addClass(this.document.body, 'ar');
-        } else {
-          this.renderer.removeClass(this.document.body, 'ar');
-        }
-      });
-    } else {
-      this.translate.use('en');
-      if (typeof localStorage !== 'undefined') {
-        if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-          localStorage.setItem('lang', 'en');
-        }
-      }
+    this.translate.use(activeLang);
+    if (typeof localStorage !== 'undefined' && typeof window !== 'undefined' && !currentLang) {
+      localStorage.setItem('lang', 'en');
     }
+
+    this.document.dir = activeLang === 'ar' ? 'rtl' : 'ltr';
+    if (activeLang === 'ar') {
+      this.renderer.addClass(this.document.body, 'ar');
+    } else {
+      this.renderer.removeClass(this.document.body, 'ar');
+    }
+
+    this.translate.onLangChange.subscribe(event => {
+      this.document.dir = event.lang === 'ar' ? 'rtl' : 'ltr';
+      if (typeof document !== 'undefined') {
+        const html = document.querySelector('html');
+        html?.setAttribute('lang', event.lang);
+        html?.setAttribute('dir', event.lang === 'ar' ? 'rtl' : 'ltr');
+      }
+
+      if (event.lang === 'ar') {
+        this.renderer.addClass(this.document.body, 'ar');
+      } else {
+        this.renderer.removeClass(this.document.body, 'ar');
+      }
+    });
 
     let envRP = {
       offlineSeats: 'http://154.41.209.93:7025',

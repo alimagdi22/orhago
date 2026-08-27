@@ -3,6 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { HotelCheckoutService } from 'rp-hotels-ui';
 import { SharedService } from '../../../../../shared/shared.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { CancellationPolicyComponent } from '../../../hotels-rooms/components/cancellation-policy/cancellation-policy.component';
+
 @Component({
   standalone: false,
   selector: 'app-hotel-checkout-preview',
@@ -18,6 +21,7 @@ export class HotelCheckoutPreviewComponent implements OnInit {
 
   private hotelCheckoutService = inject(HotelCheckoutService);
   private translateService = inject(TranslateService);
+  private dialog = inject(MatDialog);
   public sharedService = inject(SharedService);
 
   ngOnInit(): void {
@@ -62,5 +66,15 @@ export class HotelCheckoutPreviewComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  openCancellationModal(): void {
+    if (!this.cancellationRules || !this.cancellationRules.length) return;
+    this.dialog.open(CancellationPolicyComponent, {
+      data: this.cancellationRules,
+      width: '90%',
+      maxWidth: '600px',
+      autoFocus: false,
+    });
   }
 }

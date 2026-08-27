@@ -40,7 +40,17 @@ img {
   max-width: 100%;
 }
 
-/* Calender */
+/* Calender & Datepicker Container */
+.datepicker-container {
+  direction: ltr;
+
+  [dir='rtl'] &,
+  html[dir='rtl'] &,
+  body.ar & {
+    direction: rtl;
+  }
+}
+
 .calenderMenu {
   height: 100%;
   transform-origin: left top;

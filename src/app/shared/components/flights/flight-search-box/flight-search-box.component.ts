@@ -1,9 +1,10 @@
-import { Component, ElementRef, inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../../shared.service';
 import { Validators } from '@angular/forms';
 import { FlightSearchInputsComponent } from './flight-search-inputs/flight-search-inputs.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: false,
@@ -15,7 +16,7 @@ export class FlightSearchBoxComponent implements OnInit {
   @Input() airlineLogo?: string;
   public flightSearchService = inject(FlightSearchService);
   sharedService = inject(SharedService);
-
+  lang = inject(TranslateService)
   private platformId = inject(PLATFORM_ID);
   public isBrowser = isPlatformBrowser(this.platformId);
 

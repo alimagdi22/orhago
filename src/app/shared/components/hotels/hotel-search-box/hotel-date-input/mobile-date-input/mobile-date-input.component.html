@@ -1,4 +1,4 @@
-<div class="datepicker-container">
+<div class="datepicker-container" [attr.dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">
   <header>
     <span>{{ 'searchBox.dateSelection' | translate }}</span>
     <button (click)="dialogRef.close()">{{ 'searchBox.close' | translate }}</button>

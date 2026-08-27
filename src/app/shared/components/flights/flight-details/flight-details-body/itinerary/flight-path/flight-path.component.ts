@@ -40,4 +40,6 @@ export class FlightPathComponent implements OnInit {
     console.log(this.cabinClass , 'class');
     
   }
+
+  
 }
