@@ -16,7 +16,9 @@ export class FlightDetailsHeaderComponent {
   selectButton: IMainButton = {
     height: '48px',
     width: '100%',
-    borderRadius: '12px',
+    borderRadius: '6px',
+    backgroundColor: '#213567',
+    color:'white'
   };
 
   onClickExit() {

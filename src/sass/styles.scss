@@ -254,19 +254,19 @@ ngx-intl-tel-input {
 :host ::ng-deep .swiper-wrapper {
   justify-content: center !important;
 }
-// Define the custom primary palette using your green color
+// Define the custom primary palette using your blue color (#213567)
 $green-palette: (
-  50: #e0f7e4,
-  100: #b3ebbd,
-  200: #80de94,
-  300: #4dd06b,
-  400: #26c551,
-  500: #1f8f0a,
-  // Main green
-  600: #1a7e08,
-  700: #156d06,
-  800: #115b05,
-  900: #0a3d03,
+  50: #e8ebf0,
+  100: #c6d0e3,
+  200: #a0adc6,
+  300: #7a8aa9,
+  400: #5d6e93,
+  500: #213567,
+  // Main blue
+  600: #1d2f5f,
+  700: #182754,
+  800: #13204a,
+  900: #0a1339,
   contrast: (
     50: #000,
     100: #000,

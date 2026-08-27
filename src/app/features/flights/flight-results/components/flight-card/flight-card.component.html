@@ -35,7 +35,7 @@
         }
 
         <!-- Refundable Badge -->
-        <div class="refundability-badge-row">
+        <div class="refundability-badge-row d-flex justify-content-between">
           @if (itinerary.isRefundable) {
             <span class="refundable-badge">
               {{ 'results.card.refundable' | translate }}
@@ -43,6 +43,14 @@
           } @else {
             <span class="refundable-badge non-refundable">
               {{ 'results.card.nonRefundable' | translate }}
+            </span>
+          }
+
+          @if (flightResultService.isBrandedFaresLoading) {
+            <span class="footer-link disabled-link">{{ 'results.card.flightDetails' | translate }}</span>
+          } @else {
+            <span class="footer-link" (click)="showFlightDetails(itinerary, $event)">
+              {{ 'results.card.flightDetails' | translate }}
             </span>
           }
         </div>
@@ -53,27 +61,33 @@
       </div>
     </div>
 
-    <!-- Solid Green Footer Bar -->
-    <div class="card-footer-bar">
-      @if (!$index && !showMoreFlights && airItineraries.length > 1) {
-        <span class="footer-action" (click)="showMoreFlights = true">
-          +{{ airItineraries.length - 1 }} {{ translate.currentLang === 'en' ? 'More flights at same price' : 'رحلات إضافية بنفس السعر' }}
-        </span>
-      } @else if ($index === airItineraries.length - 1 && showMoreFlights) {
-        <span class="footer-action" (click)="showMoreFlights = false">
-          {{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات أقل' }}
-        </span>
-      } @else {
-        <span></span>
-      }
-
-      @if (flightResultService.isBrandedFaresLoading) {
-        <span class="footer-link disabled-link">{{ 'results.card.flightDetails' | translate }}</span>
-      } @else {
-        <span class="footer-link" (click)="showFlightDetails(itinerary, $event)">
-          {{ 'results.card.flightDetails' | translate }}
-        </span>
-      }
-    </div>
+    <!-- Modern Centered Floating Footer Pill (Always on the first card) -->
+    @if (!$index && airItineraries.length > 1) {
+      <div class="card-footer-bar">
+        @if (!showMoreFlights) {
+          <button type="button" class="footer-pill-btn" (click)="showMoreFlights = true">
+            <span class="pill-icon">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+            <span class="pill-text">
+              +{{ airItineraries.length - 1 }} {{ translate.currentLang === 'en' ? 'More flights at same price' : 'رحلات إضافية بنفس السعر' }}
+            </span>
+          </button>
+        } @else {
+          <button type="button" class="footer-pill-btn expanded" (click)="showMoreFlights = false">
+            <span class="pill-icon">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </span>
+            <span class="pill-text">
+              {{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات أقل' }}
+            </span>
+          </button>
+        }
+      </div>
+    }
   </div>
 }

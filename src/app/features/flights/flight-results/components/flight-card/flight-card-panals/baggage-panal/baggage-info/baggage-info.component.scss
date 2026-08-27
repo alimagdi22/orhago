@@ -16,7 +16,7 @@
 }
 
 .baggage-row{
-  background-color: #F1FFF4;
+  background-color: #daedfe;
   border-radius: 6px;
   padding: 6px;
   margin-inline-start: 30px
@@ -169,9 +169,9 @@
 
   .info-alert-box {
     margin-top: 12px;
-    background-color: #f0fdf4;
-    border: 1px solid #86efac;
-    border-radius: 10px;
+    background-color: #daedfe;
+    border: 1px solid #213567;
+    border-radius: 6px;
     padding: 10px 12px;
     display: flex;
     align-items: flex-start;
@@ -187,7 +187,7 @@
     .alert-message {
       font-size: 12px;
       line-height: 1.4;
-      color: #15803d;
+      color: #213567;
       margin: 0;
       font-weight: 500;
     }

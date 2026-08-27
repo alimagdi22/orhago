@@ -52,6 +52,8 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
     height: '48px',
     width: '248px',
     borderRadius: '12px',
+    backgroundColor: '#213567',
+    color:'white'
   };
 
   previousButton: IMainButton = {
@@ -92,7 +94,11 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
         );
 
         if (this.homePageService.pointOfSale?.country) {
-          this.flightCheckoutService.getAllOfflineServices(String(params['sid']).split('_')[0], this.homePageService.pointOfSale.country, true);
+          this.flightCheckoutService.getAllOfflineServices(
+            String(params['sid']).split('_')[0],
+            this.homePageService.pointOfSale.country,
+            true,
+          );
         } else {
           this.flightCheckoutService.getAllOfflineServices(String(params['sid']).split('_')[0], 'KW', true);
         }
@@ -172,8 +178,7 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
         },
       }),
     );
-    console.log(this.flightCheckoutService.usersArray.controls,'users');
-    
+    console.log(this.flightCheckoutService.usersArray.controls, 'users');
   }
 
   countrySearchFields: SearchCountryField[] = [

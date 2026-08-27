@@ -1,11 +1,20 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/colors';
+
 .gradient-button {
-  background: linear-gradient(90deg, #21910a 0%, #88cb1a 100%);
   background-size: 150% 100%;
   background-position: center;
-  color: white;
-  border: none;
   padding: 10px 20px;
   transition: background-position 0.4s ease-in-out;
+
+  &:not(:disabled) {
+    background-color: var(--mdc-filled-button-container-color, #213567);
+    color: var(--mdc-filled-button-label-text-color, inherit);
+  }
+
+  span {
+    color: inherit;
+  }
 
   &:hover {
     background-position: right;

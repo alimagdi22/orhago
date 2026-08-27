@@ -2,13 +2,13 @@
 @import '../../../../../../sass/colors';
 
 .card {
+  position: relative;
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   border: 1px solid #f1f5f9;
-  padding: 20px 24px 0 24px;
-  margin-bottom: 20px;
-  overflow: hidden;
+  padding: 20px 24px 24px 24px;
+  margin-bottom: 28px;
 }
 
 .card-main-content {
@@ -60,13 +60,13 @@
 
   .refundable-badge {
     display: inline-block;
-    background-color: #eefcf0;
-    color: #1eb026;
+    background-color: #daedfe;
+    color: #213567;
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     font-weight: 600;
     padding: 6px 14px;
-    border-radius: 12px;
+    border-radius: 6px;
 
     &.non-refundable {
       background-color: #fff1f2;
@@ -86,33 +86,87 @@
 }
 
 .card-footer-bar {
-  background-color: #1e8e19;
-  color: #ffffff;
-  padding: 12px 24px;
-  margin: 20px -24px 0 -24px;
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  z-index: 5;
+  pointer-events: none;
 
-  .footer-action,
-  .footer-link {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+  .footer-pill-btn {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: map-get($colors, 'main');
     color: #ffffff;
+    padding: 7px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(33, 53, 103, 0.22), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1.5px solid #ffffff;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+
+    .pill-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: transform 0.25s ease;
+
+      svg {
+        stroke: currentColor;
+      }
+    }
+
+    .pill-text {
+      letter-spacing: 0.1px;
+    }
 
     &:hover {
-      opacity: 0.85;
-      text-decoration: underline;
+      background-color: #182754;
+      transform: translateY(2px) scale(1.02);
+      box-shadow: 0 6px 18px rgba(33, 53, 103, 0.35);
+
+      .pill-icon {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    &:active {
+      transform: translateY(1px) scale(0.99);
     }
   }
+}
 
-  .disabled-link {
-    opacity: 0.6;
-    cursor: not-allowed;
+.footer-link {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-bottom: 0 !important;
+  text-decoration: underline;
+  &:hover {
+    opacity: 0.85;
+    text-decoration: underline;
   }
+}
+
+.disabled-link {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

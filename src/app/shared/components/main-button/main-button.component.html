@@ -1,11 +1,16 @@
 <button
   type="button"
   mat-flat-button
-  color="primary"
   (click)="onClick($event)"
   [disabled]="isDisibled || isLoading"
   class="gradient-button"
   [title]="title"
+  [style.--mdc-filled-button-container-color]="computedStyles.backgroundColor || null"
+  [style.--mdc-filled-button-label-text-color]="computedStyles.color || null"
+  [style.background-color]="computedStyles.backgroundColor || null"
+  [style.background]="computedStyles.backgroundColor || null"
+  [style.color]="computedStyles.color || null"
+  [style.border]="computedStyles.border || null"
   [ngStyle]="{
     width: computedStyles.width,
     height: computedStyles.height,

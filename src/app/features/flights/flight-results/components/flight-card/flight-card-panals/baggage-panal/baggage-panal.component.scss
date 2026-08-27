@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e6f9eb;
-  border-radius: 12px;
+  background-color: white;
+  border-radius: 6px;
   padding: 6px 12px;
   width: 100%;
   margin-bottom: 12px;
@@ -12,7 +12,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #16a34a;
+    background-color: #daedfe;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
@@ -30,7 +30,7 @@
     .bag-item {
       font-size: 13px;
       font-weight: 600;
-      color: #1e293b;
+      color:black;
       display: flex;
       align-items: center;
       gap: 4px;

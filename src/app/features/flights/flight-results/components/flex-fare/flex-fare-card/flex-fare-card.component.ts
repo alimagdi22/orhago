@@ -29,7 +29,7 @@ export class FlexFareCardComponent implements OnInit {
       dName: 'Default Segment',
       mName: null,
       dValue: 0,
-      mValue: 0
+      mValue: 0,
     },
     passengerFareBreakDowns: [],
     optionalServices: [],
@@ -40,7 +40,7 @@ export class FlexFareCardComponent implements OnInit {
   @Input() isActive = true;
   @Input() totalPassengers = 0;
 
-  translate = inject(TranslateService)
+  translate = inject(TranslateService);
 
   ngOnInit(): void {
     this.getOptionalServices();
@@ -50,7 +50,9 @@ export class FlexFareCardComponent implements OnInit {
   selectButton: IMainButton = {
     height: '36px',
     width: '100%',
-    borderRadius: '12px',
+    borderRadius: '6px',
+    backgroundColor: '#213567',
+    color:'white'
   };
 
   onClickSelect() {

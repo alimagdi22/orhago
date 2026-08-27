@@ -36,16 +36,22 @@ export class NavbarComponent implements OnInit {
 
   isAuthenticated = false;
 
-  signInButton: IMainButton = {
-    height: '36px',
-    width: 'none',
-    borderRadius: '6px',
-  };
-
+  
   isMenuCollapsed = true;
   isScrolled = false;
   selectedLang = 'EN';
-
+  
+  get signInButton(): IMainButton {
+    return {
+      height: '36px',
+      width: 'auto',
+      borderRadius: '6px',
+      backgroundColor: 'transparent',
+      border: this.isScrolled ? '1.5px solid white' : '1.5px solid black',
+      padding: '8px 14px',
+      color: this.isScrolled ? 'white' : 'black',
+    };
+  }
   isSidebarOpen = false;
   isLangPopupOpen = false;
   isCurrencyPopupOpen = false;

@@ -25,19 +25,20 @@
 
   .select-btn {
     width: 100%;
-    background-color: #38b000;
+    background-color: #213567;
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
     border: none;
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 12px 0;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.15s ease;
     margin-top: 12px;
 
     &:hover:not(:disabled) {
-      background-color: #2e9600;
+      background-color: #daedfe;
+      color: #213567;
       transform: scale(1.02);
     }
 

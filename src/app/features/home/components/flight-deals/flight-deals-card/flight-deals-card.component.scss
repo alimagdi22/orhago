@@ -41,7 +41,7 @@
       border-radius: $base-radius;
 
       color: map-get($map: $colors, $key: 'main');
-      background-color: map-get($map: $colors, $key: 'off-white');
+      background-color: #daedfe;
     }
   }
 
@@ -79,4 +79,8 @@
       justify-content: end;
     }
   }
+}
+
+p{
+  margin-bottom: 0 !important;
 }

@@ -22,7 +22,7 @@
 }
 
 .active {
-  color: white;
+  color: #213567;
   border: 1px solid map-get($map: $colors, $key: 'main');
-  background-color: map-get($map: $colors, $key: 'main');
+  background-color:#daedfe;
 }

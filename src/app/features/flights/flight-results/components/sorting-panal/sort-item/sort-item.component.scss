@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 24px;
-  border-radius: 12px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   gap: 16px;
@@ -21,11 +21,11 @@
   }
 
   &.active {
-    background-color: #effdf2;
+    background-color: #daedfe;
 
     .sort-item__title,
     .sort-item__number {
-      color: #16a34a;
+      color: #213567;
       font-weight: 700;
     }
   }

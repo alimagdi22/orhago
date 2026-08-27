@@ -20,10 +20,12 @@ export class FlightDealsCardComponent implements OnInit, OnChanges {
   displayImage = 'assets/images/popular/Dubai.png';
 
   bookButton: IMainButton = {
-    borderRadius: '12px',
+    borderRadius: '6px',
     height: '30px',
     fontSize: '14px',
     width: '120px',
+    backgroundColor: '#213567',
+    color:'white'
   };
 
   ngOnInit(): void {
@@ -35,7 +37,8 @@ export class FlightDealsCardComponent implements OnInit, OnChanges {
   }
 
   updateImage(): void {
-    const airport = this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO?.[0]?.arrivalTerminalAirport as any;
+    const airport = this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO?.[0]
+      ?.arrivalTerminalAirport as any;
     const cityImage = airport?.en?.cityImage || airport?.cityImage;
 
     if (!cityImage || typeof cityImage !== 'string' || cityImage.includes('stagingimages.round-pixel.net')) {
