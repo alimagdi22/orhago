@@ -25,6 +25,8 @@ export class CabinClassComponent implements OnInit {
     height: '42px',
     width: '100%',
     borderRadius: '6px',
+    backgroundColor: '#213567',
+    color: 'white',
   };
 
   classTypes = classTypes;
@@ -34,14 +36,14 @@ export class CabinClassComponent implements OnInit {
   infantValid: boolean = true;
   openClass: boolean = false;
 
-      constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnChanges(): void {
-    if(this.openMenu) {
+    if (this.openMenu) {
       this.cabinClassTrigger.openMenu();
     }
   }
-  
+
   ngOnInit(): void {
     this.classTypes.forEach((classType) => {
       if (classType.value === this.flightSearchService.searchFlight.get('class')?.value) {
@@ -149,18 +151,18 @@ export class CabinClassComponent implements OnInit {
   }
 
   onClickInput() {
-    if(this.sharedService.screenWidth >= 1200) {
-      return
+    if (this.sharedService.screenWidth >= 1200) {
+      return;
     }
-    
+
     this.dialog.open(MobileViewCabinClassComponent, {
       data: {
-        dismiss: () => this.dialog.closeAll()
+        dismiss: () => this.dialog.closeAll(),
       },
       width: '100vw',
       height: '100vh',
       maxWidth: '100vw',
-      hasBackdrop: true
+      hasBackdrop: true,
     });
   }
 

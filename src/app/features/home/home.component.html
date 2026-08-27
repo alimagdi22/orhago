@@ -28,8 +28,41 @@
     }
     <app-site-advantages />
     <app-hotel-deals />
-    <!-- <app-app-ad /> -->
-    <app-popular-cities />
-    <app-popular-airlines />
+    <!-- Modern Explore Popular Flights and Hotels Accordion Section -->
+    <section class="explore-section">
+      <div class="explore-header text-center mb-4">
+        <h2 class="explore-main-title">
+          {{ sharedService.lang === 'ar' ? 'استكشف أشهر الرحلات والفنادق' : 'Explore popular flights and hotels' }}
+        </h2>
+      </div>
+
+      <div class="explore-accordion-list">
+        <!-- Accordion 1: Popular Airlines -->
+        <mat-expansion-panel [expanded]="true" class="explore-accordion-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="accordion-title">
+              <span class="title-icon">✈️</span>
+              <span>{{ 'home.populerAirlines.title' | translate }}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="accordion-body-wrapper py-2">
+            <app-popular-airlines />
+          </div>
+        </mat-expansion-panel>
+
+        <!-- Accordion 2: Popular Cities -->
+        <mat-expansion-panel [expanded]="true" class="explore-accordion-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="accordion-title">
+              <span class="title-icon">🏙️</span>
+              <span>{{ 'home.populerCities.title' | translate }}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="accordion-body-wrapper py-2">
+            <app-popular-cities />
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </section>
   </div>
 </main>

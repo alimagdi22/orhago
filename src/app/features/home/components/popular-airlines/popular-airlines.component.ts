@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: false,
@@ -11,11 +12,10 @@ import { Router } from '@angular/router';
     'ngSkipHydration': 'true',
   },
 })
-export class PopularAirlinesComponent implements OnInit, AfterViewInit {
-  @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
-
+export class PopularAirlinesComponent implements OnInit {
   http = inject(HttpClient);
   router = inject(Router);
+  translate = inject(TranslateService);
 
   popularAirlines: any[] = [];
   isLoading = true;
@@ -24,31 +24,16 @@ export class PopularAirlinesComponent implements OnInit, AfterViewInit {
     this.fetchAirlines();
   }
 
-  ngAfterViewInit(): void {
-    this.initSwiper();
-  }
-
-  initSwiper(): void {
-    if (this.swiperEl?.nativeElement) {
-      const swiper = this.swiperEl.nativeElement;
-
-      Object.assign(swiper, {
-        slidesPerView: 5,
-        spaceBetween: 20,
-        pagination: { bulletClass: 'hide' },
-        breakpoints: {
-          0: { slidesPerView: 2 },
-          768: { slidesPerView: 4 },
-          1024: { slidesPerView: 5 },
-        },
-      });
-
-      if (typeof swiper.initialize === 'function') {
-        swiper.initialize();
-      } else if (swiper.swiper && typeof swiper.swiper.update === 'function') {
-        swiper.swiper.update();
-      }
+  getAirlineName(airline: any): string {
+    if (airline?.allAirlineInfoDtos && airline.allAirlineInfoDtos.length > 0) {
+      const langIdx = this.translate.currentLang === 'ar' ? 1 : 0;
+      return (
+        airline.allAirlineInfoDtos[langIdx]?.airlineName ||
+        airline.allAirlineInfoDtos[0]?.airlineName ||
+        airline.slug
+      );
     }
+    return airline?.slug || 'Airline';
   }
 
   fetchAirlines(): void {
@@ -62,7 +47,6 @@ export class PopularAirlinesComponent implements OnInit, AfterViewInit {
           }));
         }
         this.isLoading = false;
-        setTimeout(() => this.initSwiper(), 100);
       },
       error: () => {
         this.http.get<any>('http://154.41.209.93:3016/api/GetAllAirLines').subscribe({
@@ -74,7 +58,6 @@ export class PopularAirlinesComponent implements OnInit, AfterViewInit {
               }));
             }
             this.isLoading = false;
-            setTimeout(() => this.initSwiper(), 100);
           },
           error: (err) => {
             console.error('Error fetching airlines:', err);
@@ -86,17 +69,8 @@ export class PopularAirlinesComponent implements OnInit, AfterViewInit {
   }
 
   navigateToAirline(slug: string): void {
-    console.log(slug,'hello');
-    
     if (slug) {
-      this.router.navigate([`/airline/${slug}`]).then(() => {
-            console.log('yes');
-            
-          })
-        .catch(() => {
-            console.log('no');
-            
-          });
+      this.router.navigate([`/airline/${slug}`]);
     }
   }
 }

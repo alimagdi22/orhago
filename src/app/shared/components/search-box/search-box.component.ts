@@ -1,7 +1,8 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { SharedService } from '../../shared.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: false,
@@ -9,13 +10,14 @@ import { Router } from '@angular/router';
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.scss',
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent implements OnInit, OnDestroy {
   @Input() airlineLogo?: string;
   translate = inject(TranslateService);
   sharedService = inject(SharedService);
   router = inject(Router);
 
   tabIndex = 0;
+  private subscription = new Subscription();
 
   get isFlightResults(): boolean {
     return this.router.url.includes('flight-results');
@@ -27,14 +29,23 @@ export class SearchBoxComponent implements OnInit {
 
   ngOnInit(): void {
     const url = this.router.url.toLowerCase();
-    console.log(this.isFlightResults, 'flight');
 
     if (url.includes('hotels')) {
       this.tabIndex = 1;
     }
+
+    this.subscription.add(
+      this.sharedService.popularCitySelected.subscribe(() => {
+        this.tabIndex = 1;
+      })
+    );
   }
 
   onTabChanged(_tabIndex: number) {
     this.tabIndex = _tabIndex;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

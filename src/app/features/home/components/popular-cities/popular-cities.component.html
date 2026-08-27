@@ -1,14 +1,10 @@
-<div class="text-wrapper">
-  <h2>{{ 'home.populerCities.title' | translate }}</h2>
-</div>
-
-<swiper-container #swiperEl autoplay='{"delay": 3000, "disableOnInteraction": false}'>
+<div class="city-grid">
   @for (card of cards; track $index) {
-    <swiper-slide>
-      <div class="popular-cities-card">
-        <img [src]="'assets/images/popular/' + card.image" title="City Image" class="popular-cities-card__img" />
-        <span class="popular-cities-card__name">{{ card.cityName }}</span>
+    <button type="button" class="city-card-btn" (click)="onSelectCity(card.cityName)">
+      <div class="city-img-box">
+        <img [src]="'assets/images/popular/' + card.image" [alt]="card.cityName" [title]="card.cityName" />
       </div>
-    </swiper-slide>
+      <span class="city-name-text">{{ card.cityName }}</span>
+    </button>
   }
-</swiper-container>
+</div>

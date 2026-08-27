@@ -2,7 +2,16 @@
   @for (card of cards; track $index) {
     <swiper-slide>
       <div class="advantage">
-        <img [ngStyle]="{backgroundColor:card[lang]?.img === 'shield-icon.svg'?'#daedfe':'none',borderRadius:card[lang]?.img === 'shield-icon.svg'?'50%':'none'}" [src]="'assets/icons/home-icons/' + (card[lang]?.image || 'world-icon.svg')" title="World Icon" class="advantage__icon" />
+        <img
+          [ngStyle]="{
+            backgroundColor: card[lang]?.image === 'shield-icon.svg' ? '#daedfe' : 'transparent',
+            borderRadius: card[lang]?.image === 'shield-icon.svg' ? '50%' : '0',
+            padding: card[lang]?.image === 'shield-icon.svg' ? '10px' : '0'
+          }"
+          [src]="'assets/icons/home-icons/' + (card[lang]?.image || 'world-icon.svg')"
+          [title]="card[lang]?.title"
+          class="advantage__icon"
+        />
         <span class="advantage__title">{{ card[lang]?.title }}</span>
         <p class="advantage__paragraph">{{ card[lang]?.description }}</p>
       </div>

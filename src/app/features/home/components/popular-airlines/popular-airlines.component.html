@@ -1,19 +1,20 @@
-<div class="text-wrapper">
-  <h2>{{ 'home.populerAirlines.title' | translate }}</h2>
-</div>
-
 @if (isLoading) {
-  <div class="container my-3">
-    <app-skeleton-loader height="100px" borderRadius="12px" />
+  <div class="airline-grid">
+    @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track $index) {
+      <div class="airline-skeleton">
+        <app-skeleton-loader height="56px" borderRadius="12px" />
+      </div>
+    }
   </div>
 } @else {
-  <swiper-container #swiperEl slides-per-view="5" space-between="20" autoplay='{"delay": 3500, "disableOnInteraction": false}'>
+  <div class="airline-grid">
     @for (airline of popularAirlines; track $index) {
-      <swiper-slide>
-        <a (click)="navigateToAirline(airline.slug)" class="airline cursor-pointer">
-          <img [src]="airline.airlineLogo" [alt]="airline.slug" [title]="airline.slug" />
-        </a>
-      </swiper-slide>
+      <button type="button" class="airline-card-btn" (click)="navigateToAirline(airline.slug)">
+        <div class="airline-logo-box">
+          <img [src]="airline.airlineLogo" [alt]="getAirlineName(airline)" [title]="getAirlineName(airline)" />
+        </div>
+        <span class="airline-name-text">{{ getAirlineName(airline) }}</span>
+      </button>
     }
-  </swiper-container>
+  </div>
 }

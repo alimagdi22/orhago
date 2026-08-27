@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ViewChild, ElementRef } from '@angular/core';
 import { HotelSearchService } from 'rp-hotels-ui';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { MobileDateInputComponent } from './mobile-date-input/mobile-date-input.component';
 import { SharedService } from '../../../../shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: false,
@@ -16,7 +17,7 @@ import { SharedService } from '../../../../shared.service';
   styleUrls: ['./hotel-date-input.component.scss'],
   providers: [DatePipe]
 })
-export class HotelDateInputComponent implements OnInit {
+export class HotelDateInputComponent implements OnInit, OnDestroy {
   @ViewChild('dateGroupRef', { static: false }) dateGroupRef!: ElementRef<HTMLDivElement>;
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
 
@@ -25,6 +26,7 @@ export class HotelDateInputComponent implements OnInit {
   datePipe = inject(DatePipe);
   dialog = inject(MatDialog);
   public sharedService = inject(SharedService);
+  private subscriptions = new Subscription();
 
   searchForm!: FormGroup;
   currentLang = this.translate.currentLang;
@@ -60,6 +62,18 @@ export class HotelDateInputComponent implements OnInit {
     this.minCheckoutDate.setDate(this.today.getDate() + 1);
     this.minCheckoutDateNgb = this.convertToNgbDate(this.minCheckoutDate);
     this.setCachedDateInput();
+
+    this.subscriptions.add(
+      this.sharedService.openHotelCalendarNotifier.subscribe(() => {
+        setTimeout(() => {
+          this.openDatePicker('checkIn');
+        }, 150);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   setCachedDateInput(): void {
@@ -108,8 +122,10 @@ export class HotelDateInputComponent implements OnInit {
     return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
   }
 
-  openDatePicker(calendarType: 'checkIn' | 'checkOut', event: MouseEvent): void {
-    event.stopPropagation();
+  openDatePicker(calendarType: 'checkIn' | 'checkOut', event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
 
     if (this.isMobile()) {
       this.openCalendarDialog(calendarType);
@@ -136,13 +152,12 @@ export class HotelDateInputComponent implements OnInit {
     }
 
     // Open the menu if not already open
-    if (!this.menuTrigger.menuOpen) {
+    if (this.menuTrigger && !this.menuTrigger.menuOpen) {
       this.menuTrigger.openMenu();
     }
   }
 
   onMenuClosed(): void {
-    // Reset to checkIn calendar when menu closes
     this.currentCalendar = 'checkIn';
   }
 

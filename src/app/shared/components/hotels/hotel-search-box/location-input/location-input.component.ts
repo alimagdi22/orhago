@@ -42,6 +42,44 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     this.initializeForm();
     this.isMobile = this.sharedService.screenWidth < 768;
     this.setCachedLocationInput();
+
+    this.subscriptions.add(
+      this.sharedService.popularCitySelected.subscribe((cityName) => {
+        this.selectPopularCity(cityName);
+      })
+    );
+  }
+
+  selectPopularCity(cityName: string): void {
+    this.showValidationErrors = false;
+
+    if (this.locationInput?.nativeElement) {
+      this.locationInput.nativeElement.value = cityName;
+    }
+
+    this.homePageService.getCitiesById(cityName);
+
+    let attempts = 0;
+    const intervalId = setInterval(() => {
+      attempts++;
+      const cities: hotelCities[] = this.homePageService.selectAllcities || [];
+      if (cities.length > 0 || attempts > 20) {
+        clearInterval(intervalId);
+        if (cities.length > 0) {
+          const matchedCity = cities.find(c => c.City?.toLowerCase().includes(cityName.toLowerCase())) || cities[0];
+          this.selectedCity = matchedCity;
+          this.searchForm.get('location')?.setValue(matchedCity);
+          this.searchForm.get('location')?.markAsTouched();
+          if (this.locationInput?.nativeElement) {
+            this.locationInput.nativeElement.value = matchedCity.City;
+          }
+          this.searchForm.get('location')?.updateValueAndValidity();
+        }
+        setTimeout(() => {
+          this.sharedService.openHotelCalendarNotifier.next();
+        }, 150);
+      }
+    }, 100);
   }
 
   ngOnDestroy(): void {

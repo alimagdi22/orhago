@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: false,
@@ -7,8 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './search-box-header.component.html',
   styleUrl: './search-box-header.component.scss',
 })
-export class SearchBoxHeaderComponent implements OnInit {
+export class SearchBoxHeaderComponent implements OnInit, OnDestroy {
   @Output() tabChanged = new EventEmitter<number>();
+  sharedService = inject(SharedService);
+  private subscription = new Subscription();
 
   isFlightSelected = true;
   isHotelSelected = true;
@@ -38,10 +42,22 @@ export class SearchBoxHeaderComponent implements OnInit {
       this.isHotelSelected = false;
       this.tabChanged.emit(0); // Flight tab
     }
+
+    this.subscription.add(
+      this.sharedService.popularCitySelected.subscribe(() => {
+        this.isFlightSelected = false;
+        this.isHotelSelected = true;
+        this.tabChanged.emit(1);
+      })
+    );
   }
 
   onClickTab(tabIndex: number): void {
     this.isFlightSelected = tabIndex === 0;
     this.tabChanged.emit(tabIndex);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

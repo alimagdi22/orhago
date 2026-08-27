@@ -1,5 +1,5 @@
-import { animate } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SharedService } from '../../../../shared/shared.service';
 
 @Component({
   standalone: false,
@@ -7,8 +7,8 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
   templateUrl: './popular-cities.component.html',
   styleUrl: './popular-cities.component.scss',
 })
-export class PopularCitiesComponent implements AfterViewInit{
-  @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
+export class PopularCitiesComponent {
+  sharedService = inject(SharedService);
 
   cards = [
     {
@@ -39,19 +39,9 @@ export class PopularCitiesComponent implements AfterViewInit{
       cityName: 'Moscow',
       image: 'Moscow.png'
     },
-  ]
-  
-  ngAfterViewInit(): void {
-    const swiper = this.swiperEl.nativeElement;
+  ];
 
-    Object.assign(swiper, {
-      spaceBetween: 20,
-      pagination: { bulletClass: 'hide' },
-      breakpoints: {
-        0: { slidesPerView: 1 }, // Mobile view (default)
-        768: { slidesPerView: 2 }, // Tablets
-        1024: { slidesPerView: 3 }, // Desktops
-      },
-    });
+  onSelectCity(cityName: string): void {
+    this.sharedService.selectPopularCity(cityName);
   }
 }

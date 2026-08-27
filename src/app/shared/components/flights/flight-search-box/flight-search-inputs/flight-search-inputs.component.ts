@@ -55,21 +55,25 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
     height: '42px',
     width: '100%',
     borderRadius: '6px',
+    backgroundColor: '#213567',
+    color: 'white',
   };
-  
+
   /* Button Properties */
   searchButton: IMainButton = {
     height: '56px',
     width: '100%',
-    borderRadius: '12px',
+    borderRadius: '6px',
     backgroundColor: '#213567',
-    color:'white'
+    color: 'white',
   };
 
   addFlightButton: IMainButton = {
     height: '42px',
     width: '130px',
-    borderRadius: '12px',
+    borderRadius: '6px',
+    backgroundColor: '#213567',
+    color: 'white',
   };
 
   /* Input Activations Properties */
