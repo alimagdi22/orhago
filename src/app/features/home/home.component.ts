@@ -40,15 +40,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     'assets/images/search-box/5.png',
     'assets/images/search-box/6.png',
     'assets/images/search-box/7.png',
-    'assets/images/search-box/8.png',
-    'assets/images/search-box/9.png',
-    'assets/images/search-box/10.png',
-    'assets/images/search-box/11.png',
-    'assets/images/search-box/12.png',
-    'assets/images/search-box/13.png',
-    'assets/images/search-box/14.png',
-    'assets/images/search-box/15.png',
-    'assets/images/search-box/16.png',
   ];
   currentImage: string = this.images[0];
 

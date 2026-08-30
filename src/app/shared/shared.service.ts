@@ -47,6 +47,7 @@ export class SharedService {
   errorSheetMessage = '';
   userManagementNotifier = new Subject<any>();
   toggleFlightSearchNotifier = new Subject<void>();
+  toggleHotelSearchNotifier = new Subject<void>();
   popularCitySelected = new Subject<string>();
   openHotelCalendarNotifier = new Subject<void>();
 
@@ -57,6 +58,10 @@ export class SharedService {
 
   onToggleFlightSearch() {
     this.toggleFlightSearchNotifier.next();
+  }
+
+  onToggleHotelSearch() {
+    this.toggleHotelSearchNotifier.next();
   }
 
   isCitiesLoading = false;

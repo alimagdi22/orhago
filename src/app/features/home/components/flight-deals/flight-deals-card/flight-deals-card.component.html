@@ -1,5 +1,5 @@
 @if (mostSearchedFlight && mostSearchedFlight.searchCriteria) {
-  <div class="flight-deal-card">
+  <div class="flight-deal-card" (click)="mostSearchedFlightsService.goToSearchResults(mostSearchedFlight.searchCriteria)">
     <img
       [src]="displayImage"
       (error)="onImgError()"

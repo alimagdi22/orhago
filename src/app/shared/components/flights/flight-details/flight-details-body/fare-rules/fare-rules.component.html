@@ -165,7 +165,7 @@
                     flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
                       .passengerFareBreakDowns[0].changePenaltyDTOs[0].curency | exchange: 'code'
                   }}
-                  {{ getChangePrice() | exchange: 'value' }} + {{ 'flightDetails.fareRules.perPassenger' | translate }}
+                  {{ getChangePrice() | exchange: 'value' }} {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>
             }

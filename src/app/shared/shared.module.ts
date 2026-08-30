@@ -104,6 +104,9 @@ import { FlexFareCardAppComponent } from './components/flex-fare-app/flex-fare-c
 import { FlightSummaryComponent } from './components/flights/flight-summary/flight-summary.component';
 import { CheckoutStepsComponent } from './components/flights/checkout-steps/checkout-steps.component';
 
+import { HotelSummaryComponent } from './components/hotels/hotel-summary/hotel-summary.component';
+import { HotelCheckoutStepsComponent } from './components/hotels/hotel-checkout-steps/hotel-checkout-steps.component';
+
 export const MatrialComponents = [
   MatButtonModule,
   MatMenuModule,
@@ -182,6 +185,8 @@ export const SharedComponents = [
   PaymentSummaryComponent,
   PaymentViewComponent,
   FlightSummaryComponent,
+  HotelSummaryComponent,
+  HotelCheckoutStepsComponent,
   CheckoutStepsComponent
 ];
 
@@ -195,7 +200,7 @@ export const SharedDirectives = [
   RestrictArabicDirective,
 ];
 @NgModule({
-  declarations: [SharedComponents, SharedDirectives, FlightPathComponent, DestInputComponent, DateInputComponent, MobileViewCabinClassComponent, CustomDateRangePipe,TimeFormatPipe, FlightDetailsAppComponent, FlightDetailsHeaderAppComponent, FlightDetailsBodyAppComponent, InputHeaderAppComponent, ItineraryAppComponent,FlightPathAppComponent, BaggageDetailsAppComponent, FlexFareAppComponent, FlexFareCardAppComponent,HotelSearchBoxComponent, LocationInputComponent, HotelDateInputComponent, MobileLocationInputComponent, MobileDateInputComponent, GuestRoomSelectorComponent, MobileGuestRoomSelectorComponent],
+  declarations: [SharedComponents, SharedDirectives, FlightPathComponent, DestInputComponent, DateInputComponent, MobileViewCabinClassComponent, CustomDateRangePipe,TimeFormatPipe, FlightDetailsAppComponent, FlightDetailsHeaderAppComponent, FlightDetailsBodyAppComponent, InputHeaderAppComponent, ItineraryAppComponent,FlightPathAppComponent, BaggageDetailsAppComponent, FlexFareAppComponent, FlexFareCardAppComponent,HotelSearchBoxComponent, LocationInputComponent, HotelDateInputComponent, MobileLocationInputComponent, MobileDateInputComponent, GuestRoomSelectorComponent, MobileGuestRoomSelectorComponent, HotelSummaryComponent, HotelCheckoutStepsComponent],
   imports: [MatrialComponents, ImportedModules, CommonModule],
   exports: [MatrialComponents, ImportedModules, SharedComponents, SharedDirectives,CustomDateRangePipe, TimeFormatPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

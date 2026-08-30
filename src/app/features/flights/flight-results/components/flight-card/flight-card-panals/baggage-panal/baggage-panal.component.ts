@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BAGGAGE_INFORMATION_DEFAULT, IBaggageInformation } from 'rp-travel-ui';
 @Component({
   standalone: false,
@@ -6,9 +6,12 @@ import { BAGGAGE_INFORMATION_DEFAULT, IBaggageInformation } from 'rp-travel-ui';
   templateUrl: './baggage-panal.component.html',
   styleUrl: './baggage-panal.component.scss',
 })
-export class BaggagePanalComponent {
+export class BaggagePanalComponent implements OnInit {
   @Input() baggageInfo: IBaggageInformation = BAGGAGE_INFORMATION_DEFAULT;
-
+  ngOnInit(): void {
+      console.log(this.baggageInfo,'baaaaaaagd');
+      
+  }
   get normalBaggage() {
     if (!this.baggageInfo?.baggage) return '1';
     const baggage = this.baggageInfo.baggage.split(' ');

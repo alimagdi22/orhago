@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, OnDestroy, inject } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, OnDestroy, inject, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { TranslateService } from '@ngx-translate/core';
 import { BAGGAGE_INFORMATION_DEFAULT, IBaggageInformation } from 'rp-travel-ui';
@@ -9,7 +9,7 @@ import { BAGGAGE_INFORMATION_DEFAULT, IBaggageInformation } from 'rp-travel-ui';
   templateUrl: './baggage-info.component.html',
   styleUrl: './baggage-info.component.scss',
 })
-export class BaggageInfoComponent implements OnDestroy {
+export class BaggageInfoComponent implements OnInit , OnDestroy {
   @Input() baggageInfo: IBaggageInformation = BAGGAGE_INFORMATION_DEFAULT;
   @ViewChild('icon') icon!: ElementRef;
   @ViewChild('baggageInfoTrigger') baggageInfoTrigger!: MatMenuTrigger;
@@ -18,6 +18,11 @@ export class BaggageInfoComponent implements OnDestroy {
   isHoveringIcon = false;
   isHoveringContent = false;
 
+  ngOnInit(): void {
+      console.log(this.baggageInfo,'bag');
+      
+  }
+
   ngOnDestroy(): void {
     if (this.closeTimer) {
       clearTimeout(this.closeTimer);
@@ -25,15 +30,23 @@ export class BaggageInfoComponent implements OnDestroy {
   }
 
   normalBaggage() {
-    const baggage = this.baggageInfo?.baggage?.split(' ');
+    // const baggage = this.baggageInfo?.baggage?.split(' ');
 
-    if (!baggage || baggage.length === 0) return '1';
+    // if (!baggage || baggage.length === 0) return '1';
 
-    if (baggage[1] === 'Kilograms') {
-      return Math.floor(parseInt(baggage[0]) / 7) || '1';
+    // if (baggage[1] === 'Kilograms') {
+    //   return Math.floor(parseInt(baggage[0]) / 7) || '1';
+    // }
+
+    // return baggage[0] || '1';
+    if (!this.baggageInfo?.baggage) return '1';
+    const baggage = this.baggageInfo.baggage.split(' ');
+
+    if (baggage && baggage[1] === 'Kilograms') {
+      return baggage[0] === '0' ? baggage[0] : '1 ' + 'x ' + baggage[0];
     }
 
-    return baggage[0] || '1';
+    return baggage ? baggage[0] : '1';
   }
 
   childBaggage() {

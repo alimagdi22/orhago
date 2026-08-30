@@ -1,0 +1,26 @@
+@if (cityName || checkInDate) {
+  <div class="wrapper" [ngClass]="{ 'scrolled': isScrolled }" (click)="toggle.emit()">
+    <div class="search-summary">
+      @if (cityName) {
+        <span class="city">{{ cityName }}</span>
+      }
+
+      @if (checkInDate) {
+        <div dir="ltr">
+          <span> - {{ checkInDate | date: 'dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }} </span>
+        </div>
+      }
+
+      @if (checkOutDate) {
+        <span class="arrow" [ngClass]="{ 'flip-horizontal': translate.currentLang === 'ar' }">➔</span>
+        <div dir="ltr">
+          <span> {{ checkOutDate | date: 'dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }} </span>
+        </div>
+      }
+    </div>
+
+    <button class="search-toggle" type="button" aria-label="Toggle Search">
+      <img src="assets/icons/svgexport-17.svg" alt="Search" width="24" />
+    </button>
+  </div>
+}

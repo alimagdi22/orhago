@@ -1,0 +1,25 @@
+<div class="steps" [ngClass]="{ 'isScrolled': isScrolled }">
+  <p [ngClass]="{ activated: step >= 1 }">
+    {{ 'checkout.selectRoom' | translate }}
+  </p>
+
+  <img
+    [src]="'assets/icons/right-arrow-' + (step >= 2 ? 'blue-icon.svg' : 'gray-icon.svg')"
+    title="Arrow"
+    [class.flip-icon]="translateService.currentLang === 'ar'"
+  />
+
+  <p [ngClass]="{ activated: step >= 2 }">
+    {{ 'checkout.guestDetails' | translate }}
+  </p>
+
+  <img
+    [src]="'assets/icons/right-arrow-' + (step >= 3 ? 'blue-icon.svg' : 'gray-icon.svg')"
+    title="Arrow"
+    [class.flip-icon]="translateService.currentLang === 'ar'"
+  />
+
+  <p [ngClass]="{ activated: step >= 3 }">
+    {{ 'checkout.paymentStep' | translate }}
+  </p>
+</div>

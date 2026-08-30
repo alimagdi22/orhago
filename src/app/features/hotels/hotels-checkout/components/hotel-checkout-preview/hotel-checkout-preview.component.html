@@ -4,7 +4,7 @@
       <img [src]="hotel.hotelImages[0] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" class="col-lg-3 col-12 preview" />
 
       <div class="col-lg-9 col-12 row wrapper">
-          <span class="title col-12">{{ hotel.hotelName }} - {{ hotel.Package.Rooms[0].RoomType }}</span>
+          <span class="title col-12">{{ hotel.hotelName }} </span>
           <span class="sub-title col-12">{{ hotel.City }}, {{ hotel.Country }}</span>
 
           @for (amenity of hotel.Amenities | slice: 0: 2; track $index) {
@@ -41,6 +41,7 @@
         <img [src]="room.Images[$index + 2] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" class="col-lg-3 col-12 preview" />
 
         <div class="col-lg-9 col-12 row wrapper">
+            <span class="title col-12">{{ room.RoomType }}</span>
             <span class="title col-12">{{ room.RoomCode }}</span>
             <p class="col-6 amenity"><img src="assets/icons/hotels/people.svg"/> {{ room.Adult }} {{ "hotelCheckout.Adult" | translate }}</p>
             @if(room.Child) {

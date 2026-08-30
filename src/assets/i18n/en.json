@@ -266,6 +266,8 @@
     "Transit": "Transit",
     "seeMoreDetails": "See more details",
     "travelerDetails": "Traveler Details",
+    "selectRoom": "Select Room",
+    "guestDetails": "Guest Details",
     "review": "Review",
     "paymentStep": "Payment",
     "payment": {

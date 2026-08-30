@@ -1,27 +1,29 @@
 
-<div class="search-box">
-  <div class="container">
-    <div class="d-lg-none">
-      <div *ngIf="isSearchVisible" class="mobile-search-box">
-        @if (sharedService.isCitiesLoading) {
-          <app-skeleton-loader height="200px" />
-        } @else {
-          <app-search-box />
-        }
+@if (!hotelResultsService.hotelResultsLoader && hotelResultsService.hotelDataResponse?.HotelResult?.length) {
+  @if (isSearchVisible) {
+    <div class="search-box">
+      <div class="container">
+        <div class="d-lg-none">
+          <div class="mobile-search-box">
+            @if (sharedService.isCitiesLoading) {
+              <app-skeleton-loader height="200px" />
+            } @else {
+              <app-search-box />
+            }
+          </div>
+        </div>
+
+        <div class="desktop-search-box">
+          @if (sharedService.isCitiesLoading) {
+            <app-skeleton-loader height="200px" />
+          } @else {
+            <app-search-box class="regular-search" />
+          }
+        </div>
       </div>
     </div>
-
-    <div class="desktop-search-box">
-      @if (sharedService.isCitiesLoading) {
-        <app-skeleton-loader height="200px" />
-      } @else {
-          @if(sharedService.screenWidth > 1000)
-          {
-            <app-search-box />
-          }      }
-    </div>
-  </div>
-</div>
+  }
+}
 
 <main class="container content">
   @if (hotelResultsService.hotelResultsLoader) {

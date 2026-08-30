@@ -2,7 +2,7 @@
   <div
     class="wrapper"
     [ngClass]="{
-      shadow: sharedService.isSegmentPresent(['flight-results', 'flight-checkout', 'flight-confirmation']),
+      shadow: sharedService.isSegmentPresent(['flight-results', 'flight-checkout', 'flight-confirmation', 'hotels-results', 'hotel-results', 'hotels-rooms', 'hotel-rooms', 'hotels-checkout', 'hotel-checkout', 'hotels-confirmation', 'hotel-confirmation']),
       'scroll-background': isScrolled,
     }"
   >
@@ -10,12 +10,16 @@
       @if(isScrolled){
         <img src="assets/images/logo-white.svg" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
       }@else {
-        <img src="assets/images/logo.svg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        <img src="assets/images/logo.jpeg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
       }
       @if (sharedService.isSegmentPresent(['flight-results'])) {
         <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
+      } @else if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
+        <app-hotel-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleHotelSearch()" />
       } @else if (sharedService.isSegmentPresent(['flight-checkout'])) {
         <app-checkout-steps [isScrolled]="isScrolled"/>
+      } @else if (sharedService.isSegmentPresent(['hotels-rooms', 'hotel-rooms', 'hotels-checkout', 'hotel-checkout', 'hotels-confirmation', 'hotel-confirmation'])) {
+        <app-hotel-checkout-steps [isScrolled]="isScrolled" />
       } @else {
         <button
           class="manage-booking-button"

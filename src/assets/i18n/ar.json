@@ -265,6 +265,8 @@
     "Transit": "ترانزيت",
     "seeMoreDetails": "عرض المزيد من التفاصيل",
     "travelerDetails": "بيانات المسافرين",
+    "selectRoom": "اختر الغرفة",
+    "guestDetails": "بيانات النزلاء",
     "review": "مراجعة",
     "paymentStep": "الدفع",
     "payment": {

@@ -61,7 +61,11 @@
           [class.open]="isSidebarOpen">
           <app-filter-panal (click)="filterUpdated()" />
         </aside>
-        <aside class="col-lg-3 desktop-filter">
+        <aside
+          #filterComponent
+          class="col-lg-3 desktop-filter position-sticky"
+          [ngStyle]="{ top: (filterHeight > screenHeight) ? '-' + (filterHeight - screenHeight + 20) + 'px' : '20px' }"
+        >
           <app-filter-panal (click)="filterUpdated()" />
         </aside>
 

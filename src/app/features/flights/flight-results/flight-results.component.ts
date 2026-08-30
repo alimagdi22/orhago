@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FlightResultService, FlightSearchService } from 'rp-travel-ui';
@@ -13,6 +13,8 @@ import { ISortItem } from './models/sortItem.model';
   styleUrl: './flight-results.component.scss',
 })
 export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('filterComponent') filterComponent!: ElementRef;
+
   subscription = new Subscription();
   route = inject(ActivatedRoute);
   flightResultService = inject(FlightResultService);
@@ -30,6 +32,8 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
   timeoutId: any = '';
   falseLoading = false;
   showStickySearch = false;
+  filterHeight = 0;
+  screenHeight = 0;
   private scrollThreshold = 180;
   public translate = inject(TranslateService);
   public flightSearchService = inject(FlightSearchService);
@@ -53,9 +57,24 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
     },
   ];
 
+  @HostListener('window:resize')
+  onResize() {
+    this.calculateFilterSticky();
+  }
+
+  calculateFilterSticky() {
+    if (typeof window !== 'undefined') {
+      this.filterHeight = this.filterComponent?.nativeElement?.offsetHeight || 0;
+      this.screenHeight = window.innerHeight;
+    }
+  }
+
   filterUpdated() {
     this.totalPages = Math.ceil(this.flightResultService.orgnizedResponce.length / this.itemsPerPage);
     this.goToPage(1);
+    if (typeof window !== 'undefined') {
+      setTimeout(() => this.calculateFilterSticky(), 150);
+    }
   }
 
   ngOnInit(): void {
@@ -118,6 +137,9 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
             }
           });
           this.flightResultService.sortMyResult(1);
+          if (typeof window !== 'undefined') {
+            setTimeout(() => this.calculateFilterSticky(), 500);
+          }
         },
       })
     );
@@ -125,6 +147,9 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngAfterViewInit(): void {
     this.sharedService.scrollToTop();
+    if (typeof window !== 'undefined') {
+      setTimeout(() => this.calculateFilterSticky(), 100);
+    }
   }
 
   updateTimeoutSession() {

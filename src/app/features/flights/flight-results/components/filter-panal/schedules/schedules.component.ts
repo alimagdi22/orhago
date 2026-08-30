@@ -57,9 +57,21 @@ export class SchedulesComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.departCity = this.flights[this.isReturn ? 1 : 0].flightDTO[0].departureTerminalAirport.cityName;
-    this.arrivalCity = this.flights[this.isReturn ? 1 : 0].flightDTO[this.flights[this.isReturn ? 1 : 0].flightDTO.length - 1].arrivalTerminalAirport
-          .cityName
+    if (this.flights && this.flights.length) {
+      const flightIndex = this.isReturn ? 1 : 0;
+      const flight = this.flights[flightIndex];
+      if (flight && flight.flightDTO && flight.flightDTO.length) {
+        this.departCity = flight.flightDTO[0]?.departureTerminalAirport?.cityName || '';
+        this.arrivalCity = flight.flightDTO[flight.flightDTO.length - 1]?.arrivalTerminalAirport?.cityName || '';
+      }
+    }
+
+    const initialScheduleFilter = this.flightResultService.filterForm.get(
+      this.isReturn ? this.returnFlight[0] : this.goingFlight[0]
+    );
+    this.scheduleOptions.forEach((e) => {
+      e.isActive = initialScheduleFilter?.get('startTime')?.value === e.startTime;
+    });
   }
 
   onSelectOption(scheduleOption: IScheduleOption) {
@@ -82,17 +94,14 @@ export class SchedulesComponent implements OnInit {
   }
 
   onScheduleTabChange(value: number) {
+    this.flightTypeIndex = value;
+
     const scheduleFilter = this.flightResultService.filterForm.get(
       this.isReturn ? this.returnFlight[this.flightTypeIndex] : this.goingFlight[this.flightTypeIndex]
     );
 
-    scheduleFilter?.get('startTime')?.setValue('');
-    scheduleFilter?.get('endTime')?.setValue('');
-
     this.scheduleOptions.forEach((e) => {
-      e.isActive = false;
+      e.isActive = scheduleFilter?.get('startTime')?.value === e.startTime;
     });
-    
-    this.flightTypeIndex = value;
   }
 }

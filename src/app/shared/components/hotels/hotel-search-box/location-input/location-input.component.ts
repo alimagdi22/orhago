@@ -55,6 +55,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
 
     if (this.locationInput?.nativeElement) {
       this.locationInput.nativeElement.value = cityName;
+      this.locationInput.nativeElement.focus();
     }
 
     this.homePageService.getCitiesById(cityName);
@@ -65,19 +66,12 @@ export class LocationInputComponent implements OnInit, OnDestroy {
       const cities: hotelCities[] = this.homePageService.selectAllcities || [];
       if (cities.length > 0 || attempts > 20) {
         clearInterval(intervalId);
-        if (cities.length > 0) {
-          const matchedCity = cities.find(c => c.City?.toLowerCase().includes(cityName.toLowerCase())) || cities[0];
-          this.selectedCity = matchedCity;
-          this.searchForm.get('location')?.setValue(matchedCity);
-          this.searchForm.get('location')?.markAsTouched();
-          if (this.locationInput?.nativeElement) {
-            this.locationInput.nativeElement.value = matchedCity.City;
-          }
-          this.searchForm.get('location')?.updateValueAndValidity();
+        if (this.locationInput?.nativeElement) {
+          this.locationInput.nativeElement.focus();
         }
-        setTimeout(() => {
-          this.sharedService.openHotelCalendarNotifier.next();
-        }, 150);
+        if (this.autocompleteTrigger) {
+          this.autocompleteTrigger.openPanel();
+        }
       }
     }, 100);
   }
