@@ -14,11 +14,6 @@
       <app-search-box class="regular-search" />
     }
   </div>
-  @if(showStickySearch && !(flightSearchService.searchFlight.get('flightType')?.value === "MultiCity")){
-    <div class="sticky-search-box">
-      <app-search-box/>
-    </div>
-  }
 
   <div class="container">
     @if (
@@ -32,7 +27,7 @@
     <section class="explore-section">
       <div class="explore-header text-center mb-4">
         <h2 class="explore-main-title">
-          {{ sharedService.lang === 'ar' ? 'استكشف أشهر الرحلات والفنادق' : 'Explore popular flights and hotels' }}
+          {{ 'home.exploreTitle' | translate }}
         </h2>
       </div>
 

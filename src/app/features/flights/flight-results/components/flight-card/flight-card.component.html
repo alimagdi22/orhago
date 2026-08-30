@@ -72,7 +72,7 @@
               </svg>
             </span>
             <span class="pill-text">
-              +{{ airItineraries.length - 1 }} {{ translate.currentLang === 'en' ? 'More flights at same price' : 'رحلات إضافية بنفس السعر' }}
+              +{{ airItineraries.length - 1 }} {{ 'flightResults.moreFlightsSamePrice' | translate }}
             </span>
           </button>
         } @else {
@@ -83,7 +83,7 @@
               </svg>
             </span>
             <span class="pill-text">
-              {{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات أقل' }}
+              {{ 'flightResults.showLessFlights' | translate }}
             </span>
           </button>
         }

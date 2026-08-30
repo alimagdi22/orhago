@@ -82,7 +82,7 @@
 
 
   "home": {
-    "bannarTitle": "Everything is ready... pack your bags and leave the rest to orhas",
+    "bannarTitle": "Plan your imagination and book it",
     "search": {
       "flights": "Flights",
       "oneWay": "One Way",
@@ -96,12 +96,12 @@
       "arrive": "Arrive",
       "popularDest": "Popular destinations",
       "passenger": "Passenger",
-      "guest": "Passenger",
+      "guest": "Guest",
       "selectDate": "Select a date",
       "adult": "Adult",
       "child": "child",
       "infant": "infant",
-      "Economy": "Economy",
+      "Economy": "Economy class",
       "Premium Economy": "Premium Economy",
       "Business": "Business",
       "First": "First Class",
@@ -109,20 +109,23 @@
       "done": "Done",
       "addFlight": "Add Flight",
       "addFlightNote": "Maximum of 4 different flights can be added",
-      "searchTicket": "Search Ticket"
+      "searchTicket": "Search Ticket",
+      "enterDestination": "Enter your destination city"
     },
+    "exploreTitle": "Explore popular flights and hotels",
     "adContent": {
       "title": "Unlock exclusive features available only on the Travelo app. Download it now!",
       "features": [
         "Enjoy more than ten practical features tailored exclusively for app users",
-        "Get early access to new offers and discounts",
-        "Seamlessly manage your bookings with advanced tools"
+        "Discover our Explore page for popular Destinations, Weekend Getaways, Travel News and more.",
+        "Swift checkout process on the Travelo app with offline booking access, various discounts and password-less logins."
       ],
       "scanToDownload": "Scan to download"
     },
     "flightDeals": {
       "title": "The best Flight deals",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler"
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler",
+      "book": "Book"
     },
     "hotelDeals": {
       "title": "Popular Searches",
@@ -132,7 +135,12 @@
       "title": "Popular cities for hotels"
     },
     "populerAirlines": {
-      "title": "Popular airlines"
+      "title": "The most popular airlines",
+      "text": "Book the best airline"
+    },
+    "topAirlines": {
+      "title": "The most popular airlines",
+      "text": "Book the best airline"
     }
   },
 
@@ -261,8 +269,27 @@
     "Transit": "Transit",
     "seeMoreDetails": "See more details",
     "travelerDetails": "Traveler Details",
+    "selectRoom": "Select Room",
+    "guestDetails": "Guest Details",
     "review": "Review",
-    "payment": "Payment",
+    "paymentStep": "Payment",
+    "payment": {
+      "chooseCard": "Choose Card",
+      "cardNumber": "Card Number",
+      "expiration": "Expiration",
+      "cvc": "CVC",
+      "nameOnCard": "Name on Card",
+      "nameOnCardPlaceholder": "Name on card",
+      "conditionStart": "I agree to the",
+      "conditionEnd": "Terms and Conditions",
+      "pay": "Pay",
+      "errorTitle": "Whoops!",
+      "errorMessage": "Purchase failed. Please try different card or check your current card information",
+      "tryAgain": "Let's try again",
+      "successTitle": "You Got the Ticket!",
+      "successMessage": "The ticket purchase was successful.",
+      "seeConfirmation": "See reservation confirmation"
+    },
     "contactInfo": "Contact Info",
     "contactNumber": "Contact Number",
     "gmail": "Gmail",
@@ -470,7 +497,8 @@
     "popular":"Popular Filters",
     "star":"Stars Rateing",
     "location":"Location",
-    "reset":"Reset Filters"
+    "reset":"Reset Filters",
+    "PropertySearch":"Search"
   },
 
   "hotelCard": {
@@ -503,10 +531,18 @@
     "View more amenities": "View more amenities",
     "Book Now": "Book Now",
     "errorMessage": "Something went wrong while fetching hotel rooms. Please try again later.",
-    "goHome": "Go to Home"
+    "goHome": "Go to Home",
+    "Cancellation Policy": "Cancellation Policy",
+    "From": "From",
+    "To": "To",
+    "Penalty": "Penalty",
+    "Free": "Free",
+    "Close": "Close"
   },
 
   "hotelCheckout": {
+    "Includes": "Includes",
+    "guests": "guests",
     "Guest Room": "Guest Room: ",
     "Special Request": "Special Request (Optional)",
     "Mr": "Mr",
@@ -543,5 +579,72 @@
     "Pay at Property": "Pay at Property",
     "In property curreency": "In property curreency",
     "note": "This payment is due upon arrival. Exchange rates at the time of payment may differ."
+  },
+
+  "popularAirlines": {
+    "table": {
+      "iataCode": "IATA Code",
+      "icaoCode": "ICAO Code",
+      "headquarters": "Headquarters",
+      "numberOfDestinations": "Number of Destinations",
+      "mainOperationalAirport": "Main Operational Airport",
+      "mostPopularDestinations": "Most Popular Destinations",
+      "yearOfEstablishment": "Year of Establishment",
+      "keyRoutes": "Key Routes",
+      "fleetComposition": "Fleet Composition",
+      "parentCompany": "Parent Company",
+      "contactInformation": "Contact Information",
+      "destinationsWorldwide": "Destinations Worldwide"
+    },
+    "about": "About",
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "faq": "Frequently Asked Questions",
+    "similarAirlines": "Similar Airlines"
+  },
+
+  "flightResults": {
+    "cabin": "Cabin",
+    "bags": "Bags",
+    "carryOn": "Carry-on",
+    "checkedBags": "Checked bags",
+    "flexibility": "Flexibility",
+    "cancellationFeeApplies": "Cancellation fee applies",
+    "cancellationFeeNotApplies": "Cancellation fee not apply",
+    "changeFeeApplies": "Change fee applies",
+    "changeFeeNotApplies": "Change fee not apply",
+    "brandedFares": "Branded Fares",
+    "selectBrandedFareMsg": "Please select a branded fare to proceed to the checkout page.",
+    "noBrandedFares": "No Branded Fares To Show",
+    "showMoreFlights": "Show More Flights",
+    "showLessFlights": "Show Less Flights",
+    "moreFlightsSamePrice": "More flights at same price",
+    "noResultsTitle": "No results",
+    "noResultsParagraph": "Sorry, there are no results for your search. Please try a new set of dates.",
+    "goBack": "Go Back"
+  },
+
+  "contact": {
+    "info": "Contact Info",
+    "socialMedia": "Social Media",
+    "sendMessage": "Send a Message",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "howCanWeHelp": "How can we help you?",
+    "send": "Send"
+  },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "sectionTitle": "Information collection and use",
+    "description": "We collect only the necessary information to provide our services. Your data is securely stored and never shared without your consent."
+  },
+
+  "terms": {
+    "title": "Terms And Conditions",
+    "sectionTitle": "Information collection and use",
+    "description": "By using orhas, you agree to our Terms of Service. We are not responsible for any issues arising from third-party services. Please read our Privacy Policy for more details."
   }
 }

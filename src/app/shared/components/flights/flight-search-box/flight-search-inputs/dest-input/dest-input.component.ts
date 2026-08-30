@@ -130,7 +130,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
       const inputValue = this.flightItem.get(this.destination)?.value;
       if (!inputValue || !this.cities.length) {
-        const trigger = this.menuTrigger?.toArray()[this.index];
+        const trigger = this.menuTrigger?.first;
         if (trigger && !trigger.menuOpen) {
           trigger.openMenu();
         }
@@ -186,7 +186,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
   onMenuOpen() {
     if (this.isLoading) {
-      const trigger = this.menuTrigger?.toArray()[this.index];
+      const trigger = this.menuTrigger?.first;
       if (trigger && trigger.menuOpen) {
         trigger.closeMenu();
       }
@@ -195,7 +195,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
     const selected = this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity'];
     if (selected?.cityName && this.isFocused) {
-      const trigger = this.menuTrigger?.toArray()[this.index];
+      const trigger = this.menuTrigger?.first;
       if (trigger && trigger.menuOpen) {
         trigger.closeMenu();
       }
@@ -220,7 +220,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = null;
     }
 
-    const trigger = this.menuTrigger?.toArray()[index];
+    const trigger = this.menuTrigger?.first;
     if (trigger?.menuOpen) {
       trigger.closeMenu();
     }
@@ -263,7 +263,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
     this.isFocused = false;
 
-    const trigger = this.menuTrigger?.toArray()[index];
+    const trigger = this.menuTrigger?.first;
     if (trigger?.menuOpen) {
       trigger.closeMenu();
     }
@@ -271,7 +271,13 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     const type = isCitySelection ? 'City' : 'Airport';
     this.destinationTypeChange.emit({ dest, type });
 
-    if (this.sharedService.flightType === 'multi-city') {
+    const currentFlightType = this.flightSearchService.searchFlight?.get('flightType')?.value;
+    if (
+      currentFlightType === 'MultiCity' ||
+      currentFlightType === 'multi-city' ||
+      this.sharedService.flightType === 'multi-city' ||
+      this.sharedService.flightType === 'MultiCity'
+    ) {
       return;
     }
 

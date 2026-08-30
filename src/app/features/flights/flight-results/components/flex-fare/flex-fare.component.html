@@ -1,12 +1,12 @@
 <header>
-  <p class="title">{{ translate.currentLang === 'en' ? 'Branded Fares' : 'أسعار الباقات'}}</p>
+  <p class="title">{{ 'flightResults.brandedFares' | translate }}</p>
   @if (!this.flightResultService.isBrandedFaresLoading) {
     <img src="assets/icons/exit-icon.svg" title="Close Icon" (click)="sharedService.isBrandedFaresShowed = false" />
   }
 </header>
 
 @if (!flightResultService.isBrandedFaresLoading) {
-  <p class="message">{{ translate.currentLang === 'en' ? 'Please select a branded fare to proceed to the checkout page.' : 'الرجاء اختيار فئة السعر للمتابعة إلى صفحة الدفع.'}}</p>
+  <p class="message">{{ 'flightResults.selectBrandedFareMsg' | translate }}</p>
 }
 
 @if (flightResultService.isBrandedFaresLoading) {
@@ -25,6 +25,6 @@
 
     </swiper-container>
   } @else {
-    <p>{{ translate.currentLang === 'en' ? 'No Branded Fares To Show' : 'لا يوجد باقات لعرضها' }}</p>
+    <p>{{ 'flightResults.noBrandedFares' | translate }}</p>
   }
 }

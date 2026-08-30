@@ -192,7 +192,7 @@ export class AppComponent implements OnInit {
       },
     };
 
-    this.environment.envConfiguration(envTransarabian);
+    this.environment.envConfiguration(envFly);
     this.hotelEnvironmentService.envConfiguration(envRP);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {

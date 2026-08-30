@@ -2,8 +2,7 @@
 @import '../../../../../sass/colors';
 
 form {
-  overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow: visible;
 }
 
 .airline-logo{

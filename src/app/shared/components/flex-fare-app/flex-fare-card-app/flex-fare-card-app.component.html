@@ -25,7 +25,7 @@
 
     <p class="main-info__saver">
       <span class="main-info__saver__type">{{ brand.brandName }}</span>
-      <span class="main-info__saver__cabin-class">{{translate.currentLang === 'en' ? 'Cabin' : 'المقصورة'}}: {{ brand.cabinClasse }}</span>
+      <span class="main-info__saver__cabin-class">{{ 'flightResults.cabin' | translate }}: {{ brand.cabinClasse }}</span>
     </p>
   </div>
 
@@ -39,13 +39,13 @@
 
   @if (brand.baggageAllowances) {
     <div class="sub-info">
-      <span class="sub-info__title">{{ translate.currentLang === 'en' ? 'Bags' : 'حقائب' }}</span>
+      <span class="sub-info__title">{{ 'flightResults.bags' | translate }}</span>
 
       @for (baggageAllowanceDetail of brand.baggageAllowances[0].baggageAllowanceDetails; track $index) {
         <div class="sub-info__value">
           <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
           <div>
-            {{ baggageAllowanceDetail.baggage === 'CarryOn' ? (translate.currentLang === 'en' ? 'Carry-on' : 'حقيبة اليد') : (translate.currentLang === 'en' ? 'Checked bags' : 'حقائب الشحن') }} bag included
+            {{ baggageAllowanceDetail.baggage === 'CarryOn' ? ('flightResults.carryOn' | translate) : ('flightResults.checkedBags' | translate) }}
             {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
             {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
           </div>
@@ -76,22 +76,22 @@
     } -->
 
   <div class="sub-info">
-    <span class="sub-info__title">{{ translate.currentLang === 'en' ? 'Flexibility' : 'إمكانية التغير' }}</span>
+    <span class="sub-info__title">{{ 'flightResults.flexibility' | translate }}</span>
     <p class="sub-info__value">
       <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
       <span>{{
         brand.passengerFareBreakDowns[0].cancelPenaltyDTOs[0].price
-          ? (translate.currentLang === 'en' ? 'Cancellation fee applies' : 'تُطبق رسوم الإلغاء')
-          : (translate.currentLang === 'en' ? 'Cancellation fee not apply' : 'لا تُطبق رسوم الإلغاء')
+          ? ('flightResults.cancellationFeeApplies' | translate)
+          : ('flightResults.cancellationFeeNotApplies' | translate)
       }}</span>
     </p>
     <p class="sub-info__value">
       <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
       <span>{{
-        brand.passengerFareBreakDowns[0].changePenaltyDTOs[0].price ? (translate.currentLang === 'en' ? 'Change fee applies' : 'يتم تطبيق رسوم التغيير') : (translate.currentLang === 'en' ? 'Change fee not apply' : 'لا يتم تطبيق رسوم التغيير')
+        brand.passengerFareBreakDowns[0].changePenaltyDTOs[0].price ? ('flightResults.changeFeeApplies' | translate) : ('flightResults.changeFeeNotApplies' | translate)
       }}</span>
     </p>
   </div>
 
-  <app-main-button [mainButtonInfo]="selectButton" [title]="translate.currentLang === 'en' ? 'Select' : 'إختر'" (clickMainButton)="onClickSelect()" />
+  <app-main-button [mainButtonInfo]="selectButton" [title]="'results.card.select' | translate" (clickMainButton)="onClickSelect()" />
 </div>

@@ -109,8 +109,10 @@
       "done": "Done",
       "addFlight": "Add Flight",
       "addFlightNote": "Maximum of 4 different flights can be added",
-      "searchTicket": "Search Ticket"
+      "searchTicket": "Search Ticket",
+      "enterDestination": "Enter your destination city"
     },
+    "exploreTitle": "Explore popular flights and hotels",
     "adContent": {
       "title": "Unlock exclusive features available only on the Travelo app. Download it now!",
       "features": [
@@ -122,7 +124,8 @@
     },
     "flightDeals": {
       "title": "The best Flight deals",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler"
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler",
+      "book": "Book"
     },
     "hotelDeals": {
       "title": "Popular Searches",
@@ -592,6 +595,56 @@
       "parentCompany": "Parent Company",
       "contactInformation": "Contact Information",
       "destinationsWorldwide": "Destinations Worldwide"
-    }
+    },
+    "about": "About",
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "faq": "Frequently Asked Questions",
+    "similarAirlines": "Similar Airlines"
+  },
+
+  "flightResults": {
+    "cabin": "Cabin",
+    "bags": "Bags",
+    "carryOn": "Carry-on",
+    "checkedBags": "Checked bags",
+    "flexibility": "Flexibility",
+    "cancellationFeeApplies": "Cancellation fee applies",
+    "cancellationFeeNotApplies": "Cancellation fee not apply",
+    "changeFeeApplies": "Change fee applies",
+    "changeFeeNotApplies": "Change fee not apply",
+    "brandedFares": "Branded Fares",
+    "selectBrandedFareMsg": "Please select a branded fare to proceed to the checkout page.",
+    "noBrandedFares": "No Branded Fares To Show",
+    "showMoreFlights": "Show More Flights",
+    "showLessFlights": "Show Less Flights",
+    "moreFlightsSamePrice": "More flights at same price",
+    "noResultsTitle": "No results",
+    "noResultsParagraph": "Sorry, there are no results for your search. Please try a new set of dates.",
+    "goBack": "Go Back"
+  },
+
+  "contact": {
+    "info": "Contact Info",
+    "socialMedia": "Social Media",
+    "sendMessage": "Send a Message",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "howCanWeHelp": "How can we help you?",
+    "send": "Send"
+  },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "sectionTitle": "Information collection and use",
+    "description": "We collect only the necessary information to provide our services. Your data is securely stored and never shared without your consent."
+  },
+
+  "terms": {
+    "title": "Terms And Conditions",
+    "sectionTitle": "Information collection and use",
+    "description": "By using orhas, you agree to our Terms of Service. We are not responsible for any issues arising from third-party services. Please read our Privacy Policy for more details."
   }
 }

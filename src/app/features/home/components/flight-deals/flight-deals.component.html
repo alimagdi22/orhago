@@ -3,7 +3,7 @@
   <p class="home-paragraph">{{ 'home.flightDeals.description' | translate }}</p>
 </div>
 
-<swiper-container #swiperEl>
+<swiper-container #swiperEl [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
   <swiper-slide *ngFor="let mostSearchedFlight of mostSearchedFlightsService.mostSearchedFlights; let i = index">
     <app-flight-deals-card [mostSearchedFlight]="mostSearchedFlight"></app-flight-deals-card>
   </swiper-slide>

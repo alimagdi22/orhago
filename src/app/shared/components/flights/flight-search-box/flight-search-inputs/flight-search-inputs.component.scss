@@ -277,27 +277,55 @@ hr{
   }
 }
 
+.dest.multi-city-sub-dest {
+  grid-column: span 5;
+
+  @media (max-width: 1200px) {
+    grid-column: span 12;
+  }
+}
+
+.calander.multi-city-sub-calander {
+  grid-column: span 6;
+
+  @media (max-width: 1200px) {
+    grid-column: span 10;
+  }
+}
+
 .remove-icon {
-  flex-grow: 1;
+  grid-column: span 1;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
+  align-items: center;
 
   img {
-    width: 35px;
+    width: 30px;
     cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    grid-column: span 2;
   }
 }
 
 .multi-city-action {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  grid-column: span 3;
+  grid-column: span 12;
+  margin-top: 10px;
 
   .add-flight-info {
-    font-size: 10px;
+    font-size: 12px;
     color: #393c43;
+    margin-bottom: 0;
   }
 }
 

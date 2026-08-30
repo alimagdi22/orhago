@@ -21,7 +21,7 @@
     "contact": {
       "email": "info@orhas.com",
       "phone": "+971 66414350",
-      "address": "بجوار مطعم جاد، شارع حبيب مناور، الفروانية، الكويت"
+      "address": "الامارات العربية المتحدة . دبي"
     },
     "copyright": "&copy; 2025 جوتاج. جميع الحقوق محفوظة."
   },
@@ -80,7 +80,7 @@
   },
 
   "home": {
-    "bannarTitle": "كل شي جاهز... شيل شنطتك والباقي على orhas",
+    "bannarTitle": "خطط لخيالك واحجز رحلتك",
     "search": {
       "flights": "رحلات الطيران",
       "oneWay": "ذهاب فقط",
@@ -107,20 +107,23 @@
       "done": "تم",
       "addFlight": "إضافة رحلة",
       "addFlightNote": "يمكن إضافة 4 رحلات مختلفة كحد أقصى",
-      "searchTicket": "البحث عن تذكرة"
+      "searchTicket": "البحث عن تذكرة",
+      "enterDestination": "أدخل وجهتك"
     },
+    "exploreTitle": "استكشف أشهر الرحلات والفنادق",
     "adContent": {
       "title": "افتح ميزات حصرية متاحة فقط على تطبيق Travelo. قم بتنزيله الآن!",
       "features": [
         "استمتع بأكثر من عشر ميزات عملية مخصصة حصريًا لمستخدمي التطبيق",
-        "احصل على وصول مبكر إلى العروض والخصومات الجديدة",
-        "إدارة الحجوزات الخاصة بك بسهولة باستخدام الأدوات المتقدمة"
+        "اكتشف صفحة الاستكشاف للوجهات الشهيرة وعطلات نهاية الأسبوع وأخبار السفر والمزيد.",
+        "عملية الدفع السريعة على تطبيق Travelo مع إمكانية الحجز دون اتصال بالإنترنت وخصومات متنوعة وتسجيل الدخول بدون كلمة مرور."
       ],
       "scanToDownload": "امسح للتنزيل"
     },
     "flightDeals": {
       "title": "أفضل عروض الطيران",
-      "description": "اكتشف وجهاتنا المميزة وابحث عن الرحلة المثالية. سواء كنت تبحث عن الاسترخاء أو المغامرة أو تجربة ثقافية، فإن Travelo لديها ما يناسب كل مسافر."
+      "description": "اكتشف وجهاتنا المميزة وابحث عن الرحلة المثالية. سواء كنت تبحث عن الاسترخاء أو المغامرة أو تجربة ثقافية، فإن Travelo لديها ما يناسب كل مسافر.",
+      "book": "احجز الآن"
     },
     "hotelDeals": {
       "title": "البحوثات الأكثر انتشاراً",
@@ -130,7 +133,12 @@
       "title": "المدن الأكثر شهرة للفنادق"
     },
     "populerAirlines": {
-      "title": "شركات الطيران الأكثر شهرة"
+      "title": "أشهر شركات الطيران",
+      "text": "احجز أفضل شركة طيران"
+    },
+    "topAirlines": {
+      "title": "أشهر شركات الطيران",
+      "text": "احجز أفضل شركة طيران"
     }
   },
 
@@ -259,9 +267,28 @@
     "Direct": "مباشر",
     "Transit": "ترانزيت",
     "seeMoreDetails": "عرض المزيد من التفاصيل",
-    "travelerDetails": "تفاصيل المسافر",
+    "travelerDetails": "بيانات المسافرين",
+    "selectRoom": "اختر الغرفة",
+    "guestDetails": "بيانات النزلاء",
     "review": "مراجعة",
-    "payment": "الدفع",
+    "paymentStep": "الدفع",
+    "payment": {
+      "chooseCard": "اختر البطاقة",
+      "cardNumber": "رقم البطاقة",
+      "expiration": "تاريخ الانتهاء",
+      "cvc": "رمز الأمان (CVC)",
+      "nameOnCard": "الاسم على البطاقة",
+      "nameOnCardPlaceholder": "الاسم المكتوب على البطاقة",
+      "conditionStart": "أوافق على",
+      "conditionEnd": "الشروط والأحكام",
+      "pay": "دفع",
+      "errorTitle": "عذراً!",
+      "errorMessage": "فشلت عملية الشراء. يرجى استخدام بطاقة أخرى أو التحقق من بيانات البطاقة الحالية",
+      "tryAgain": "لنحاول مرة أخرى",
+      "successTitle": "تم شراء التذكرة بنجاح!",
+      "successMessage": "تمت عملية شراء التذكرة بنجاح.",
+      "seeConfirmation": "عرض تأكيد الحجز"
+    },
     "contactInfo": "معلومات الاتصال",
     "contactNumber": "رقم الاتصال",
     "gmail": "جيميل",
@@ -462,12 +489,21 @@
       "empty": "لا توجد حجوزات رحلات لعرضها"
     },
     "hotels-filter":{
-      "filter":"Filter",
-      "popular":"Popular Filter",
-      "star":"Star Rate",
-      "location":"Location",
-      "reset":"Reset Filters"
+      "filter": "Filter",
+      "popular": "Popular Filter",
+      "star": "Star Rate",
+      "location": "Location",
+      "reset": "Reset Filters",
+      "PropertSearch": "بحث"
     }
+  },
+  "hotels-filter":{
+    "filter": "Filter",
+    "popular": "Popular Filter",
+    "star": "Star Rate",
+    "location": "Location",
+    "reset": "Reset Filters",
+    "PropertySearch": "بحث"
   },
 
   "hotelCard": {
@@ -476,5 +512,132 @@
     "Per night": "لكل ليلة",
     "Show More Results": "عرض المزيد من النتائج",
     "View Deal": "عرض الصفقة"
+  },
+
+  "hotelCheckout": {
+    "Includes": "يشمل",
+    "guests": "ضيوف",
+    "Guest Room": "غرفة النزيل: ",
+    "Special Request": "طلب خاص (اختياري)",
+    "Mr": "السيد",
+    "Mrs": "السيدة",
+    "Ms": "الآنسة",
+    "Check In": "تسجيل الوصول",
+    "Check Out": "المغادرة",
+    "Stay": "الإقامة",
+    "Room only": "غرفة فقط",
+    "Breakfast included": "الإفطار مشمول",
+    "Meals included": "الوجبات مشمولة",
+    "Adult": "بالغ",
+    "Child": "طفل",
+    "From": "من",
+    "To": "إلى"
+  },
+
+  "hotelRooms": {
+    "Rooms": "الغرف",
+    "Map": "الخريطة",
+    "Details": "التفاصيل",
+    "Good breakfast": "إفطار جيد",
+    "Nice pool": "مسبح لطيف",
+    "Popular amenities": "المرافق الشائعة",
+    "Parking": "موقف سيارات",
+    "Swimming pool": "حمام سباحة",
+    "Read More": "قراءة المزيد",
+    "Read Less": "قراءة أقل",
+    "Address": "العنوان",
+    "Check In": "تسجيل الوصول",
+    "Check Out": "المغادرة",
+    "No meals included": "بدون وجبات",
+    "Breackfast included": "الإفطار مشمول",
+    "Meals included": "الوجبات مشمولة",
+    "Refundable": "مستردة",
+    "Nun-refundable": "غير مستردة",
+    "View more amenities": "عرض المزيد من المرافق",
+    "Book Now": "احجز الآن",
+    "errorMessage": "حدث خطأ أثناء جلب غرف الفندق. يرجى المحاولة مرة أخرى لاحقاً.",
+    "goHome": "العودة إلى الرئيسية",
+    "Cancellation Policy": "سياسة الإلغاء",
+    "From": "من",
+    "To": "إلى",
+    "Penalty": "الغرامة",
+    "Free": "مجاني",
+    "Close": "إغلاق"
+  },
+  "hotelPayment": {
+    "Payment Summary": "ملخص الدفع",
+    "Total": "الإجمالي",
+    "Payment Timeline": "الجدول الزمني للدفع",
+    "Pay now": "ادفع الآن",
+    "Pay at Property": "الدفع في مكان الإقامة",
+    "In property curreency": "بعملة مكان الإقامة",
+    "note": "هذا المبلغ مستحق عند الوصول. قد تختلف أسعار الصرف وقت الدفع."
+  },
+
+  "popularAirlines": {
+    "table": {
+      "iataCode": "رمز إياتا",
+      "icaoCode": "رمز إيكاو",
+      "headquarters": "المقر الرئيسي",
+      "numberOfDestinations": "عدد الوجهات",
+      "mainOperationalAirport": "المطار الرئيسي",
+      "mostPopularDestinations": "الوجهات الأكثر شهرة",
+      "yearOfEstablishment": "سنة التأسيس",
+      "keyRoutes": "المسارات الرئيسية",
+      "fleetComposition": "تكوين الأسطول",
+      "parentCompany": "الشركة الأم",
+      "contactInformation": "معلومات الاتصال",
+      "destinationsWorldwide": "وجه حول العالم"
+    },
+    "about": "عن",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل",
+    "faq": "الأسئلة الشائعة",
+    "similarAirlines": "خطوط طيران مشابهة"
+  },
+
+  "flightResults": {
+    "cabin": "المقصورة",
+    "bags": "حقائب",
+    "carryOn": "حقيبة اليد",
+    "checkedBags": "حقائب الشحن",
+    "flexibility": "إمكانية التغير",
+    "cancellationFeeApplies": "تُطبق رسوم الإلغاء",
+    "cancellationFeeNotApplies": "لا تُطبق رسوم الإلغاء",
+    "changeFeeApplies": "يتم تطبيق رسوم التغيير",
+    "changeFeeNotApplies": "لا يتم تطبيق رسوم التغيير",
+    "brandedFares": "أسعار الباقات",
+    "selectBrandedFareMsg": "الرجاء اختيار فئة السعر للمتابعة إلى صفحة الدفع.",
+    "noBrandedFares": "لا يوجد باقات لعرضها",
+    "showMoreFlights": "اعرض المزيد من الرحلات",
+    "showLessFlights": "اعرض رحلات أقل",
+    "moreFlightsSamePrice": "رحلات إضافية بنفس السعر",
+    "noResultsTitle": "لا توجد نتائج",
+    "noResultsParagraph": "عذراً، لا توجد نتائج لبحثك. يرجى تجربة مواعيد جديدة.",
+    "goBack": "العودة"
+  },
+
+  "contact": {
+    "info": "معلومات الاتصال",
+    "socialMedia": "وسائل التواصل الاجتماعي",
+    "sendMessage": "إرسال رسالة",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "phoneNumber": "رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "howCanWeHelp": "كيف يمكننا مساعدتك؟",
+    "send": "إرسال"
+  },
+
+  "privacy": {
+    "title": "سياسة الخصوصية",
+    "sectionTitle": "جمع المعلومات واستخدامها",
+    "description": "نقوم بجمع المعلومات الضرورية فقط لتقديم خدماتنا. يتم تخزين بياناتك بأمان ولن يتم مشاركتها أبداً دون موافقتك."
+  },
+
+  "terms": {
+    "title": "الشروط والأحكام",
+    "sectionTitle": "جمع المعلومات واستخدامها",
+    "description": "باستخدام orhas، فإنك توافق على شروط الخدمة الخاصة بنا. لسنا مسؤولين عن أي مشكلات تنشأ عن خدمات الطرف الثالث. يرجى قراءة سياسة الخصوصية الخاصة بنا لمزيد من التفاصيل."
   }
 }

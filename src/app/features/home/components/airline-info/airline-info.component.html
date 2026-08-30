@@ -16,7 +16,7 @@
     <!-- About Title -->
     @if (airlineInfoDto && airlineInfoDto.length) {
       <h1 class="title mb-4 fw-bold fs-3">
-        <span>{{ langIndex ? "عن" : "About" }} </span>
+        <span>{{ 'popularAirlines.about' | translate }} </span>
         <span class="text-uppercase">{{ airlineInfoDto[langIndex]?.airlineName || airlineInfoDto[0]?.airlineName }}</span>
       </h1>
     }
@@ -84,7 +84,7 @@
         <div [innerHTML]="sections[0].content"></div>
 
         @if (!isExpanded) {
-          <a (click)="toggleShowMore()" class="text-primary fw-bold cursor-pointer mt-2 d-inline-block">Show More</a>
+          <a (click)="toggleShowMore()" class="text-primary fw-bold cursor-pointer mt-2 d-inline-block">{{ 'popularAirlines.showMore' | translate }}</a>
         }
 
         @if (isExpanded) {
@@ -94,7 +94,7 @@
               <div [innerHTML]="section.content"></div>
             </div>
           }
-          <a (click)="toggleShowMore()" class="text-primary fw-bold mt-2 d-inline-block cursor-pointer">Show Less</a>
+          <a (click)="toggleShowMore()" class="text-primary fw-bold mt-2 d-inline-block cursor-pointer">{{ 'popularAirlines.showLess' | translate }}</a>
         }
       </div>
     }
@@ -103,7 +103,7 @@
     @if (faqs && faqs.length) {
       <div class="faq-container mb-5">
         <h2 class="title fs-4 fw-bold mb-4">
-          {{ translate.currentLang === "en" ? "Frequently Asked Questions" : "الأسئلة الشائعة" }}
+          {{ 'popularAirlines.faq' | translate }}
         </h2>
         <div class="d-flex flex-column gap-2">
           @for (question of faqs; track $index) {
@@ -124,7 +124,7 @@
     @if (allAirlines && allAirlines.length) {
       <div class="similar-airlines-container mb-5">
         <h2 class="title fs-4 fw-bold mb-4">
-          {{ translate.currentLang === "en" ? "Similar Airlines" : "خطوط طيران مشابهة" }}
+          {{ 'popularAirlines.similarAirlines' | translate }}
         </h2>
         <div class="w-100 d-flex flex-wrap justify-content-center align-items-center gap-4">
           @for (airline of allAirlines; track $index) {

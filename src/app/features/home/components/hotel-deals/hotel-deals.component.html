@@ -1,4 +1,4 @@
-<div class="hotel-deals-container">
+<div class="hotel-deals-container" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
   <div class="text-wrapper">
     <h2 class="title">{{ 'home.hotelDeals.title' | translate }}</h2>
     <p class="description">{{ 'home.hotelDeals.description' | translate }}</p>
@@ -18,7 +18,7 @@
       class="nav-btn prev-btn"
       [disabled]="currentPage === 1"
       (click)="prevPage()"
-      aria-label="Previous Page"
+      [attr.aria-label]="'checkout.previous' | translate"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"></polyline>
@@ -42,7 +42,7 @@
       class="nav-btn next-btn"
       [disabled]="currentPage === totalPages"
       (click)="nextPage()"
-      aria-label="Next Page"
+      [attr.aria-label]="'checkout.next' | translate"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="9 18 15 12 9 6"></polyline>

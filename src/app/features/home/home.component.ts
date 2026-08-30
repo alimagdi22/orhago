@@ -12,8 +12,6 @@ import { SharedService } from '../../shared/shared.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  showStickySearch = false;
-  private scrollThreshold = 200;
   private subscription = new Subscription();
 
   private route = inject(ActivatedRoute);
@@ -46,7 +44,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
       this.startImageRotation();
-      this.renderer.listen('window', 'scroll', this.scrollHandler);
     }
 
     this.subscription.add(
@@ -102,19 +99,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
   }
-
-  private scrollHandler = () => {
-    if (typeof window === 'undefined') return;
-    const regularSearch = this.elementRef.nativeElement.querySelector('.regular-search');
-    if (!regularSearch) return;
-
-    const rect = regularSearch.getBoundingClientRect();
-    const shouldShow = rect.bottom < 0;
-
-    if (shouldShow !== this.showStickySearch) {
-      this.showStickySearch = shouldShow;
-    }
-  };
 
   ngOnDestroy(): void {
     if (this.intervalId) {

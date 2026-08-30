@@ -49,13 +49,13 @@
   <div class="flight-card__bottom">
     <div class="same-price">
             @if (!$index && !showMoreFlights && airItineraries.length > 1) {
-        <span class="text" (click)="showMoreFlights = true">{{ translate.currentLang === 'en' ? 'Show More Flights' : 'اعرض المزيد من الرحلات' }}</span>
+        <span class="text" (click)="showMoreFlights = true">{{ 'flightResults.showMoreFlights' | translate }}</span>
       } @else if($index !== airItineraries.length - 1) {
         <span> </span>
       }
 
       @if ($index === airItineraries.length - 1 && showMoreFlights) {
-        <span class="text" (click)="showMoreFlights = false">{{ translate.currentLang === 'en' ? 'Show Less Flights' : 'اعرض رحلات اقل' }}</span>
+        <span class="text" (click)="showMoreFlights = false">{{ 'flightResults.showLessFlights' | translate }}</span>
       }
     </div>
 

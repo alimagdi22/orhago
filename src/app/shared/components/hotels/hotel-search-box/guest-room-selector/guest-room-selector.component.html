@@ -86,11 +86,11 @@
           + {{ 'searchBox.addRoom' | translate }}
         </button>
 
-        <div *ngIf="hotelSearchService.guestMessageError.enMsg" class="error-message">
-          {{ hotelSearchService.guestMessageError.enMsg }}
+        <div *ngIf="translate.currentLang === 'ar' ? hotelSearchService.guestMessageError.arMsg : hotelSearchService.guestMessageError.enMsg" class="error-message">
+          {{ translate.currentLang === 'ar' ? hotelSearchService.guestMessageError.arMsg : hotelSearchService.guestMessageError.enMsg }}
         </div>
-        <div *ngIf="hotelSearchService.RoomMessageError.enMsg" class="error-message">
-          {{ hotelSearchService.RoomMessageError.enMsg }}
+        <div *ngIf="translate.currentLang === 'ar' ? hotelSearchService.RoomMessageError.arMsg : hotelSearchService.RoomMessageError.enMsg" class="error-message">
+          {{ translate.currentLang === 'ar' ? hotelSearchService.RoomMessageError.arMsg : hotelSearchService.RoomMessageError.enMsg }}
         </div>
       </div>
     </div>

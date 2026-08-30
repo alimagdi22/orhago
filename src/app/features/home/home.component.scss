@@ -1,8 +1,9 @@
 .bannar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 20px;
   background-image: url(../../../assets/images/search-box/2.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -10,9 +11,10 @@
   object-fit: none;
   margin: 5%;
   margin-top: 0;
-  padding: 5%;
+  padding: 40px 30px;
   border-radius: 12px;
   min-height: 80vh;
+  height: auto;
 
   &__text {
     font-size: 40px;
@@ -20,7 +22,7 @@
     color: white;
     text-align: center;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 
     @media (max-width:1200px){
       font-size: 20px;
@@ -34,13 +36,15 @@
     overflow: hidden;
     margin: 5%;
     margin-top: 0;
-    padding: 5%;
+    padding: 50px 40px;
     border-radius: 12px;
     min-height: 80vh;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 30px;
 
     &__bg {
       position: absolute;
@@ -63,7 +67,7 @@
       color: white;
       text-align: center;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-      margin-bottom: 30px;
+      margin-bottom: 0;
     }
 
     .regular-search {
@@ -82,30 +86,6 @@
 }
 
 
-
-.sticky-search-box {
-  background-color: white;
-  width: 80%;
-  margin: auto;
-  border-radius: 15px;
-  position: fixed;
-  left: 50%;
-  z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transform: translateX(-50%);
-  animation: stickySlideDown 0.25s ease-out;
-}
-
-@keyframes stickySlideDown {
-  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-@media (max-width:1200px){
-  .sticky-search-box{
-    display: none;
-  }
-}
 
 .explore-section {
   margin-block: 50px;

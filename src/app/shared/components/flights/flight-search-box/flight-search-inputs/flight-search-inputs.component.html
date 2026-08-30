@@ -14,6 +14,7 @@
         <ng-container [formGroupName]="i">
           <section
             class="dest"
+            [class.multi-city-sub-dest]="$index && flightType === 'multi-city'"
             [ngStyle]="{
               borderColor:
                 isDepartingNotValid(i) ||
@@ -56,15 +57,15 @@
 
           <section
             class="calander"
-            [class.col-9]="sharedService.screenWidth < 1200 && $index"
-            [class.col-12]="sharedService.screenWidth > 1200 || !$index"
+            [class.multi-city-sub-calander]="$index && flightType === 'multi-city'"
             [ngStyle]="{ borderColor: isCalanderNotValid(i) ? 'red' : '' }"
           >
             <app-date-input
               [index]="i"
               [flightType]="flightType"
               [isReturnDateSelected]="false"
-              class="col-5"
+              [class.col-5]="flightType !== 'multi-city'"
+              [class.w-100]="flightType === 'multi-city'"
               (openRoundTripCalendar)="openReturnDateCalendar = openReturnDateCalendar + 1"
               [openCalendar]="openDepartingDateCalendar"
               (openCabinMenu)="openCabinMenu = openCabinMenu + 1"

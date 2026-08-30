@@ -3,7 +3,7 @@
     <!-- Side Nav -->
 
     <aside class="col-12 col-md-4 col-xl-3">
-      <h1>Contact Info</h1>
+      <h1>{{ 'contact.info' | translate }}</h1>
 
       <ul>
         <li>
@@ -28,7 +28,7 @@
 
       <hr />
 
-      <p>Social Media</p>
+      <p>{{ 'contact.socialMedia' | translate }}</p>
 
       <div class="links">
         <a href="https://www.facebook.com">
@@ -58,48 +58,48 @@
     <!-- Content -->
 
     <section class="col-12 col-md-7 col-xl-8">
-      <h1>Send a Message</h1>
+      <h1>{{ 'contact.sendMessage' | translate }}</h1>
 
       <div class="wrapper">
         <form>
           <div class="custom-radio-group">
             <div>
-              <label>First Name</label>
+              <label>{{ 'contact.firstName' | translate }}</label>
 
               <div class="custom-input-container">
-                <input type="text" placeholder="First Name" />
+                <input type="text" [placeholder]="'contact.firstName' | translate" />
               </div>
             </div>
 
             <div>
-              <label>Last Name</label>
+              <label>{{ 'contact.lastName' | translate }}</label>
 
               <div class="custom-input-container">
-                <input type="text" placeholder="Last Name" />
+                <input type="text" [placeholder]="'contact.lastName' | translate" />
               </div>
             </div>
 
             <div>
-              <label>Phone Number</label>
+              <label>{{ 'contact.phoneNumber' | translate }}</label>
 
               <div class="custom-input-container">
-                <input type="text" placeholder="Last Name" />
+                <input type="text" [placeholder]="'contact.phoneNumber' | translate" />
               </div>
             </div>
 
             <div>
-              <label>Gmail</label>
+              <label>{{ 'contact.email' | translate }}</label>
               <div class="custom-input-container">
                 <span class="input-icon">
                   <img src="assets/icons/email-icon.svg" alt="icon" />
                 </span>
 
-                <input type="text" placeholder="Email" />
+                <input type="text" [placeholder]="'contact.email' | translate" />
               </div>
             </div>
 
             <div>
-              <label>How can we help you?</label>
+              <label>{{ 'contact.howCanWeHelp' | translate }}</label>
               <div class="custom-input-container">
                 <textarea rows="10"></textarea>
               </div>
@@ -108,7 +108,7 @@
         </form>
 
         <div class="actions">
-          <app-main-button [mainButtonInfo]="sendButton" [title]="'Send'" />
+          <app-main-button [mainButtonInfo]="sendButton" [title]="'contact.send' | translate" />
         </div>
       </div>
     </section>

@@ -15,7 +15,17 @@
               | date: 'd MMMM' : undefined : (translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
           }}
         </p>
-        <p class="flight-deal-card__body__info__flight-type">{{ mostSearchedFlight.searchCriteria.flightType }}</p>
+        <p class="flight-deal-card__body__info__flight-type">
+          @if (mostSearchedFlight.searchCriteria.flightType === 'OneWay' || mostSearchedFlight.searchCriteria.flightType === 'oneway') {
+            {{ 'searchBox.oneway' | translate }}
+          } @else if (mostSearchedFlight.searchCriteria.flightType === 'RoundTrip' || mostSearchedFlight.searchCriteria.flightType === 'roundtrip') {
+            {{ 'searchBox.roundtrip' | translate }}
+          } @else if (mostSearchedFlight.searchCriteria.flightType === 'MultiCity' || mostSearchedFlight.searchCriteria.flightType === 'multicity') {
+            {{ 'searchBox.multicity' | translate }}
+          } @else {
+            {{ mostSearchedFlight.searchCriteria.flightType }}
+          }
+        </p>
       </div>
 
       <p class="flight-deal-card__body__percentage" dir="ltr">{{ mostSearchedFlight.discountPercentage * -1 }}%</p>
@@ -41,7 +51,7 @@
       <div class="flight-deal-card__footer__action">
         <app-main-button
           [mainButtonInfo]="bookButton"
-          title="Book"
+          [title]="'home.flightDeals.book' | translate"
           (clickMainButton)="mostSearchedFlightsService.goToSearchResults(mostSearchedFlight.searchCriteria)"
         />
       </div>

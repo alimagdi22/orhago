@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IHotelDeal } from './hotel-deals-card/hotel-deals-card.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: false,
@@ -8,6 +9,8 @@ import { IHotelDeal } from './hotel-deals-card/hotel-deals-card.component';
   styleUrl: './hotel-deals.component.scss',
 })
 export class HotelDealsComponent implements OnInit {
+  translate = inject(TranslateService);
+
   currentPage = 1;
   pageSize = 4;
   totalPages = 4;
