@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { FlightResultService, FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../shared.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './flex-fare-app.component.html',
   styleUrl: './flex-fare-app.component.scss'
 })
-export class FlexFareAppComponent {
+export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
   flightResultService = inject(FlightResultService);
   flightSearchService = inject(FlightSearchService);
   sharedService = inject(SharedService);
@@ -31,20 +31,17 @@ export class FlexFareAppComponent {
       this.flightResultService.notify.asObservable().subscribe({
         next: () => {
           this.totalPages = Math.ceil(this.flightResultService.currentSelectedBrands.length / this.itemsPerPage);
-          this.cdRef.detectChanges(); // Force change detection
+          this.cdRef.detectChanges();
         },
       }),
     );
 
-    // Add subscription to brandedFareNotifier
     this.subscription.add(
       this.flightResultService.brandedFareNotifier.subscribe({
         next: () => {
-          // Data is loaded, force re-render
           this.totalPages = Math.ceil(this.flightResultService.currentSelectedBrands.length / this.itemsPerPage);
           this.cdRef.detectChanges();
 
-          // Re-initialize swiper after data loads
           setTimeout(() => {
             this.initializeSwiper();
           }, 100);
@@ -52,6 +49,12 @@ export class FlexFareAppComponent {
         error: (err) => {
           console.error('Error loading branded fares:', err);
         }
+      })
+    );
+
+    this.subscription.add(
+      this.translate.onLangChange.subscribe(() => {
+        this.initializeSwiper();
       })
     );
   }
@@ -78,12 +81,12 @@ export class FlexFareAppComponent {
     };
 
     Object.assign(swiperEl, swiperParams);
+    swiperEl.dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
 
-    // Only initialize if not already initialized
     if (!swiperEl.swiper) {
       swiperEl.initialize();
     } else {
-      // If already initialized, update it
+      swiperEl.swiper.changeLanguage?.(this.translate.currentLang);
       swiperEl.swiper.update();
     }
   }

@@ -37,8 +37,32 @@
   padding-block: 6px;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    grid-template-areas:
+      "main main main"
+      "dept stops land";
+    gap: 12px 4px;
+    align-items: center;
+
+    .col-main {
+      grid-area: main;
+      width: 100%;
+    }
+
+    .col-dept {
+      grid-area: dept;
+      text-align: start;
+    }
+
+    .col-stops {
+      grid-area: stops;
+      text-align: center;
+    }
+
+    .col-land {
+      grid-area: land;
+      text-align: end;
+    }
   }
 }
 

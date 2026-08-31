@@ -9,6 +9,10 @@ form {
   position: absolute;
   right: 0;
 
+  @media (max-width:768px) {
+    position: relative;
+  }
+
   &.ar{
     right: auto !important;
     left: 0;

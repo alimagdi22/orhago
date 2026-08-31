@@ -48,4 +48,32 @@
       white-space: nowrap;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    .airline-logo {
+      width: 32px;
+      height: 32px;
+    }
+
+    .info-text {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .airline-name-text {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .duration-text {
+        font-size: 13px;
+        color: #475569;
+        font-weight: 600;
+        direction: ltr;
+      }
+    }
+  }
 }

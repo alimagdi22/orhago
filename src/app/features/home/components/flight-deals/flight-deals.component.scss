@@ -24,83 +24,82 @@ swiper-slide {
   display: flex;
   justify-content: center;
 }
-::ng-deep swiper-button-next svg, .swiper-button-prev svg {
-    width: 30%;
-    height: 100%;
-    object-fit: contain;
-    transform-origin: center;
-}
+
+/* Swiper Navigation Buttons Styling */
 swiper-container::part(button-next),
-  swiper-container::part(button-prev) {
-    position: absolute;
-    top: 50%;
-    z-index: 1000;
-    // border: 1px solid #007aff;;
-    // border-radius: 50%;
-    padding: 1px 8px;
-    width: 2%;
-  }
+swiper-container::part(button-prev) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  color: #213567;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LTR Positioning */
 swiper-container::part(button-next) {
-  right: -.5px;
+  right: 0px;
   left: auto;
 }
 swiper-container::part(button-prev) {
-  left: -.5px;
+  left: 0px;
   right: auto;
 }
 
+/* RTL Positioning */
 swiper-container[dir='rtl']::part(button-next),
-:host-context([dir='rtl']) swiper-container::part(button-next) {
-  left: -.5px;
+:host-context([dir='rtl']) swiper-container::part(button-next),
+[dir='rtl'] swiper-container::part(button-next) {
+  left: 0px;
   right: auto;
 }
 swiper-container[dir='rtl']::part(button-prev),
-:host-context([dir='rtl']) swiper-container::part(button-prev) {
-  right: -.5px;
+:host-context([dir='rtl']) swiper-container::part(button-prev),
+[dir='rtl'] swiper-container::part(button-prev) {
+  right: 0px;
   left: auto;
 }
 
-/* In your component's SCSS file */
-:host {
-  ::ng-deep {
-    .swiper-button-next, .swiper-button-prev {
-      --swiper-navigation-size: 20%; /* Modern Swiper variable */
-
-      svg {
-        width: var(--swiper-navigation-size) !important;
-        height: auto !important;
-      }
-    }
-  }
-}
+/* Mobile responsive styles */
 @media (max-width: 768px) {
   swiper-container::part(button-next),
   swiper-container::part(button-prev) {
-    position: absolute;
+    width: 36px;
+    height: 36px;
     top: 50%;
-    z-index: 1000;
-    padding: 1px 8px;
-    width: 4%;
+    transform: translateY(-50%);
+    z-index: 10;
   }
-  swiper-container::part(button-next){
-    right:0;
+
+  swiper-container::part(button-next) {
+    right: 2px;
     left: auto;
   }
   swiper-container::part(button-prev) {
-    left: 0;
+    left: 2px;
     right: auto;
   }
+
   swiper-container[dir='rtl']::part(button-next),
-  :host-context([dir='rtl']) swiper-container::part(button-next) {
-    left: 0;
+  :host-context([dir='rtl']) swiper-container::part(button-next),
+  [dir='rtl'] swiper-container::part(button-next) {
+    left: 2px;
     right: auto;
   }
   swiper-container[dir='rtl']::part(button-prev),
-  :host-context([dir='rtl']) swiper-container::part(button-prev) {
-    right: 0;
+  :host-context([dir='rtl']) swiper-container::part(button-prev),
+  [dir='rtl'] swiper-container::part(button-prev) {
+    right: 2px;
     left: auto;
   }
-  ::ng-deep .swiper-pagination-bullets{
+
+  ::ng-deep .swiper-pagination-bullets {
     display: none !important;
   }
 }

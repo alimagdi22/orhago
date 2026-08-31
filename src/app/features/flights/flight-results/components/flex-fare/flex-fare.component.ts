@@ -35,25 +35,43 @@ export class FlexFareComponent implements OnDestroy {
     );
   }
 
-    @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
-    ngAfterViewInit(): void {
+  @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
+  ngAfterViewInit(): void {
+    const swiperEl = this.swiperEl?.nativeElement;
+    if (!swiperEl) return;
+
+    const swiperParams = {
+      spaceBetween: 20,
+      navigation: true,
+      breakpoints: {
+        0: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 2 },
+      },
+    };
+
+    Object.assign(swiperEl, swiperParams);
+    swiperEl.dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
+    swiperEl.initialize();
+
+    this.subscription.add(
+      this.translate.onLangChange.subscribe(() => {
+        this.updateSwiperDir();
+      })
+    );
+  }
+
+  updateSwiperDir(): void {
+    if (this.swiperEl?.nativeElement) {
       const swiperEl = this.swiperEl.nativeElement;
-
-      const swiperParams = {
-        spaceBetween: 20,
-        navigation: true,
-        breakpoints: {
-          0: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 2 },
-        },
-
-      };
-
-      Object.assign(swiperEl, swiperParams);
-
-      swiperEl.initialize();
+      const dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
+      swiperEl.dir = dir;
+      if (swiperEl.swiper) {
+        swiperEl.swiper.changeLanguage?.(this.translate.currentLang);
+        swiperEl.swiper.update();
+      }
     }
+  }
 
   get getTotalPassenger() {
     let adult = this.flightSearchService.searchFlight?.get('passengers.adults')?.value;

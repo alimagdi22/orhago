@@ -1,11 +1,11 @@
 <section class="stops-info-wrapper">
   <p class="stop-title">
     @if (flight.stopsNum === 0) {
-      Direct
+      {{ 'results.filter.Non-Stop' | translate }}
     } @else if (flight.stopsNum === 1) {
-      One Stop
+      {{ 'results.filter.1 Stop' | translate }}
     } @else {
-      {{ flight.stopsNum }} Stops
+      {{ flight.stopsNum }} {{ 'results.filter.stops' | translate }}
     }
   </p>
 

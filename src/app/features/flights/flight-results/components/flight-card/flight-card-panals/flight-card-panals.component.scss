@@ -16,4 +16,10 @@
   app-baggage-panal {
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    padding: 12px 14px;
+    border-radius: 12px;
+    gap: 6px;
+  }
 }

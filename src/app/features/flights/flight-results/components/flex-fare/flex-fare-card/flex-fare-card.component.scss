@@ -67,8 +67,3 @@
   border: 1px solid map-get($map: $colors, $key: 'main');
 }
 
-@media (max-width: 768px) {
-  .wrapper{
-    max-width: 200px;
-  }
-}

@@ -84,12 +84,7 @@
 
           <div class="flight-cards">
             @for (airItineraries of flightResultService.orgnizedResponce; track $index) {
-              @if (sharedService.screenWidth > 1000) {
-                <app-flight-card [airItineraries]="airItineraries" />
-              }@else {
-                <app-flight-card-app [airItineraries]="airItineraries" />
-              }
-
+              <app-flight-card [airItineraries]="airItineraries" />
             }
           </div>
         </section>

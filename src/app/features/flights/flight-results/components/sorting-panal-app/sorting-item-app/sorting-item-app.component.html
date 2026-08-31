@@ -1,5 +1,5 @@
 <div class="sort-item" [ngClass]="{ active: sortItem.isActive }">
-  <div class="sort-item__title">{{ sortItem.title }}</div>
+  <div class="sort-item__title">{{ 'results.sort.' + sortItem.title | translate  }}</div>
   <div class="sort-item__price">
     <span class="value" *ngIf="sortItem.currency">{{ sortItem.price | exchange : 'value'}} </span>
     <span  class="currency">{{ sortItem.currency | exchange : 'code'}}</span>

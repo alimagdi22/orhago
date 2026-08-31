@@ -58,6 +58,10 @@
   gap: 24px;
   margin-top: 40px;
 
+  @media(max-width:768px){
+    margin-top: 125px;
+  }
+
   .nav-btn {
     width: 44px;
     height: 44px;

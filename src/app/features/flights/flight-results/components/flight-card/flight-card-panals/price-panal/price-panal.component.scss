@@ -47,4 +47,32 @@
       cursor: not-allowed;
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .price-content {
+      margin-block: 0;
+      text-align: start;
+
+      .price-panal__title {
+        font-size: 12px;
+        margin-bottom: 2px;
+      }
+
+      .price-panal__price {
+        font-size: 19px;
+      }
+    }
+
+    .select-btn {
+      width: auto;
+      min-width: 120px;
+      margin-top: 0;
+      padding: 10px 22px;
+      font-size: 15px;
+    }
+  }
 }

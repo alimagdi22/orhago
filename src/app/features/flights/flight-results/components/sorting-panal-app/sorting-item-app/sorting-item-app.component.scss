@@ -55,13 +55,13 @@
   }
 
   &.active {
-    background-color: #F1FFF4;
-    border: 1px solid #C2F0C5;
+    background-color: #daedfe;
+    border: 1px solid #daedfe;
 
     .sort-item__title,
     .value,
     .currency {
-      color: #2D9F3C;
+      color: black;
       font-weight: 600;
       white-space: nowrap;
     }
