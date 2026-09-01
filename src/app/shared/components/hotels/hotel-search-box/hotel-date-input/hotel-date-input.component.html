@@ -3,7 +3,7 @@
   <div class="form-group checkin-group"
        [class.invalid]="checkInInvalid"
        [ngStyle]="currentLang === 'en' ? {'border-radius': '10px 0 0 10px'} : {'border-radius': '0 10px 10px 0'}"
-       [matMenuTriggerFor]="dateMenu"
+       [matMenuTriggerFor]="isMobile() ? null : dateMenu"
        (click)="openDatePicker('checkIn', $event)">
     <label for="checkIn" [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
       {{ 'searchBox.checkIn' | translate }}
@@ -20,7 +20,7 @@
   <div class="form-group checkout-group"
        [class.invalid]="checkOutInvalid"
        [ngStyle]="currentLang === 'en' ? {'border-radius': '0 10px 10px 0'} : {'border-radius': '10px 0 0 10px'}"
-       [matMenuTriggerFor]="dateMenu"
+       [matMenuTriggerFor]="isMobile() ? null : dateMenu"
        (click)="openDatePicker('checkOut', $event)">
     <label for="checkOut" [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
       {{ 'searchBox.checkOut' | translate }}

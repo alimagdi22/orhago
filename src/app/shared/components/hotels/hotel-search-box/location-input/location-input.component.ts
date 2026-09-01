@@ -34,13 +34,11 @@ export class LocationInputComponent implements OnInit, OnDestroy {
   currentLang = this.translate.currentLang;
   showValidationErrors = false;
   selectedCity: hotelCities | null = null;
-  isMobile = false;
 
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.initializeForm();
-    this.isMobile = this.sharedService.screenWidth < 768;
     this.setCachedLocationInput();
 
     this.subscriptions.add(
@@ -132,7 +130,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
   }
 
   onLocationChange(event: Event): void {
-    if (this.isMobile) return;
+    if (this.isMobile()) return;
 
     const input = event.target as HTMLInputElement;
     const value = input.value;
@@ -170,7 +168,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
   }
 
   onCitySelected(event: MatAutocompleteSelectedEvent): void {
-    if (this.isMobile) return;
+    if (this.isMobile()) return;
 
     this.selectedCity = event.option.value;
     this.searchForm.get('location')?.setValue(this.selectedCity);
@@ -211,12 +209,18 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     this.searchForm.get('location')?.updateValueAndValidity();
   }
 
+  isMobile(): boolean {
+    return this.sharedService.screenWidth < 768;
+  }
+
   openLocationDialog(): void {
-    if (this.isMobile) {
+    if (this.isMobile()) {
       const dialogRef = this.dialog.open(MobileLocationInputComponent, {
         width: '100vw',
-        height: '100%',
-        panelClass: 'mobile-dialog',
+        height: '100vh',
+        maxWidth: '100vw',
+        panelClass: 'full-width-dialog',
+        hasBackdrop: true,
         data: { currentValue: this.searchForm.get('location')?.value }
       });
 
@@ -228,9 +232,11 @@ export class LocationInputComponent implements OnInit, OnDestroy {
           this.searchForm.get('location')?.markAsTouched();
           this.searchForm.get('location')?.updateValueAndValidity();
 
-          if (this.locationInput?.nativeElement) {
-            this.locationInput.nativeElement.value = city.City;
-          }
+          setTimeout(() => {
+            if (this.locationInput?.nativeElement) {
+              this.locationInput.nativeElement.value = this.displayCity(city);
+            }
+          });
           // Clear cities list to prevent dropdown from showing
           this.homePageService.selectAllcities = [];
         }

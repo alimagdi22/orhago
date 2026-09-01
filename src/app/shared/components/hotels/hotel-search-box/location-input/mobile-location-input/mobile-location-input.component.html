@@ -1,34 +1,47 @@
-<header>
-  <span>{{ 'searchBox.Location' | translate }}</span>
-  <button (click)="closeDialog()">{{ 'searchBox.close' | translate }}</button>
-</header>
+<app-input-header
+  [headerTitle]="'searchBox.Destination' | translate"
+  (onClickClose)="closeDialog()"
+/>
 
-<div class="form-group location-group" [formGroup]="searchForm" [class.invalid]="locationInvalid">
-  @if(searchForm.get('location')?.value) {
-    <button type="button" class="btn-close btn-close-white"
-            [attr.aria-label]="'searchBox.close' | translate"
-            (click)="clearInput()">
-      <span>&times;</span>
-    </button>
-  }
-
-  <input
-    #locationInput
-    type="text"
-    id="location"
-    class="form-control"
-    formControlName="location"
-    [placeholder]="'searchBox.Entercity' | translate"
-    autocomplete="off"
-    (input)="onLocationChange($event)"
-    (blur)="showValidationErrors = true"
-    [value]="displayCity(searchForm.get('location')?.value) || ''"
-  />
+<div class="input-wrapper">
+  <div class="input-container position-relative">
+    <input
+      #locationInput
+      type="text"
+      id="location"
+      class="form-control"
+      [placeholder]="'searchBox.Entercity' | translate"
+      autocomplete="off"
+      (input)="onLocationChange($event)"
+      [value]="displayCity(searchForm.get('location')?.value) || ''"
+    />
+    @if(searchForm.get('location')?.value) {
+      <button type="button" class="clear-btn" (click)="clearInput($event)">
+        &times;
+      </button>
+    }
+  </div>
+  <hr />
 </div>
 
-<!-- City list dropdown -->
-<ul class="city-dropdown" *ngIf="homePageService.selectAllcities?.length > 0">
-  <li *ngFor="let city of homePageService.selectAllcities" (click)="onCityPicked(city)">
-    {{ city.City }}
-  </li>
-</ul>
+<div class="options-container">
+  @if (homePageService.cityLoader) {
+    <div class="skeleton-container" *ngFor="let loader of [1,2,3,4,5]">
+      <div class="loader-circle skeleton"></div>
+      <div class="loader-content skeleton"></div>
+    </div>
+  } @else {
+    @if (homePageService.selectAllcities?.length > 0) {
+      @for (city of homePageService.selectAllcities; track $index) {
+        <div class="city-option-item" (click)="onCityPicked(city)">
+          <div class="city-item d-flex align-items-center">
+            <img src="assets/icons/location-icon.svg" width="24" height="24" class="city-icon" alt="location" />
+            <span class="city-text fw-semibold">{{ city.City }}</span>
+          </div>
+        </div>
+      }
+    } @else if (searchForm.get('location')?.value && displayCity(searchForm.get('location')?.value).length >= 2) {
+      <div class="no-search-results">{{ 'searchBox.noSearchResults' | translate }}</div>
+    }
+  }
+</div>

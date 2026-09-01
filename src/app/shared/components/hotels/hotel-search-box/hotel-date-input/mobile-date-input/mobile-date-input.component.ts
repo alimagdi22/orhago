@@ -78,9 +78,14 @@ export class MobileDateInputComponent implements OnInit {
       this.minCheckoutDate = nextDay;
       this.minCheckoutDateNgb = this.convertToNgbDate(nextDay);
 
+      let currentCheckOutDate = this.convertToDate(this.checkOutNgb);
+      if (currentCheckOutDate <= selectedDate) {
+        currentCheckOutDate = nextDay;
+      }
+
       this.dialogRef.close({
-        checkIn: this.convertToDate(this.checkInNgb),
-        checkOut: this.convertToDate(this.checkOutNgb)
+        checkIn: selectedDate,
+        checkOut: currentCheckOutDate
       });
 
     } else {
@@ -89,7 +94,7 @@ export class MobileDateInputComponent implements OnInit {
 
       this.dialogRef.close({
         checkIn: this.convertToDate(this.checkInNgb),
-        checkOut: this.convertToDate(this.checkOutNgb)
+        checkOut: selectedDate
       });
     }
   }

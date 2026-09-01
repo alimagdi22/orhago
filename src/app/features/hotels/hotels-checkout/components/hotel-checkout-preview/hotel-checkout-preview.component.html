@@ -81,30 +81,33 @@
 <div class="hotel-card">
 
   <!-- القسم الأول: معلومات الفندق -->
-  <div class="hotel-header">
-    <div class="hotel-info">
-      <h3 class="hotel-name">{{ hotel.hotelName }}</h3>
-      <p class="hotel-location">{{ hotel.City }}, {{ hotel.Country }}</p>
-    </div>
-    <img class="hotel-img" [src]="room.Images[$index + 2] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" alt="hotel" />
-  </div>
+  @if($index === 0 ){
 
-  <div class="hotel-services">
-    <!-- <div class="service">
-      <i class="bi bi-p-square"></i>
-      <span>وقوف السيارات</span>
-    </div> -->
-    <div class="service">
-      <img src="assets/images/hotels/formkit_date.svg" alt="">
-      <span>{{ hotel.HotelFormDto.CheckIn | date: 'd MMM y' }} - {{ hotel.HotelFormDto.CheckOut | date: 'd MMM y' }} ({{ nights }}) </span>
+    <div class="hotel-header">
+      <div class="hotel-info">
+        <h3 class="hotel-name">{{ hotel.hotelName }}</h3>
+        <p class="hotel-location">{{ hotel.City }}, {{ hotel.Country }}</p>
+      </div>
+      <img class="hotel-img" [src]="room.Images[$index + 2] || 'assets/images/hotels/hotel-replacement.webp'" (error)="$any($event.target).src = 'assets/images/hotels/hotel-replacement.webp'" alt="hotel" />
     </div>
-  </div>
+    <div class="hotel-services">
+      <!-- <div class="service">
+        <i class="bi bi-p-square"></i>
+        <span>وقوف السيارات</span>
+      </div> -->
+      <div class="service">
+        <img src="assets/images/hotels/formkit_date.svg" alt="">
+        <span>{{ hotel.HotelFormDto.CheckIn | date: 'd MMM y' }} - {{ hotel.HotelFormDto.CheckOut | date: 'd MMM y' }} ({{ nights }}) </span>
+      </div>
+    </div>
+  }
+
 
   <hr />
 
   <!-- القسم الثاني: تفاصيل الغرفة -->
   <div class="room-details">
-    <h4 class="room-title">{{ room.RoomCode }}</h4>
+    <h4 class="room-title">{{ room.RoomType }}</h4>
 
     <div class="room-guests">
       <i class="bi bi-person"></i>

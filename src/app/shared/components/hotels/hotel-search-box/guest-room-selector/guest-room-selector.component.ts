@@ -5,6 +5,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MobileGuestRoomSelectorComponent } from './mobile-guest-room-selector/mobile-guest-room-selector.component';
+import { SharedService } from '../../../../shared.service';
 
 @Component({
   standalone: false,
@@ -17,7 +18,8 @@ export class GuestRoomSelectorComponent implements OnInit {
 
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
   translate = inject(TranslateService);
-  public dialog = inject(MatDialog)
+  sharedService = inject(SharedService);
+  public dialog = inject(MatDialog);
 
   constructor(public hotelSearchService: HotelSearchService) {}
 
@@ -93,15 +95,15 @@ export class GuestRoomSelectorComponent implements OnInit {
   }
 
   onSelectorClick(event: MouseEvent) {
-    if (this.isMobileDevice()) {
+    if (this.isMobile()) {
       event.stopPropagation();
       event.preventDefault();
       this.openMobileDialog();
     }
   }
 
-  isMobileDevice(): boolean {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  isMobile(): boolean {
+    return this.sharedService.screenWidth < 768;
   }
 
   openMobileDialog(): void {

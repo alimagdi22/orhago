@@ -20,9 +20,11 @@ export class HotelCardAppComponent {
 
   public translate = inject(TranslateService);
   public viewDealButton: IMainButton = {
-    borderRadius: '12px',
+    borderRadius: '6px',
     height: '36px',
-    width: '100%'
+    width: '100%',
+    backgroundColor: '#213567',
+    color: 'white'
   }
 
   get stars(): number[] {

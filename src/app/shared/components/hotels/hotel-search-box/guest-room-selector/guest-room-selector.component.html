@@ -1,6 +1,6 @@
 <!-- guest-room-selector.component.html -->
 <div class="guest-room-selector">
-  <div class="selector-summary" (click)="onSelectorClick($event)" [matMenuTriggerFor]="guestMenu">
+  <div class="selector-summary" (click)="onSelectorClick($event)" [matMenuTriggerFor]="isMobile() ? null : guestMenu">
     <div class="head">
       <p>{{ 'searchBox.guestsRooms' | translate }}</p>
     </div>

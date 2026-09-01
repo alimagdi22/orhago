@@ -194,7 +194,7 @@ export class HotelDateInputComponent implements OnInit, OnDestroy {
   }
 
   isMobile(): boolean {
-    return window.innerWidth <= 768;
+    return this.sharedService.screenWidth < 768;
   }
 
   onDateSelect(pickerType: 'checkIn' | 'checkOut', date: NgbDate): void {
@@ -224,7 +224,7 @@ export class HotelDateInputComponent implements OnInit, OnDestroy {
       this.checkOutNgb = date;
 
       // Close the menu after selection
-      setTimeout(() => this.menuTrigger.closeMenu(), 300);
+      setTimeout(() => this.menuTrigger?.closeMenu(), 300);
     }
 
     this.validateDates();
@@ -232,19 +232,18 @@ export class HotelDateInputComponent implements OnInit, OnDestroy {
     this.dateTouched = true;
   }
 
-  // Date highlighting methods with proper null checks
   isCheckInDate(date: NgbDateStruct): boolean {
-      if (!this.checkInNgb) return false;
-      const checkInDate = new NgbDate(this.checkInNgb.year, this.checkInNgb.month, this.checkInNgb.day);
-      const currentDate = new NgbDate(date.year, date.month, date.day);
-      return checkInDate.equals(currentDate);
+    if (!this.checkInNgb) return false;
+    const checkInDate = new NgbDate(this.checkInNgb.year, this.checkInNgb.month, this.checkInNgb.day);
+    const currentDate = new NgbDate(date.year, date.month, date.day);
+    return checkInDate.equals(currentDate);
   }
 
   isCheckOutDate(date: NgbDateStruct): boolean {
-      if (!this.checkOutNgb) return false;
-      const checkOutDate = new NgbDate(this.checkOutNgb.year, this.checkOutNgb.month, this.checkOutNgb.day);
-      const currentDate = new NgbDate(date.year, date.month, date.day);
-      return checkOutDate.equals(currentDate);
+    if (!this.checkOutNgb) return false;
+    const checkOutDate = new NgbDate(this.checkOutNgb.year, this.checkOutNgb.month, this.checkOutNgb.day);
+    const currentDate = new NgbDate(date.year, date.month, date.day);
+    return checkOutDate.equals(currentDate);
   }
 
   isSelectedDate(date: NgbDateStruct): boolean {

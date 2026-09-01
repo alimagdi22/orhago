@@ -1,13 +1,13 @@
 <div class="form-group location-group"
      [formGroup]="searchForm"
      [class.invalid]="locationInvalid"
-     (click)="openLocationDialog()"
-     [class.mobile-clickable]="isMobile">
+     (click)="isMobile() ? openLocationDialog() : null"
+     [class.mobile-clickable]="isMobile()">
 
   @if(searchForm.get('location')?.value) {
     <button type="button" class="btn-close btn-close-white"
             [attr.aria-label]="'searchBox.close' | translate"
-            (click)="clearInput()"
+            (click)="clearInput($event)"
             [ngStyle]="currentLang==='ar'?{'left':'2%','right':'90%'}:{}">
       <span>&times;</span>
     </button>
@@ -27,6 +27,7 @@
       formControlName="location"
       [placeholder]="'searchBox.Entercity' | translate"
       [matAutocomplete]="auto"
+      [readonly]="isMobile()"
       autocomplete="off"
       (input)="onLocationChange($event)"
       (blur)="showValidationErrors = true"

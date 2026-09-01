@@ -1,27 +1,23 @@
 <div class="hotel-card">
   <div class="hotel-inner">
     <div class="text-area">
-      <div class="row-1">
-        <span class="region">منطقة التجارة الحرة</span>
-        <div class="stars">
-            @for (star of stars; track $index) {
-                <img src="assets/icons/hotel-card/star.svg" />
-            }
-        </div>
-      </div>
       <div class="row-2">
-        <h3 class="hotel-name">{{ hotel.hotelName }}</h3>
-        <!-- <h3 class="hotel-name">{{ hotel.City }}, {{ hotel.Country }} City</h3> -->
+        <h3 class="hotel-name mb-2">{{ hotel.hotelName }}</h3>
+        <p class="hotel-location" *ngIf="hotel.City">
+          <img src="assets/icons/hotel-card/location.svg" width="12" alt="location" />
+          <span>{{ hotel.City }}</span>
+        </p>
       </div>
-      <div class="row-3">
-        <span class="reviews">(تقييماً 1234)</span>
-        <div class="rating-box">6.4</div>
+      <div class="row-1">
+        <div class="stars">
+          @for (star of stars; track $index) {
+            <img src="assets/icons/hotel-card/star.svg" alt="star" />
+          }
+        </div>
       </div>
       <div class="row-4">
         <div class="deal-box">
-
-                  <app-main-button [mainButtonInfo]="viewDealButton" [title]="'hotelCard.View Deal' | translate" (clickMainButton)="onClickViewDeal()" />
-
+          <app-main-button [mainButtonInfo]="viewDealButton" [title]="'hotelCard.View Deal' | translate" (clickMainButton)="onClickViewDeal()" />
           <div class="price">{{ hotel.TotalSellPrice | exchange: 'value' }} {{ hotel.sellCurrency | exchange: 'code' }}</div>
         </div>
       </div>

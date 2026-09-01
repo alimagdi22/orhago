@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { HotelSearchService } from 'rp-hotels-ui';
 import { HomePageService } from 'rp-hotels-ui';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autoc
   templateUrl: './mobile-location-input.component.html',
   styleUrls: ['./mobile-location-input.component.scss']
 })
-export class MobileLocationInputComponent implements OnInit {
+export class MobileLocationInputComponent implements OnInit, AfterViewInit {
   @ViewChild('locationInput', { read: ElementRef }) locationInput!: ElementRef;
   @ViewChild('auto') auto: MatAutocomplete | undefined;
   @ViewChild(MatAutocompleteTrigger) autocompleteTrigger!: MatAutocompleteTrigger;
@@ -39,6 +39,14 @@ export class MobileLocationInputComponent implements OnInit {
       locationControl.updateValueAndValidity();
     }
     this.setCachedLocationInput();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.locationInput?.nativeElement) {
+        this.locationInput.nativeElement.focus();
+      }
+    }, 100);
   }
 
   setCachedLocationInput(): void {

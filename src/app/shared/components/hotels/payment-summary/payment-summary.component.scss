@@ -38,6 +38,7 @@ body {
     font-size: 14px !important;
     line-height: 100% !important;
     letter-spacing: 0% !important;
+    white-space: nowrap;
   }
   .sub-title , .price{
     font-weight: 700 !important;
@@ -49,11 +50,14 @@ body {
   .mobile-price{
     display: flex;
     justify-content: space-between;
-    gap: 120px;
   }
   .mobile-sub{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 30px;
+  }
+  .price{
+    white-space: nowrap;
   }
 }
