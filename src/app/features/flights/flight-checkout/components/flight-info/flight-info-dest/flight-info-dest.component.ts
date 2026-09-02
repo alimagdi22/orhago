@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IFlightDTO } from 'rp-travel-ui';
+import { SharedService } from '../../../../../../shared/shared.service';
 
 @Component({
   standalone: false,
@@ -11,6 +12,6 @@ import { IFlightDTO } from 'rp-travel-ui';
 export class FlightInfoDestComponent {
   @Input() flightSegment: IFlightDTO | null = null;
   @Input() isDepart = false;
-
+  sharedService = inject(SharedService);
   translate = inject(TranslateService);
 }

@@ -1,154 +1,169 @@
 @import '../../../../../../sass/variables';
 @import '../../../../../../sass/colors';
 
-@mixin scaleAnimation() {
-  cursor: pointer;
-  transition: all 0.1s;
-
-  &:hover {
-    transform: scale(1.1);
-  }
+:host {
+  display: block;
+  width: 100%;
 }
 
-header {
-  flex-grow: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Mobile Header (Image 1) */
+.mobile-header {
+  text-align: start;
+  margin-bottom: 16px;
 
-  .title {
-    font-size: 22px;
-    font-weight: bold;
-    text-align: start;
-  }
+  .mobile-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  img {
-    width: 35px;
-    cursor: pointer;
-    transition: all 0.1s;
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a202c;
+      margin: 0;
+    }
 
-    &:hover {
-      transform: scale(1.05);
+    .close-btn {
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      color: #4a5568;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        color: #1a202c;
+      }
     }
   }
 
-  margin-bottom: 10px;
+  .subtitle {
+    font-size: 13px;
+    color: #718096;
+    margin: 4px 0 16px 0;
+  }
+
+  .section-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 12px 0 8px 0;
+  }
 }
 
-.message {
+/* Desktop Header (Image 2) */
+.desktop-header {
   text-align: start;
-  font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+
+  .subtitle {
+    font-size: 14px;
+    color: #4a5568;
+    margin: 0;
+  }
 }
 
 .loader-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 300px;
+  min-height: 250px;
+  width: 100%;
 }
 
-swiper-slide {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+/* Desktop Swiper (Image 2: Swipe Right & Left) */
+.desktop-swiper-wrapper {
+  width: 100%;
 
-::ng-deep swiper-container {
-  --swiper-navigation-color: #213567;
-  --swiper-navigation-size: 24px;
-  overflow: visible !important;
-  position: relative;
-  display: block;
+  swiper-container {
+    --swiper-navigation-color: #213567;
+    --swiper-navigation-size: 16px;
+    overflow: hidden !important;
+    position: relative;
+    padding: 10px 12px 20px 12px;
 
-  swiper-container::part(button-next),
-  swiper-container::part(button-prev) {
-    background-color: transparent;
-    height: 28px;
-    width: 28px;
-    color: #213567;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    border: 1px solid #213567;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    &::part(button-next),
+    &::part(button-prev) {
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      height: 32px;
+      width: 32px;
+      color: #213567;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      border: 1px solid #cbd5e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
 
-    &::after {
-      font-size: 16px;
+      &::after {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+
+    &::part(button-next) {
+      right: 4px;
+      left: auto;
+    }
+
+    &::part(button-prev) {
+      left: 4px;
+      right: auto;
     }
   }
 
-  /* LTR Positioning */
-  swiper-container::part(button-next) {
-    right: -25px;
-    left: auto;
+  swiper-slide {
+    height: auto;
+    display: flex;
   }
 
-  swiper-container::part(button-prev) {
-    left: -25px;
-    right: auto;
-  }
+  .desktop-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
 
-  /* RTL Positioning */
-  swiper-container[dir='rtl']::part(button-next),
-  :host-context([dir='rtl']) swiper-container::part(button-next),
-  [dir='rtl'] swiper-container::part(button-next) {
-    left: -25px;
-    right: auto;
-  }
+    .select-continue-btn {
+      background-color: #28a745;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s;
 
-  swiper-container[dir='rtl']::part(button-prev),
-  :host-context([dir='rtl']) swiper-container::part(button-prev),
-  [dir='rtl'] swiper-container::part(button-prev) {
-    right: -25px;
-    left: auto;
+      &:hover {
+        background-color: #218838;
+      }
+    }
   }
 }
 
-@media (max-width: 768px) {
-  swiper-container::part(button-next),
-  swiper-container::part(button-prev) {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    width: 28px;
-    height: 28px;
-    border: 1px solid #213567;
-    border-radius: 50%;
-    padding: 0;
-  }
+/* Mobile Vertical Cards Stack (Image 1: Swipe Up & Down) */
+.mobile-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 75vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 2px 24px 2px;
 
-  swiper-container::part(button-next) {
-    right: 2px !important;
-    left: auto !important;
+  .mobile-card-item {
+    width: 100%;
   }
+}
 
-  swiper-container::part(button-prev) {
-    left: 2px !important;
-    right: auto !important;
-  }
-
-  swiper-container[dir='rtl']::part(button-next),
-  :host-context([dir='rtl']) swiper-container::part(button-next),
-  [dir='rtl'] swiper-container::part(button-next) {
-    left: 2px !important;
-    right: auto !important;
-  }
-
-  swiper-container[dir='rtl']::part(button-prev),
-  :host-context([dir='rtl']) swiper-container::part(button-prev),
-  [dir='rtl'] swiper-container::part(button-prev) {
-    right: 2px !important;
-    left: auto !important;
-  }
-
-  ::ng-deep .swiper-pagination-bullets {
-    display: none !important;
-  }
+.no-fares-msg {
+  font-size: 14px;
+  color: #718096;
+  padding: 20px 0;
 }

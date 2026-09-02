@@ -607,6 +607,7 @@
     "changeFeeApplies": "يتم تطبيق رسوم التغيير",
     "changeFeeNotApplies": "لا يتم تطبيق رسوم التغيير",
     "brandedFares": "أسعار الباقات",
+    "FlightPackage": "اختار فئة السعر",
     "selectBrandedFareMsg": "الرجاء اختيار فئة السعر للمتابعة إلى صفحة الدفع.",
     "noBrandedFares": "لا يوجد باقات لعرضها",
     "showMoreFlights": "اعرض المزيد من الرحلات",

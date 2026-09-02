@@ -10,13 +10,13 @@
       <p class="info__date">
         {{
           isDepart
-            ? (flightSegment.departureDate | date: 'dd MMMM yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
-            : (flightSegment.arrivalDate | date: 'dd MMMM yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
+            ? (flightSegment.departureDate | date: 'dd MMM yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
+            : (flightSegment.arrivalDate | date: 'dd MMM yyyy' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
         }}
       </p>
     </div>
     <span class="info__airport">{{
-      isDepart ? flightSegment.departureTerminalAirport.airportName : flightSegment.arrivalTerminalAirport.airportName
+      sharedService.screenWidth > 768 ? (isDepart ? flightSegment.departureTerminalAirport.airportName : flightSegment.arrivalTerminalAirport.airportName) : (isDepart ? flightSegment.departureTerminalAirport.airportCode : flightSegment.arrivalTerminalAirport.airportCode)
     }}</span>
   </div>
 }

@@ -1,97 +1,184 @@
 <div
-  class="wrapper"
+  class="fare-card-wrapper"
   [ngClass]="{
-    active: isActive,
+    'active': isActive,
+    'accent-blue': cardIndex % 3 === 0,
+    'accent-green': cardIndex % 3 === 1,
+    'accent-red': cardIndex % 3 === 2
   }"
   [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
+  (click)="onClickSelect()"
 >
-  <div class="main-info">
-    <p class="main-info__price">
-      <span class="main-info__price__value"
-        >
-        {{
-          brand.itinTotalFare.amount | exchange: 'value'
-        }}
-        {{ brand.itinTotalFare.currencyCode | exchange: 'code' }}</span
-      >
-      <span class="main-info__price__info"
-        >{{
-          brand.itinTotalFare.amount | exchange: 'value'
-        }}
-        {{ brand.itinTotalFare.currencyCode | exchange: 'code' }} {{ sharedService.flightType }} for
-        {{ totalPassengers }} {{ totalPassengers > 1 ? 'travelers' : 'traveler' }}</span
-      >
-    </p>
+  <!-- Card Header -->
+  <div class="card-header-row">
+    <div class="brand-title-group">
+      <span class="brand-title">{{ brand.brandName }}</span>
+      @if (brand.cabinClasse) {
+        <span class="cabin-label">{{ 'flightResults.cabin' | translate }}: {{ brand.cabinClasse }}</span>
+      }
+    </div>
 
-    <p class="main-info__saver">
-      <span class="main-info__saver__type">{{ brand.brandName }}</span>
-      <span class="main-info__saver__cabin-class">{{ 'flightResults.cabin' | translate }}: {{ brand.cabinClasse }}</span>
-    </p>
+    <!-- Desktop Radio Indicator -->
+    <div class="radio-indicator desktop-only">
+      @if (isActive) {
+        <span class="radio-checked">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+      } @else {
+        <span class="radio-unchecked"></span>
+      }
+    </div>
   </div>
 
-  <!-- <div class="sub-info">
-        <span class="sub-info__title">Seat</span>
-        <p class="sub-info__value">
-            <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
-            <span>Seat choice for a fee</span>
-        </p>
-    </div> -->
-
-  @if (brand.baggageAllowances) {
-    <div class="sub-info">
-      <span class="sub-info__title">{{ 'flightResults.bags' | translate }}</span>
+  <!-- Baggage Allowance Section -->
+  @if (brand.baggageAllowances && brand.baggageAllowances[0]?.baggageAllowanceDetails?.length) {
+    <div class="fare-section">
+      <span class="section-title">{{ 'flightResults.bags' | translate }}</span>
 
       @for (baggageAllowanceDetail of brand.baggageAllowances[0].baggageAllowanceDetails; track $index) {
-        <div class="sub-info__value">
-          <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
-          <div>
+        <div class="feature-row">
+          @if (baggageAllowanceDetail.baggage === 'CarryOn') {
+            <span class="feature-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="8" width="18" height="13" rx="2"></rect>
+                <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </span>
+          } @else {
+            <span class="feature-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="6" width="16" height="14" rx="2"></rect>
+                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                <line x1="10" y1="11" x2="10" y2="15"></line>
+                <line x1="14" y1="11" x2="14" y2="15"></line>
+              </svg>
+            </span>
+          }
+          <span class="feature-text">
+            1 piece X {{ baggageAllowanceDetail.baggageAllowanceInfo.size }} {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
             {{ baggageAllowanceDetail.baggage === 'CarryOn' ? ('flightResults.carryOn' | translate) : ('flightResults.checkedBags' | translate) }}
-            {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
-            {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
-          </div>
-        </div>
-
-        <div
-          [ngStyle]="{
-            marginBottom: '10px',
-          }"
-        >
-          ({{ baggageAllowanceDetail.flightRoute }})
+          </span>
         </div>
       }
     </div>
   }
 
-  <!-- @if(optionalServices.length) {
-        <div class="sub-info">
-            <span class="sub-info__title">Other Services</span>
+  <!-- Changes and Cancellations Section -->
+  <div class="fare-section">
+    <div class="section-title-row">
+      <span class="section-title">{{ 'flightResults.flexibility' | translate }}</span>
 
-            @for(service of optionalServices; track $index) {
-                <p class="sub-info__value">
-                    <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
-                    <span>{{service}}</span>
-                </p>
-            }
-        </div>
-    } -->
+      <!-- Mobile Right Price Delta -->
+      <span class="mobile-only mobile-price-delta">
+        +{{ priceDifference > 0 ? (priceDifference | exchange: 'value') : 0 }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' }}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </span>
+    </div>
 
-  <div class="sub-info">
-    <span class="sub-info__title">{{ 'flightResults.flexibility' | translate }}</span>
-    <p class="sub-info__value">
-      <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
-      <span>{{
-        brand.passengerFareBreakDowns[0].cancelPenaltyDTOs[0].price
-          ? ('flightResults.cancellationFeeApplies' | translate)
-          : ('flightResults.cancellationFeeNotApplies' | translate)
-      }}</span>
-    </p>
-    <p class="sub-info__value">
-      <img src="assets/icons/dollar-sign-icon.svg" title="Dollar Sign Icon" />
-      <span>{{
-        brand.passengerFareBreakDowns[0].changePenaltyDTOs[0].price ? ('flightResults.changeFeeApplies' | translate) : ('flightResults.changeFeeNotApplies' | translate)
-      }}</span>
-    </p>
+    <!-- Cancellation Policy -->
+    <div class="feature-row">
+      <span class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13" cy="4" r="2"></circle>
+          <path d="M6 21l3-7 3 2 3-5 3 2"></path>
+          <path d="M12 13l-2-2-4 3"></path>
+        </svg>
+      </span>
+      <span class="feature-text">
+        {{
+          brand.passengerFareBreakDowns[0]?.cancelPenaltyDTOs?.[0]?.price
+            ? ('flightResults.cancellationFeeApplies' | translate)
+            : ('flightResults.cancellationFeeNotApplies' | translate)
+        }}
+      </span>
+      <span class="info-icon" title="Details">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </span>
+    </div>
+
+    <!-- Change Policy -->
+    <div class="feature-row">
+      <span class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13" cy="4" r="2"></circle>
+          <path d="M6 21l3-7 3 2 3-5 3 2"></path>
+          <path d="M12 13l-2-2-4 3"></path>
+        </svg>
+      </span>
+      <span class="feature-text">
+        {{
+          brand.passengerFareBreakDowns[0]?.changePenaltyDTOs?.[0]?.price
+            ? ('flightResults.changeFeeApplies' | translate)
+            : ('flightResults.changeFeeNotApplies' | translate)
+        }}
+      </span>
+      <span class="info-icon" title="Details">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </span>
+    </div>
   </div>
 
-  <app-main-button [mainButtonInfo]="selectButton" [title]="'results.card.select' | translate" (clickMainButton)="onClickSelect()" />
+  <!-- Extra Services Section -->
+  <div class="fare-section">
+    <span class="section-title">Extra Services</span>
+    @if (optionalServices.length) {
+      @for (service of optionalServices; track $index) {
+        <div class="feature-row">
+          <span class="feature-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="2" x2="6" y2="4"></line>
+              <line x1="10" y1="2" x2="10" y2="4"></line>
+              <line x1="14" y1="2" x2="14" y2="4"></line>
+            </svg>
+          </span>
+          <span class="feature-text">{{ service }}</span>
+        </div>
+      }
+    } @else {
+      <div class="feature-row">
+        <span class="feature-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 8h1a4 4 0 0 1 0 8h-1"></path>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"></path>
+            <line x1="6" y1="2" x2="6" y2="4"></line>
+            <line x1="10" y1="2" x2="10" y2="4"></line>
+            <line x1="14" y1="2" x2="14" y2="4"></line>
+          </svg>
+        </span>
+        <span class="feature-text">Complimentary Refreshments</span>
+      </div>
+    }
+  </div>
+
+  <!-- Card Footer (Desktop Price & Select) -->
+  <div class="card-footer-row desktop-only">
+    <div class="price-container">
+      <span class="price-value">
+        +{{ priceDifference > 0 ? (priceDifference | exchange: 'value') : 0 }}
+      </span>
+      <span class="price-currency">
+        {{ brand.itinTotalFare.currencyCode | exchange: 'code' }}
+      </span>
+    </div>
+
+    <app-main-button
+      [mainButtonInfo]="selectButton"
+      [title]="'results.card.select' | translate"
+      (clickMainButton)="onClickSelect()"
+    />
+  </div>
 </div>

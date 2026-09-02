@@ -19,7 +19,7 @@
     <swiper-container #swiperEl [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'" init="false">
       @for (brand of flightResultService.currentSelectedBrands; track $index) {
         <swiper-slide>
-          <app-flex-fare-card-app [isActive]="true" [brand]="brand" [totalPassengers]="getTotalPassenger" />
+          <app-flex-fare-card-app [isActive]="$index === 0" [brand]="brand" [totalPassengers]="getTotalPassenger" [cardIndex]="$index" />
         </swiper-slide>
       }
 

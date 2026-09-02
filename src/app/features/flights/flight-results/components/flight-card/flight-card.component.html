@@ -61,6 +61,13 @@
       </div>
     </div>
 
+    <!-- Desktop Inline Flex Fare Drawer (Extends down directly from the card) -->
+    @if (sharedService.isBrandedFaresShowed && sharedService.selectedFlightItinerary?.sequenceNum === itinerary.sequenceNum) {
+      <div class="desktop-inline-flex-fare d-none d-lg-block" (click)="$event.stopPropagation()">
+        <app-flex-fare />
+      </div>
+    }
+
     <!-- Modern Centered Floating Footer Pill (Always on the first card) -->
     @if (!$index && airItineraries.length > 1) {
       <div class="card-footer-bar">

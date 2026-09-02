@@ -72,6 +72,42 @@
   height: auto;
 }
 
+.mobile-bottom-sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  .branded-fares-bottom-sheet {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 85vh;
+    background-color: #ffffff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px 16px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUpBottomSheet 0.3s ease-out forwards;
+    overflow-y: auto;
+  }
+}
+
+@keyframes slideUpBottomSheet {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .filter-toggle {
   position: fixed;
   left: 10px;

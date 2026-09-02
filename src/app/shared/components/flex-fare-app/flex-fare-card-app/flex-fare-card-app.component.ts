@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Brand } from 'rp-travel-ui';
 import { SharedService } from '../../../shared.service';
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './flex-fare-card-app.component.html',
   styleUrl: './flex-fare-card-app.component.scss'
 })
-export class FlexFareCardAppComponent {
+export class FlexFareCardAppComponent implements OnInit {
   @Input() brand: Brand = {
     brandName: 'ECONOMY BASIC',
     brandId: '000000',
@@ -40,14 +40,22 @@ export class FlexFareCardAppComponent {
 
   @Input() isActive = true;
   @Input() totalPassengers = 0;
+  @Input() cardIndex = 0;
 
-  translate = inject(TranslateService)
+  get priceDifference(): number {
+    const basePrice = this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || 0;
+    const currentPrice = this.brand?.itinTotalFare?.amount || 0;
+    const diff = currentPrice - basePrice;
+    return diff > 0 ? diff : 0;
+  }
+
+  translate = inject(TranslateService);
+  sharedService = inject(SharedService);
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getOptionalServices();
   }
-  sharedService = inject(SharedService);
 
   selectButton: IMainButton = {
     height: '36px',
@@ -62,19 +70,22 @@ export class FlexFareCardAppComponent {
       this.sharedService.selectedFlightItinerary.pKey,
       this.brand.brandId,
     );
-    this.dialog.closeAll()
-    // this.sharedService.isBrandedFaresShowed = false;
+    this.dialog.closeAll();
   }
 
   getOptionalServices() {
-    const optionalServices = this.brand.optionalServices.filter((service) => {
-      return service.type.toLocaleLowerCase() !== 'mealorbeverage' && service.type.toLocaleLowerCase() !== 'baggage';
-    });
+    if (this.brand?.optionalServices) {
+      const optionalServices = this.brand.optionalServices.filter((service) => {
+        return service.type.toLocaleLowerCase() !== 'mealorbeverage' && service.type.toLocaleLowerCase() !== 'baggage';
+      });
 
-    const uniqueServices = optionalServices.map((service) => {
-      return service.serviceInfo.description[0];
-    });
+      const uniqueServices = optionalServices.map((service) => {
+        return service.serviceInfo.description[0];
+      });
 
-    this.optionalServices = [...new Set(uniqueServices)];
+      this.optionalServices = [...new Set(uniqueServices)];
+    } else {
+      this.optionalServices = [];
+    }
   }
 }

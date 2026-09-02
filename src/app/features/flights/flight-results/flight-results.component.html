@@ -104,8 +104,8 @@
 }
 
 @if (sharedService.isBrandedFaresShowed) {
-  <div class="overlay">
-    <div class="custom_modal branded-fares-modal" appClickOutside (clickOutside)="sharedService.hideBrandedFares()">
+  <div class="overlay mobile-bottom-sheet-overlay d-lg-none">
+    <div class="custom_modal branded-fares-bottom-sheet" appClickOutside (clickOutside)="sharedService.hideBrandedFares()">
       <app-flex-fare />
     </div>
   </div>

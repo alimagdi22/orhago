@@ -1,30 +1,70 @@
-<header>
-  <p class="title">{{ 'flightResults.brandedFares' | translate }}</p>
-  @if (!this.flightResultService.isBrandedFaresLoading) {
-    <img src="assets/icons/exit-icon.svg" title="Close Icon" (click)="sharedService.isBrandedFaresShowed = false" />
-  }
+<!-- Mobile Header (Image 1) -->
+<header class="mobile-header d-lg-none">
+  <div class="mobile-header-top">
+    <h3 class="title">{{'flightResults.FlightPackage'| translate}}</h3>
+    @if (!flightResultService.isBrandedFaresLoading) {
+      <button type="button" class="close-btn" (click)="sharedService.isBrandedFaresShowed = false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    }
+  </div>
+  <p class="subtitle">{{ 'flightResults.selectBrandedFareMsg' | translate }}</p>
 </header>
 
-@if (!flightResultService.isBrandedFaresLoading) {
-  <p class="message">{{ 'flightResults.selectBrandedFareMsg' | translate }}</p>
-}
+<!-- Desktop Subtitle Header (Image 2) -->
+<div class="desktop-header d-none d-lg-block">
+  <p class="subtitle">{{ 'flightResults.selectBrandedFareMsg' | translate }}</p>
+</div>
 
 @if (flightResultService.isBrandedFaresLoading) {
   <div class="loader-wrapper">
     <mat-spinner />
   </div>
 } @else {
-
   @if (flightResultService.currentSelectedBrands.length) {
-    <swiper-container #swiperEl [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'" init="false">
-      @for (brand of flightResultService.currentSelectedBrands; track $index) {
-        <swiper-slide>
-          <app-flex-fare-card [isActive]="true" [brand]="brand" [totalPassengers]="getTotalPassenger" />
-        </swiper-slide>
-      }
+    <!-- Desktop Horizontal Swiper Layout (Image 2: Swipe Right & Left) -->
+    <div class="desktop-swiper-wrapper d-none d-lg-block">
+      <swiper-container #swiperEl [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'" init="false">
+        @for (brand of flightResultService.currentSelectedBrands; track $index) {
+          <swiper-slide>
+            <app-flex-fare-card
+              [isActive]="$index === 0"
+              [brand]="brand"
+              [totalPassengers]="getTotalPassenger"
+              [cardIndex]="$index"
+            />
+          </swiper-slide>
+        }
+      </swiper-container>
 
-    </swiper-container>
+      <div class="desktop-actions-row">
+        <button
+          type="button"
+          class="select-continue-btn"
+          (click)="flightResultService.currentSelectedBrands.length && sharedService.onSelectFlight(sharedService.selectedFlightItinerary.sequenceNum, sharedService.selectedFlightItinerary.pcc, sharedService.selectedFlightItinerary.pKey, flightResultService.currentSelectedBrands[0].brandId); sharedService.isBrandedFaresShowed = false"
+        >
+          Select and continue
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Vertical Stacked Layout (Image 1: Swipe Up & Down) -->
+    <div class="mobile-cards-stack d-lg-none">
+      @for (brand of flightResultService.currentSelectedBrands; track $index) {
+        <div class="mobile-card-item">
+          <app-flex-fare-card
+            [isActive]="$index === 0"
+            [brand]="brand"
+            [totalPassengers]="getTotalPassenger"
+            [cardIndex]="$index"
+          />
+        </div>
+      }
+    </div>
   } @else {
-    <p>{{ 'flightResults.noBrandedFares' | translate }}</p>
+    <p class="no-fares-msg">{{ 'flightResults.noBrandedFares' | translate }}</p>
   }
 }

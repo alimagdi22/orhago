@@ -2,142 +2,179 @@
 @import '../../../../../../../sass/colors';
 
 .baggage-info {
+  margin: 25px;
+  padding: 25px;
 
-
-  p {
-    font-weight: 400;
+  @media (max-width: 768px) {
+    margin: 10px 0;
+    padding: 10px 0;
   }
 
   .inculded-sec {
     &__header {
       display: flex;
       align-items: center;
-      gap: 3px;
-      margin-bottom: 8px;
-    }
+      gap: 6px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
 
-    &__baggage {
-      margin-left: 30px;
-      &__info {
-        display: flex;
-        align-items: start;
-      }
-    }
-    span{
-  font-size: 20px !important;
-  font-weight: 600;
-    }
-  }
-
-  .not-possible-sec {
-    &__header {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-
-      &__icon {
-        cursor: default;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        line-height: 0;
-        font-size: 12px;
-
+      img {
         width: 20px;
         height: 20px;
+      }
+    }
+  }
 
-        border-radius: 50%;
-        border: 1px solid black;
+  /* DESKTOP LAYOUT (Original exact desktop look matching Image 1) */
+  .baggage-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+
+    .baggage-type {
+      font-weight: 500;
+      color: #1e293b;
+    }
+
+    .baggage-route {
+      color: #334155;
+    }
+
+    .baggage-entry {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #0f172a;
+      direction: ltr;
+
+      [dir='rtl'] & {
+        direction: rtl;
+      }
+
+      img {
+        width: 18px;
+        height: 18px;
       }
     }
 
-    &__baggage {
+    .hand-baggage {
       display: flex;
-      align-items: center;
-      gap: 3px;
-      margin-left: 30px;
-      margin-block: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      direction: ltr;
+
+      [dir='rtl'] & {
+        direction: rtl;
+        align-items: flex-end;
+      }
+
+      .hand-baggage-top {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+        color: #0f172a;
+
+        img {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      .hand-baggage-details {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 2px;
+      }
     }
+  }
 
-    &__info {
-      display: flex;
-      align-items: start;
-      gap: 5px;
-      margin-left: 30px;
-      padding: 18px;
-      font-weight: 400;
-      border-radius: 6px;
-      border: 1px solid map-get($map: $colors, $key: 'main');
+  /* MOBILE LAYOUT ENHANCEMENT (Matching Image 2 request for mobile only) */
+  @media (max-width: 768px) {
+    .baggage-line {
+      flex-direction: column;
+      align-items: stretch;
+      white-space: normal;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      gap: 10px;
+
+      .baggage-type {
+        align-self: flex-start;
+        display: inline-block;
+        background-color: #e2e8f0;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+      }
+
+      .baggage-route {
+        font-size: 14px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+
+      .baggage-entry,
+      .hand-baggage {
+        padding-top: 6px;
+        border-top: 1px solid #edf2f7;
+      }
+
+      .baggage-entry {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .hand-baggage {
+        .hand-baggage-top {
+          font-size: 13.5px;
+          font-weight: 600;
+          color: #1e293b;
+        }
+
+        .hand-baggage-details {
+          font-size: 12px;
+          color: #64748b;
+          margin-top: 2px;
+        }
+      }
     }
   }
-}
 
-.wrapper,
-.baggage-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 400;
-}
+  hr.desktop-only-hr {
+    margin: 24px 0 16px 0;
 
-.wrapper {
-  justify-content: space-between;
-  padding: 11px 15px;
-}
-
-// @media (max-width: $web-view-break-point) {
-//   .baggage-info {
-//     padding: 10px;
-//     margin: 10px 0 0 0;
-//   }
-// }
-
-
-
-.baggage-line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  margin-bottom: 16px;
-  font-size: 0.8rem;
-}
-
-.baggage-entry,
-.hand-baggage-top {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.hand-baggage {
-  display: flex;
-  flex-direction: column;
-}
-
-.hand-baggage-details {
-  font-size: 13px;
-}
-.baggage-entry,
-.hand-baggage{
-    direction: ltr;
-
-  [dir='rtl'] & {
-    direction: rtl;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
-}
 
-@media (max-width:768px){
-  .baggage-line{
-    flex-direction: column;
-    align-items: start;
-  }
-  .inculded-sec{
-    &__header{
-      justify-content: start;
+  .baggage-note {
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 16px;
+
+    @media (max-width: 768px) {
+      background-color: #f1f5f9;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 20px;
+      color: #475569;
     }
   }
 }

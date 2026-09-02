@@ -194,3 +194,21 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.desktop-inline-flex-fare {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed #cbd5e0;
+  animation: expandFlexFare 0.3s ease-out forwards;
+}
+
+@keyframes expandFlexFare {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

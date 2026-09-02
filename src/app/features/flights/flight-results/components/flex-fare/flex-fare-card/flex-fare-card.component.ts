@@ -39,6 +39,14 @@ export class FlexFareCardComponent implements OnInit {
 
   @Input() isActive = true;
   @Input() totalPassengers = 0;
+  @Input() cardIndex = 0;
+
+  get priceDifference(): number {
+    const basePrice = this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || 0;
+    const currentPrice = this.brand?.itinTotalFare?.amount || 0;
+    const diff = currentPrice - basePrice;
+    return diff > 0 ? diff : 0;
+  }
 
   translate = inject(TranslateService);
 
@@ -52,10 +60,13 @@ export class FlexFareCardComponent implements OnInit {
     width: '100%',
     borderRadius: '6px',
     backgroundColor: '#213567',
-    color:'white'
+    color: 'white',
   };
 
-  onClickSelect() {
+  onClickSelect(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.sharedService.onSelectFlight(
       this.sharedService.selectedFlightItinerary.sequenceNum,
       this.sharedService.selectedFlightItinerary.pcc,
@@ -65,15 +76,21 @@ export class FlexFareCardComponent implements OnInit {
     this.sharedService.isBrandedFaresShowed = false;
   }
 
-  getOptionalServices() {
-    const optionalServices = this.brand.optionalServices.filter((service) => {
-      return service.type.toLocaleLowerCase() !== 'mealorbeverage' && service.type.toLocaleLowerCase() !== 'baggage';
-    });
+  getOptionalServices(): void {
+    if (this.brand?.optionalServices) {
+      const optionalServices = this.brand.optionalServices.filter((service) => {
+        const type = service.type.toLocaleLowerCase();
 
-    const uniqueServices = optionalServices.map((service) => {
-      return service.serviceInfo.description[0];
-    });
+        return type !== 'mealorbeverage' && type !== 'baggage';
+      });
 
-    this.optionalServices = [...new Set(uniqueServices)];
+      const uniqueServices = optionalServices.map((service) => {
+        return service.serviceInfo.description[0];
+      });
+
+      this.optionalServices = [...new Set(uniqueServices)];
+    } else {
+      this.optionalServices = [];
+    }
   }
 }

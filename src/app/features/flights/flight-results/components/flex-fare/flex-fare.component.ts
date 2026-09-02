@@ -26,6 +26,8 @@ export class FlexFareComponent implements OnDestroy {
   endIndex = this.itemsPerPage;
 
   constructor() {
+    console.log(this.flightResultService.currentSelectedBrands,'brands');
+    
     this.subscription.add(
       this.flightResultService.notify.asObservable().subscribe({
         next: () => {
@@ -41,12 +43,12 @@ export class FlexFareComponent implements OnDestroy {
     if (!swiperEl) return;
 
     const swiperParams = {
-      spaceBetween: 20,
+      spaceBetween: 16,
       navigation: true,
       breakpoints: {
         0: { slidesPerView: 1 },
         768: { slidesPerView: 2 },
-        1024: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
       },
     };
 

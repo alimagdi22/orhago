@@ -9,6 +9,9 @@
 
   &__time {
     font-size: 22px;
+    @media(max-width:768px){
+      white-space: nowrap;
+    }
   }
   &__dest,
   &__airport {
@@ -27,11 +30,15 @@
   }
 }
 
+
 @media only screen and (max-width: 768px) {
   .info{
     &__time {
       font-size: 18px;
       word-wrap: none;
     }
+  }
+  p{
+    margin-bottom: 0 !important;
   }
 }
