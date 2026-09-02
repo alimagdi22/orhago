@@ -11,6 +11,12 @@
   }
 }
 
+:host {
+  display: block;
+  width: 100%;
+  overscroll-behavior: contain;
+}
+
 header {
   flex-grow: 1;
   display: flex;

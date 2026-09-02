@@ -33,11 +33,11 @@
   </div>
 
   <!-- Baggage Allowance Section -->
-  @if (brand.baggageAllowances && brand.baggageAllowances[0]?.baggageAllowanceDetails?.length) {
+  @if (sortedBaggageAllowanceDetails.length) {
     <div class="fare-section">
       <span class="section-title">{{ 'flightResults.bags' | translate }}</span>
 
-      @for (baggageAllowanceDetail of brand.baggageAllowances[0].baggageAllowanceDetails; track $index) {
+      @for (baggageAllowanceDetail of sortedBaggageAllowanceDetails; track $index) {
         <div class="feature-row">
           @if (baggageAllowanceDetail.baggage === 'CarryOn') {
             <span class="feature-icon">

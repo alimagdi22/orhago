@@ -59,9 +59,14 @@ header {
 
 @media (max-width:768px){
   header{
+    justify-content: space-around;
     .price {
       &__text {
         font-size: 17px;
+        white-space: nowrap;
+      }
+      &__caption{
+        white-space: nowrap;
       }
     }
   }

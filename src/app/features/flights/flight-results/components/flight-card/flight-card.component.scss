@@ -200,6 +200,7 @@
   padding-top: 20px;
   border-top: 1px dashed #cbd5e0;
   animation: expandFlexFare 0.3s ease-out forwards;
+  overscroll-behavior: contain;
 }
 
 @keyframes expandFlexFare {

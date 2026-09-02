@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FlightResultService, FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../../../../shared/shared.service';
 import { Subscription } from 'rxjs';
@@ -10,11 +10,12 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './flex-fare.component.html',
   styleUrl: './flex-fare.component.scss',
 })
-export class FlexFareComponent implements OnDestroy {
+export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
   flightResultService = inject(FlightResultService);
   flightSearchService = inject(FlightSearchService);
   sharedService = inject(SharedService);
   translate = inject(TranslateService);
+  private elementRef = inject(ElementRef);
 
   subscription = new Subscription();
 
@@ -24,6 +25,32 @@ export class FlexFareComponent implements OnDestroy {
 
   startIndex = 0;
   endIndex = this.itemsPerPage;
+
+  private wheelListener = (event: WheelEvent) => {
+    const hostEl = this.elementRef.nativeElement;
+    const scrollable = (hostEl.querySelector('.mobile-cards-stack') as HTMLElement)
+      || (hostEl.scrollHeight > hostEl.clientHeight ? hostEl : null);
+
+    if (!scrollable) {
+      event.preventDefault();
+      return;
+    }
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollable;
+    const isScrollable = scrollHeight > clientHeight + 1;
+
+    if (!isScrollable) {
+      event.preventDefault();
+    } else {
+      const delta = event.deltaY;
+      const isAtTop = scrollTop <= 0 && delta < 0;
+      const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight && delta > 0;
+
+      if (isAtTop || isAtBottom) {
+        event.preventDefault();
+      }
+    }
+  };
 
   constructor() {
     console.log(this.flightResultService.currentSelectedBrands,'brands');
@@ -35,6 +62,10 @@ export class FlexFareComponent implements OnDestroy {
         },
       }),
     );
+  }
+
+  ngOnInit(): void {
+    this.elementRef.nativeElement.addEventListener('wheel', this.wheelListener, { passive: false });
   }
 
   @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
@@ -83,6 +114,7 @@ export class FlexFareComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.elementRef.nativeElement.removeEventListener('wheel', this.wheelListener);
     this.subscription.unsubscribe();
   }
 }

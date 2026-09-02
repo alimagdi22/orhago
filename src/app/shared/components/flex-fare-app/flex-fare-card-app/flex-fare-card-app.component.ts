@@ -49,6 +49,16 @@ export class FlexFareCardAppComponent implements OnInit {
     return diff > 0 ? diff : 0;
   }
 
+  get sortedBaggageAllowanceDetails(): any[] {
+    const details = this.brand?.baggageAllowances?.[0]?.baggageAllowanceDetails;
+    if (!details) return [];
+    return [...details].sort((a, b) => {
+      if (a.baggage === 'CarryOn' && b.baggage !== 'CarryOn') return 1;
+      if (a.baggage !== 'CarryOn' && b.baggage === 'CarryOn') return -1;
+      return 0;
+    });
+  }
+
   translate = inject(TranslateService);
   sharedService = inject(SharedService);
   constructor(public dialog: MatDialog) {}

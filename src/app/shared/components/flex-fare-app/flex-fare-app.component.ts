@@ -16,6 +16,7 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
   sharedService = inject(SharedService);
   translate = inject(TranslateService);
   private cdRef = inject(ChangeDetectorRef);
+  private elementRef = inject(ElementRef);
 
   subscription = new Subscription();
 
@@ -25,6 +26,32 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
 
   startIndex = 0;
   endIndex = this.itemsPerPage;
+
+  private wheelListener = (event: WheelEvent) => {
+    const hostEl = this.elementRef.nativeElement;
+    const scrollable = (hostEl.querySelector('.mobile-cards-stack') as HTMLElement)
+      || (hostEl.scrollHeight > hostEl.clientHeight ? hostEl : null);
+
+    if (!scrollable) {
+      event.preventDefault();
+      return;
+    }
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollable;
+    const isScrollable = scrollHeight > clientHeight + 1;
+
+    if (!isScrollable) {
+      event.preventDefault();
+    } else {
+      const delta = event.deltaY;
+      const isAtTop = scrollTop <= 0 && delta < 0;
+      const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight && delta > 0;
+
+      if (isAtTop || isAtBottom) {
+        event.preventDefault();
+      }
+    }
+  };
 
   constructor() {
     this.subscription.add(
@@ -62,6 +89,7 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
 
   ngAfterViewInit(): void {
+    this.elementRef.nativeElement.addEventListener('wheel', this.wheelListener, { passive: false });
     this.initializeSwiper();
   }
 
@@ -99,6 +127,7 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.elementRef.nativeElement.removeEventListener('wheel', this.wheelListener);
     this.subscription.unsubscribe();
   }
 }
