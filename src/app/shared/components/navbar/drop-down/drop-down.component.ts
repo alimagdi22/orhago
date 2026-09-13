@@ -1,4 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, inject } from '@angular/core';
 import { UserProfileService } from 'rp-travel-ui';
 
@@ -17,9 +18,14 @@ import { UserProfileService } from 'rp-travel-ui';
 export class DropDownComponent {
   alertTrigger = false;
   userProfileService = inject(UserProfileService);
+  private document = inject(DOCUMENT);
 
   get userName() {
     return this.userProfileService.user.firstName + ' ' + this.userProfileService.user.lastName;
+  }
+
+  get menuXPosition(): 'before' | 'after' {
+    return this.document.documentElement.dir === 'rtl' ? 'after' : 'before';
   }
 
   @HostListener('window:resize', ['$event'])

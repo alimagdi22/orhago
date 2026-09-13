@@ -37,7 +37,7 @@ export class FlightDealsCardComponent implements OnInit, OnChanges {
   }
 
   updateImage(): void {
-    const airport = this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO?.[0]
+    const airport = this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO?.[this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO.length - 1]
       ?.arrivalTerminalAirport as any;
     const cityImage = airport?.en?.cityImage || airport?.cityImage;
     if (!cityImage || typeof cityImage !== 'string') {

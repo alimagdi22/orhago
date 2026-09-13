@@ -55,10 +55,25 @@
               </svg>
             </span>
           }
-          <span class="feature-text">
-            1 piece X {{ baggageAllowanceDetail.baggageAllowanceInfo.size }} {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
-            {{ baggageAllowanceDetail.baggage === 'CarryOn' ? ('flightResults.carryOn' | translate) : ('flightResults.checkedBags' | translate) }}
+          <span
+            class="feature-text"
+            [attr.dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
+          >
+            <bdi>{{ translate.currentLang === 'en' ? '1 piece' : '1 قطعة' }}</bdi>
+            <span>&nbsp;×&nbsp;</span>
+            <bdi>
+              {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
+              {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
+            </bdi>
+            <bdi>
+              {{
+                baggageAllowanceDetail.baggage === 'CarryOn'
+                  ? ('flightResults.carryOn' | translate)
+                  : ('flightResults.checkedBags' | translate)
+              }}
+            </bdi>
           </span>
+
         </div>
       }
     </div>

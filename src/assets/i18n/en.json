@@ -234,7 +234,7 @@
       "dateChangeFee": "Date change fee:",
       "allChangesNote": "All Changes are prior to scheduled departure of the first flight. Does not include additional no-show charges.",
       "pleaseNote": "Please Note: The add-on service charges, convenience fee, and the discount you have received using a coupon code is non-refundable. The final refund amount will be adjusted as per the deductions.",
-      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Taj doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
+      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Orhas doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
     },
 
     "baggage": {
@@ -469,7 +469,7 @@
       "gmail": "Gmail",
       "emailPlaceholder": "Email",
       "contactNumber": "Contact Number",
-      "privacyPolicy": "I give Taj permission to send me informational and promotional emails and text messages in accordance with the",
+      "privacyPolicy": "I give Orhas permission to send me informational and promotional emails and text messages in accordance with the",
       "privacyPolicyLink": "Privacy Policy",
       "changePassword": "Change Password",
       "save": "Save"

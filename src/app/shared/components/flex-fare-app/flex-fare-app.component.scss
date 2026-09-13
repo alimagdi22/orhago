@@ -109,6 +109,7 @@ swiper-slide {
   [dir='rtl'] swiper-container::part(button-next) {
     left: -25px;
     right: auto;
+    transform: translateY(-50%) rotate(180deg);
   }
 
   swiper-container[dir='rtl']::part(button-prev),
@@ -116,8 +117,10 @@ swiper-slide {
   [dir='rtl'] swiper-container::part(button-prev) {
     right: -25px;
     left: auto;
+    transform: translateY(-50%) rotate(180deg);
   }
 }
+
 
 @media (max-width: 768px) {
   swiper-container::part(button-next),

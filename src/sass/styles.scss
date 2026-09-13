@@ -353,6 +353,10 @@ $custom-theme: mat.m2-define-light-theme(
 @include mat.core(); // Import core styles
 @include mat.all-component-themes($custom-theme); // Apply custom theme
 
+.cdk-overlay-pane:has(.user-nav-menu) {
+  width: auto !important;
+}
+
 /* Baggage Info Popover Menu Global Styles */
 .baggage-info-popover-menu {
   &.mat-mdc-menu-panel,
@@ -536,3 +540,12 @@ $custom-theme: mat.m2-define-light-theme(
   }
 }
 
+/* Override Swiper's constructed-stylesheet RTL arrow rotation — desktop (flex-fare-app) only */
+@media (min-width: 769px) {
+  html[dir='rtl'] .swiper-rtl .swiper-button-next svg,
+  html[dir='rtl'] .swiper-rtl .swiper-button-prev svg,
+  [dir='rtl'] .swiper-rtl .swiper-button-next svg,
+  [dir='rtl'] .swiper-rtl .swiper-button-prev svg {
+    transform: none !important;
+  }
+}

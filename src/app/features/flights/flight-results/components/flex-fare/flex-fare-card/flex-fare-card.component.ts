@@ -34,13 +34,24 @@ export class FlexFareCardComponent implements OnInit {
     passengerFareBreakDowns: [],
     optionalServices: [],
   };
-
-  optionalServices: string[] = [];
-
   @Input() isActive = true;
   @Input() totalPassengers = 0;
   @Input() cardIndex = 0;
+  translate = inject(TranslateService);
+  optionalServices: string[] = [];
 
+  ngOnInit(): void {
+    this.getOptionalServices();
+  }
+  sharedService = inject(SharedService);
+
+  selectButton: IMainButton = {
+    height: '36px',
+    width: '100%',
+    borderRadius: '6px',
+    backgroundColor: '#213567',
+    color: 'white',
+  };
   get priceDifference(): number {
     const basePrice = this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || 0;
     const currentPrice = this.brand?.itinTotalFare?.amount || 0;
@@ -58,20 +69,6 @@ export class FlexFareCardComponent implements OnInit {
     });
   }
 
-  translate = inject(TranslateService);
-
-  ngOnInit(): void {
-    this.getOptionalServices();
-  }
-  sharedService = inject(SharedService);
-
-  selectButton: IMainButton = {
-    height: '36px',
-    width: '100%',
-    borderRadius: '6px',
-    backgroundColor: '#213567',
-    color: 'white',
-  };
 
   onClickSelect(event?: Event) {
     if (event) {
