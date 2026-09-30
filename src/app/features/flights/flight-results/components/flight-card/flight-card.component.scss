@@ -100,8 +100,8 @@
 }
 
 .price-section {
-  width: 240px;
-  min-width: 240px;
+  width: 290px;
+  min-width: 260px;
 
   @media (max-width: 991px) {
     width: 100%;
@@ -117,7 +117,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  z-index: 4;
   pointer-events: none;
 
   .footer-pill-btn {
@@ -212,4 +212,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
+}

@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class FlightDealsComponent implements AfterViewInit, OnInit {
   @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
+  @ViewChild('prevBtn', { static: false }) prevBtn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('nextBtn', { static: false }) nextBtn!: ElementRef<HTMLButtonElement>;
 
   mostSearchedFlightsService = inject(MostSearchedFlightsService);
   translate = inject(TranslateService);
@@ -31,12 +33,15 @@ export class FlightDealsComponent implements AfterViewInit, OnInit {
   }
 
   private initSwiper(): void {
-    if (!this.swiperEl?.nativeElement) return;
+    if (!this.swiperEl?.nativeElement || !this.prevBtn?.nativeElement || !this.nextBtn?.nativeElement) return;
     const swiper = this.swiperEl.nativeElement;
 
     Object.assign(swiper, {
       spaceBetween: 20,
-      navigation: true,
+      navigation: {
+        prevEl: this.prevBtn.nativeElement,
+        nextEl: this.nextBtn.nativeElement,
+      },
       pagination: { bulletClass: 'hide' },
       breakpoints: {
         0: { slidesPerView: 1 },
@@ -46,6 +51,9 @@ export class FlightDealsComponent implements AfterViewInit, OnInit {
     });
 
     this.updateSwiperDir();
+    if (typeof swiper.initialize === 'function') {
+      swiper.initialize();
+    }
   }
 
   private updateSwiperDir(): void {

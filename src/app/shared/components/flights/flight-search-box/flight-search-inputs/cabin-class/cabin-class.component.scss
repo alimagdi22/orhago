@@ -110,6 +110,7 @@
   }
 }
 
-::ng-deep.mat-menu-panel {
+::ng-deep .cabin-menu.mat-mdc-menu-panel,
+::ng-deep .cabin-menu.mat-menu-panel {
   max-width: none !important;
 }

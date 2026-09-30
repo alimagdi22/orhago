@@ -41,7 +41,9 @@ export class HotelSearchBoxComponent implements OnInit {
   cityLoader = false;
   fixedNationality = 'EG';
   showMaxGuestError = false;
-  formError!:string | null | undefined;
+  locationError = '';
+  dateError = '';
+  guestError = '';
 
   ngOnInit(): void {
     this.searchForm = this.hotelSearchService.HotelSearchForm;
@@ -136,16 +138,16 @@ saveFormToLocalStorage(): void {
 
   onSubmit(): void {
     this.showMaxGuestError = false;
-    this.formError = '';
+    this.locationError = '';
+    this.dateError = '';
+    this.guestError = '';
 
     // Check guest count first
     if (this.totalGuests > this.maxGuests) {
       this.showMaxGuestError = true;
-      if (this.currentLang === 'en') {
-        this.formError = 'Maximum number of guests cannot exceed 9 guests';
-      } else {
-        this.formError = 'لا يمكن البحث لاكثر من ٩ اشخاص';
-      }
+      this.guestError = this.currentLang === 'en'
+        ? 'Maximum number of guests cannot exceed 9 guests'
+        : 'لا يمكن البحث لاكثر من ٩ اشخاص';
       return;
     }
 
@@ -191,15 +193,25 @@ saveFormToLocalStorage(): void {
         ]);
       } else {
         this.hotelSearchService.guestNumberValidation();
-        this.formError = this.currentLang === 'en'
+        this.dateError = (this.currentLang === 'en'
           ? errorMsg.enMsg
-          : this.hotelSearchService.DateMessageError.arMsg;
+          : this.hotelSearchService.DateMessageError.arMsg) ?? '';
       }
     } else {
       this.searchForm.markAllAsTouched();
-      this.formError = this.currentLang === 'en'
+      const requiredMsg = this.currentLang === 'en'
         ? 'Please fill all required fields correctly'
         : 'يرجى ملء جميع الحقول المطلوبة بشكل صحيح';
+
+      if (this.searchForm.get('location')?.invalid) {
+        this.locationError = requiredMsg;
+      }
+      if (this.searchForm.get('checkIn')?.invalid || this.searchForm.get('checkOut')?.invalid) {
+        this.dateError = requiredMsg;
+      }
+      if (!this.locationError && !this.dateError) {
+        this.locationError = requiredMsg;
+      }
     }
   }
 

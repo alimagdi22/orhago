@@ -1,15 +1,13 @@
 <header class="row between gap-2">
   <div class="titles col-6 col-md-5 col-xl-3 ">
     <p class="titles__main">{{ 'flightDetails.title' | translate }}</p>
-    <p class="titles__secondayr">
-      {{ sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO[0].departureTerminalAirport.cityName }} -
-      {{
-        sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO[
-          sharedService.selectedFlightItinerary.allJourney.flights[0].flightDTO.length - 1
-        ].arrivalTerminalAirport.cityName
-      }} - 
-      {{flightResultService.response?.searchCriteria?.flightType}}
-    </p>
+    @for(flight of sharedService.selectedFlightItinerary.allJourney.flights; track $index; let i = $index) {
+        <p class="titles__secondayr">
+          {{ flight.flightDTO[0].departureTerminalAirport.cityName }} -
+          {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityName }} 
+        </p>
+    }
+    ({{flightResultService.response?.searchCriteria?.flightType}})
   </div>
 
   @if (sharedService.isSegmentPresent(['flight-checkout'])) {
@@ -19,7 +17,7 @@
         {{
           flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
             ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount
-            : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value')
+            : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3')
         }}
       </p>
 
@@ -40,7 +38,7 @@
       <div class="d-flex flex-column align-items-center justify-content-center w-50">
         <p class="price__text">
           {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-          {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' }}
+          {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3' }}
         </p>
         <p class="price__caption">Price per adult</p>
       </div>

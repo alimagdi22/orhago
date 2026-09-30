@@ -87,6 +87,8 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
   }
 
   @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
+  @ViewChild('prevBtn', { static: false }) prevBtn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('nextBtn', { static: false }) nextBtn!: ElementRef<HTMLButtonElement>;
 
   ngAfterViewInit(): void {
     this.elementRef.nativeElement.addEventListener('wheel', this.wheelListener, { passive: false });
@@ -94,19 +96,25 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
   }
 
   initializeSwiper() {
-    if (!this.swiperEl?.nativeElement) return;
+    if (!this.swiperEl?.nativeElement || !this.prevBtn?.nativeElement || !this.nextBtn?.nativeElement) return;
 
     const swiperEl = this.swiperEl.nativeElement;
 
-    const swiperParams = {
+    const swiperParams: Record<string, unknown> = {
       spaceBetween: 20,
-      navigation: true,
       breakpoints: {
         0: { slidesPerView: 1 },
         768: { slidesPerView: 2 },
         1024: { slidesPerView: 2 },
       },
     };
+
+    if (!swiperEl.swiper) {
+      swiperParams['navigation'] = {
+        prevEl: this.prevBtn.nativeElement,
+        nextEl: this.nextBtn.nativeElement,
+      };
+    }
 
     Object.assign(swiperEl, swiperParams);
     swiperEl.dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';

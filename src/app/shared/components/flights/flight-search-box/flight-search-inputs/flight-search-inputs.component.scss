@@ -62,6 +62,9 @@
   grid-column: span 2;
 }
 
+.add-flight-button {
+  grid-column: span 2;
+}
 .dest__from:hover {
   .dest__from__placeholder__clear {
     visibility: visible;
@@ -314,8 +317,39 @@ hr{
   }
 }
 
-.multi-city-action {
+.multi-city-footer {
+  grid-column: span 6;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.cabin.multi-city-cabin {
+  flex: 0 0 auto;
+  width: max-content;
+  min-width: 320px;
+  height: 64px;
+
+  ::ng-deep .cabin {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 28px;
+    height: 100%;
+    padding: 0 20px;
+  }
+}
+
+.button.multi-city-button {
+  flex: 0 0 240px;
+  width: 240px;
+  height: 64px;
+}
+
+.multi-city-action {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   align-items: center;
   gap: 12px;
   width: 100%;
@@ -326,6 +360,7 @@ hr{
     font-size: 12px;
     color: #393c43;
     margin-bottom: 0;
+    grid-column: span 3;
   }
 }
 
@@ -335,9 +370,70 @@ app-cabin-class {
 }
 
 
-@media (max-width:768px){
-  .dest , .calander , .cabin , .button{
-    grid-column: span 12;
+@media (max-width: 1200px) {
+  .multi-city-footer {
+    display: block;
   }
 
+  .cabin.multi-city-cabin {
+    width: 100%;
+    min-width: 0;
+    height: $inputs-height;
+
+    ::ng-deep .cabin {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      gap: 0;
+      padding: 8px 12px;
+    }
+  }
+}
+
+@media (max-width:768px){
+  .dest , .calander , .cabin , .button{
+    grid-column: span 12 !important;
+  }
+
+  .calander:has(+ .remove-icon) {
+    grid-column: span 10 !important;
+  }
+
+  .remove-icon {
+    display: flex;
+    grid-column: span 2 !important;
+    height: $inputs-height;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .multi-city-action {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "passenger passenger"
+      "add note";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 15px;
+    margin-top: 0;
+  }
+
+  .multi-city-action .multi-city-footer {
+    grid-area: passenger;
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .multi-city-action .add-flight-button {
+    grid-area: add;
+    grid-column: auto;
+    width: auto;
+  }
+
+  .multi-city-action .add-flight-info {
+    grid-area: note;
+    grid-column: auto;
+    min-width: 0;
+    line-height: 1.35;
+  }
 }

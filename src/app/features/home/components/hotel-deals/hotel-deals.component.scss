@@ -63,27 +63,49 @@
   }
 
   .nav-btn {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: #f1f5f9;
-    color: #334155;
-    border: none;
+    background: rgba(255, 255, 255, 0.96);
+    color: #213567;
+    border: 1px solid rgba(33, 53, 103, 0.1);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.05),
+      0 8px 18px rgba(15, 23, 42, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    padding: 0;
+    transition:
+      background-color 0.22s ease,
+      color 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.22s ease;
 
     &:hover:not(:disabled) {
-      background-color: #e2e8f0;
-      color: #0f172a;
-      transform: scale(1.05);
+      background: #213567;
+      color: #ffffff;
+      border-color: #213567;
+      box-shadow: 0 10px 22px rgba(33, 53, 103, 0.28);
+      transform: scale(1.06);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(33, 53, 103, 0.35);
+      outline-offset: 2px;
     }
 
     &:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+      opacity: 0.38;
+      cursor: default;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.82);
     }
   }
 

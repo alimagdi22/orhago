@@ -148,27 +148,27 @@ export class AppComponent implements OnInit {
       }
     });
 
-    let envRP = {
-      offlineSeats: 'http://154.41.209.93:7025',
-      searchflow: 'http://154.41.209.93:6057',
-      BookingFlow: 'http://154.41.209.93:6055',
-      FareRules: 'http://154.41.209.93:6056',
-      asm: 'http://154.41.209.93:6012',
-      Apihotels: 'https://hotelsapi.round-pixel.net',
-      users: 'http://154.41.209.93:6057',
-      admin: 'http://154.41.209.93:6010/',
-      getDPayment: 'http://154.41.209.93:6010/',
-      bookHotels: 'https://staginghotels.round-pixel.net',
-      prepay: 'http://154.41.209.93:6062',
-      backOffice: 'http://154.41.209.93:6012',
-      FlightTop: 'http://154.41.209.93:6057',
-      offers: {
-        getAll: 'http://154.41.209.93:7893/api/GetAllOffersAPI?POS=',
-        getByID: 'http://154.41.209.93:7893/api/GetOfferByIdAPI?OfferId=',
-        BookOffer: 'http://154.41.209.93:7895/api/BookOffer',
-        RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
-      },
-    };
+    // let envRP = {
+    //   offlineSeats: 'http://154.41.209.93:7025',
+    //   searchflow: 'http://154.41.209.93:6057',
+    //   BookingFlow: 'http://154.41.209.93:6055',
+    //   FareRules: 'http://154.41.209.93:6056',
+    //   asm: 'http://154.41.209.93:6012',
+    //   Apihotels: 'https://hotelsapi.round-pixel.net',
+    //   users: 'http://154.41.209.93:6057',
+    //   admin: 'http://154.41.209.93:6010/',
+    //   getDPayment: 'http://154.41.209.93:6010/',
+    //   bookHotels: 'https://staginghotels.round-pixel.net',
+    //   prepay: 'http://154.41.209.93:6062',
+    //   backOffice: 'http://154.41.209.93:6012',
+    //   FlightTop: 'http://154.41.209.93:6057',
+    //   offers: {
+    //     getAll: 'http://154.41.209.93:7893/api/GetAllOffersAPI?POS=',
+    //     getByID: 'http://154.41.209.93:7893/api/GetOfferByIdAPI?OfferId=',
+    //     BookOffer: 'http://154.41.209.93:7895/api/BookOffer',
+    //     RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
+    //   },
+    // };
 
     let envTransarabian = {
       offlineSeats: "http://154.41.209.93:7025",
@@ -217,7 +217,33 @@ export class AppComponent implements OnInit {
       },
     };
 
-    this.environment.envConfiguration(envTransarabian);
+    let envRP = {
+      offlineSeats: 'http://41.223.55.14:7025',
+      searchflow: 'https://flightsearch.round-pixel.net',
+      BookingFlow: 'https://flightflow.round-pixel.net',
+      FareRules: 'https://flightprov.round-pixel.net',
+      asm: 'https://backofficeapi.round-pixel.net',
+      Apihotels: 'https://hotelsapi.round-pixel.net',
+      // users: 'https://flightsearch.flytoall.com',
+      users: 'https://flightsearch.round-pixel.net',
+      admin: 'https://adminapi.round-pixel.net',
+      // admin: 'https://adminapi.flytoall.com',
+      getDPayment: 'https://adminapi.round-pixel.net/',
+      bookHotels: 'https://staginghotels.round-pixel.net',
+      prepay: 'https://prepayapi.round-pixel.net',
+      backOffice: 'https://backofficeapi.round-pixel.net',
+      FlightTop: 'https://flightsearch.round-pixel.net',
+      staticPages: 'https://stagingcms.round-pixel.net',
+      offers: {
+        getAll: 'http://41.215.243.36:7893/api/GetAllOffersAPI?POS=',
+        getByID: 'http://41.215.243.36:7893/api/GetOfferByIdAPI?OfferId=',
+        BookOffer: 'http://41.215.243.36:7895/api/BookOffer',
+        RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
+      },
+    };
+
+
+    this.environment.envConfiguration(envRP);
     this.hotelEnvironmentService.envConfiguration(envRP);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {

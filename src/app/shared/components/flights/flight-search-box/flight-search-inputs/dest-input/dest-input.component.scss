@@ -146,6 +146,11 @@ img {
   }
 }
 
+::ng-deep .popular-dest.mat-mdc-menu-panel,
+::ng-deep .popular-dest.mat-menu-panel {
+  max-width: none !important;
+}
+
 .popular-dest {
   border-radius: 6px;
   &__title {
@@ -230,10 +235,6 @@ img {
 
 .mat-option {
   max-width: 28rem;
-}
-
-::ng-deep .cdk-overlay-pane {
-  width: 100% !important;
 }
 
 .error-message {

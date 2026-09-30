@@ -13,14 +13,14 @@ export class BaggagePanalComponent implements OnInit {
       
   }
   get normalBaggage() {
-    if (!this.baggageInfo?.baggage) return '1';
+    if (!this.baggageInfo?.baggage) return '1 x 23KG';
     const baggage = this.baggageInfo.baggage.split(' ');
 
     if (baggage && baggage[1] === 'Kilograms') {
-      return baggage[0];
+      return ' 1 x ' + baggage[0] + 'KGs'  ;
     }
 
-    return baggage ? baggage[0] : '1';
+    return baggage ? baggage[0] + 'x 23KG' : '1 x 23KG';
   }
 
   get getUnit() {

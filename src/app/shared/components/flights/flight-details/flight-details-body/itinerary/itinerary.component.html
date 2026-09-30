@@ -51,7 +51,8 @@
 
         <section class="flight-info">
           @if (flightType !== 'roundtrip') {
-            <p class="flight-info__title">{{ 'flightDetails.itinerary.Departure' | translate }}</p>
+            <p class="flight-info__title">{{ 'flightDetails.itinerary.Departure' | translate }}             <span>({{flight.flightDTO[0].departureTerminalAirport.cityCode}} - {{flight.flightDTO[0].arrivalTerminalAirport.cityCode}})</span>
+            </p>
           }
 
 

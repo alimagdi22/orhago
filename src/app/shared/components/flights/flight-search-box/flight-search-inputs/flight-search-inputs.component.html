@@ -22,6 +22,7 @@
                 flightSearchService.flightsArray.at(i).errors?.['sameLocation']
                   ? 'red'
                   : '',
+              gridColumn: flightType === 'multi-city' ? 'span 5' : 'span 4',
             }"
           >
             <app-dest-input
@@ -58,7 +59,7 @@
           <section
             class="calander"
             [class.multi-city-sub-calander]="$index && flightType === 'multi-city'"
-            [ngStyle]="{ borderColor: isCalanderNotValid(i) ? 'red' : '' }"
+            [ngStyle]="{ borderColor: isCalanderNotValid(i) ? 'red' : '' , gridColumn: flightType === 'multi-city' ? 'span 6' : 'span 4'}"
           >
             <app-date-input
               [index]="i"
@@ -96,7 +97,7 @@
             }
           </section>
 
-          @if (!$index) {
+          @if (!$index && flightType !== 'multi-city') {
             <section class="cabin">
               <app-cabin-class [openMenu]="openCabinMenu" />
             </section>
@@ -121,12 +122,35 @@
       }
       @if (flightType === 'multi-city' && flightSearchService.flightsArray.length < 4) {
         <div class="multi-city-action">
+          <div class="add-flight-button">
           <app-secondary-button
             [title]="'+ ' + ('home.search.addFlight' | translate)"
             [secondaryButtonInfo]="addFlightButton"
             (clickSecondaryButton)="addFlight()"
           />
+          </div>
           <p class="add-flight-info">{{ 'home.search.addFlightNote' | translate }}</p>
+          @if (flightType === 'multi-city') {
+            <div class="multi-city-footer">
+              @if(sharedService.screenWidth <= 1200) {
+              <hr>
+              }
+              <section class="cabin multi-city-cabin">
+                <app-cabin-class [openMenu]="openCabinMenu" />
+              </section>
+    
+              @if(sharedService.screenWidth >= 1200) {
+                <section class="button multi-city-button">
+                  <app-main-button
+                    [title]="'home.search.searchTicket' | translate"
+                    [mainButtonInfo]="multiCitySearchButton"
+                    [isLoading]="isSelectButtonLoading"
+                    (clickMainButton)="onSubmit()"
+                  />
+                </section>
+              }
+            </div>
+          }
         </div>
       }
     </ng-container>

@@ -68,6 +68,14 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
     color: 'white',
   };
 
+  multiCitySearchButton: IMainButton = {
+    height: '64px',
+    width: '100%',
+    borderRadius: '12px',
+    backgroundColor: '#213567',
+    color: 'white',
+  };
+
   addFlightButton: IMainButton = {
     height: '42px',
     width: '130px',

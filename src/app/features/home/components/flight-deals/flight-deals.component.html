@@ -3,8 +3,32 @@
   <p class="home-paragraph">{{ 'home.flightDeals.description' | translate }}</p>
 </div>
 
-<swiper-container #swiperEl [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
-  <swiper-slide *ngFor="let mostSearchedFlight of mostSearchedFlightsService.mostSearchedFlights; let i = index">
-    <app-flight-deals-card [mostSearchedFlight]="mostSearchedFlight"></app-flight-deals-card>
-  </swiper-slide>
-</swiper-container>
+<div class="deals-swiper">
+  <button
+    type="button"
+    class="deal-nav deal-nav--prev"
+    #prevBtn
+    [attr.aria-label]="'checkout.previous' | translate"
+  >
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M14.5 6.5L9 12l5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <swiper-container #swiperEl init="false" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
+    <swiper-slide *ngFor="let mostSearchedFlight of mostSearchedFlightsService.mostSearchedFlights; let i = index">
+      <app-flight-deals-card [mostSearchedFlight]="mostSearchedFlight"></app-flight-deals-card>
+    </swiper-slide>
+  </swiper-container>
+
+  <button
+    type="button"
+    class="deal-nav deal-nav--next"
+    #nextBtn
+    [attr.aria-label]="'checkout.next' | translate"
+  >
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+</div>

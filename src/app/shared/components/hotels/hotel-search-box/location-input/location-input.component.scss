@@ -183,3 +183,15 @@ span{
   }
 }
 
+@media (max-width: 1000px) {
+  .location-group {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100px;
+    padding: 16px 14px;
+    border: 1px solid map-get($map: $colors, $key: 'gray');
+    border-radius: 12px;
+    justify-content: center;
+  }
+}
+

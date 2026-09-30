@@ -25,78 +25,100 @@ swiper-slide {
   justify-content: center;
 }
 
-/* Swiper Navigation Buttons Styling */
-swiper-container::part(button-next),
-swiper-container::part(button-prev) {
+.deals-swiper {
+  position: relative;
+}
+
+swiper-container {
+  display: block;
+  padding-inline: 8px;
+}
+
+.deal-nav {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
+  z-index: 4;
   width: 40px;
   height: 40px;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(33, 53, 103, 0.1);
+  background: rgba(255, 255, 255, 0.96);
   color: #213567;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 8px 18px rgba(15, 23, 42, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+
+  svg {
+    display: block;
+  }
+
+  &:hover:not(:disabled) {
+    background: #213567;
+    color: #ffffff;
+    border-color: #213567;
+    box-shadow: 0 10px 22px rgba(33, 53, 103, 0.28);
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(-50%) scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(33, 53, 103, 0.35);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &.swiper-button-disabled {
+    opacity: 0.38;
+    cursor: default;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  &.swiper-button-lock {
+    display: none;
+  }
 }
 
-/* LTR Positioning */
-swiper-container::part(button-next) {
-  right: 0px;
-  left: auto;
-}
-swiper-container::part(button-prev) {
-  left: 0px;
-  right: auto;
+.deal-nav--prev {
+  inset-inline-start: -6px;
 }
 
-/* RTL Positioning */
-swiper-container[dir='rtl']::part(button-next),
-:host-context([dir='rtl']) swiper-container::part(button-next),
-[dir='rtl'] swiper-container::part(button-next) {
-  left: 0px;
-  right: auto;
-}
-swiper-container[dir='rtl']::part(button-prev),
-:host-context([dir='rtl']) swiper-container::part(button-prev),
-[dir='rtl'] swiper-container::part(button-prev) {
-  right: 0px;
-  left: auto;
+.deal-nav--next {
+  inset-inline-end: -6px;
 }
 
-/* Mobile responsive styles */
+:host-context([dir='rtl']) .deal-nav svg {
+  transform: scaleX(-1);
+}
+
 @media (max-width: 768px) {
-  swiper-container::part(button-next),
-  swiper-container::part(button-prev) {
-    width: 36px;
-    height: 36px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+  .deal-nav {
+    width: 34px;
+    height: 34px;
   }
 
-  swiper-container::part(button-next) {
-    right: 2px;
-    left: auto;
-  }
-  swiper-container::part(button-prev) {
-    left: 2px;
-    right: auto;
+  .deal-nav--prev {
+    inset-inline-start: 2px;
   }
 
-  swiper-container[dir='rtl']::part(button-next),
-  :host-context([dir='rtl']) swiper-container::part(button-next),
-  [dir='rtl'] swiper-container::part(button-next) {
-    left: 2px;
-    right: auto;
-  }
-  swiper-container[dir='rtl']::part(button-prev),
-  :host-context([dir='rtl']) swiper-container::part(button-prev),
-  [dir='rtl'] swiper-container::part(button-prev) {
-    right: 2px;
-    left: auto;
+  .deal-nav--next {
+    inset-inline-end: 2px;
   }
 
   ::ng-deep .swiper-pagination-bullets {

@@ -69,13 +69,19 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @ViewChild('swiperEl', { static: false }) swiperEl!: ElementRef;
+  @ViewChild('prevBtn', { static: false }) prevBtn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('nextBtn', { static: false }) nextBtn!: ElementRef<HTMLButtonElement>;
+
   ngAfterViewInit(): void {
     const swiperEl = this.swiperEl?.nativeElement;
-    if (!swiperEl) return;
+    if (!swiperEl || !this.prevBtn?.nativeElement || !this.nextBtn?.nativeElement) return;
 
     const swiperParams = {
       spaceBetween: 16,
-      navigation: true,
+      navigation: {
+        prevEl: this.prevBtn.nativeElement,
+        nextEl: this.nextBtn.nativeElement,
+      },
       breakpoints: {
         0: { slidesPerView: 1 },
         768: { slidesPerView: 2 },

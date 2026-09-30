@@ -1,15 +1,18 @@
-<p [ngStyle]="currentLang ==='en'?{'margin-left':'18px'}:{'margin-right':'18px'}" class="head mb-0 mt-3">{{'searchBox.hotelHead' | translate}}</p>
+<p [ngStyle]="currentLang ==='en'?{'margin-left':'18px'}:{'margin-right':'18px'}" class="head mt-3">{{'searchBox.hotelHead' | translate}}</p>
 <div class="hotel-search-container" [formGroup]="searchForm">
-  <!-- Location Field with Mat-Autocomplete -->
-  <app-location-input/>
+  <div class="search-field">
+    <app-location-input/>
+    <p *ngIf="locationError" class="error-message">{{ locationError }}</p>
+  </div>
 
-  <app-hotel-date-input/>
+  <div class="search-field">
+    <app-hotel-date-input/>
+    <p *ngIf="dateError" class="error-message">{{ dateError }}</p>
+  </div>
 
-  <app-guest-room-selector/>
-
-  <!-- Error Message -->
-  <div *ngIf="formError" class="error-message">
-    {{ formError }}
+  <div class="search-field">
+    <app-guest-room-selector/>
+    <p *ngIf="guestError" class="error-message">{{ guestError }}</p>
   </div>
 
   <!-- Search Button -->

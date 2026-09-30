@@ -78,67 +78,14 @@
 .desktop-swiper-wrapper {
   width: 100%;
 
+  .fare-swiper {
+    position: relative;
+  }
+
   swiper-container {
-    --swiper-navigation-color: #213567;
-    --swiper-navigation-size: 16px;
     overflow: hidden !important;
     position: relative;
-    padding: 10px 12px 20px 12px;
-
-    &::part(button-next),
-    &::part(button-prev) {
-      background-color: #ffffff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      height: 32px;
-      width: 32px;
-      color: #213567;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-      border: 1px solid #cbd5e0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      
-
-      &::after {
-        font-size: 14px;
-        font-weight: bold;
-      }
-
-      svg{
-        width: 50% !important;
-        height: 50% !important;
-      }
-    }
-
-    &::part(button-next) {
-      right: 4px;
-      left: auto;
-    }
-
-    &::part(button-prev) {
-      left: 4px;
-      right: auto;
-    }
-    /* RTL */
-    :host-context([dir='rtl']) &::part(button-next),
-    [dir='rtl'] &::part(button-next) {
-    right: auto;
-    left: 4px;
-    transform: translateY(-50%) rotate(0);
-    }
-
-    :host-context([dir='rtl']) &::part(button-prev),
-    [dir='rtl'] &::part(button-prev) {
-    left: auto;
-    right: 4px;
-    transform: translateY(-50%) rotate(0);
-  }
-    
+    padding: 10px 28px 20px;
   }
 
   
@@ -193,10 +140,75 @@
   padding: 20px 0;
 }
 
+.fare-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(33, 53, 103, 0.1);
+  background: #daedfe;
+  color: #213567;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 8px 18px rgba(15, 23, 42, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
 
-@media (min-width: 769px) {
-  ::ng-deep .swiper-rtl .swiper-button-next svg,
-  ::ng-deep .swiper-rtl .swiper-button-prev svg {
-    transform: none !important;
+  svg {
+    display: block;
   }
+
+  &:hover:not(:disabled) {
+    background: #213567;
+    color: #ffffff;
+    border-color: #213567;
+    box-shadow: 0 10px 22px rgba(33, 53, 103, 0.28);
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(-50%) scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(33, 53, 103, 0.35);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &.swiper-button-disabled {
+    opacity: 0.38;
+    cursor: default;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  &.swiper-button-lock {
+    display: none;
+  }
+}
+
+.fare-nav--prev {
+  inset-inline-start: 0;
+}
+
+.fare-nav--next {
+  inset-inline-end: 0;
+}
+
+:host-context([dir='rtl']) .fare-nav svg {
+  transform: scaleX(-1);
 }
