@@ -1,19 +1,81 @@
-.text-wrapper {
+.section-head {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin-block: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 8px 0 18px;
+  text-align: start;
+
+  h2 {
+    margin: 0;
+    color: #1a191e;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-align: start;
+  }
+
+  p {
+    max-width: 640px;
+    margin: 6px 0 0;
+    color: #646081;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  &__link {
+    flex: 0 0 auto;
+    color: #5029f4;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  &__link-short {
+    display: none;
+  }
 }
 
-.wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+:host-context(html.dark) {
+  .section-head h2 {
+    color: #f4f2ff;
+  }
+
+  .section-head p {
+    color: #9a97ae;
+  }
+
+  .section-head__link {
+    color: #b7a6ff;
+  }
+}
+
+@media (max-width: 700px) {
+  .section-head {
+    h2 {
+      font-size: 22px;
+    }
+
+    p {
+      display: none;
+    }
+
+    &__link-wide {
+      display: none;
+    }
+
+    &__link-short {
+      display: inline;
+    }
+  }
 }
 
 h2 {
-  text-align: center;
+  text-align: start;
 }
 
 .hide {
@@ -22,11 +84,21 @@ h2 {
 
 swiper-slide {
   display: flex;
-  justify-content: center;
+  height: auto;
+  align-items: stretch;
+}
+
+app-flight-deals-card {
+  display: block;
+  width: 100%;
 }
 
 .deals-swiper {
   position: relative;
+}
+
+.deal-nav {
+  display: none;
 }
 
 swiper-container {
@@ -35,6 +107,7 @@ swiper-container {
 }
 
 .deal-nav {
+  display: none;
   position: absolute;
   top: 50%;
   z-index: 4;
@@ -49,7 +122,6 @@ swiper-container {
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.05),
     0 8px 18px rgba(15, 23, 42, 0.1);
-  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -119,6 +191,10 @@ swiper-container {
 
   .deal-nav--next {
     inset-inline-end: 2px;
+  }
+
+  .deal-nav {
+    display: none;
   }
 
   ::ng-deep .swiper-pagination-bullets {

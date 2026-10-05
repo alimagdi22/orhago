@@ -1,25 +1,28 @@
 @import '../../../../../../../../sass/variables';
-@import '../../../../../../../../sass/colors';
 
 .tab-group {
   display: flex;
-  justify-content: space-between;
+  gap: 16px;
 
   span {
-    flex-grow: 1;
-    flex-basis: 50%;
     cursor: pointer;
-
-    text-align: center;
-    text-transform: capitalize;
-
-    padding-block: 8px;
-    transition: all 0.2s;
+    color: #8d89a3;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .active {
-    border-radius: $base-radius-small;
-    color: map-get($map: $colors, $key: 'main');
-    background-color: map-get($map: $colors, $key: 'off-white');
+    color: #5029f4;
+  }
+}
+
+:host-context(html.dark) .tab-group span {
+  color: #9a97ae;
+
+  &.active {
+    color: #b7a6ff;
   }
 }

@@ -1,22 +1,16 @@
-@import '../../../../../../../../sass/variables';
-@import '../../../../../../../../sass/colors';
+:host {
+  display: block;
+}
 
-.price {
-  border: 1px solid map-get($map: $colors, $key: 'gray-border');
-  padding: 8px;
-  border-radius: $base-radius-tiny;
+.price__value {
+  margin: 0;
+  color: #1a191e;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
 
-  &__title,
-  &__value span {
-    font-size: 12px;
-    font-weight: 400;
-  }
-
-  &__value {
-    margin-top: 10px;
-
-    display: flex;
-    align-items: end;
-    gap: 5px;
-  }
+:host-context(html.dark) .price__value {
+  color: #f7f4ff;
 }

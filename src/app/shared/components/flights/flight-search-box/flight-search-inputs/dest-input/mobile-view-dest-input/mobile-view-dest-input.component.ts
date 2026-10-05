@@ -25,7 +25,16 @@ export class MobileViewDestInputComponent implements OnInit, OnDestroy {
   public isLoading = false;
   public sharedService = inject(SharedService);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { destination: TDestinations; flightItem: AbstractControl; index: number; dismiss: Function }) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      destination: TDestinations;
+      flightItem: AbstractControl;
+      index: number;
+      dismiss: Function;
+      onSelected?: (isCitySelection: boolean) => void;
+    },
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -112,7 +121,10 @@ export class MobileViewDestInputComponent implements OnInit, OnDestroy {
     }
 
     const langObj = city[this.sharedService.lang];
-    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = langObj;
+    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = {
+      ...langObj,
+      isCitySelection,
+    };
     const code = isCitySelection ? langObj.cityCode : langObj.airportCode;
     this.data.flightItem.get(dest)?.setValue(langObj.cityName + ',' + code);
 
@@ -121,6 +133,7 @@ export class MobileViewDestInputComponent implements OnInit, OnDestroy {
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(true);
 
+    this.data.onSelected?.(isCitySelection);
     this.data.dismiss();
   }
 

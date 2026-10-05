@@ -1,13 +1,13 @@
 <div class="wrapper">
-  <app-schedule-tab (scheduleTabChange)="onScheduleTabChange($event)" />
+  <p class="schedule-kicker">
+    @if (flightTypeIndex === 0) {
+      {{ 'results.filter.departureFrom' | translate }} {{ originCode }}
+    } @else {
+      {{ 'results.filter.arrivalAt' | translate }} {{ destinationCode }}
+    }
+  </p>
 
-  <div class="text-wrapper">
-    <span>{{ this.departCity }}</span>
-    
-    <img src="assets/icons/right-arrow-blue-icon.svg" [class.flip-icon]="translateService.currentLang === 'ar'" title="Arrow" width="10px" />
-    
-    <span>{{ this.arrivalCity }}</span>
-  </div>
+  <app-schedule-tab (scheduleTabChange)="onScheduleTabChange($event)" />
 
   <div class="options">
     <app-schedule-option

@@ -10,4 +10,17 @@ import { SCHEDULE_OPTION_DEFAULT } from '../../../../constants/defaultValuse';
 })
 export class ScheduleOptionComponent {
   @Input({ required: true }) scheduleOption: IScheduleOption = SCHEDULE_OPTION_DEFAULT;
+
+  get labelKey(): string {
+    switch (this.scheduleOption.title) {
+      case 'Morning':
+        return 'results.filter.before0600';
+      case 'Noon':
+        return 'results.filter.range0612';
+      case 'Afternoon':
+        return 'results.filter.range1218';
+      default:
+        return 'results.filter.after1800';
+    }
+  }
 }

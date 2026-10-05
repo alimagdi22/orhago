@@ -23,33 +23,25 @@ flightResultService = inject(FlightResultService);
   ngOnInit(): void {
     this.flightResultService.filterForm.valueChanges.subscribe({
       next: () => {
-        this.sortItems.forEach(e => {
-          if(this.flightResultService.orgnizedResponce.length) {
-            this.flightResultService.sortMyResult(e.sortCode);
-            e.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
-            e.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
-          }
-        })
-        this.flightResultService.sortMyResult(1);
+        const active = this.sortItems.find((item) => item.isActive);
+        if (active?.sortCode) {
+          this.flightResultService.sortMyResult(active.sortCode);
+        }
       }
     })
   }
 
   onClickSort(sortItem: ISortItem) {
-    this.sortItems.forEach((e) => {
-      if(this.flightResultService.orgnizedResponce.length) {
-        this.flightResultService.sortMyResult(e.sortCode);
-        e.isActive = false;
-        e.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
-        e.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
-      }
+    this.sortItems.forEach((item) => {
+      item.isActive = false;
     });
-
-    this.flightResultService.sortMyResult(sortItem.sortCode);
-
     sortItem.isActive = true;
-    sortItem.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
-    sortItem.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
+
+    if (sortItem.sortCode && this.flightResultService.orgnizedResponce.length) {
+      this.flightResultService.sortMyResult(sortItem.sortCode);
+      sortItem.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
+      sortItem.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
+    }
   }
     toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

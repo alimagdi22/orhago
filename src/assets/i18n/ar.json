@@ -2,6 +2,12 @@
   "navbar": {
     "signIn": "تسجيل الدخول",
     "manageBooking": "إدارة الحجز",
+    "flights": "رحلات",
+    "hotels": "فنادق",
+    "cars": "سيارات",
+    "transfers": "انتقالات",
+    "deals": "عروض",
+    "theme": "تبديل وضع الألوان",
     "userProfile": "الملف الشخصي",
     "signOut": "تسجيل الخروج",
     "signOutMessage": "هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟",
@@ -81,8 +87,18 @@
 
   "home": {
     "bannarTitle": "خطط لخيالك واحجز رحلتك",
+    "heroEyebrow": "رحلات · فنادق · سيارات · انتقالات",
+    "heroTitle1": "بحث واحد.",
+    "heroTitle2": "الرحلة كاملة.",
+    "heroSubtitle": "قارن أكثر من 450 شركة طيران، و1.4 مليون عقار، وانتقالات بالسائق وتأجير سيارات — بالسعر بعملتك، وفي عملية دفع واحدة.",
+    "heroChip": "إسطنبول · من 890 د.إ",
     "search": {
-      "flights": "رحلات الطيران",
+      "flights": "رحلات",
+      "hotels": "فنادق",
+      "cars": "سيارات",
+      "transfers": "انتقالات",
+      "packages": "باقات",
+      "comingSoon": "سنضيف هذا البحث لاحقًا.",
       "oneWay": "ذهاب فقط",
       "roundTrip": "ذهاب وعودة",
       "multiCity": "وجهات متعددة",
@@ -91,11 +107,12 @@
       "leavingFrom": "المغادرة من",
       "goingTo": "الذهاب إلى",
       "depart": "المغادرة",
+      "returnLabel": "العودة",
       "arrive": "الوصول",
       "popularDest": "وجهات مشهورة",
       "selectDate": "اختر تاريخًا",
-      "passenger": "المسافرين",
-      "guest": "راكب",
+      "passenger": "المسافرون",
+      "guest": "مسافرون",
       "adult": "بالغ",
       "child": "طفل",
       "infant": "رضيع",
@@ -107,8 +124,29 @@
       "done": "تم",
       "addFlight": "إضافة رحلة",
       "addFlightNote": "يمكن إضافة 4 رحلات مختلفة كحد أقصى",
-      "searchTicket": "البحث عن تذكرة",
+      "searchTicket": "ابحث عن رحلات",
       "enterDestination": "أدخل وجهتك"
+    },
+    "promises": {
+      "priceMatch": "نطابق السعر",
+      "priceMatchText": "إذا وجدت أرخص، نردّ الفرق",
+      "cancellation": "إلغاء مجاني خلال 24 ساعة",
+      "cancellationText": "على كل سعر مذكور أنه قابل للاسترداد",
+      "fees": "بدون رسوم مخفية",
+      "feesText": "السعر الذي تراه هو السعر الذي تدفعه",
+      "support": "قناة دعم واحدة",
+      "supportText": "لكل جزء من رحلتك"
+    },
+    "stats": {
+      "airlines": "شركة طيران للمقارنة",
+      "properties": "عقار حول العالم",
+      "support": "دعم بعدة لغات",
+      "payment": "دفع آمن"
+    },
+    "fareCard": {
+      "from": "من",
+      "seeAll": "عرض الكل",
+      "seeAllRoutes": "عرض كل المسارات"
     },
     "exploreTitle": "استكشف أشهر الرحلات والفنادق",
     "adContent": {
@@ -143,6 +181,15 @@
   },
 
   "results": {
+    "summary": {
+      "modifySearch": "تعديل البحث",
+      "adult": "بالغ",
+      "adults": "بالغين",
+      "child": "طفل",
+      "children": "أطفال",
+      "infant": "رضيع",
+      "infants": "رضّع"
+    },
     "availableFlights": "الرحلات المتاحة",
     "loadingMessage": "جاري تحميل نتائج البحث، يرجى الانتظار.",
 
@@ -155,6 +202,15 @@
       "flightSchedules": "جداول الرحلات",
       "departure": "المغادرة",
       "arrival": "الوصول",
+      "departureFrom": "المغادرة من",
+      "arrivalAt": "الوصول إلى",
+      "before0600": "قبل 06:00",
+      "range0612": "06:00–12:00",
+      "range1218": "12:00–18:00",
+      "after1800": "بعد 18:00",
+      "title": "التصفية",
+      "clearAll": "مسح الكل",
+      "priceRange": "نطاق السعر",
       "Morning": "الصباح",
       "Noon": "الظهر",
       "Afternoon": "بعد الظهر",
@@ -165,13 +221,18 @@
       "nonRefundable": "غير قابل للاسترداد",
       "stops": "التوقفات",
       "1 Stop": "توقف واحد",
-      "2 Stops": "توقفان",
+      "2 Stops": "توقفان أو أكثر",
       "Non-Stop": "بدون توقف"
     },
 
     "sort": {
+      "Recommended": "الموصى به",
+      "Best": "الأفضل",
       "Cheapest": "الأرخص",
-      "Fastest": "الأسرع"
+      "Fastest": "الأسرع",
+      "label": "الترتيب:",
+      "flights": "رحلات",
+      "taxes": "الأسعار تشمل الضرائب والرسوم"
     },
 
     "card": {

@@ -1,74 +1,66 @@
-@import '../../../../../sass/variables';
-@import '../../../../../sass/colors';
-
-.city-grid {
+.fare-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 14px;
-  padding: 8px 0;
-
-  @media (max-width: 576px) {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 10px;
-  }
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
 }
 
-.city-card-btn {
+.fare-card {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  text-align: start;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-  outline: none;
+  flex-direction: column;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e4e1f0;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #1a191e;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-align: start;
+  cursor: pointer;
 
-  .city-img-box {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
-    border-radius: 8px;
-    background-color: #f8fafc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  &__media {
+    display: block;
+    height: 132px;
+    background: linear-gradient(160deg, #6d4ff8 0%, #15113f 100%);
 
     img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px;
     }
   }
 
-  .city-name-text {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1e293b;
-    font-family: 'Open Sans', sans-serif;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: color 0.2s ease;
+  &__body {
+    display: block;
+    padding: 14px 16px 16px;
   }
 
-  &:hover {
-    border-color: map-get($colors, 'main');
-    background-color: #f8fafc;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(33, 53, 103, 0.08);
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
 
-    .city-name-text {
-      color: map-get($colors, 'main');
-    }
+:host-context(html.dark) .fare-card {
+  background: #17151f;
+  border-color: #2e2b3c;
+  color: #f4f2ff;
+}
+
+@media (max-width: 900px) {
+  .fare-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
   }
 
-  &:active {
-    transform: translateY(0);
+  .fare-card {
+    flex: 0 0 46%;
+    scroll-snap-align: start;
   }
 }

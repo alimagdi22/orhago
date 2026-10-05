@@ -1,22 +1,13 @@
-@if (!isFlightResults && !isHotelResults) {
-  <app-search-box-header (tabChanged)="onTabChanged($event)" />
-}
-<div
-  class="search-box-wrapper"
->
-  @if (isFlightResults) {
-    <app-flight-search-box />
-  }@else if(isHotelResults){  
-    <app-hotel-search-box/>
-  }@else {
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" [selectedIndex]="tabIndex">
-      <mat-tab [label]="'home.search.flights' | translate">
-        <app-flight-search-box [airlineLogo]="airlineLogo"/>
-      </mat-tab>
-      <mat-tab [label]="'searchBox.hotels' | translate">
-        <app-hotel-search-box/>
-      </mat-tab>
-    </mat-tab-group>
+<div class="search-box-wrapper">
+  @if (!isFlightResults && !isHotelResults) {
+    <app-search-box-header (tabChanged)="onTabChanged($event)" />
+  }
+
+  @if (isFlightResults || (!isHotelResults && tabIndex === 0)) {
+    <app-flight-search-box [airlineLogo]="airlineLogo" />
+  } @else if (isHotelResults || tabIndex === 1) {
+    <app-hotel-search-box />
+  } @else {
+    <p class="search-placeholder">{{ 'home.search.comingSoon' | translate }}</p>
   }
 </div>
-

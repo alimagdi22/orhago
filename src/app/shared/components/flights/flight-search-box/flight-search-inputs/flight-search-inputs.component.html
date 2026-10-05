@@ -34,16 +34,11 @@
               (destinationTypeChange)="updateDestinationType($event)"
             />
 
-            <div class="dest__devider col-1">
-              <div class="dest__devider__line"></div>
-              <img
-                src="../../../../../../assets/icons/switch-icon1.svg"
-                (click)="switchDestination(item, i)"
-                class="dest__devider__icon"
-                title="Switch Icon"
-              />
-              <div class="dest__devider__line"></div>
-            </div>
+            <button type="button" class="dest__devider" (click)="switchDestination(item, i)" title="Switch">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 7h11M15 4l3 3-3 3M17 17H6M9 14l-3 3 3 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
 
             <app-dest-input
               [index]="i"

@@ -3,7 +3,12 @@
     <ng-container formGroupName="airline">
       <ng-container formArrayName="airlines">
         @for (airline of flightResultService.airlinesA; track airline; let i = $index) {
-          <mat-checkbox color="primary" [formControlName]="i">{{ airline }}</mat-checkbox>
+          <div class="check-row">
+            <mat-checkbox color="primary" [formControlName]="i">{{ airline }}</mat-checkbox>
+            @if (count(airline) !== null) {
+              <span class="check-row__count">{{ count(airline) }}</span>
+            }
+          </div>
         }
       </ng-container>
     </ng-container>

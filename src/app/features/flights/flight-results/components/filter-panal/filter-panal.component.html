@@ -1,33 +1,44 @@
-<div class="filter-wrapper">
-  <app-expansion-panel [title]="'results.filter.price' | translate">
+<aside class="filter-card">
+  <header class="filter-card__head">
+    <h2>{{ 'results.filter.title' | translate }}</h2>
+    <button type="button" class="filter-card__clear" (click)="clearAll()">
+      {{ 'results.filter.clearAll' | translate }}
+    </button>
+  </header>
+
+  <section class="filter-section">
+    <h3 class="filter-section__label">{{ 'results.filter.stops' | translate }}</h3>
+    <app-stops-filter />
+  </section>
+
+  <section class="filter-section">
+    <h3 class="filter-section__label">{{ 'results.filter.priceRange' | translate }}</h3>
     <app-price />
-  </app-expansion-panel>
+  </section>
 
   @if (sharedService.flightType !== 'multi-city') {
-    <app-expansion-panel [title]="'results.filter.flightSchedules' | translate">
-      <div class="schedule-wrapper">
-        <app-schedules [isReturn]="false" [flights]="flightResultService.orgnizedResponce.length ? flightResultService.orgnizedResponce[0][0].allJourney.flights : []" />
+    <section class="filter-section filter-section--schedule">
+      <app-schedules
+        [isReturn]="false"
+        [flights]="flightResultService.orgnizedResponce.length ? flightResultService.orgnizedResponce[0][0].allJourney.flights : []"
+      />
 
-        @if (sharedService.flightType === 'roundtrip') {
-          <hr />
-          <app-schedules
-            [isReturn]="true"
-            [flights]="flightResultService.orgnizedResponce.length ? flightResultService.orgnizedResponce[0][0].allJourney.flights : []"
-          />
-        }
-      </div>
-    </app-expansion-panel>
+      @if (sharedService.flightType === 'roundtrip') {
+        <app-schedules
+          [isReturn]="true"
+          [flights]="flightResultService.orgnizedResponce.length ? flightResultService.orgnizedResponce[0][0].allJourney.flights : []"
+        />
+      }
+    </section>
   }
 
-  <app-expansion-panel [title]="'results.filter.airlines' | translate">
+  <section class="filter-section">
+    <h3 class="filter-section__label">{{ 'results.filter.airlines' | translate }}</h3>
     <app-airlines-filter />
-  </app-expansion-panel>
+  </section>
 
-  <app-expansion-panel [title]="'results.filter.refundability' | translate">
+  <section class="filter-section">
+    <h3 class="filter-section__label">{{ 'results.filter.refundability' | translate }}</h3>
     <app-refundability-filter />
-  </app-expansion-panel>
-
-  <app-expansion-panel [title]="'results.filter.stops' | translate">
-    <app-stops-filter />
-  </app-expansion-panel>
-</div>
+  </section>
+</aside>

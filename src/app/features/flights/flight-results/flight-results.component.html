@@ -1,28 +1,28 @@
 
-@if (!flightResultService.loading && flightResultService.orgnizedResponce.length) {
-  @if (isSearchVisible) {
-    <div class="search-box">
-      <div class="container">
-        <div class="d-lg-none">
-          <div class="mobile-search-box">
-            @if (sharedService.isCitiesLoading) {
-              <app-skeleton-loader height="200px" />
-            } @else {
-              <app-search-box />
-            }
-          </div>
-        </div>
+<app-flight-summary (toggle)="sharedService.onToggleFlightSearch()" />
 
-        <div class="desktop-search-box">
+@if (isSearchVisible) {
+  <div class="search-box">
+    <div class="container">
+      <div class="d-lg-none">
+        <div class="mobile-search-box">
           @if (sharedService.isCitiesLoading) {
             <app-skeleton-loader height="200px" />
           } @else {
-            <app-search-box class="regular-search"/>
+            <app-search-box />
           }
         </div>
       </div>
+
+      <div class="desktop-search-box">
+        @if (sharedService.isCitiesLoading) {
+          <app-skeleton-loader height="200px" />
+        } @else {
+          <app-search-box class="regular-search"/>
+        }
+      </div>
     </div>
-  }
+  </div>
 }
 
 <main class="container content">
@@ -70,12 +70,6 @@
         </aside>
 
         <section class="col-lg-9 col-12">
-          @if (sharedService.screenWidth < 1000) {
-          }@else {
-            <p class="available-flights">
-              {{ flightResultService.orgnizedResponce.length }} {{ 'results.availableFlights' | translate }}
-            </p>
-          }
           @if (sharedService.screenWidth > 1000) {
             <app-sorting-panal [sortItems]="sortItems" />
           }@else {

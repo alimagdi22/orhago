@@ -21,8 +21,13 @@
             {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.cityName }}
           </p>
           <p class="dest__airport-id">
-            {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportName }}
-            ({{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportCode }})
+            @if (isCitySelected()) {
+              {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportCode }}
+              . {{ 'searchBox.allAirports' | translate }}
+            } @else {
+              {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportCode }}
+              . {{ sharedService.selectedDestions[index][destination === 'departing' ? 'departingCity' : 'landingCity']?.airportName }}
+            }
           </p>
           <input
             #destinationInput
@@ -65,7 +70,7 @@
               <!-- City Option (All Airports) -->
               <mat-option
                 [value]="group.airports[0][sharedService.lang].cityName + ',' + group.airports[0][sharedService.lang].cityCode"
-                (onSelectionChange)="onSelectCity(destination, group.airports[0], index)"
+                (click)="onSelectCity(destination, group.airports[0], index); $event.stopPropagation()"
                 class="dropdown-list__item city-option"
               >
                 <div class="dropdown-list__item__wrapper">
@@ -91,7 +96,7 @@
               @for (airport of group.airports; track airport[sharedService.lang].airportCode) {
                 <mat-option
                   [value]="airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode"
-                  (onSelectionChange)="onSelectDestintation(destination, airport, index, false)"
+                  (click)="onSelectDestintation(destination, airport, index, false); $event.stopPropagation()"
                   class="dropdown-list__item airport-option"
                 >
                   <div class="dropdown-list__item__wrapper">

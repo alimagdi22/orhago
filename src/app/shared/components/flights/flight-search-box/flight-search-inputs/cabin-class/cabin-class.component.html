@@ -1,6 +1,12 @@
 <div class="cabin" #cabinClassTrigger="matMenuTrigger" [matMenuTriggerFor]="sharedService.screenWidth >= 1200 ? cabinClass : null" (click)="onClickInput()">
   <p class="cabin__placeholder">{{ 'home.search.passenger' | translate }}</p>
-  <p class="cabin__guests">{{ getTotalPassenger }} {{ 'home.search.guest' | translate }}</p>
+  <p class="cabin__guests">
+    @if ((flightSearchService.searchFlight.get('passengers.child')?.value || 0) + (flightSearchService.searchFlight.get('passengers.infant')?.value || 0) === 0) {
+      {{ flightSearchService.searchFlight.get('passengers.adults')?.value }} {{ 'home.search.adult' | translate }}
+    } @else {
+      {{ getTotalPassenger }} {{ 'home.search.guest' | translate }}
+    }
+  </p>
   <p class="cabin__type">
     {{ 'home.search.' + flightSearchService.searchFlight.get('class')?.value | translate }}
   </p>

@@ -1,11 +1,47 @@
+.head {
+  display: none;
+}
+
 .hotel-search-container {
   display: grid;
-  grid-template-columns: minmax(0, 316px) minmax(0, 353px) minmax(0, 200px) 1fr;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.3fr) minmax(0, 1fr) 180px;
   align-items: start;
   justify-content: center;
-  gap: 15px;
-  padding: 20px 20px 36px;
-  background: #fff;
+  gap: 12px;
+  padding: 0;
+  background: transparent;
+
+  ::ng-deep .location-group,
+  ::ng-deep .date-group .form-group,
+  ::ng-deep .selector-summary {
+    border: 1px solid #e0deec !important;
+    border-radius: 16px !important;
+    min-height: 76px;
+    height: 76px !important;
+    background: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  ::ng-deep .location-group label,
+  ::ng-deep .date-group label,
+  ::ng-deep .selector-summary .head p {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: #646081 !important;
+    margin-bottom: 4px !important;
+  }
+
+  ::ng-deep .location-group input,
+  ::ng-deep .date-group .date-display,
+  ::ng-deep .selector-summary .summary-text {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #1a191e;
+  }
 
   .search-field {
     position: relative;
@@ -323,6 +359,29 @@
       grid-column: 4;
       grid-row: 1;
     }
+  }
+}
+
+:host-context(html.dark) .hotel-search-container {
+  ::ng-deep .location-group,
+  ::ng-deep .date-group .form-group,
+  ::ng-deep .selector-summary {
+    background: #1a191e !important;
+    border-color: #2c2a3a !important;
+    color: #ffffff;
+  }
+
+  ::ng-deep .location-group label,
+  ::ng-deep .date-group label,
+  ::ng-deep .selector-summary .head p {
+    color: #9a97ae !important;
+  }
+
+  ::ng-deep .location-group input,
+  ::ng-deep .date-group .date-display,
+  ::ng-deep .selector-summary .summary-text,
+  ::ng-deep select {
+    color: #ffffff !important;
   }
 }
 

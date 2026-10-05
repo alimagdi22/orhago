@@ -1,6 +1,6 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlightResultService, IFlight } from 'rp-travel-ui';
+import { Subscription } from 'rxjs';
 import { IScheduleOption } from '../../../models/scheduleOption.model';
 
 type flightType = 'goingFlightScheduleDepart' | 'returnFlightScheduleDepart' | 'goingFlightScheduleArrival' | 'returnFlightScheduleArrival';
@@ -10,20 +10,17 @@ type flightType = 'goingFlightScheduleDepart' | 'returnFlightScheduleDepart' | '
   templateUrl: './schedules.component.html',
   styleUrl: './schedules.component.scss',
 })
-export class SchedulesComponent implements OnInit {
+export class SchedulesComponent implements OnInit, OnDestroy {
   @Input({ required: true }) isReturn = false;
   @Input({ required: true }) flights: IFlight[] = [];
   
   flightResultService = inject(FlightResultService);
-  translateService = inject(TranslateService);
   flightTypeIndex = 0;
+  private subscription = new Subscription();
   
   goingFlight: [depart: 'goingFlightScheduleDepart', arrival: 'goingFlightScheduleArrival'] = ['goingFlightScheduleDepart', 'goingFlightScheduleArrival']
 
   returnFlight: [depart: 'returnFlightScheduleDepart', arrival: 'returnFlightScheduleArrival'] = ['returnFlightScheduleDepart', 'returnFlightScheduleArrival']
-
-  departCity = '';
-  arrivalCity = '';
 
   scheduleOptions: IScheduleOption[] = [
     {
@@ -57,21 +54,22 @@ export class SchedulesComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    if (this.flights && this.flights.length) {
-      const flightIndex = this.isReturn ? 1 : 0;
-      const flight = this.flights[flightIndex];
-      if (flight && flight.flightDTO && flight.flightDTO.length) {
-        this.departCity = flight.flightDTO[0]?.departureTerminalAirport?.cityName || '';
-        this.arrivalCity = flight.flightDTO[flight.flightDTO.length - 1]?.arrivalTerminalAirport?.cityName || '';
-      }
-    }
-
-    const initialScheduleFilter = this.flightResultService.filterForm.get(
-      this.isReturn ? this.returnFlight[0] : this.goingFlight[0]
+    this.syncActive();
+    this.subscription.add(
+      this.flightResultService.filterForm?.valueChanges.subscribe(() => this.syncActive())
     );
-    this.scheduleOptions.forEach((e) => {
-      e.isActive = initialScheduleFilter?.get('startTime')?.value === e.startTime;
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  get originCode(): string {
+    return this.airportCode(true);
+  }
+
+  get destinationCode(): string {
+    return this.airportCode(false);
   }
 
   onSelectOption(scheduleOption: IScheduleOption) {
@@ -95,13 +93,29 @@ export class SchedulesComponent implements OnInit {
 
   onScheduleTabChange(value: number) {
     this.flightTypeIndex = value;
+    this.syncActive();
+  }
 
-    const scheduleFilter = this.flightResultService.filterForm.get(
+  private syncActive(): void {
+    const scheduleFilter = this.flightResultService.filterForm?.get(
       this.isReturn ? this.returnFlight[this.flightTypeIndex] : this.goingFlight[this.flightTypeIndex]
     );
-
-    this.scheduleOptions.forEach((e) => {
-      e.isActive = scheduleFilter?.get('startTime')?.value === e.startTime;
+    this.scheduleOptions.forEach((option) => {
+      option.isActive = scheduleFilter?.get('startTime')?.value === option.startTime;
     });
+  }
+
+  private airportCode(departing: boolean): string {
+    const flight = this.flights?.[this.isReturn ? 1 : 0];
+    const legs = flight?.flightDTO;
+    if (!legs?.length) {
+      return '';
+    }
+
+    const airport = departing
+      ? legs[0]?.departureTerminalAirport
+      : legs[legs.length - 1]?.arrivalTerminalAirport;
+    const translated = airport as { airportCode?: string; cityCode?: string; en?: { airportCode?: string; cityCode?: string } };
+    return translated?.airportCode || translated?.en?.airportCode || translated?.cityCode || translated?.en?.cityCode || '';
   }
 }

@@ -14,46 +14,32 @@ export class SearchBoxHeaderComponent implements OnInit, OnDestroy {
   sharedService = inject(SharedService);
   private subscription = new Subscription();
 
-  isFlightSelected = true;
-  isHotelSelected = true;
+  activeIndex = 0;
 
-  showFlightTab = true;
-  showHotelTab = true;
+  readonly tabs = [
+    { index: 0, label: 'home.search.flights' },
+    { index: 1, label: 'home.search.hotels' },
+    { index: 2, label: 'home.search.cars' },
+    { index: 3, label: 'home.search.transfers' },
+    { index: 4, label: 'home.search.packages' },
+  ];
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const currentUrl = this.router.url.toLowerCase();
-
-    this.showHotelTab = currentUrl.includes('hotels');
-    this.showFlightTab = currentUrl.includes('flight');
-
-    if (!this.showHotelTab && !this.showFlightTab) {
-      this.showHotelTab = true;
-      this.showFlightTab = true;
-    }
-
-    if (this.showHotelTab && !this.showFlightTab) {
-      this.isFlightSelected = false;
-      this.isHotelSelected = true;
-      this.tabChanged.emit(1); // Hotel tab
-    } else if (this.showFlightTab && !this.showHotelTab) {
-      this.isFlightSelected = true;
-      this.isHotelSelected = false;
-      this.tabChanged.emit(0); // Flight tab
+    if (this.router.url.toLowerCase().includes('hotels')) {
+      this.onClickTab(1);
     }
 
     this.subscription.add(
       this.sharedService.popularCitySelected.subscribe(() => {
-        this.isFlightSelected = false;
-        this.isHotelSelected = true;
-        this.tabChanged.emit(1);
-      })
+        this.onClickTab(1);
+      }),
     );
   }
 
   onClickTab(tabIndex: number): void {
-    this.isFlightSelected = tabIndex === 0;
+    this.activeIndex = tabIndex;
     this.tabChanged.emit(tabIndex);
   }
 

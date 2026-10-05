@@ -42,18 +42,40 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
 
   sortItems: ISortItem[] = [
     {
+      title: 'Recommended',
+      price: '',
+      currency: '',
+      duration: 0,
+      isActive: true,
+      sortCode: 0,
+      showCard: false,
+    },
+    {
+      title: 'Best',
+      price: '',
+      currency: '',
+      duration: 0,
+      isActive: false,
+      sortCode: 7,
+      showCard: true,
+    },
+    {
       title: 'Cheapest',
       price: '',
       currency: '',
-      isActive: true,
+      duration: 0,
+      isActive: false,
       sortCode: 1,
+      showCard: true,
     },
     {
       title: 'Fastest',
       price: '',
       currency: '',
+      duration: 0,
       isActive: false,
       sortCode: 2,
+      showCard: true,
     },
   ];
 
@@ -129,14 +151,6 @@ export class FlightResultsComponent implements OnInit, AfterViewInit, OnDestroy 
       this.flightResultService.notify.subscribe({
         next: () => {
           this.totalPages = Math.ceil(this.flightResultService.orgnizedResponce.length / this.itemsPerPage);
-          this.sortItems.forEach(e => {
-            if (this.flightResultService.orgnizedResponce.length) {
-              this.flightResultService.sortMyResult(e.sortCode);
-              e.currency = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.currencyCode;
-              e.price = this.flightResultService.orgnizedResponce[0][0].itinTotalFare.amount;
-            }
-          });
-          this.flightResultService.sortMyResult(1);
           if (typeof window !== 'undefined') {
             setTimeout(() => this.calculateFilterSticky(), 500);
           }

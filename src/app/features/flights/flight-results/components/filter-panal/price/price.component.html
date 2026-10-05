@@ -1,5 +1,5 @@
 @if (flightResultService.filterForm) {
-  <div class="container-fluid" [formGroup]="flightResultService.filterForm">
+  <div class="price-range" [formGroup]="flightResultService.filterForm">
     <mat-slider
       [min]="flightResultService.minPriceValueForSlider - 1"
       [max]="flightResultService.maxPriceValueForSlider + 1"
@@ -24,12 +24,10 @@
       <app-max-min-price
         [title]="'results.filter.minPrice' | translate"
         [price]="(flightResultService.filterForm.get('minpriceSlider')?.value ?? 0) - 1"
-        class="prices__min"
       />
       <app-max-min-price
         [title]="'results.filter.maxPrice' | translate"
         [price]="(flightResultService.filterForm.get('maxpriceSlider')?.value ?? 0) + 1"
-        class="prices__max"
       />
     </div>
   </div>

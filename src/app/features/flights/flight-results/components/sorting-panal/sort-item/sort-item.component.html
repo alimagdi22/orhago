@@ -1,4 +1,7 @@
-<div class="sort-item" [class.active]="sortItem.isActive">
-  <span class="sort-item__title">{{ 'results.sort.' + sortItem.title | translate }}</span>
-  <span class="sort-item__number">{{ sortItem.price | exchange: 'value' }}</span>
-</div>
+<button type="button" class="sort-card" [class.active]="sortItem.isActive">
+  <span class="sort-card__title">{{ 'results.sort.' + sortItem.title | translate }}</span>
+  <span class="sort-card__meta">
+    <strong>{{ sortItem.currency | exchange: 'code' }} {{ sortItem.price | exchange: 'value' }}</strong>
+    <span>{{ durationLabel }}</span>
+  </span>
+</button>

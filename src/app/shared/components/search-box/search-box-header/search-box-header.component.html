@@ -1,34 +1,12 @@
 <header class="search-box-header">
   <ul class="search-box-header__list">
-    @if (showFlightTab) {
+    @for (tab of tabs; track tab.index) {
       <li
         class="search-box-header__list__item"
-        (click)="onClickTab(0)"
-        [ngClass]="{ active: isFlightSelected }"
+        [class.active]="activeIndex === tab.index"
+        (click)="onClickTab(tab.index)"
       >
-        <div>
-          <img
-            [src]="isFlightSelected ? './assets/icons/plane-icon-white.svg' : './assets/icons/plane-icon-black.svg'"
-            title="Flight Icon"
-          />
-          <span>{{ 'home.search.flights' | translate }}</span>
-        </div>
-      </li>
-    }
-
-    @if (showHotelTab) {
-      <li
-        class="search-box-header__list__item"
-        (click)="onClickTab(1)"
-        [ngClass]="{ active: !isFlightSelected }"
-      >
-        <div>
-          <img
-            [src]="!isFlightSelected ? './assets/icons/hotel-icon-white.svg' : './assets/icons/hotel-icon-black.svg'"
-            title="Hotel Icon"
-          />
-          <span>{{ 'searchBox.hotels' | translate }}</span>
-        </div>
+        <span>{{ tab.label | translate }}</span>
       </li>
     }
   </ul>

@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: space-evenly;
 
-  height: $inputs-height - 1px;
+  height: 100%;
   box-sizing: border-box;
 
   padding: 8px 12px;
@@ -19,14 +19,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
-    color: #555;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #646081;
     margin-bottom: 0 !important;
   }
 
   &__date {
     font-weight: 700;
-    font-size: 13px;
+    font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -36,6 +39,7 @@
   }
 
   &__day {
+    display: none;
     font-size: 12px;
     font-weight: 600;
     color: #777;
@@ -43,5 +47,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+:host-context(html.dark) {
+  .calander__date,
+  .custom-input {
+    color: #ffffff;
+  }
+
+  .calander__placeholder,
+  .calander__day {
+    color: #9a97ae;
   }
 }

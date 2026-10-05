@@ -9,4 +9,15 @@ import { FlightResultService } from 'rp-travel-ui';
 })
 export class AirlinesFilterComponent {
   flightResultService = inject(FlightResultService);
+
+  count(name: string): number | null {
+    const flights = this.flightResultService.response?.airItineraries;
+    if (!flights?.length) {
+      return null;
+    }
+
+    return flights.filter((flight) =>
+      flight.allJourney?.flights?.some((leg) => leg.flightAirline?.airlineName === name)
+    ).length;
+  }
 }

@@ -1,19 +1,22 @@
 @if (isLoading) {
-  <div class="airline-grid">
-    @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track $index) {
-      <div class="airline-skeleton">
-        <app-skeleton-loader height="56px" borderRadius="12px" />
+  <div class="fare-grid">
+    @for (i of [1, 2, 3, 4]; track $index) {
+      <div class="fare-card fare-card--skeleton">
+        <app-skeleton-loader height="132px" borderRadius="0" />
+        <app-skeleton-loader height="24px" />
       </div>
     }
   </div>
 } @else {
-  <div class="airline-grid">
+  <div class="fare-grid">
     @for (airline of popularAirlines; track $index) {
-      <button type="button" class="airline-card-btn" (click)="navigateToAirline(airline.slug)">
-        <div class="airline-logo-box">
+      <button type="button" class="fare-card" (click)="navigateToAirline(airline.slug)">
+        <span class="fare-card__media">
           <img [src]="airline.airlineLogo" [alt]="getAirlineName(airline)" [title]="getAirlineName(airline)" />
-        </div>
-        <span class="airline-name-text">{{ getAirlineName(airline) }}</span>
+        </span>
+        <span class="fare-card__body">
+          <span class="fare-card__title">{{ getAirlineName(airline) }}</span>
+        </span>
       </button>
     }
   </div>

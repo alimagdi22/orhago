@@ -1,9 +1,3 @@
 <div class="schedule-option" [ngClass]="{ active: scheduleOption.isActive }">
-  <img
-    [src]="'assets/icons/' + scheduleOption.icon"
-    [title]="'results.filter.' + scheduleOption.title | translate"
-    class="schedule-option__icon"
-  />
-  <span class="schedule-option__title">{{ 'results.filter.' + scheduleOption.title | translate }}</span>
-  <span class="schedule-option__time">{{ scheduleOption.startTime }} - {{ scheduleOption.endTime }}</span>
+  <span class="schedule-option__title">{{ labelKey | translate }}</span>
 </div>

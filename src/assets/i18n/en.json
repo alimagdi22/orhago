@@ -1,7 +1,13 @@
 {
   "navbar": {
-    "signIn": "Sign In",
-    "manageBooking": "Manage Booking",
+    "signIn": "Sign in",
+    "manageBooking": "Manage booking",
+    "flights": "Flights",
+    "hotels": "Hotels",
+    "cars": "Cars",
+    "transfers": "Transfers",
+    "deals": "Deals",
+    "theme": "Toggle colour mode",
     "userProfile": "User Profile",
     "signOut": "Sign Out",
     "signOutMessage": "Are you sure you want to sign out of your account?",
@@ -83,25 +89,36 @@
 
   "home": {
     "bannarTitle": "Plan your imagination and book it",
+    "heroEyebrow": "Flights · Hotels · Cars · Transfers",
+    "heroTitle1": "One search.",
+    "heroTitle2": "The whole journey.",
+    "heroSubtitle": "Compare 450+ airlines, 1.4 million properties, chauffeur transfers and car hire — priced in your currency, booked in one checkout.",
+    "heroChip": "Istanbul · from AED 890",
     "search": {
       "flights": "Flights",
-      "oneWay": "One Way",
-      "roundTrip": "Round Trip",
-      "multiCity": "Multi City",
+      "hotels": "Hotels",
+      "cars": "Cars",
+      "transfers": "Transfers",
+      "packages": "Packages",
+      "comingSoon": "This search will be added next.",
+      "oneWay": "One way",
+      "roundTrip": "Round trip",
+      "multiCity": "Multi-city",
       "from": "From",
       "to": "To",
       "leavingFrom": "Leaving From",
       "goingTo": "Going To",
       "depart": "Depart",
+      "returnLabel": "Return",
       "arrive": "Arrive",
       "popularDest": "Popular destinations",
-      "passenger": "Passenger",
-      "guest": "Guest",
+      "passenger": "Travellers",
+      "guest": "Travellers",
       "selectDate": "Select a date",
       "adult": "Adult",
       "child": "child",
       "infant": "infant",
-      "Economy": "Economy class",
+      "Economy": "Economy",
       "Premium Economy": "Premium Economy",
       "Business": "Business",
       "First": "First Class",
@@ -109,8 +126,29 @@
       "done": "Done",
       "addFlight": "Add Flight",
       "addFlightNote": "Maximum of 4 different flights can be added",
-      "searchTicket": "Search Ticket",
+      "searchTicket": "Search flights",
       "enterDestination": "Enter your destination city"
+    },
+    "promises": {
+      "priceMatch": "We price match",
+      "priceMatchText": "Find it cheaper, we refund the difference",
+      "cancellation": "Free 24-hour cancellation",
+      "cancellationText": "On every fare marked refundable",
+      "fees": "No hidden fees",
+      "feesText": "The price you see is the price you pay",
+      "support": "One support channel",
+      "supportText": "For every part of your trip"
+    },
+    "stats": {
+      "airlines": "airlines compared",
+      "properties": "properties worldwide",
+      "support": "multilingual support",
+      "payment": "secure payment"
+    },
+    "fareCard": {
+      "from": "from",
+      "seeAll": "See all",
+      "seeAllRoutes": "See all routes"
     },
     "exploreTitle": "Explore popular flights and hotels",
     "adContent": {
@@ -145,6 +183,15 @@
   },
 
   "results": {
+    "summary": {
+      "modifySearch": "Modify search",
+      "adult": "Adult",
+      "adults": "Adults",
+      "child": "Child",
+      "children": "Children",
+      "infant": "Infant",
+      "infants": "Infants"
+    },
     "availableFlights": "Available Flights",
     "loadingMessage": "Loading Search results, Please wait.",
 
@@ -157,6 +204,15 @@
       "flightSchedules": "Flight Schedules",
       "departure": "departure",
       "arrival": "arrival",
+      "departureFrom": "Departure from",
+      "arrivalAt": "Arrival at",
+      "before0600": "Before 06:00",
+      "range0612": "06:00–12:00",
+      "range1218": "12:00–18:00",
+      "after1800": "After 18:00",
+      "title": "Filters",
+      "clearAll": "Clear all",
+      "priceRange": "Price range",
       "Morning": "Morning",
       "Noon": "Noon",
       "Afternoon": "Afternoon",
@@ -166,14 +222,19 @@
       "refundable": "Refundable",
       "nonRefundable": "Non-Refundable",
       "stops": "Stops",
-      "1 Stop": "1 Stop",
-      "2 Stops": "2 Stops",
-      "Non-Stop": "Direct"
+      "1 Stop": "1 stop",
+      "2 Stops": "2+ stops",
+      "Non-Stop": "Non-stop"
     },
 
     "sort": {
+      "Recommended": "Recommended",
+      "Best": "Best",
       "Cheapest": "Cheapest",
-      "Fastest": "Fastest"
+      "Fastest": "Fastest",
+      "label": "Sort:",
+      "flights": "flights",
+      "taxes": "prices include taxes and fees"
     },
 
     "card": {

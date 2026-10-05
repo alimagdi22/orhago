@@ -1,54 +1,97 @@
 .hotel-deals-container {
   padding-block: 40px;
-  max-width: 1200px;
+  max-width: 1380px;
   margin: 0 auto;
 }
 
-.text-wrapper {
+.section-head {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 40px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  text-align: start;
 
   .title {
-    font-size: 32px;
+    margin: 0;
+    color: #1a191e;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
     font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 12px;
-
-    @media (max-width: 768px) {
-      font-size: 26px;
-    }
+    letter-spacing: -0.03em;
+    line-height: 1.15;
   }
 
   .description {
-    font-size: 15px;
-    color: #64748b;
-    max-width: 720px;
-    line-height: 1.55;
-    margin: 0 auto;
+    max-width: 640px;
+    margin: 6px 0 0;
+    color: #646081;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
 
-    @media (max-width: 768px) {
-      font-size: 13px;
-    }
+  &__link {
+    flex: 0 0 auto;
+    color: #5029f4;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  &__link-short {
+    display: none;
   }
 }
 
 .deals-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-
-  @media (max-width: 991px) {
-    grid-template-columns: 1fr;
-    gap: 150px;
-  }
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .grid-item {
   width: 100%;
-  height: 290px;
+  height: auto;
+}
+
+:host-context(html.dark) {
+  .section-head .title {
+    color: #f4f2ff;
+  }
+
+  .section-head .description {
+    color: #9a97ae;
+  }
+
+  .section-head__link {
+    color: #b7a6ff;
+  }
+}
+
+@media (max-width: 1100px) {
+  .deals-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .section-head .title {
+    font-size: 22px;
+  }
+
+  .section-head .description {
+    display: none;
+  }
+
+  .section-head__link-wide {
+    display: none;
+  }
+
+  .section-head__link-short {
+    display: inline;
+  }
 }
 
 .pagination-wrapper {
@@ -56,10 +99,10 @@
   align-items: center;
   justify-content: center;
   gap: 24px;
-  margin-top: 40px;
+  margin-top: 28px;
 
   @media(max-width:768px){
-    margin-top: 125px;
+    margin-top: 28px;
   }
 
   .nav-btn {

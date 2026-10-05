@@ -1,165 +1,72 @@
-@import '../../../../../../sass/variables';
-@import '../../../../../../sass/colors';
-
-.hotel-deal-card {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid #f1f5f9;
+.fare-card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid #e4e1f0;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #1a191e;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  }
+  &__media {
+    height: 148px;
+    background: linear-gradient(160deg, #ffba26 0%, #5029f4 55%, #15113f 100%);
 
-  @media (max-width: 576px) {
-    height: auto;
-  }
-
-  &__img-container {
-    width: 45%;
-    min-width: 45%;
-    position: relative;
-    overflow: hidden;
-
-    @media (max-width: 576px) {
+    img {
+      display: block;
       width: 100%;
-      min-width: 100%;
-      height: 200px;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
-  &__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-
-    @media (max-width: 576px) {
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 16px;
-    }
-  }
-
-  &__info {
-    width: 55%;
-    padding: 20px 22px;
+  &__body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
-    @media (max-width: 576px) {
-      width: 100%;
-      padding: 16px;
-    }
-
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-
-      &__hotel-type {
-        padding: 5px 16px;
-        border-radius: 6px;
-        background-color:#f48851 ;
-        color: white;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 0.2px;
-      }
-
-      &__percentage {
-        padding: 5px 14px;
-        border-radius: 6px;
-        color: #213567;
-        background-color: #daedfe;
-        font-size: 13px;
-        font-weight: 700;
-      }
-    }
-
-    &__hotel-name {
-      font-weight: 700;
-      font-size: 17px;
-      color: #0f172a;
-      line-height: 1.35;
-      margin: 0 0 12px 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    &__location {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 16px;
-
-      &__icon {
-        width: 15px;
-        height: 15px;
-        object-fit: contain;
-      }
-
-      &__text {
-        font-size: 13px;
-        font-weight: 500;
-        color: #475569;
-      }
-    }
-
-    &__footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 8px;
-
-      &__price {
-        font-weight: 800;
-        font-size: 16px;
-        color: #0f172a;
-      }
-
-      &__btn {
-        color: #ffffff;
-        background-color: #213567;
-        font-size: 14px;
-        font-weight: 600;
-        border: none;
-        border-radius: 8px;
-        padding: 9px 20px;
-        cursor: pointer;
-        transition: background-color 0.2s ease, transform 0.15s ease;
-
-        &:hover {
-          background-color: #daedfe;
-          color: black;
-          transform: scale(1.02);
-        }
-
-        &:active {
-          transform: scale(0.98);
-        }
-
-        &:focus {
-          outline: none;
-        }
-      }
-    }
+    align-items: flex-start;
+    gap: 4px;
+    padding: 14px 16px 16px;
   }
 
-  @media (max-width: 576px) {
-    flex-direction: column;
+  &__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  &__meta {
+    margin: 0;
+    color: #646081;
+    font-size: 13px;
+  }
+
+  &__price {
+    margin: 8px 0 0;
+    color: #646081;
+    font-size: 14px;
+
+    strong {
+      color: #1a191e;
+      font-weight: 700;
+    }
+  }
+}
+
+:host-context(html.dark) .fare-card {
+  background: #17151f;
+  border-color: #2e2b3c;
+  color: #f4f2ff;
+
+  .fare-card__meta,
+  .fare-card__price {
+    color: #9a97ae;
+  }
+
+  .fare-card__price strong {
+    color: #f4f2ff;
   }
 }

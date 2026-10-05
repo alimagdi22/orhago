@@ -1,10 +1,12 @@
-<div class="city-grid">
+<div class="fare-grid">
   @for (card of cards; track $index) {
-    <button type="button" class="city-card-btn" (click)="onSelectCity(card.cityName)">
-      <div class="city-img-box">
+    <button type="button" class="fare-card" (click)="onSelectCity(card.cityName)">
+      <span class="fare-card__media">
         <img [src]="'assets/images/popular/' + card.image" [alt]="card.cityName" [title]="card.cityName" />
-      </div>
-      <span class="city-name-text">{{ card.cityName }}</span>
+      </span>
+      <span class="fare-card__body">
+        <span class="fare-card__title">{{ card.cityName }}</span>
+      </span>
     </button>
   }
 </div>

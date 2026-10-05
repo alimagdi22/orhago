@@ -1,11 +1,124 @@
-.filter-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+:host {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #1a191e;
 }
 
-.schedule-wrapper {
+.filter-card {
+  padding: 18px 16px 8px;
+  border: 1px solid #eceaf4;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(26, 25, 30, 0.04);
+}
+
+.filter-card__head {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+
+  h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+.filter-card__clear {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #5029f4;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-section {
+  padding: 16px 0;
+  border-top: 1px solid #eeeaf6;
+
+  &--schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.filter-section__label {
+  margin: 0 0 12px;
+  color: #8d89a3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+:host ::ng-deep {
+  .check-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 34px;
+  }
+
+  .check-row__count {
+    flex: 0 0 auto;
+    color: #9a97ae;
+    font-size: 13px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mat-mdc-checkbox {
+    --mdc-checkbox-selected-icon-color: #5029f4;
+    --mdc-checkbox-selected-hover-icon-color: #5029f4;
+    --mdc-checkbox-selected-focus-icon-color: #5029f4;
+    --mdc-checkbox-selected-pressed-icon-color: #5029f4;
+    --mdc-checkbox-unselected-icon-color: #d9d6e6;
+    --mdc-checkbox-unselected-hover-icon-color: #c9c5d8;
+    --mdc-checkbox-selected-checkmark-color: #ffffff;
+    --mdc-checkbox-selected-focus-state-layer-color: #5029f4;
+    --mdc-checkbox-selected-hover-state-layer-color: #5029f4;
+
+    .mdc-checkbox__background {
+      border-radius: 4px;
+    }
+
+    .mdc-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1a191e;
+    }
+  }
+}
+
+:host-context(html.dark) {
+  color: #f7f4ff;
+
+  .filter-card {
+    background: #17151f;
+    border-color: #2e2b3c;
+    box-shadow: none;
+  }
+
+  .filter-section {
+    border-top-color: #2e2b3c;
+  }
+
+  .filter-section__label,
+  ::ng-deep .check-row__count {
+    color: #9a97ae;
+  }
+
+  ::ng-deep .mat-mdc-checkbox .mdc-label {
+    color: #f7f4ff;
+  }
 }

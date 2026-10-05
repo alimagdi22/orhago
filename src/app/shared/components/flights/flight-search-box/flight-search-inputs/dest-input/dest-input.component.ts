@@ -251,7 +251,10 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     const langObj = city[this.sharedService.lang];
-    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = langObj;
+    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = {
+      ...langObj,
+      isCitySelection,
+    };
 
     this.flightSearchService.flightsArray
       .at(index)
@@ -259,7 +262,10 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       ?.setValue(true);
 
     const code = isCitySelection ? langObj.cityCode : langObj.airportCode;
-    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(langObj.cityName + ',' + code);
+    const selectedValue = `${langObj.cityName},${code}`;
+    const control = this.flightSearchService.flightsArray.at(index).get(dest);
+    control?.setValue(selectedValue);
+    queueMicrotask(() => control?.setValue(selectedValue));
 
     this.isFocused = false;
 
@@ -336,7 +342,13 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
         dismiss: () => this.dialog.closeAll(),
         index,
         destination,
-        flightItem
+        flightItem,
+        onSelected: (isCitySelection: boolean) => {
+          this.destinationTypeChange.emit({
+            dest: this.destination,
+            type: isCitySelection ? 'City' : 'Airport',
+          });
+        },
       },
       width: '100vw',
       height: '100vh',
@@ -344,6 +356,10 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       panelClass: 'full-width-dialog',
       hasBackdrop: true
     });
+  }
+
+  isCitySelected(): boolean {
+    return !!this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity']?.isCitySelection;
   }
 
   isDestNotValid(index: number) {

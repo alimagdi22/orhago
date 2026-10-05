@@ -21,13 +21,14 @@
 .dest,
 .calander,
 .cabin {
-  height: $inputs-height;
+  height: 85px;
   display: flex;
   justify-content: center;
-
-  border: 1px solid map-get($map: $colors, $key: 'gray');
+  align-items: stretch;
+  border: 1px solid #8D89A3;
+  background: #FBFAFF;
   transition: all 0.2s;
-  border-radius: $base-radius-small;
+  border-radius: 16px;
 
   &__devider {
     display: flex;
@@ -35,9 +36,7 @@
     align-items: center;
 
     &__line {
-      background-color: map-get($map: $colors, $key: 'gray');
-      width: 1px;
-      height: 100%;
+      display: none;
     }
 
     &__icon {
@@ -54,12 +53,79 @@
   }
 }
 
-.dest , .calander{
+.dest,
+.calander {
   grid-column: span 4;
+  border: none;
+  background: transparent;
+  gap: 12px;
+  border-radius: 0;
+  align-items: center;
 }
 
-.cabin , .button {
+.dest app-dest-input,
+.calander app-date-input,
+.calander__to {
+  flex: 1 1 auto;
+  min-height: 87px;
+  width: auto !important;
+  max-width: none;
+  min-width: 0;
+  min-width: 179px;
+  height: 87px;
+  display: flex;
+  border: 1px solid #8D89A3;
+  border-radius: 16px;
+  background: #FBFAFF;
+  overflow: hidden;
+}
+
+.dest__devider {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #e0deec;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #1a191e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  cursor: pointer;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.calander__devider {
+  display: none;
+}
+
+:host-context(html.dark) {
+  .dest app-dest-input,
+  .calander app-date-input,
+  .calander__to,
+  .cabin,
+  .dest__devider {
+    background: #1a191e;
+    border-color: #2c2a3a;
+    color: #ffffff;
+  }
+}
+
+.cabin,
+.button {
   grid-column: span 2;
+}
+
+.cabin app-cabin-class {
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .add-flight-button {
@@ -391,8 +457,28 @@ app-cabin-class {
 }
 
 @media (max-width:768px){
-  .dest , .calander , .cabin , .button{
+  .dest,
+  .calander,
+  .cabin,
+  .button {
     grid-column: span 12 !important;
+  }
+
+  .dest {
+    flex-direction: column;
+    height: auto;
+    align-items: stretch;
+  }
+
+  .calander {
+    flex-direction: row;
+    height: auto;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .dest__devider {
+    display: none;
   }
 
   .calander:has(+ .remove-icon) {

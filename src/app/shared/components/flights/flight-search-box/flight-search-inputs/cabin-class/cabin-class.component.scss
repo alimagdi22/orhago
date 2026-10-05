@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: space-evenly;
 
-  height: $inputs-height - 1px;
+  height: 100%;
   box-sizing: border-box;
 
   padding: 8px 12px;
@@ -15,15 +15,18 @@
   cursor: pointer;
 
   &__placeholder {
-    font-size: 13px;
-    color: #555;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #646081;
     margin: 0;
     margin-bottom: 0;
   }
 
   &__guests {
     font-weight: 700;
-    font-size: 13px;
+    font-size: 16px;
     color: #111;
     margin: 0;
   }
@@ -33,6 +36,17 @@
     font-weight: 600;
     color: #777;
     margin: 0;
+  }
+}
+
+:host-context(html.dark) {
+  .cabin__guests {
+    color: #ffffff;
+  }
+
+  .cabin__placeholder,
+  .cabin__type {
+    color: #9a97ae;
   }
 }
 

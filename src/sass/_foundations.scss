@@ -1,0 +1,293 @@
+// ORHAS foundations, taken from the Foundations board.
+// Existing theme variables ($green, $colors, $base-radius, body type) are unchanged.
+//
+// Not on the board, so not invented here:
+// - Elevation offsets, blur, and alpha. The board only names the four levels
+//   and says shadows are tinted with Midnight Ink, never pure black.
+// - Type sizes and line-heights that the sample text covers. Those styles
+//   still carry family and weight, and size only when the number before the
+//   slash was fully visible.
+
+$font-display: 'Bricolage Grotesque', sans-serif;
+$font-body: 'Plus Jakarta Sans', sans-serif;
+
+// Violet is the primary scale. Starred brand steps: 50, 300, 500, 900.
+$violet: (
+  50: #f4f2ff,
+  // Lavender Mist
+  100: #e6e1ff,
+  200: #cfc5ff,
+  300: #8e7aff,
+  // Soft Ultraviolet
+  400: #6d4ff8,
+  500: #5029f4,
+  // Orhas Ultraviolet
+  600: #3f1fd1,
+  700: #3119a3,
+  800: #221566,
+  900: #15113f,
+  // Deep Cosmos
+);
+
+// Amber is the secondary scale. Starred brand step: 500.
+$amber: (
+  50: #fff6e0,
+  100: #ffe9b8,
+  200: #ffd980,
+  300: #ffcb4d,
+  400: #ffba26,
+  500: #ffac00,
+  // Amber Glow
+  600: #d68f00,
+  700: #a36d00,
+);
+
+// Ink starts at 400. Starred brand step: 900.
+$ink: (
+  400: #5a5870,
+  500: #47455c,
+  600: #353447,
+  700: #282732,
+  800: #201f27,
+  900: #1a191e,
+  // Midnight Ink
+);
+
+// Violet-tinted neutrals. Starred brand step: 500.
+// neutral/100 is #eeecf7 from the chip. The caption under it did not resolve cleanly.
+$neutral: (
+  0: #ffffff,
+  25: #fbfaff,
+  50: #f7f6fc,
+  100: #eeecf7,
+  200: #e0deec,
+  300: #c7c4d8,
+  400: #9a97ae,
+  450: #8d89a3,
+  500: #646081,
+  // Slate Violet
+  600: #4e4866,
+  700: #38364b,
+);
+
+// Semantic captions were cropped. These are the chip colours.
+$semantic-green: (
+  50: #e8f7f0,
+  500: #13a05c,
+  600: #0b7a45,
+);
+
+$semantic-warning: (
+  50: #fff4e0,
+  500: #8e6000,
+);
+
+$semantic-red: (
+  50: #fcecec,
+  500: #df3130,
+  600: #b02626,
+);
+
+$foundation-colors: (
+  'violet': $violet,
+  'amber': $amber,
+  'ink': $ink,
+  'neutral': $neutral,
+  'green': $semantic-green,
+  'warning': $semantic-warning,
+  'red': $semantic-red,
+);
+
+$color-lavender-mist: map-get($violet, 50);
+$color-soft-ultraviolet: map-get($violet, 300);
+$color-orhas-ultraviolet: map-get($violet, 500);
+$color-deep-cosmos: map-get($violet, 900);
+$color-amber-glow: map-get($amber, 500);
+$color-midnight-ink: map-get($ink, 900);
+$color-slate-violet: map-get($neutral, 500);
+
+@function foundation-color($group, $step) {
+  $scale: map-get($foundation-colors, $group);
+
+  @if $scale == null {
+    @error "Unknown foundation colour `#{$group}`.";
+  }
+
+  $value: map-get($scale, $step);
+
+  @if $value == null {
+    @error "Unknown step `#{$step}` on `#{$group}`.";
+  }
+
+  @return $value;
+}
+
+// size is font-size. line-height is the board's percentage when it was fully visible.
+$type-styles: (
+  'display-xl': (
+    family: $font-display,
+    weight: 800,
+    size: null,
+    line-height: null,
+  ),
+  'display-l': (
+    family: $font-display,
+    weight: 800,
+    size: null,
+    line-height: null,
+  ),
+  'display-m': (
+    family: $font-display,
+    weight: 700,
+    size: 36px,
+    line-height: null,
+  ),
+  'heading-l': (
+    family: $font-display,
+    weight: 700,
+    size: 28px,
+    line-height: null,
+  ),
+  'heading-m': (
+    family: $font-display,
+    weight: 600,
+    size: null,
+    line-height: null,
+  ),
+  'heading-s': (
+    family: $font-display,
+    weight: 600,
+    size: null,
+    line-height: null,
+  ),
+  'body-l': (
+    family: $font-body,
+    weight: 400,
+    size: 17px,
+    line-height: null,
+  ),
+  'body-m': (
+    family: $font-body,
+    weight: 400,
+    size: 15px,
+    line-height: null,
+  ),
+  'body-s': (
+    family: $font-body,
+    weight: 400,
+    size: 13px,
+    line-height: null,
+  ),
+  'label-l': (
+    family: $font-body,
+    weight: 600,
+    size: 15px,
+    line-height: null,
+  ),
+  'label-m': (
+    family: $font-body,
+    weight: 600,
+    size: 14px,
+    line-height: null,
+  ),
+  'label-s': (
+    family: $font-body,
+    weight: 600,
+    size: 12px,
+    line-height: null,
+  ),
+  'overline': (
+    family: $font-body,
+    weight: 700,
+    size: 11px,
+    line-height: 120%,
+  ),
+  'price-xl': (
+    family: $font-body,
+    weight: 700,
+    size: 32px,
+    line-height: 110%,
+  ),
+  'price-l': (
+    family: $font-body,
+    weight: 700,
+    size: 24px,
+    line-height: 114.9%,
+  ),
+  'price-m': (
+    family: $font-body,
+    weight: 700,
+    size: 18px,
+    line-height: 120%,
+  ),
+  'price-strike': (
+    family: $font-body,
+    weight: 500,
+    size: 14px,
+    line-height: null,
+  ),
+);
+
+@mixin type($name) {
+  $style: map-get($type-styles, $name);
+
+  @if $style == null {
+    @error "Unknown type style `#{$name}`.";
+  }
+
+  font-family: map-get($style, family);
+  font-weight: map-get($style, weight);
+
+  $size: map-get($style, size);
+  @if $size != null {
+    font-size: $size;
+  }
+
+  $leading: map-get($style, line-height);
+  @if $leading != null {
+    line-height: $leading;
+  }
+}
+
+// Board labels: xs 6, sm 10, md 14, lg 20, xl 28, pill full.
+$radius-xs: 6px;
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$radius-pill: 9999px;
+
+$radius: (
+  'xs': $radius-xs,
+  'sm': $radius-sm,
+  'md': $radius-md,
+  'lg': $radius-lg,
+  'xl': $radius-xl,
+  'pill': $radius-pill,
+);
+
+// card, raised, popover, modal. Numeric shadows are not on the board.
+$elevation-levels: 'card', 'raised', 'popover', 'modal';
+
+@mixin foundation-custom-properties {
+  @each $group, $scale in $foundation-colors {
+    @each $step, $value in $scale {
+      --#{$group}-#{$step}: #{$value};
+    }
+  }
+
+  --color-lavender-mist: #{$color-lavender-mist};
+  --color-soft-ultraviolet: #{$color-soft-ultraviolet};
+  --color-orhas-ultraviolet: #{$color-orhas-ultraviolet};
+  --color-deep-cosmos: #{$color-deep-cosmos};
+  --color-amber-glow: #{$color-amber-glow};
+  --color-midnight-ink: #{$color-midnight-ink};
+  --color-slate-violet: #{$color-slate-violet};
+
+  --font-display: #{inspect($font-display)};
+  --font-body: #{inspect($font-body)};
+
+  @each $name, $value in $radius {
+    --radius-#{$name}: #{$value};
+  }
+}

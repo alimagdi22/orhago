@@ -15,6 +15,10 @@
 /* utilities */
 @import './utilities';
 
+:root {
+  @include foundation-custom-properties;
+}
+
 * {
   color: inherit;
   margin: 0;
@@ -24,6 +28,11 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
   background-color: white;
+}
+
+html.dark,
+html.dark body {
+  background-color: #0c0b12;
 }
 
 /* Arabic-specific font */

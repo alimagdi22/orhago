@@ -1,19 +1,32 @@
-.container-fluid{
-  padding: 0 !important;
+.price-range {
+  padding: 0;
 }
 
 .slider {
-  width: 95%;
+  width: 100%;
 }
 
 .prices {
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  gap: 12px;
+  margin-top: 2px;
+}
 
-  &__min,
-  &__max {
-    flex-grow: 1;
-    height: 79px;
+:host ::ng-deep .mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #ffffff;
+  --mdc-slider-focus-handle-color: #ffffff;
+  --mdc-slider-hover-handle-color: #ffffff;
+  --mdc-slider-active-track-color: #5029f4;
+  --mdc-slider-inactive-track-color: #e6e3f0;
+  --mdc-slider-with-tick-marks-active-container-color: #5029f4;
+  --mat-slider-active-track-color: #5029f4;
+  --mat-slider-inactive-track-color: #e6e3f0;
+  --mat-slider-handle-color: #ffffff;
+  --mat-slider-focus-handle-color: #ffffff;
+  --mat-slider-hover-handle-color: #ffffff;
+
+  .mdc-slider__thumb-knob {
+    border: 2px solid #5029f4;
   }
 }

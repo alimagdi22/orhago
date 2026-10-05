@@ -8,10 +8,12 @@
   align-items: center;
   gap: 15px;
 
-  border-radius: $base-radius;
+  border-radius: 18px;
   padding: 20px;
-
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #ffffff;
+  color: #1a191e;
+  border: 1px solid #e4e1f0;
+  box-shadow: none;
 
   &__icon {
     width: 80px;
@@ -23,6 +25,17 @@
 
   &__paragraph {
     text-align: center;
+    color: #646081;
+  }
+}
+
+:host-context(html.dark) .advantage {
+  background: #17151f;
+  border-color: #2e2b3c;
+  color: #f4f2ff;
+
+  .advantage__paragraph {
+    color: #9a97ae;
   }
 }
 

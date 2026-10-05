@@ -47,8 +47,8 @@ export class FlightSearchBoxComponent implements OnInit {
 
     this.flightSearchService.initSearchForm(form);
 
-    if (!form) {
-      this.flightSearchService.searchFlight?.get('flightType')?.setValue('OneWay');
+    if (!form && !flightType) {
+      this.selectFlightType('RoundTrip');
     }
 
     if (flightType) {

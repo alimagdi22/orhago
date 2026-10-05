@@ -6,6 +6,7 @@ export interface IAirPort {
   countryCode: string;
   countryName: string;
   regionName: string;
+  isCitySelection?: boolean;
 }
 
 export interface IAirPortTranslated {

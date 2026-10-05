@@ -5,14 +5,14 @@
 #value
 class="calander"
 >
-<p class="calander__placeholder">{{ (isReturnDateSelected ? 'home.search.arrive' : 'home.search.depart') | translate }}</p>
+<p class="calander__placeholder">{{ (isReturnDateSelected ? 'home.search.returnLabel' : 'home.search.depart') | translate }}</p>
 
 @if(isReturnDateSelected) {
   @if (!flightSearchService.searchFlight.get('returnDate')?.value) {
     <p class="calander__date">{{ 'home.search.selectDate' | translate }}</p>
     } @else {
     <p class="calander__date">
-        {{ flightSearchService.searchFlight.get('returnDate')?.value | date: 'd MMMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+        {{ flightSearchService.searchFlight.get('returnDate')?.value | date: 'EEE d MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
     </p>
     <p class="calander__day">
         {{ flightSearchService.searchFlight.get('returnDate')?.value | date: 'EEEE' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
@@ -23,7 +23,7 @@ class="calander"
     <p class="calander__date">{{ 'home.search.selectDate' | translate }}</p>
   } @else {
     <p class="calander__date">
-      {{ flightSearchService.flightsArray.at(index).get('departingD')?.value | date: 'd MMMM y' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
+      {{ flightSearchService.flightsArray.at(index).get('departingD')?.value | date: 'EEE d MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
     </p>
     <p class="calander__day">
       {{ flightSearchService.flightsArray.at(index).get('departingD')?.value | date: 'EEEE' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}

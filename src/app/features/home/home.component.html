@@ -1,21 +1,109 @@
 <main>
-  <div class="bannar" [style.backgroundImage]="'url(' + images[index] + ')'">
-      <div
-    class="bannar__bg"
-    *ngFor="let img of images; let i = index"
-    [ngClass]="{ active: i === index }"
-    [style.backgroundImage]="'url(' + img + ')'"
-  ></div>
-    <p class="bannar__text capitalize">{{ 'home.bannarTitle' | translate }}</p>
+  <section class="hero">
+    <div class="hero__panel">
+      <div class="hero__copy">
+        <p class="hero__eyebrow">{{ 'home.heroEyebrow' | translate }}</p>
+        <h1>
+          <span>{{ 'home.heroTitle1' | translate }}</span>
+          <span>{{ 'home.heroTitle2' | translate }}</span>
+        </h1>
+        <p class="hero__subtitle">{{ 'home.heroSubtitle' | translate }}</p>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <svg class="hero__mark" viewBox="0 0 320 320">
+          <path
+            d="M168 28c78 6 132 62 130 136-2 68-48 106-96 150-22 22-32 46-32 72"
+            fill="none"
+            stroke="white"
+            stroke-width="28"
+            stroke-linecap="round"
+          />
+          <path
+            d="M62 168c16-68 64-112 132-118"
+            fill="none"
+            stroke="white"
+            stroke-width="28"
+            stroke-linecap="round"
+          />
+          <circle cx="58" cy="186" r="22" fill="white" />
+        </svg>
+        <p class="hero__chip">{{ 'home.heroChip' | translate }}</p>
+      </div>
+
+      <svg class="hero__arc" viewBox="0 0 760 140" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          d="M-20 118C140 18 360 8 560 78"
+          fill="none"
+          stroke="#ffba26"
+          stroke-width="22"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
 
     @if (sharedService.isCitiesLoading) {
       <app-skeleton-loader height="200px" />
     } @else {
-      <app-search-box class="regular-search" />
+      <app-search-box class="hero__search" />
     }
-  </div>
+  </section>
 
   <div class="container">
+    <section class="home-promises mt-5 mb-5">
+      <ul>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.2 8 13.7 15.5 6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <div>
+            <p class="home-promises__title">{{ 'home.promises.priceMatch' | translate }}</p>
+            <p class="home-promises__text">{{ 'home.promises.priceMatchText' | translate }}</p>
+          </div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.2 8 13.7 15.5 6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <div>
+            <p class="home-promises__title">{{ 'home.promises.cancellation' | translate }}</p>
+            <p class="home-promises__text">{{ 'home.promises.cancellationText' | translate }}</p>
+          </div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.2 8 13.7 15.5 6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <div>
+            <p class="home-promises__title">{{ 'home.promises.fees' | translate }}</p>
+            <p class="home-promises__text">{{ 'home.promises.feesText' | translate }}</p>
+          </div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.2 8 13.7 15.5 6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <div>
+            <p class="home-promises__title">{{ 'home.promises.support' | translate }}</p>
+            <p class="home-promises__text">{{ 'home.promises.supportText' | translate }}</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="home-stats mt-5 mb-5">
+      <ul>
+        <li>
+          <p class="home-stats__value">450+</p>
+          <p class="home-stats__label">{{ 'home.stats.airlines' | translate }}</p>
+        </li>
+        <li>
+          <p class="home-stats__value">1.4M</p>
+          <p class="home-stats__label">{{ 'home.stats.properties' | translate }}</p>
+        </li>
+        <li>
+          <p class="home-stats__value">24/7</p>
+          <p class="home-stats__label">{{ 'home.stats.support' | translate }}</p>
+        </li>
+        <li>
+          <p class="home-stats__value">100%</p>
+          <p class="home-stats__label">{{ 'home.stats.payment' | translate }}</p>
+        </li>
+      </ul>
+    </section>
+
     @if (
       !mostSearchedFlightsService.isEmpty && !mostSearchedFlightsService.isError && !mostSearchedFlightsService.isLoading
     ) {

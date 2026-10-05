@@ -61,10 +61,10 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
 
   /* Button Properties */
   searchButton: IMainButton = {
-    height: '56px',
+    height: '76px',
     width: '100%',
-    borderRadius: '6px',
-    backgroundColor: '#213567',
+    borderRadius: '16px',
+    backgroundColor: '#5029f4',
     color: 'white',
   };
 
@@ -172,6 +172,15 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
 
       localStorage.setItem('departing', landing ?? '');
       localStorage.setItem('landing', departing ?? '');
+    }
+
+    const previousDepartingType = this.departingType;
+    this.departingType = this.landingType;
+    this.landingType = previousDepartingType;
+
+    if (this.departingType && this.landingType) {
+      this.destinationType = `${this.departingType}_${this.landingType}`;
+      this.sharedService.destinationType = this.destinationType;
     }
 
     item.markAllAsTouched();

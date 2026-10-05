@@ -25,7 +25,7 @@ img {
   justify-content: space-between;
   cursor: text;
 
-  height: $inputs-height - 1px;
+  height: 100%;
   box-sizing: border-box;
 
   padding: 8px 12px;
@@ -35,7 +35,7 @@ img {
   &__country,
   &__date {
     font-weight: 700;
-    font-size: 13px;
+    font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -48,8 +48,11 @@ img {
     align-items: center;
 
     span {
-      font-size: 13px;
-      color: #555;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #646081;
     }
 
     &__clear {
@@ -95,6 +98,18 @@ img {
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+:host-context(html.dark) {
+  .dest__country,
+  .custom-input {
+    color: #ffffff;
+  }
+
+  .dest__placeholder span,
+  .dest__airport-id {
+    color: #9a97ae;
+  }
 }
 
 .sr-only-input {

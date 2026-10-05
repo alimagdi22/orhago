@@ -29,20 +29,38 @@ form {
 
 .radio-buttons {
   display: flex;
-  margin-bottom: 16px;
-  gap: 1%;
+  margin-bottom: 14px;
+  gap: 18px;
 
   font-size: 16px;
   text-wrap: nowrap;
   text-overflow: ellipsis;
 
   @media (max-width: 1200px) {
-    justify-content: space-between;
-    font-size: 12px;
-    gap: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    font-size: 14px;
+    gap: 8px 16px;
   }
 }
 
-::ng-deep .mdc-form-field > label{
-  margin-inline-start: -10px !important;
+::ng-deep .mdc-form-field > label {
+  margin-inline-start: 2px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #3a3850;
+}
+
+::ng-deep .radio-buttons {
+  .mdc-radio__outer-circle {
+    border-color: #c7c4d8 !important;
+  }
+
+  .mdc-radio--checked .mdc-radio__outer-circle,
+  .mdc-radio--checked .mdc-radio__inner-circle {
+    border-color: #5029f4 !important;
+  }
+
+  .mdc-radio__inner-circle {
+    background-color: #5029f4 !important;
+  }
 }

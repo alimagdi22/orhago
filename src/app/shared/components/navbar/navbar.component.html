@@ -1,69 +1,90 @@
+<ng-template #brandMark>
+  <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+    <path
+      d="M17.2 5.2c5.4.4 9.2 4.2 9.1 9.2-.1 4.6-3.2 7.2-6.4 10.1-1.7 1.5-2.4 3-2.4 4.7"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.4"
+      stroke-linecap="round"
+    />
+    <path
+      d="M8.4 16.6c1.2-4.6 4.6-7.6 9.2-8"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.4"
+      stroke-linecap="round"
+    />
+    <circle cx="8.2" cy="18.2" r="2.1" fill="currentColor" />
+  </svg>
+</ng-template>
+
 <div class="desktop-nav-wrapper">
-  <div
-    class="wrapper"
-    [ngClass]="{
-      shadow: sharedService.isSegmentPresent(['flight-results', 'flight-checkout', 'flight-confirmation', 'hotels-results', 'hotel-results', 'hotels-rooms', 'hotel-rooms', 'hotels-checkout', 'hotel-checkout', 'hotels-confirmation', 'hotel-confirmation']),
-      'scroll-background': isScrolled,
-    }"
-  >
-    <nav class="container">
-      @if(isScrolled){
-        <img src="assets/images/logo-white.svg" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-      }@else {
-        <img src="assets/images/logo.jpeg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-      }
-      @if (sharedService.isSegmentPresent(['flight-results'])) {
-        <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
-      } @else if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
+  <div class="wrapper" [class.shadow]="isScrolled">
+    <nav class="site-header container">
+      <a class="brand" routerLink="/" (click)="sharedService.scrollToTop()">
+        <ng-container *ngTemplateOutlet="brandMark" />
+        <span class="brand__name">Orhas</span>
+      </a>
+
+      @if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
         <app-hotel-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleHotelSearch()" />
       } @else if (sharedService.isSegmentPresent(['flight-checkout'])) {
         <app-checkout-steps [isScrolled]="isScrolled"/>
       } @else if (sharedService.isSegmentPresent(['hotels-rooms', 'hotel-rooms', 'hotels-checkout', 'hotel-checkout', 'hotels-confirmation', 'hotel-confirmation'])) {
         <app-hotel-checkout-steps [isScrolled]="isScrolled" />
       } @else {
-        <button
-          class="manage-booking-button"
-          [ngClass]="{ 'scroll-button': isScrolled }"
-          (click)="onManageBooking()"
-          type="button"
-        >
-          {{ 'navbar.manageBooking' | translate }}
-        </button>
+        <div class="product-nav">
+          <a routerLink="/" [class.is-current]="isFlightsRoute">{{ 'navbar.flights' | translate }}</a>
+          <a routerLink="/hotels" [class.is-current]="isHotelsRoute">{{ 'navbar.hotels' | translate }}</a>
+          <button type="button">{{ 'navbar.cars' | translate }}</button>
+          <button type="button">{{ 'navbar.transfers' | translate }}</button>
+          <button type="button">{{ 'navbar.deals' | translate }}</button>
+        </div>
       }
 
-      <div class="actions">
+      <div class="header-tools">
+        <button
+          type="button"
+          class="theme-btn"
+          (click)="theme.toggle()"
+          [attr.aria-label]="'navbar.theme' | translate"
+          [attr.aria-pressed]="theme.isDark()"
+        >
+          @if (theme.isDark()) {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M18.9 5.1l-1.6 1.6M6.7 17.3l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.8 14.6A6.6 6.6 0 0 1 9.2 6.4 6.7 6.7 0 1 0 16.8 14.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            </svg>
+          }
+        </button>
+
         @if (homePageService.loader) {
-          <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '120px' }" />
-        } @else {
-          <button
-            class="custom-button regional-btn"
-            [ngClass]="{ 'scroll-button': isScrolled }"
-            (click)="openRegionalPopup('currency')"
-            *ngIf="this.homePageService.selectedCurrency"
-            type="button"
-          >
-            <img
-              class="flag-icon"
-              width="20"
-              height="15"
-              [src]="this.homePageService.selectedCurrency['Image_Url']"
-              title="Flag Icon"
-            />
-            <span class="currency-code">{{ this.homePageService.selectedCurrency['Currency_Code'] }}</span>
-            <span class="dot-divider">•</span>
-            <!-- <span class="lang-code">{{ translate.currentLang == 'en' ? 'EN' : 'AR' }}</span>
-            <img src="assets/icons/arrow-down.svg" title="Arrow Down" class="arrow-down-icon" /> -->
+          <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '64px' }" />
+        } @else if (homePageService.selectedCurrency) {
+          <button class="tool-btn" (click)="openRegionalPopup('currency')" type="button">
+            <span>{{ homePageService.selectedCurrency['Currency_Code'] }}</span>
+            <svg viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.2 4.2 6 8l3.8-3.8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        }
+
+        @if (showProductNav) {
+          <button class="tool-btn tool-btn--text" (click)="onManageBooking()" type="button">
+            {{ 'navbar.manageBooking' | translate }}
           </button>
         }
 
         @if (isAuthenticated) {
           <app-drop-down />
         } @else {
-          <app-main-button
-            [mainButtonInfo]="signInButton"
-            [title]="'navbar.signIn' | translate"
-            (clickMainButton)="onClickSignIn()"
-          />
+          <button class="sign-in-btn" type="button" (click)="onClickSignIn()">
+            {{ 'navbar.signIn' | translate }}
+          </button>
         }
       </div>
     </nav>
@@ -73,15 +94,39 @@
 
 <div class="mobile-nav-wrapper">
   <section class="top-nav">
-    <div>
-      <img src="assets/images/logo.jpeg" width="130" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
-    </div>
+    <a class="brand" routerLink="/" (click)="sharedService.scrollToTop()">
+      <ng-container *ngTemplateOutlet="brandMark" />
+      <span class="brand__name">Orhas</span>
+    </a>
 
-    <button type="button" class="burger-btn" (click)="toggleSidebar()" aria-label="Toggle Menu">
-      <span class="burger-bar"></span>
-      <span class="burger-bar"></span>
-      <span class="burger-bar"></span>
-    </button>
+    <div class="mobile-tools">
+      <button
+        type="button"
+        class="theme-btn"
+        (click)="theme.toggle()"
+        [attr.aria-label]="'navbar.theme' | translate"
+      >
+        @if (theme.isDark()) {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M18.9 5.1l-1.6 1.6M6.7 17.3l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        } @else {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16.8 14.6A6.6 6.6 0 0 1 9.2 6.4 6.7 6.7 0 1 0 16.8 14.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          </svg>
+        }
+      </button>
+      @if (homePageService.selectedCurrency) {
+        <button class="tool-btn" type="button" (click)="openRegionalPopup('currency')">
+          {{ homePageService.selectedCurrency['Currency_Code'] }}
+        </button>
+      }
+      <button type="button" class="burger-btn" (click)="toggleSidebar()" aria-label="Toggle Menu">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
   </section>
 </div>
 
@@ -95,6 +140,31 @@
       </div>
 
       <ul class="sidebar-menu">
+        <li routerLink="/" (click)="closeSidebar()">
+          <div class="menu-item-content">
+            <span class="menu-label">{{ 'navbar.flights' | translate }}</span>
+          </div>
+        </li>
+        <li routerLink="/hotels" (click)="closeSidebar()">
+          <div class="menu-item-content">
+            <span class="menu-label">{{ 'navbar.hotels' | translate }}</span>
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-content">
+            <span class="menu-label">{{ 'navbar.cars' | translate }}</span>
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-content">
+            <span class="menu-label">{{ 'navbar.transfers' | translate }}</span>
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-content">
+            <span class="menu-label">{{ 'navbar.deals' | translate }}</span>
+          </div>
+        </li>
         <li (click)="onManageBookingMobile()">
           <div class="menu-item-content">
             <span class="menu-icon">📋</span>

@@ -1,4 +1,4 @@
-<p [ngStyle]="currentLang ==='en'?{'margin-left':'18px'}:{'margin-right':'18px'}" class="head mt-3">{{'searchBox.hotelHead' | translate}}</p>
+<p class="head">{{'searchBox.hotelHead' | translate}}</p>
 <div class="hotel-search-container" [formGroup]="searchForm">
   <div class="search-field">
     <app-location-input/>
@@ -20,12 +20,12 @@
     <app-main-button
       [title]="'searchBox.searchHotels' | translate"
       [mainButtonInfo]="{
-        height: '53px',
-        borderRadius: '6px',
+        height: '76px',
+        borderRadius: '16px',
         fontSize: '16px',
         padding:'16px 8px',
         width:'100%',
-        backgroundColor:'#213567',
+        backgroundColor:'#5029f4',
         color:'white'
       }"
 

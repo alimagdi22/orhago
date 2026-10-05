@@ -1,6 +1,13 @@
-<div class="text-wrapper">
-  <h2>{{ 'home.flightDeals.title' | translate }}</h2>
-  <p class="home-paragraph">{{ 'home.flightDeals.description' | translate }}</p>
+<div class="section-head">
+  <div>
+    <h2 class="mt-3 mb-3">{{ 'home.flightDeals.title' | translate }}</h2>
+    <p>{{ 'home.flightDeals.description' | translate }}</p>
+  </div>
+  <a class="section-head__link" routerLink="/flights">
+    <span class="section-head__link-wide">{{ 'home.fareCard.seeAllRoutes' | translate }}</span>
+    <span class="section-head__link-short">{{ 'home.fareCard.seeAll' | translate }}</span>
+    <span aria-hidden="true"> ›</span>
+  </a>
 </div>
 
 <div class="deals-swiper">
@@ -16,7 +23,7 @@
   </button>
 
   <swiper-container #swiperEl init="false" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
-    <swiper-slide *ngFor="let mostSearchedFlight of mostSearchedFlightsService.mostSearchedFlights; let i = index">
+    <swiper-slide *ngFor="let mostSearchedFlight of mostSearchedFlightsService.mostSearchedFlights">
       <app-flight-deals-card [mostSearchedFlight]="mostSearchedFlight"></app-flight-deals-card>
     </swiper-slide>
   </swiper-container>

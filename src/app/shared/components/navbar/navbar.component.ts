@@ -12,8 +12,8 @@ import {
   UserProfileService,
 } from 'rp-travel-ui';
 import { Subscription } from 'rxjs';
-import { IMainButton } from '../../models/flights/mainButton.model';
 import { SharedService } from '../../shared.service';
+import { ThemeService } from '../../theme.service';
 
 @Component({
   standalone: false,
@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
   tripsService = inject(TripsService);
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
+  theme = inject(ThemeService);
 
   isAuthenticated = false;
 
@@ -41,17 +42,6 @@ export class NavbarComponent implements OnInit {
   isScrolled = false;
   selectedLang = 'EN';
   
-  get signInButton(): IMainButton {
-    return {
-      height: '36px',
-      width: 'auto',
-      borderRadius: '6px',
-      backgroundColor: 'transparent',
-      border: this.isScrolled ? '1.5px solid white' : '1.5px solid black',
-      padding: '8px 14px',
-      color: this.isScrolled ? 'white' : 'black',
-    };
-  }
   isSidebarOpen = false;
   isLangPopupOpen = false;
   isCurrencyPopupOpen = false;
@@ -60,6 +50,33 @@ export class NavbarComponent implements OnInit {
   currencySearchQuery = '';
 
   subscription = new Subscription();
+
+  private readonly productNavHiddenOn = [
+    'flight-checkout',
+    'flight-confirmation',
+    'hotels-results',
+    'hotel-results',
+    'hotels-rooms',
+    'hotel-rooms',
+    'hotels-checkout',
+    'hotel-checkout',
+    'hotels-confirmation',
+    'hotel-confirmation',
+  ];
+
+  get showProductNav(): boolean {
+    return !this.sharedService.isSegmentPresent(this.productNavHiddenOn);
+  }
+
+  get isFlightsRoute(): boolean {
+    const path = this.router.url.split('?')[0];
+    return path === '/' || path === '/flights';
+  }
+
+  get isHotelsRoute(): boolean {
+    const path = this.router.url.split('?')[0];
+    return path === '/hotels';
+  }
 
   get filteredCurrencies(): currencyModel[] {
     if (!this.homePageService.allCurrency) return [];

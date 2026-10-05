@@ -1,10 +1,14 @@
 @if (flightResultService.filterForm && flightResultService.filterForm.get('flexibleTickets')) {
   <ng-container [formGroup]="flightResultService.filterForm">
     <ng-container formGroupName="flexibleTickets">
-      <mat-checkbox color="primary" formControlName="refund">{{ 'results.filter.refundable' | translate }}</mat-checkbox>
-      <mat-checkbox color="primary" formControlName="nonRefund">{{
-        'results.filter.nonRefundable' | translate
-      }}</mat-checkbox>
+      <div class="check-row">
+        <mat-checkbox color="primary" formControlName="refund">{{ 'results.filter.refundable' | translate }}</mat-checkbox>
+        <span class="check-row__count">{{ flightResultService.refundedItineries }}</span>
+      </div>
+      <div class="check-row">
+        <mat-checkbox color="primary" formControlName="nonRefund">{{ 'results.filter.nonRefundable' | translate }}</mat-checkbox>
+        <span class="check-row__count">{{ flightResultService.nonRefundedItieneries }}</span>
+      </div>
     </ng-container>
   </ng-container>
 }

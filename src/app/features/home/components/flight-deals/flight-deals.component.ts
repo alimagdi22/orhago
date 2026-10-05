@@ -44,9 +44,9 @@ export class FlightDealsComponent implements AfterViewInit, OnInit {
       },
       pagination: { bulletClass: 'hide' },
       breakpoints: {
-        0: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
+        0: { slidesPerView: 1.6 },
+        700: { slidesPerView: 2 },
+        1100: { slidesPerView: 4 },
       },
     });
 

@@ -1,22 +1,25 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-
-  .options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-
-    app-schedule-option {
-      flex-grow: 1;
-      flex-basis: 40%;
-    }
-  }
+  gap: 10px;
 }
 
-.text-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.schedule-kicker {
+  margin: 0;
+  color: #8d89a3;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+:host-context(html.dark) .schedule-kicker {
+  color: #9a97ae;
 }

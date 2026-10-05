@@ -1,7 +1,14 @@
 <div class="hotel-deals-container" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
-  <div class="text-wrapper">
-    <h2 class="title">{{ 'home.hotelDeals.title' | translate }}</h2>
-    <p class="description">{{ 'home.hotelDeals.description' | translate }}</p>
+  <div class="section-head">
+    <div>
+      <h2 class="title">{{ 'home.hotelDeals.title' | translate }}</h2>
+      <p class="description">{{ 'home.hotelDeals.description' | translate }}</p>
+    </div>
+    <a class="section-head__link" routerLink="/hotels">
+      <span class="section-head__link-wide">{{ 'home.fareCard.seeAllRoutes' | translate }}</span>
+      <span class="section-head__link-short">{{ 'home.fareCard.seeAll' | translate }}</span>
+      <span aria-hidden="true"> ›</span>
+    </a>
   </div>
 
   <div class="deals-grid">
