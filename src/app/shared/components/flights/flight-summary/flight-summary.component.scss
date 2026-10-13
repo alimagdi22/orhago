@@ -65,7 +65,13 @@
   cursor: pointer;
 }
 
-:host-context([dir='rtl']) .trip-bar__arrow {
+.trip-bar__back,
+.trip-bar__edit {
+  display: none;
+}
+
+:host-context([dir='rtl']) .trip-bar__arrow,
+:host-context([dir='rtl']) .trip-bar__back svg {
   transform: scaleX(-1);
 }
 
@@ -84,19 +90,58 @@
   }
 }
 
-@media (max-width: 700px) {
-  .trip-bar__inner {
-    align-items: flex-start;
-    gap: 12px;
-    min-height: 0;
-    padding-block: 14px;
+@media (max-width: 1000px) {
+  .trip-bar {
+    background: transparent;
   }
 
-  .trip-bar__route {
-    font-size: 16px;
+  .trip-bar__inner {
+    align-items: center;
+    gap: 10px;
+    min-height: 0;
+    padding: 12px 14px;
+    background: #f4f2ff;
+  }
+
+  .trip-bar__back,
+  .trip-bar__edit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .trip-bar__back {
+    color: #1a191e;
+  }
+
+  .trip-bar__edit {
+    color: #5029f4;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
   }
 
   .trip-bar__modify {
-    padding: 8px 12px;
+    display: none;
+  }
+
+  .trip-bar__route {
+    font-size: 15px;
+  }
+
+  .trip-bar__meta {
+    font-size: 12px;
+  }
+}
+
+:host-context(html.dark) .trip-bar__inner {
+  @media (max-width: 1000px) {
+    background: #1c1830;
   }
 }

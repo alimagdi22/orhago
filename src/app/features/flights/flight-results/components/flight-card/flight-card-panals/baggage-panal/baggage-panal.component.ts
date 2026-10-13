@@ -12,6 +12,27 @@ export class BaggagePanalComponent implements OnInit {
       console.log(this.baggageInfo,'baaaaaaagd');
       
   }
+  get isCabinOnly(): boolean {
+    const raw = (this.baggageInfo?.baggage || '').trim().toLowerCase();
+    if (!raw) {
+      return true;
+    }
+    const count = parseInt(raw, 10);
+    return !Number.isNaN(count) && count === 0;
+  }
+
+  get checkedKg(): string {
+    const raw = (this.baggageInfo?.baggage || '').trim();
+    const match = raw.match(/^(\d+)\s*k(?:g|ilograms?)\b/i);
+    return match?.[1] || '';
+  }
+
+  get pieceCount(): string {
+    const raw = (this.baggageInfo?.baggage || '').trim();
+    const match = raw.match(/^(\d+)\s*(?:piece|pieces|pc|pcs)\b/i);
+    return match?.[1] || '';
+  }
+
   get normalBaggage() {
     if (!this.baggageInfo?.baggage) return '1 x 23KG';
     const baggage = this.baggageInfo.baggage.split(' ');

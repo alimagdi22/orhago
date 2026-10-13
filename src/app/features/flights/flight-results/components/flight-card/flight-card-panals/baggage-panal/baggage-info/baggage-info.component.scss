@@ -3,6 +3,10 @@
 
 
 
+:host-context(.bag-chip) .exclamation {
+  display: none;
+}
+
 .exclamation {
   cursor: pointer;
   width: 35px;

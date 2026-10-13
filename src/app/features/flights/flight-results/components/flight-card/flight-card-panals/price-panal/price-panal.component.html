@@ -1,10 +1,12 @@
 <div class="price-panal">
-  <div class="price-content">
-    <p class="price-panal__title">{{ 'results.card.ticketPrice' | translate }}</p>
+  <div class="price-panal__copy">
     <p class="price-panal__price">
-      {{ airItinerary.itinTotalFare.amount | exchange: 'value' }}
       {{ airItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+      {{ airItinerary.itinTotalFare.amount | exchange: 'value' }}
     </p>
+    @if (airItinerary.cabinClass) {
+      <p class="price-panal__fare">{{ airItinerary.cabinClass }}</p>
+    }
   </div>
 
   <button

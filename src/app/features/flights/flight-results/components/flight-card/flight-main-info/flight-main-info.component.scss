@@ -1,79 +1,69 @@
-.main-info-wrapper {
+:host {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.airline {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  min-width: 0;
+}
 
-  .airline-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    flex-shrink: 0;
+.airline__mark {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: white;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.airline__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.airline__name,
+.airline__meta {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.airline__name {
+  color: #1a191e;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.airline__meta {
+  color: #8d89a3;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+  .airline__equip {
+    display: none;
+  }
+}
+
+:host-context(html.dark) {
+  .airline__name {
+    color: #f7f4ff;
   }
 
-  .info-text {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    .destinations-text {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      color: #000000;
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    .airline-name-text {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      color: #000000;
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    .duration-text {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      color: #000000;
-      margin: 0;
-      white-space: nowrap;
-    }
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-
-    .airline-logo {
-      width: 32px;
-      height: 32px;
-    }
-
-    .info-text {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-
-      .airline-name-text {
-        font-size: 14px;
-        font-weight: 700;
-      }
-
-      .duration-text {
-        font-size: 13px;
-        color: #475569;
-        font-weight: 600;
-        direction: ltr;
-      }
-    }
+  .airline__mark {
+    background: #f4f2ff;
+    color: #1a191e;
   }
 }

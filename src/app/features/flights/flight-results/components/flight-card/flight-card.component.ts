@@ -39,4 +39,20 @@ export class FlightCardComponent {
     e.stopPropagation();
     this.sharedService.showFlightDetails(airItinerary);
   }
+
+  isCheapest(itinerary: IAirItinerary): boolean {
+    const amount = Number(itinerary?.itinTotalFare?.amount);
+    if (!Number.isFinite(amount)) {
+      return false;
+    }
+
+    let min = Infinity;
+    for (const group of this.flightResultService.orgnizedResponce || []) {
+      const value = Number(group?.[0]?.itinTotalFare?.amount);
+      if (Number.isFinite(value) && value < min) {
+        min = value;
+      }
+    }
+    return amount === min;
+  }
 }

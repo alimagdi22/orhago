@@ -1,78 +1,79 @@
+:host {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
 .price-panal {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
+  align-items: flex-end;
+  text-align: end;
+}
 
-  .price-content {
-    margin-block: 10px;
-    text-align: center;
+.price-panal__price {
+  margin: 0;
+  color: #1a191e;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.price-panal__fare {
+  margin: 6px 0 0;
+  color: #8d89a3;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.select-btn {
+  min-width: 108px;
+  margin-top: 12px;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 12px;
+  background: #5029f4;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+:host-context(html.dark) .price-panal__price {
+  color: #f7f4ff;
+}
+
+@media (max-width: 1000px) {
+  .price-panal__copy {
+    position: absolute;
+    top: 16px;
+    inset-inline-end: 14px;
   }
 
-  &__title {
-    font-size: 13px;
-    font-weight: 500;
-    color: #1e293b;
-    margin-bottom: 4px;
+  .price-panal__price {
+    font-size: 18px;
   }
 
-  &__price {
-    font-size: 22px;
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0;
+  .price-panal__fare {
+    margin-top: 2px;
+    font-size: 12px;
   }
 
   .select-btn {
-    width: 100%;
-    background-color: #213567;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    border: none;
-    border-radius: 6px;
-    padding: 12px 0;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.15s ease;
-    margin-top: 12px;
-
-    &:hover:not(:disabled) {
-      background-color: white;
-      color: #213567;
-      transform: scale(1.02);
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    .price-content {
-      margin-block: 0;
-      text-align: start;
-
-      .price-panal__title {
-        font-size: 12px;
-        margin-bottom: 2px;
-      }
-
-      .price-panal__price {
-        font-size: 19px;
-      }
-    }
-
-    .select-btn {
-      width: auto;
-      min-width: 120px;
-      margin-top: 0;
-      padding: 10px 22px;
-      font-size: 15px;
-    }
+    position: absolute;
+    bottom: 14px;
+    inset-inline-end: 14px;
+    z-index: 2;
+    min-width: 0;
+    margin-top: 0;
+    padding: 8px 16px;
+    font-size: 14px;
   }
 }

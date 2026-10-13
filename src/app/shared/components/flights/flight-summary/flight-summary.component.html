@@ -1,36 +1,48 @@
 @if (fromCity && toCity) {
   <section class="trip-bar">
     <div class="trip-bar__inner container">
-      <div class="trip-bar__copy">
-        <p class="trip-bar__route">
-          <span>{{ fromCity }}</span>
-          <span class="trip-bar__arrow" aria-hidden="true">→</span>
-          <span>{{ toCity }}</span>
-        </p>
-        <p class="trip-bar__meta">
-          @if (departDate) {
-            <span>{{ departDate | date: 'EEE d MMM' : undefined : dateLocale }}</span>
-          }
-          @if (returnDate) {
-            <span> – {{ returnDate | date: 'EEE d MMM' : undefined : dateLocale }}</span>
-          }
-          @if (adults) {
-            <span> · {{ adults }} {{ (adults === 1 ? 'results.summary.adult' : 'results.summary.adults') | translate }}</span>
-          }
-          @if (children) {
-            <span>{{ adults ? ', ' : ' · ' }}{{ children }} {{ (children === 1 ? 'results.summary.child' : 'results.summary.children') | translate }}</span>
-          }
-          @if (infants) {
-            <span>{{ adults || children ? ', ' : ' · ' }}{{ infants }} {{ (infants === 1 ? 'results.summary.infant' : 'results.summary.infants') | translate }}</span>
-          }
-          @if (cabinKey) {
-            <span> · {{ cabinKey | translate }}</span>
-          }
-        </p>
+      <div class="d-flex gap-3">
+        <button type="button" class="trip-bar__back" (click)="goBack()" [attr.aria-label]="'results.summary.back' | translate">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+            <path d="M11.2 3.5 5.7 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+  
+        <div class="trip-bar__copy">
+          <p class="trip-bar__route">
+            <span>{{ fromCity }}</span>
+            <span class="trip-bar__arrow" aria-hidden="true">→</span>
+            <span>{{ toCity }}</span>
+          </p>
+          <p class="trip-bar__meta">
+            @if (departDate) {
+              <span>{{ departDate | date: 'EEE d MMM' : undefined : dateLocale }}</span>
+            }
+            @if (returnDate) {
+              <span> – {{ returnDate | date: 'EEE d MMM' : undefined : dateLocale }}</span>
+            }
+            @if (adults) {
+              <span> · {{ adults }} {{ (adults === 1 ? 'results.summary.adult' : 'results.summary.adults') | translate }}</span>
+            }
+            @if (children) {
+              <span>{{ adults ? ', ' : ' · ' }}{{ children }} {{ (children === 1 ? 'results.summary.child' : 'results.summary.children') | translate }}</span>
+            }
+            @if (infants) {
+              <span>{{ adults || children ? ', ' : ' · ' }}{{ infants }} {{ (infants === 1 ? 'results.summary.infant' : 'results.summary.infants') | translate }}</span>
+            }
+            @if (cabinKey) {
+              <span> · {{ cabinKey | translate }}</span>
+            }
+          </p>
+        </div>
       </div>
+  
 
       <button type="button" class="trip-bar__modify" (click)="toggle.emit()">
         {{ 'results.summary.modifySearch' | translate }}
+      </button>
+      <button type="button" class="trip-bar__edit" (click)="toggle.emit()">
+        {{ 'results.summary.edit' | translate }}
       </button>
     </div>
   </section>

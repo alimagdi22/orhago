@@ -7,7 +7,7 @@
             <div class="leg-divider"></div>
           }
 
-          <div class="leg-row">
+          <div class="leg-row" [class.leg-row__last]="legIdx === itinerary.allJourney.flights.length - 1 ">
             <app-flight-main-info
               [flight]="flight"
               [totalDuration]="flight.elapsedTime"
@@ -21,44 +21,39 @@
               class="leg-col col-dept"
             />
 
+            <app-stops-info
+              [flight]="flight"
+              class="leg-col col-stops"
+            />
+
             <app-destination-info
               [flightDTO]="flight.flightDTO[flight.flightDTO.length - 1]"
               [dest]="'land'"
               class="leg-col col-land"
             />
-
-            <app-stops-info
-              [flight]="flight"
-              class="leg-col col-stops"
-            />
           </div>
         }
-
-        <!-- Refundable Badge -->
-        <div class="refundability-badge-row d-flex justify-content-between">
-          @if (itinerary.isRefundable) {
-            <span class="refundable-badge">
-              {{ 'results.card.refundable' | translate }}
-            </span>
-          } @else {
-            <span class="refundable-badge non-refundable">
-              {{ 'results.card.nonRefundable' | translate }}
-            </span>
-          }
-
-          @if (flightResultService.isBrandedFaresLoading) {
-            <span class="footer-link disabled-link">{{ 'results.card.flightDetails' | translate }}</span>
-          } @else {
-            <span class="footer-link" (click)="showFlightDetails(itinerary, $event)">
-              {{ 'results.card.flightDetails' | translate }}
-            </span>
-          }
-        </div>
       </div>
 
       <div class="price-section">
         <app-flight-card-panals [airItinerary]="itinerary" />
       </div>
+    </div>
+
+    <div class="card-foot">
+      <app-baggage-panal [baggageInfo]="itinerary.baggageInformation[0]" />
+
+      @if (isCheapest(itinerary)) {
+        <span class="deal-chip">{{ 'results.sort.Cheapest' | translate }}</span>
+      }
+
+      @if (flightResultService.isBrandedFaresLoading) {
+        <span class="footer-link disabled-link">{{ 'results.card.fareDetails' | translate }} ›</span>
+      } @else {
+        <span class="footer-link" (click)="showFlightDetails(itinerary, $event)">
+          {{ 'results.card.fareDetails' | translate }} ›
+        </span>
+      }
     </div>
 
     <!-- Desktop Inline Flex Fare Drawer (Extends down directly from the card) -->

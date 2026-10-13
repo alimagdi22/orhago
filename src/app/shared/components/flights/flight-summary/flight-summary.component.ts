@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,6 +22,7 @@ export class FlightSummaryComponent implements OnInit, OnDestroy {
   toggle = output<void>();
 
   private route = inject(ActivatedRoute);
+  private location = inject(Location);
   private sharedService = inject(SharedService);
   private flightResultService = inject(FlightResultService);
   translate = inject(TranslateService);
@@ -36,6 +38,10 @@ export class FlightSummaryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   get fromCity(): string {

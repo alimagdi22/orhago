@@ -22,11 +22,20 @@ export class DestinationInfoComponent {
   }
 
   get airportName() {
-    const airport = this.dest === 'dept'
+    return this.airportCode || this.cityName;
+  }
+
+  get airportCode(): string {
+    return this.airport?.airportCode || '';
+  }
+
+  get cityName(): string {
+    return this.airport?.cityName || this.airport?.airportName || '';
+  }
+
+  private get airport() {
+    return this.dest === 'dept'
       ? this.flightDTO.departureTerminalAirport
       : this.flightDTO.arrivalTerminalAirport;
-
-    if (!airport) return '';
-    return airport.airportCode || airport.airportName || airport.cityName || '';
   }
 }

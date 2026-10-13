@@ -1,20 +1,55 @@
-<div class="wrapper">
-  <button class="filter-btn">
-    <img src="assets/images/Vector.svg" alt="filter icon" (click)="toggleSidebar()"/>
-  </button>
-      <div class="row between">
-        <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
-        <aside
-          class="mobile-sidebar-panel d-lg-none"
-          [class.open]="isSidebarOpen">
-          <app-filter-panal (click)="filterUpdated()" />
-        </aside>
-      </div>
+<div class="mobile-tools">
+  <div class="chips">
+    <button type="button" class="chip" [class.is-on]="activeFilterCount > 0" (click)="toggleSidebar()">
+      <svg class="chip__icon" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+        <path d="M1.5 3.25h11M1.5 7h11M1.5 10.75h11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+        <circle cx="4.25" cy="3.25" r="1.35" fill="currentColor" />
+        <circle cx="9.25" cy="7" r="1.35" fill="currentColor" />
+        <circle cx="5.75" cy="10.75" r="1.35" fill="currentColor" />
+      </svg>
+      <span>
+        {{ 'results.filter.title' | translate }}
+        @if (activeFilterCount > 0) {
+          <span> · {{ activeFilterCount }}</span>
+        }
+      </span>
+    </button>
 
-  @for (sortItem of sortItems; track sortItem.title; let i = $index) {
-    <app-sorting-item-app
-      [sortItem]="sortItem"
-      (click)="onClickSort(sortItem)"
-    />
-  }
+    <div class="sort-menu">
+      <button type="button" class="chip" (click)="toggleSort($event)">
+        {{ 'results.sort.label' | translate }} {{ ('results.sort.' + activeSort.title) | translate }}
+      </button>
+      @if (sortOpen) {
+        <ul class="sort-menu__list">
+          @for (sortItem of sortItems; track sortItem.title) {
+            <li>
+              <button
+                type="button"
+                [class.is-current]="sortItem.isActive"
+                (click)="onClickSort(sortItem); $event.stopPropagation()"
+              >
+                {{ 'results.sort.' + sortItem.title | translate }}
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <button type="button" class="chip" [class.is-on]="nonStop" (click)="toggleNonStop()">
+      {{ 'results.filter.Non-Stop' | translate }}
+    </button>
+  </div>
+
+  <p class="count">
+    {{ flightCount }}
+    {{ 'results.sort.flights' | translate }}
+    <span aria-hidden="true"> · </span>
+    {{ 'results.sort.taxesShort' | translate }}
+  </p>
 </div>
+
+<div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
+<aside class="mobile-sidebar-panel" [class.open]="isSidebarOpen">
+  <app-filter-panal (click)="filterUpdated()" />
+</aside>

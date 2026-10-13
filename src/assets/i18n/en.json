@@ -185,6 +185,8 @@
   "results": {
     "summary": {
       "modifySearch": "Modify search",
+      "edit": "Edit",
+      "back": "Back",
       "adult": "Adult",
       "adults": "Adults",
       "child": "Child",
@@ -234,12 +236,18 @@
       "Fastest": "Fastest",
       "label": "Sort:",
       "flights": "flights",
-      "taxes": "prices include taxes and fees"
+      "taxes": "prices include taxes and fees",
+      "taxesShort": "prices include taxes"
     },
 
     "card": {
       "ticketPrice": "Ticket Price",
       "flightDetails": "Flight Details",
+      "fareDetails": "Fare details",
+      "cabinBagOnly": "Cabin bag only",
+      "checked": "{{weight}}kg checked",
+      "onePiece": "1 piece",
+      "pieces": "{{count}} pieces",
       "refundable": "Refundable",
       "nonRefundable": "Non-Refundable",
       "One Stop": "One Stop",

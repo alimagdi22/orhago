@@ -1,16 +1,16 @@
-<section class="main-info-wrapper">
-  <img
-    [src]="flight.flightAirline.airlineLogo"
-    [alt]="flight.flightAirline.airlineName"
-    class="airline-logo"
-  />
-
-  <div class="info-text">
-    <!-- <h3 class="destinations-text">
-      {{ flight.flightDTO[0].departureTerminalAirport.cityCode }} -
-      {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
-    </h3> -->
-    <p class="airline-name-text">{{ flight.flightAirline.airlineName }}</p>
-    <p class="duration-text">{{ totalDuration | hourminute }}</p>
-  </div>
+<section class="airline">
+  <span class="airline__mark airline__code">
+    <img class="w-100 h-100" [src]="flight.flightAirline.airlineLogo" [alt]="flight.flightAirline.airlineName" />
+  </span>
+  <span class="airline__copy">
+    <span class="airline__name">{{ flight.flightAirline.airlineName }}</span>
+    @if (flightNo) {
+      <span class="airline__meta">
+        {{ flightNo }}
+        @if (equipment) {
+          <span class="airline__equip"> · {{ equipment }}</span>
+        }
+      </span>
+    }
+  </span>
 </section>

@@ -1,19 +1,21 @@
-<section class="stops-info-wrapper">
-  <p class="stop-title">
+<section class="timeline">
+  <p class="timeline__duration">{{ durationLabel }}</p>
+  <div class="timeline__track">
+    <span class="timeline__dot"></span>
+    <span class="timeline__line"></span>
+    <span class="timeline__line"></span>
+    <span class="timeline__dot"></span>
+  </div>
+  <span class="timeline__pill">
     @if (flight.stopsNum === 0) {
       {{ 'results.filter.Non-Stop' | translate }}
     } @else if (flight.stopsNum === 1) {
-      {{ 'results.filter.1 Stop' | translate }}
+      <span>{{ 'results.filter.1 Stop' | translate }}</span>
+      @if (viaCode) {
+        <span> · {{ viaCode }}</span>
+      }
     } @else {
       {{ flight.stopsNum }} {{ 'results.filter.stops' | translate }}
     }
-  </p>
-
-  @for (segment of flight.flightDTO; track $index) {
-    @if ($index < flight.stopsNum) {
-      <p class="stop-airport">
-        {{ segment.arrivalTerminalAirport.airportCode }} - {{ formatDuration(segment.transitTime)}}
-      </p>
-    }
-  }
+  </span>
 </section>

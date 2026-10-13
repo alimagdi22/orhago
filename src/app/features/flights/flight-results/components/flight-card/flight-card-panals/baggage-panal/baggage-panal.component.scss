@@ -1,40 +1,28 @@
-.baggage-bar {
-  display: flex;
+:host {
+  display: block;
+}
+
+.bag-chip {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  border-radius: 6px;
-  padding: 6px 12px;
-  width: 100%;
-  margin-bottom: 12px;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f4f2ff;
+  color: #5c5678;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
 
-  .info-badge {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #daedfe;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
+:host ::ng-deep .exclamation {
+  display: none;
+}
 
-  .baggage-items {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    .bag-item {
-      font-size: 13px;
-      font-weight: 600;
-      color:black;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-    }
+@media (max-width: 1000px) {
+  .bag-chip {
+    border: 1px solid #e6e3f0;
+    background: #ffffff;
+    color: #1a191e;
   }
 }

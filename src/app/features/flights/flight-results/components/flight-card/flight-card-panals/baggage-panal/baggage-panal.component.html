@@ -1,9 +1,12 @@
-<div class="baggage-bar">
+<span class="bag-chip bag-chip--label">
   <app-baggage-info [baggageInfo]="baggageInfo" />
-  <div class="baggage-items">
-    <span class="bag-item" title="Cabin Bag">💼 {{ normalBaggage }}</span>
-    <span class="bag-item" title="Checked Bag">🧳 1 X 7KG</span>
-    <span class="bag-item" title="Personal Item">👜 1</span>
-  </div>
-</div>
-
+  @if (isCabinOnly) {
+    {{ 'results.card.cabinBagOnly' | translate }}
+  } @else if (checkedKg) {
+    {{ 'results.card.checked' | translate: { weight: checkedKg } }}
+  } @else if (pieceCount) {
+    {{ (pieceCount === '1' ? 'results.card.onePiece' : 'results.card.pieces') | translate: { count: pieceCount } }}
+  } @else {
+    {{ baggageInfo?.baggage }}
+  }
+</span>

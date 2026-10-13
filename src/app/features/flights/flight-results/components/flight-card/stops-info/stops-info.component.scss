@@ -1,28 +1,58 @@
-.stops-info-wrapper {
+:host {
+  display: block;
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.timeline {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  min-width: 140px;
+}
 
-  .stop-title {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
-    margin: 0;
-    white-space: nowrap;
-  }
+.timeline__duration {
+  margin: 0;
+  color: #8d89a3;
+  font-size: 12px;
+  font-weight: 500;
+}
 
-  .stop-airport {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
-    margin: 0;
-    white-space: nowrap;
+.timeline__track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 24px;
+}
+
+.timeline__line {
+  flex: 1;
+  height: 2px;
+  background: #d9d6e6;
+}
+
+.timeline__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b7b3c9;
+}
+
+.timeline__pill {
+  z-index: 1;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #f4f2ff;
+  color: #5029f4;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .timeline {
+    min-width: 0;
   }
 }

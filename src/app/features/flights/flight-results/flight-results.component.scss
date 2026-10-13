@@ -30,6 +30,17 @@
   margin-top: 23px;
 }
 
+@media (max-width: 1000px) {
+  .content {
+    margin-top: 12px;
+  }
+
+  .flight-cards {
+    gap: 12px;
+    margin-top: 12px;
+  }
+}
+
 .custom_modal {
   height: auto;
   width: 50%;

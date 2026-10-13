@@ -1,42 +1,57 @@
-.dest-info-wrapper {
+:host {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.dest {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 2px;
+}
 
-  .time-text {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
-    margin: 0;
-    white-space: nowrap;
+.dest__time,
+.dest__code,
+.dest__city {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.dest__time {
+  color: #1a191e;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.dest__code {
+  margin-top: 6px;
+  color: #1a191e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.dest__city {
+  color: #8d89a3;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+  .dest__city {
+    display: none;
   }
 
-  .date-text {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
-    margin: 0;
-    white-space: nowrap;
+  :host.col-land .dest {
+    align-items: flex-end;
+    text-align: end;
   }
+}
 
-  .airport-text {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #000000;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 170px;
+:host-context(html.dark) {
+  .dest__time,
+  .dest__code {
+    color: #f7f4ff;
   }
 }

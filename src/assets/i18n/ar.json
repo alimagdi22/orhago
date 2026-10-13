@@ -183,6 +183,8 @@
   "results": {
     "summary": {
       "modifySearch": "تعديل البحث",
+      "edit": "تعديل",
+      "back": "رجوع",
       "adult": "بالغ",
       "adults": "بالغين",
       "child": "طفل",
@@ -232,12 +234,18 @@
       "Fastest": "الأسرع",
       "label": "الترتيب:",
       "flights": "رحلات",
-      "taxes": "الأسعار تشمل الضرائب والرسوم"
+      "taxes": "الأسعار تشمل الضرائب والرسوم",
+      "taxesShort": "الأسعار تشمل الضرائب"
     },
 
     "card": {
       "ticketPrice": "سعر التذكرة",
       "flightDetails": "تفاصيل الرحلة",
+      "fareDetails": "تفاصيل السعر",
+      "cabinBagOnly": "حقيبة المقصورة فقط",
+      "checked": "{{weight}} كجم مشحونة",
+      "onePiece": "قطعة واحدة",
+      "pieces": "{{count}} قطع",
       "refundable": "قابل للاسترداد",
       "nonRefundable": "غير قابل للاسترداد",
       "One Stop": "توقف واحد",

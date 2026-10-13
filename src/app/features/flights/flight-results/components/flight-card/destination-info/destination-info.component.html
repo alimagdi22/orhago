@@ -1,5 +1,5 @@
-<section class="dest-info-wrapper">
-  <h3 class="time-text">{{ date | date: 'hh:mm a' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</h3>
-  <!-- <p class="date-text">{{ date | date: 'dd MMM, EEE' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p> -->
-  <p class="airport-text">{{ airportName }}</p>
+<section class="dest" [class.dest--land]="dest === 'land'">
+  <p class="dest__time">{{ date | date: 'HH:mm' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}</p>
+  <p class="dest__code">{{ airportCode }}</p>
+  <p class="dest__city">{{ cityName }}</p>
 </section>
