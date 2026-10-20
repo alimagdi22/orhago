@@ -1,11 +1,19 @@
 <div class="terms container">
-  <h1>{{ 'terms.title' | translate }}</h1>
+  @if (!loaded) {
+    <div class="cms-loader">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (cmsHtml) {
+    <div class="cms-content" [innerHTML]="cmsHtml"></div>
+  } @else if (loaded) {
+    <h1>{{ 'terms.title' | translate }}</h1>
 
-  <section>
-    <h3>{{ 'terms.sectionTitle' | translate }}</h3>
-    <br />
-    <p>
-      {{ 'terms.description' | translate }}
-    </p>
-  </section>
+    <section>
+      <h3>{{ 'terms.sectionTitle' | translate }}</h3>
+      <br />
+      <p>
+        {{ 'terms.description' | translate }}
+      </p>
+    </section>
+  }
 </div>

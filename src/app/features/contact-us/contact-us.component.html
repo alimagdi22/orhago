@@ -1,4 +1,11 @@
 <div class="container user-management">
+  <!-- @if (!loaded) {
+    <div class="cms-loader">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (cmsHtml) {
+    <div class="cms-content" [innerHTML]="cmsHtml"></div>
+  } @else if (loaded) { -->
   <main class="row between">
     <!-- Side Nav -->
 
@@ -113,4 +120,5 @@
       </div>
     </section>
   </main>
+  <!-- } -->
 </div>

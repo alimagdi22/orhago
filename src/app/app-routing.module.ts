@@ -49,6 +49,10 @@ const routes: Routes = [
     path: 'terms-and-conditions',
     component: TermsAndConditionsComponent,
   },
+  {
+    path: 'terms',
+    component: TermsAndConditionsComponent,
+  },
   { path: 'hotels-results', loadChildren: () => import('./features/hotels/hotels-results/hotels-results.module').then(m => m.HotelsResultsModule) },
   { path: 'hotels-rooms', loadChildren: () => import('./features/hotels/hotels-rooms/hotels-rooms.module').then(m => m.HotelsRoomsModule) },
   { path: 'hotels-checkout', loadChildren: () => import('./features/hotels/hotels-checkout/hotels-checkout.module').then(m => m.HotelsCheckoutModule) },

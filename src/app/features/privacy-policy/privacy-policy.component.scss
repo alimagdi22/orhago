@@ -28,5 +28,36 @@ p {
 }
 
 section {
-  height: 50vh;
+  margin-bottom: 8px;
+}
+
+.cms-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+::ng-deep .cms-content {
+  h1 {
+    text-align: start;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  h2,
+  h3 {
+    font-size: 22px;
+    margin-top: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  img {
+    max-width: 100%;
+  }
 }
