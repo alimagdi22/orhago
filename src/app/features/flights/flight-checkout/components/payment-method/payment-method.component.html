@@ -86,7 +86,7 @@
     <div class="payment-action-footer d-flex align-items-center justify-content-between mt-4">
       <div class="payment-total-price fw-bold fs-4">
         <span>
-          {{ totalPaymentAmount | exchange: 'value' }}
+          {{ totalPaymentAmount | exchange: 'value' | arabicNumber }}
           {{ totalCurrencyCode | exchange: 'code' }}
         </span>
       </div>

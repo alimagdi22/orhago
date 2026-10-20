@@ -17,13 +17,13 @@
           <p class="info col-lg-4 col-6">
               <span>{{ "hotelCheckout.Check In" | translate }}</span>
               <span>{{ hotel.HotelFormDto.CheckIn | date: 'd MMM y' }}</span>
-              <span>{{ "hotelCheckout.From" | translate }} {{ hotel.HotelFormDto.CheckIn | date: 'h:mm a' }}</span>
+              <span>{{ "hotelCheckout.From" | translate }} {{ hotel.HotelFormDto.CheckIn | date: 'h:mm a' | arabicNumber }}</span>
           </p>
 
           <p class="info col-lg-4 col-6">
               <span>{{ "hotelCheckout.Check Out" | translate }}</span>
               <span>{{ hotel.HotelFormDto.CheckOut | date: 'd MMM y' }}</span>
-              <span>{{ "hotelCheckout.To" | translate }} {{ hotel.HotelFormDto.CheckOut | date: 'h:mm a' }}</span>
+              <span>{{ "hotelCheckout.To" | translate }} {{ hotel.HotelFormDto.CheckOut | date: 'h:mm a' | arabicNumber }}</span>
           </p>
 
           <p class="info col-lg-4 col-12">

@@ -14,7 +14,7 @@
       </div>
 
       <div class="wrapper">
-          <p>{{ currency | exchange: 'code' }}<span class="price">{{ roomsData.TotalSellPrice | exchange: 'value' | number }}</span></p>
+          <p>{{ currency | exchange: 'code' }}<span class="price">{{ roomsData.TotalSellPrice | exchange: 'value' | number | arabicNumber }}</span></p>
           <!-- <app-main-button title="Select" [mainButtonInfo]="selectButton" /> -->
       </div>
   </header>

@@ -14,11 +14,9 @@
     <div class="price col-5">
       <p class="price__text">
         {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-        {{
-          flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
+        {{ (flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
             ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount
-            : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3')
-        }}
+            : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3')) | arabicNumber }}
       </p>
 
       <p class="price__caption">{{ 'flightDetails.pricePerAdult' | translate }}</p>
@@ -38,7 +36,7 @@
       <div class="d-flex flex-column align-items-center justify-content-center w-50">
         <p class="price__text">
           {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-          {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3' }}
+          {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3' | arabicNumber }}
         </p>
         <p class="price__caption">Price per adult</p>
       </div>

@@ -2,7 +2,7 @@
   <div class="price-content">
     <p class="price-panal__title">{{ 'results.card.ticketPrice' | translate }}</p>
     <p class="price-panal__price">
-      {{ airItinerary.itinTotalFare.amount | exchange: 'value' }}
+      {{ airItinerary.itinTotalFare.amount | exchange: 'value' | arabicNumber }}
       {{ airItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
     </p>
   </div>

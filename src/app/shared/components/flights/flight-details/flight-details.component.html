@@ -2,7 +2,7 @@
     <app-input-header (onClickClose)="sharedService.dialog.closeAll()" [headerTitle]="'results.card.flightDetails' | translate" />
 }
 
-<div [class.flight-details-mobile]="sharedService.screenWidth < 1200">
+<div [class.flight-details-mobile]="sharedService.screenWidth < 1200" [class.ar-EG]="translate.currentLang === 'ar'">
     <app-flight-details-header />
     <app-flight-details-body />
 </div>

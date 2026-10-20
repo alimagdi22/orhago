@@ -20,7 +20,7 @@
           <img src="assets/icons/hotels/check-in.svg" class="item-icon" />
           <p class="item-body">
               <span>{{ "hotelRooms.Check In" | translate }}</span>
-              {{ checkInDate | date:'hh:mm a' }}
+              {{ checkInDate | date:'hh:mm a' | arabicNumber }}
           </p>
       </div>
 
@@ -28,7 +28,7 @@
           <img src="assets/icons/hotels/check-out.svg" class="item-icon" />
           <p class="item-body">
               <span>{{ "hotelRooms.Check Out" | translate }}</span>
-              {{ checkOutDate | date:'hh:mm a' }}
+              {{ checkOutDate | date:'hh:mm a' | arabicNumber }}
           </p>
       </div>
   </div>

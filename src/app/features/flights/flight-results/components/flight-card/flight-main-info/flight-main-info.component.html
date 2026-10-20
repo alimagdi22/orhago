@@ -11,6 +11,6 @@
       {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
     </h3> -->
     <p class="airline-name-text">{{ flight.flightAirline.airlineName }}</p>
-    <p class="duration-text">{{ totalDuration | hourminute }}</p>
+    <p class="duration-text">{{ totalDuration | hourminute | arabicNumber }}</p>
   </div>
 </section>

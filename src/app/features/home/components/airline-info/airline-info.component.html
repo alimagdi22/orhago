@@ -113,6 +113,7 @@
                   {{ question.question }}
                 </mat-panel-title>
               </mat-expansion-panel-header>
+              <hr>
               <p>{{ question.answer }}</p>
             </mat-expansion-panel>
           }
@@ -121,7 +122,7 @@
     }
 
     <!-- Similar Airlines -->
-    @if (allAirlines && allAirlines.length) {
+    <!-- @if (allAirlines && allAirlines.length) {
       <div class="similar-airlines-container mb-5">
         <h2 class="title fs-4 fw-bold mb-4">
           {{ 'popularAirlines.similarAirlines' | translate }}
@@ -138,6 +139,6 @@
           }
         </div>
       </div>
-    }
+    } -->
   </div>
 }

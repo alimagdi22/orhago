@@ -15,7 +15,7 @@
             {{ ($index ? 'flightDetails.itinerary.Arrive' : 'flightDetails.itinerary.Departure') | translate }}
           </p>
         }
-          <p class="top-info__flight__duration">Total duration {{ flight.elapsedTime | hourminute }}</p>
+          <p class="top-info__flight__duration">Total duration {{ flight.elapsedTime | hourminute | arabicNumber }}</p>
 
         <section class="flight-info">
           @if (flightType !== 'roundtrip') {
@@ -47,7 +47,7 @@
                   <div class="flight-info__path__change__time">
                     <img src="assets/icons/clock-icon.svg" title="Clock Icon" />
                     <p>
-                      {{ sharedService.convertTimeToDayAndHour(flightSegment.transitTime) }}
+                      {{ sharedService.convertTimeToDayAndHour(flightSegment.transitTime) | arabicNumber }}
                       {{ 'flightDetails.itinerary.changeIn' | translate }}
                       {{ flightSegment.arrivalTerminalAirport.cityName }}
                     </p>

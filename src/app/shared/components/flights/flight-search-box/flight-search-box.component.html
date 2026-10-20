@@ -1,5 +1,10 @@
 <form [formGroup]="flightSearchService.searchFlight">
   <div>
+    @if(airlineLogo){
+      <div class="logo-container d-none align-items-center justify-content-center w-100" [class.ar]="lang.currentLang === 'ar'">
+        <img class="w-25" [src]="airlineLogo" alt="airlineLogo">
+      </div>
+    }
     <mat-radio-group aria-label="Flight-Type" formControlName="flightType" class="radio-buttons" color="primary">
       <mat-radio-button value="OneWay" (click)="selectFlightType('OneWay')">{{
         'home.search.oneWay' | translate

@@ -72,3 +72,16 @@ table {
 .cursor-pointer {
   cursor: pointer;
 }
+
+mat-expansion-panel-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: end;
+  height: auto;
+  padding: 8px 14px;
+}
+
+mat-expansion-panel-body{
+  margin-top: 20px;
+  padding: 0 14px !important;
+}

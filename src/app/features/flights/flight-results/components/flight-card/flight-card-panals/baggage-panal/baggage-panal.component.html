@@ -1,9 +1,9 @@
 <div class="baggage-bar">
   <app-baggage-info [baggageInfo]="baggageInfo" />
   <div class="baggage-items">
-    <span class="bag-item" title="Cabin Bag">💼 {{ normalBaggage }}</span>
-    <span class="bag-item" title="Checked Bag">🧳 1 X 7KG</span>
-    <span class="bag-item" title="Personal Item">👜 1</span>
+    <span class="bag-item" title="Cabin Bag">💼 {{ normalBaggage | arabicNumber }}</span>
+    <span class="bag-item" title="Checked Bag">🧳 {{ '1 X 7KG' | arabicNumber }}</span>
+    <span class="bag-item" title="Personal Item">👜 {{ '1' | arabicNumber }}</span>
   </div>
 </div>
 
