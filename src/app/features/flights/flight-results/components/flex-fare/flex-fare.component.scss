@@ -93,6 +93,21 @@
   swiper-slide {
     height: auto;
     display: flex;
+    &.is-checkout{
+      display: block;
+    }
+  }
+
+  &.checkout-horizontal {
+    @media (max-width: 991.98px) {
+      swiper-container {
+        padding: 4px 0 12px;
+      }
+
+      .fare-nav {
+        display: none;
+      }
+    }
   }
 
   .desktop-actions-row {

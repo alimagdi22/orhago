@@ -63,6 +63,8 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
   };
 
   brandedFareId = 0;
+  wegoClickId = '';
+  private loadedFlightKey = '';
 
   ngOnInit(): void {
     this.homePageService.getCountries('en');
@@ -71,13 +73,7 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
       this.flightResultService.brandedFareNotifier.asObservable().subscribe({
         next: () => {
           if (this.brandedFareId) {
-            const brandIndex = this.flightResultService.currentSelectedBrands.findIndex(
-              (brand) => +brand.brandId === +this.brandedFareId,
-            );
-
-            if (brandIndex !== -1) {
-              this.sharedService.selectedBrandedIndex = brandIndex;
-            }
+            this.sharedService.applyBrandFareId(this.brandedFareId);
           }
         },
       }),
@@ -85,10 +81,24 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.route.queryParams.subscribe((params) => {
+        const providerKey = params['providerKey'] ? params['providerKey'] : params['pkey'];
+        const flightKey = `${params['sid']}|${params['sequenceNum']}|${providerKey}`;
+        this.wegoClickId = params['wego_click_id'] || '';
+        this.brandedFareId = params['brandFareId'];
+
+        if (this.brandedFareId) {
+          this.sharedService.applyBrandFareId(this.brandedFareId);
+        }
+
+        if (this.loadedFlightKey === flightKey) {
+          return;
+        }
+        this.loadedFlightKey = flightKey;
+
         this.flightCheckoutService.getSelectedFlightData(
           String(params['sid']).split('_')[0],
           +params['sequenceNum'],
-          params['providerKey'] ? params['providerKey'] : params['pkey'],
+          providerKey,
           false,
           String(params['sid']).split('_')[1],
         );
@@ -105,9 +115,16 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
 
         this.flightCheckoutService.pcc = String(params['sid']).split('_')[1];
 
-        if (params['wego_click_id']) {
+        this.wegoClickId = params['wego_click_id'] || '';
+
+        if (this.wegoClickId) {
+          const searchId = String(params['sid']).split('_')[0];
+          if (searchId && searchId !== 'undefined') {
+            this.flightResultService.searchID = searchId;
+          }
+
           if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-            localStorage.setItem('click_id', params['wego_click_id']);
+            localStorage.setItem('click_id', this.wegoClickId);
           }
         }
 
@@ -134,6 +151,17 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
             const flightObj = this.flightCheckoutService.selectedFlight;
 
             if (flightObj) {
+              if (this.wegoClickId && flightObj.airItineraryDTO) {
+                const query = this.route.snapshot.queryParams;
+                const itinerary = flightObj.airItineraryDTO;
+                this.sharedService.selectedFlightItinerary = {
+                  ...itinerary,
+                  sequenceNum: itinerary.sequenceNum || +query['sequenceNum'],
+                  pcc: itinerary.pcc || this.flightCheckoutService.pcc,
+                  pKey: itinerary.pKey || query['providerKey'] || query['pkey'],
+                };
+              }
+
               const flights = flightObj.airItineraryDTO.allJourney.flights;
               const flightType = flightObj.searchCriteria.flightType.toLowerCase();
 
@@ -260,6 +288,10 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
   }
 
   onClickNext() {
+    if (this.sharedService.blockCheckoutWithoutBrand()) {
+      return;
+    }
+
     if (this.flightCheckoutService.usersArray.invalid) {
       for (var i = 0; i < this.flightCheckoutService.usersArray.length; i++) {
         this.flightCheckoutService.usersArray.at(i).markAllAsTouched();
@@ -299,6 +331,9 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
     this.sharedService.checkoutSteps = 0;
     this.sharedService.showPayment = false;
     this.sharedService.selectedBrandedIndex = 0;
+    this.sharedService.selectedBrandFareId = null;
+    this.sharedService.wegoBrandSelected = false;
+    this.sharedService.wegoBrandRequiredError = false;
     this.flightCheckoutService.destroyer();
     this.closeModal();
   }

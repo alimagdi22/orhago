@@ -3,6 +3,14 @@
 } @else {
   <div class="container margin-bottom">
     <app-flight-info />
+    @if (wegoClickId && !sharedService.wegoBrandSelected) {
+      <div id="checkout-branded-fares" class="checkout-branded-fares">
+        @if (sharedService.wegoBrandRequiredError) {
+          <p class="brand-required-error">{{ 'checkout.selectBrandRequired' | translate }}</p>
+        }
+        <app-flex-fare />
+      </div>
+    }
     <!-- <app-checkout-steps [id]="0" /> -->
 
     @if (!sharedService.showPayment) {
@@ -470,7 +478,7 @@
     }
 
     @if (sharedService.checkoutSteps >= 2) {
-      <app-payment-method [brandedFareId]="brandedFareId" />
+      <app-payment-method [brandedFareId]="sharedService.selectedBrandFareId || brandedFareId" />
     }
 
     @if (sharedService.checkoutSteps === 1 && !sharedService.showPayment) {

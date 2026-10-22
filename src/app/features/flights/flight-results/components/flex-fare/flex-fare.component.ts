@@ -27,6 +27,8 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
   endIndex = this.itemsPerPage;
 
   private wheelListener = (event: WheelEvent) => {
+    if (this.sharedService.isWegoCheckout) return;
+
     const hostEl = this.elementRef.nativeElement;
     const scrollable = (hostEl.querySelector('.mobile-cards-stack') as HTMLElement)
       || (hostEl.scrollHeight > hostEl.clientHeight ? hostEl : null);
@@ -83,7 +85,7 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
         nextEl: this.nextBtn.nativeElement,
       },
       breakpoints: {
-        0: { slidesPerView: 1 },
+        0: { slidesPerView: this.sharedService.isWegoCheckout ? 1.15 : 1 },
         768: { slidesPerView: 2 },
         1024: { slidesPerView: 3 },
       },
@@ -110,6 +112,23 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
         swiperEl.swiper.update();
       }
     }
+  }
+
+  onSelectContinue() {
+    const brands = this.flightResultService.currentSelectedBrands;
+    if (!brands.length) return;
+
+    const index = this.sharedService.isWegoCheckout && brands[this.sharedService.selectedBrandedIndex]
+      ? this.sharedService.selectedBrandedIndex
+      : 0;
+
+    this.sharedService.onSelectFlight(
+      this.sharedService.selectedFlightItinerary.sequenceNum,
+      this.sharedService.selectedFlightItinerary.pcc,
+      this.sharedService.selectedFlightItinerary.pKey,
+      brands[index].brandId,
+    );
+    this.sharedService.isBrandedFaresShowed = false;
   }
 
   get getTotalPassenger() {

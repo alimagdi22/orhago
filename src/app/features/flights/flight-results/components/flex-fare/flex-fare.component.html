@@ -26,7 +26,12 @@
 } @else {
   @if (flightResultService.currentSelectedBrands.length) {
     <!-- Desktop Horizontal Swiper Layout (Image 2: Swipe Right & Left) -->
-    <div class="desktop-swiper-wrapper d-none d-lg-block">
+    <div
+      class="desktop-swiper-wrapper"
+      [class.d-none]="!sharedService.isWegoCheckout"
+      [class.d-lg-block]="!sharedService.isWegoCheckout"
+      [class.checkout-horizontal]="sharedService.isWegoCheckout"
+    >
       <div class="fare-swiper">
         <button
           type="button"
@@ -41,9 +46,9 @@
 
         <swiper-container #swiperEl [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'" init="false">
           @for (brand of flightResultService.currentSelectedBrands; track $index) {
-            <swiper-slide>
+            <swiper-slide [class.is-checkout]="sharedService.isWegoCheckout">
               <app-flex-fare-card
-                [isActive]="$index === 0"
+                [isActive]="sharedService.isWegoCheckout ? $index === sharedService.selectedBrandedIndex : $index === 0"
                 [brand]="brand"
                 [totalPassengers]="getTotalPassenger"
                 [cardIndex]="$index"
@@ -64,23 +69,23 @@
         </button>
       </div>
 
-      <div class="desktop-actions-row">
+      <!-- <div class="desktop-actions-row">
         <button
           type="button"
           class="select-continue-btn"
-          (click)="flightResultService.currentSelectedBrands.length && sharedService.onSelectFlight(sharedService.selectedFlightItinerary.sequenceNum, sharedService.selectedFlightItinerary.pcc, sharedService.selectedFlightItinerary.pKey, flightResultService.currentSelectedBrands[0].brandId); sharedService.isBrandedFaresShowed = false"
+          (click)="onSelectContinue()"
         >
           Select and continue
         </button>
-      </div>
+      </div> -->
     </div>
 
     <!-- Mobile Vertical Stacked Layout (Image 1: Swipe Up & Down) -->
-    <div class="mobile-cards-stack d-lg-none">
+    <div class="mobile-cards-stack d-lg-none" [class.d-none]="sharedService.isWegoCheckout">
       @for (brand of flightResultService.currentSelectedBrands; track $index) {
         <div class="mobile-card-item">
           <app-flex-fare-card
-            [isActive]="$index === 0"
+            [isActive]="sharedService.isWegoCheckout ? $index === sharedService.selectedBrandedIndex : $index === 0"
             [brand]="brand"
             [totalPassengers]="getTotalPassenger"
             [cardIndex]="$index"

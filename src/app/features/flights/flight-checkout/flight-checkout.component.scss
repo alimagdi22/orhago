@@ -5,6 +5,21 @@ h3 {
   margin: 20px;
 }
 
+.checkout-branded-fares {
+  margin: 8px 0 24px;
+
+  ::ng-deep .close-btn {
+    display: none;
+  }
+}
+
+.brand-required-error {
+  margin: 0 0 12px;
+  color: #c0392b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .custom-radio-group {
   display: flex;
   flex-wrap: wrap;

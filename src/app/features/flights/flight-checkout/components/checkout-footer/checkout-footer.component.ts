@@ -38,6 +38,10 @@ export class CheckoutFooterComponent {
   };
 
   onClick(isWhatsappService: boolean) {
+    if (this.sharedService.blockCheckoutWithoutBrand()) {
+      return;
+    }
+
     if (this.flightCheckoutService.usersArray.invalid) {
       for (var i = 0; i < this.flightCheckoutService.usersArray.length; i++) {
         if (this.flightCheckoutService.usersArray.at(i)?.invalid) {
@@ -62,7 +66,10 @@ export class CheckoutFooterComponent {
       }
 
       this.sharedService.users = this.flightCheckoutService.usersArray.value;
+      // this line skips the second step of the checkout process
+      this.sharedService.checkoutSteps = 2;
       this.sharedService.goToNextCheckoutStep();
+      
     }
   }
 }

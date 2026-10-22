@@ -2,7 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { IMainButton } from '../../../../../../shared/models/flights/mainButton.model';
 import { SharedService } from '../../../../../../shared/shared.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Brand } from 'rp-travel-ui';
+import { Brand, FlightCheckoutService } from 'rp-travel-ui';
 
 @Component({
   standalone: false,
@@ -38,6 +38,7 @@ export class FlexFareCardComponent implements OnInit {
   @Input() totalPassengers = 0;
   @Input() cardIndex = 0;
   translate = inject(TranslateService);
+  flightCheckoutService = inject(FlightCheckoutService);
   optionalServices: string[] = [];
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class FlexFareCardComponent implements OnInit {
     color: 'white',
   };
   get priceDifference(): number {
-    const basePrice = this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || 0;
+    const basePrice = this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount || 0;
     const currentPrice = this.brand?.itinTotalFare?.amount || 0;
     const diff = currentPrice - basePrice;
     return diff > 0 ? diff : 0;
@@ -74,6 +75,7 @@ export class FlexFareCardComponent implements OnInit {
     if (event) {
       event.stopPropagation();
     }
+
     this.sharedService.onSelectFlight(
       this.sharedService.selectedFlightItinerary.sequenceNum,
       this.sharedService.selectedFlightItinerary.pcc,

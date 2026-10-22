@@ -28,6 +28,9 @@ export class SharedService {
   isFlightDetailsShowed = false;
   selectedItinerary = -1;
   selectedBrandedIndex = 0;
+  selectedBrandFareId: string | number | null = null;
+  wegoBrandSelected = false;
+  wegoBrandRequiredError = false;
   selectedFlightItinerary: IAirItinerary = AIR_ITINERARIES_DEFAULT;
 
   isPaymentModalShowed = false;
@@ -246,20 +249,76 @@ export class SharedService {
     return `${hours}h ${minutes}m`;
   }
 
+  private currentQueryParams(): Record<string, any> {
+    const fromUrl = this.router.parseUrl(this.router.url).queryParams;
+    let route = this.router.routerState.snapshot.root;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    return { ...route.queryParams, ...fromUrl };
+  }
+
+  get isWegoCheckout(): boolean {
+    return !!this.currentQueryParams()['wego_click_id'];
+  }
+
+  applyBrandFareId(brandFareId: string | number | null | undefined) {
+    if (brandFareId === null || brandFareId === undefined || brandFareId === '') return;
+
+    this.selectedBrandFareId = brandFareId;
+    const brandIndex = this.flightResultService.currentSelectedBrands.findIndex(
+      (brand) => +brand.brandId === +brandFareId,
+    );
+    if (brandIndex !== -1) {
+      this.selectedBrandedIndex = brandIndex;
+    }
+  }
+
+  selectCheckoutBrand(index: number, brandId: string | number) {
+    this.selectedBrandedIndex = index;
+    this.selectedBrandFareId = brandId;
+  }
+
   onSelectFlight(sequenceNum: number, pcc: string, pKey?: string, brandFareId?: string) {
+    const fareId = brandFareId ?? '-1';
+
+    if (this.isWegoCheckout) {
+      this.wegoBrandSelected = true;
+      this.wegoBrandRequiredError = false;
+      this.applyBrandFareId(fareId);
+      this.router.navigate([], {
+        queryParams: { brandFareId: fareId },
+        queryParamsHandling: 'merge',
+        replaceUrl: true,
+      });
+      return;
+    }
+
     this.scrollToTop();
     this.router.navigate(['/flight-checkout'], {
       queryParams: {
         sid: this.flightResultService.searchID + '_' + pcc,
         sequenceNum: sequenceNum,
         providerKey: pKey,
-        brandFareId: brandFareId ?? '-1',
+        brandFareId: fareId,
       },
     });
   }
 
+  blockCheckoutWithoutBrand(): boolean {
+    if (!this.isWegoCheckout || this.wegoBrandSelected) {
+      return false;
+    }
+
+    this.wegoBrandRequiredError = true;
+    if (typeof document !== 'undefined') {
+      document.getElementById('checkout-branded-fares')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return true;
+  }
+
   goToNextCheckoutStep() {
-    if (this.checkoutSteps < 2) this.checkoutSteps++;
+    if (this.checkoutSteps < 1) this.checkoutSteps++;
     this.scrollToTop();
   }
 

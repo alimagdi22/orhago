@@ -27,8 +27,6 @@ import { AirlinesFilterComponent } from './components/filter-panal/airlines-filt
 import { RefundabilityFilterComponent } from './components/filter-panal/refundability-filter/refundability-filter.component';
 import { StopsFilterComponent } from './components/filter-panal/stops-filter/stops-filter.component';
 import { NoFlightsComponent } from './components/no-flights/no-flights.component';
-import { FlexFareComponent } from './components/flex-fare/flex-fare.component';
-import { FlexFareCardComponent } from './components/flex-fare/flex-fare-card/flex-fare-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HourMinutePipe } from '../../../shared/pipes/hourMinute.pipe';
 import { SortingPanalAppComponent } from './components/sorting-panal-app/sorting-panal-app.component';
@@ -61,8 +59,6 @@ import { DestinationInfoAppComponent } from './components/destination-info-app/d
     AirlinesFilterComponent,
     RefundabilityFilterComponent,
     StopsFilterComponent,
-    FlexFareComponent,
-    FlexFareCardComponent,
     HourMinutePipe,
     SortingPanalAppComponent,
     SortingItemAppComponent,

@@ -319,6 +319,7 @@
     "payWithWhatsapp": "الدفع مع تنبيهات واتساب @",
     "payWithoutWhatsapp": "الدفع بدون تنبيهات واتساب",
     "processToPayment":"مواصلة عملية الدفع",
+    "selectBrandRequired": "يرجى اختيار تعرفة للمتابعة",
     "guestDetails":"تفاصيل الضيف"
   },
 
@@ -615,7 +616,7 @@
     "changeFeeNotApplies": "لا يتم تطبيق رسوم التغيير",
     "brandedFares": "أسعار الباقات",
     "FlightPackage": "اختار فئة السعر",
-    "selectBrandedFareMsg": "الرجاء اختيار فئة السعر للمتابعة إلى صفحة الدفع.",
+    "selectBrandedFareMsg": "الرجاء اختيار فئة السعر للمتابعة   .",
     "noBrandedFares": "لا يوجد باقات لعرضها",
     "showMoreFlights": "اعرض المزيد من الرحلات",
     "showLessFlights": "اعرض رحلات أقل",

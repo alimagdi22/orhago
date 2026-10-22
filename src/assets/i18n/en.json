@@ -321,6 +321,7 @@
     "payWithWhatsapp": "Pay with WhatsApp Alerts @",
     "payWithoutWhatsapp": "Pay without WhatsApp Alerts",
     "processToPayment":"Proceed to Payment",
+    "selectBrandRequired": "Please select a fare to continue",
     "guestDetails":"Guest Details"
   },
 
@@ -623,7 +624,7 @@
     "changeFeeNotApplies": "Change fee not apply",
     "brandedFares": "Branded Fares",
     "FlightPackage":"Select a flight package",
-    "selectBrandedFareMsg": "Please select a flight package to proceed to the checkout page.",
+    "selectBrandedFareMsg": "Please select a flight package to proceed .",
     "noBrandedFares": "No Branded Fares To Show",
     "showMoreFlights": "Show More Flights",
     "showLessFlights": "Show Less Flights",

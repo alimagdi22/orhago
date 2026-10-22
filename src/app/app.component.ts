@@ -264,9 +264,35 @@ export class AppComponent implements OnInit {
         RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
       },
     };
+    
+    let envWego = {
+      offlineSeats: 'http://41.223.55.14:7025',
+      searchflow: 'https://wegosearch.orhas.com',
+      BookingFlow: 'https://wegobook.orhas.com',
+      FareRules: 'https://wegoprovider.orhas.com',
+      asm: 'https://backofficeapi.orhas.com',
+      Apihotels: 'https://hotelsapi.orhas.com',
+      hotelprepay: 'https://prepayapi.orhas.com',
+      users: 'https://usersapi.orhas.com',
+      admin: 'https://adminapi.orhas.com/',
+      getDPayment: 'https://adminapi.orhas.com/',
+      bookHotels: 'https://hotels.orhas.com',
+      prepay: 'https://prepayapi.orhas.com',
+      backOffice: 'https://backofficeapi.orhas.com',
+      FlightTop: 'https://flightsearch.orhas.com',
+      staticPages: 'https://cms.orhas.com',
+      offers: {
+        getAll: 'http://41.215.243.138:7893/api/GetAllOffersAPI?POS=',
+        getAllActive:
+          'http://41.215.243.138:7893/api/GetAllActiveOffersAPI?POS=',
+        getByID: 'http://41.215.243.138:7893/api/GetOfferByIdAPI?OfferId=',
+        BookOffer: 'http://41.215.243.138:7895/api/BookOffer',
+        RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
+      },
+    };
 
 
-    this.environment.envConfiguration(envRP);
+    this.environment.envConfiguration(envOrhas);
     this.hotelEnvironmentService.envConfiguration(envOrhas);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {

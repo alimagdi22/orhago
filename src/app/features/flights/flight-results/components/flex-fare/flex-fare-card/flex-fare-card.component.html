@@ -85,7 +85,7 @@
       <span class="section-title">{{ 'flightResults.flexibility' | translate }}</span>
 
       <!-- Mobile Right Price Delta -->
-      <span class="mobile-only mobile-price-delta" (click)="onClickSelect($event)">
+      <span class="mobile-only mobile-price-delta" [ngClass]="{'is-checkout': sharedService.isWegoCheckout}" (click)="onClickSelect($event)">
         +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value') : 0) | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="9 18 15 12 9 6"></polyline>
@@ -143,6 +143,11 @@
       </span> -->
     </div>
   </div>
+
+  <strong class="mobile-only mobile-price-delta" (click)="onClickSelect($event)">
+    +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value') : 0) | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+    
+  </strong>
 
   <!-- Extra Services Section -->
   <!-- <div class="fare-section">
