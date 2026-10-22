@@ -13,7 +13,7 @@ header {
     text-align: start;
 
     &__main {
-      font-size: 24px;
+      font-size: 17px;
       font-weight: 600;
     }
 
@@ -24,6 +24,10 @@ header {
 
   .price {
     text-align: end;
+
+    &__caption {
+      white-space: nowrap;
+    }
 
     &__text {
       font-size: 24px;
@@ -68,6 +72,12 @@ header {
       }
       &__caption{
         white-space: nowrap;
+      }
+      .price-details{
+        flex-direction: column !important;
+        .d-sm-none{
+          display: none !important;
+        }
       }
     }
   }

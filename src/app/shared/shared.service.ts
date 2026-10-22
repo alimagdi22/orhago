@@ -100,6 +100,8 @@ export class SharedService {
   mySafeUrl: null | SafeResourceUrl = null;
 
   /* User Management */
+  isLoginLoading = false;
+  loginProfilePending = false;
   isLogInSheetShowed = false;
   isRegisterSheetShowed = false;
   isOTPShowed = false;

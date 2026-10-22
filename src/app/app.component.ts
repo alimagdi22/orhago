@@ -63,6 +63,24 @@ export class AppComponent implements OnInit {
     this.toastr.error(message);
   }
 
+  private finishLogin(succeeded: boolean) {
+    this.sharedService.isLoginLoading = false;
+    this.sharedService.loginProfilePending = false;
+    this.authService.isLoading = false;
+
+    if (succeeded) {
+      this.sharedService.isLogInSheetShowed = false;
+      this.showSuccess(this.translate.currentLang === 'en' ? 'Welcome Back' : 'أهلاً بعودتك');
+      return;
+    }
+
+    this.showError(
+      this.translate.currentLang === 'en'
+        ? 'Invalid user or something went wrong ..'
+        : 'المستخدم غير صالح أو حدث خطأ ما ..',
+    );
+  }
+
   ngOnInit(): void {
     this.seoService.initRouteSeoListener();
 
@@ -85,14 +103,31 @@ export class AppComponent implements OnInit {
 
     this.authService.notify.subscribe({
       next: (status) => {
-        if (status === LOGIN_STATUS.success) {
-          this.showSuccess(this.translate.currentLang === 'en' ? 'Welcome Back' : 'أهلاً بعودتك');
+        if (!this.sharedService.isLoginLoading) {
+          if (status === LOGIN_STATUS.success) {
+            this.showSuccess(this.translate.currentLang === 'en' ? 'Welcome Back' : 'أهلاً بعودتك');
+          }
+          return;
+        }
+
+        if (status === LOGIN_STATUS.success || status === 'google-login') {
+          this.sharedService.loginProfilePending = true;
+          return;
+        }
+
+        if (status === LOGIN_STATUS.faild) {
+          this.finishLogin(false);
         }
       },
     });
 
     this.userProfileService.notify.subscribe({
       next: (status) => {
+        if (this.sharedService.loginProfilePending && (status === 0 || status === 1)) {
+          this.finishLogin(status === 0);
+          return;
+        }
+
         if (status === 2) {
           this.showSuccess(this.translate.currentLang === 'en' ? 'Updated Successfully' : 'تم التحديث بنجاح');
         } else if (status === 1) {
@@ -440,27 +475,29 @@ export class AppComponent implements OnInit {
     if (response.credential) {
       this.ngZone.run(() => {
         try {
+          this.sharedService.isLoginLoading = true;
           this.authService.isLoading = true;
           const idToken = response.credential;
           const googleUser = jwtDecode<any>(idToken);
-          console.log('One Tap Login user:', googleUser);
 
           const sub = this.authService.notify.subscribe((status) => {
             if (status === LOGIN_STATUS.success) {
               this.userProfileService.getUserProfile();
               this.router.navigate(['/']);
-              this.sharedService.isLogInSheetShowed = false;
               sub.unsubscribe();
             } else if (status === LOGIN_STATUS.faild) {
-              this.authService.isLoading = false;
               sub.unsubscribe();
             }
           });
 
           this.authService.googleLoginSubmit(googleUser);
+          if (!this.authService.isLoading) {
+            this.finishLogin(false);
+            sub.unsubscribe();
+          }
         } catch (error) {
           console.error('Error decoding One Tap credential:', error);
-          this.authService.isLoading = false;
+          this.finishLogin(false);
         }
       });
     }
