@@ -116,7 +116,7 @@
 <!-- @if(sharedService.screenWidth < 900 && !sharedService.isCitiesLoading){
   <div class="pricing-card">
     <div class="card-body">
-      <p>{{hotelRoomsService.roomsData.sellCurrency}}
+      <p>{{ hotelRoomsService.roomsData.sellCurrency | currencyLabel }}
         <span class="price">{{ hotelRoomsService.roomsData.TotalSellPrice | arabicNumber }}</span>
       </p>
       <button class="select-button" (click)="openPopup()">Select Rooms</button>

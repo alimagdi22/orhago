@@ -31,7 +31,7 @@
                 }}× {{ passengerFareBreakDown.flightFaresDTOs[0].fareAmount | exchange: 'value' | arabicNumber }})
               </td>
               <td>
-                {{ passengerFareBreakDown.flightFaresDTOs[0].currencyCode | exchange: 'code' }}
+                {{ passengerFareBreakDown.flightFaresDTOs[0].currencyCode | exchange: 'code' | currencyLabel }}
                 {{
                   passengerFareBreakDown.flightFaresDTOs[0].fareAmount * passengerFareBreakDown.passengerQuantity
                     | exchange: 'value' | arabicNumber }}
@@ -45,7 +45,7 @@
             <td>
               {{
                 flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
-                  .flightFaresDTOs[1].currencyCode | exchange: 'code'
+                  .flightFaresDTOs[1].currencyCode | exchange: 'code' | currencyLabel
               }}
               {{ getTotelTaxFare() | exchange: 'value' | arabicNumber }}
             </td>
@@ -58,7 +58,7 @@
               <strong
                 >{{
                   flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-                    .passengerFareBreakDowns[0].flightFaresDTOs[2].currencyCode | exchange: 'code'
+                    .passengerFareBreakDowns[0].flightFaresDTOs[2].currencyCode | exchange: 'code' | currencyLabel
                 }}
                 {{ getTotelBaseFare() | exchange: 'value' | arabicNumber }}</strong
               >
@@ -100,7 +100,7 @@
                 <td>
                   {{
                     flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-                      .passengerFareBreakDowns[0].cancelPenaltyDTOs[0].curency | exchange: 'code'
+                      .passengerFareBreakDowns[0].cancelPenaltyDTOs[0].curency | exchange: 'code' | currencyLabel
                   }}
                   {{ getCancellationPrice() | exchange: 'value' | arabicNumber }}
                   {{ 'flightDetails.fareRules.perPassenger' | translate }}
@@ -114,7 +114,7 @@
                 <td>
                   {{
                     flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0]
-                      .curency | exchange: 'code'
+                      .curency | exchange: 'code' | currencyLabel
                   }}
                   {{
                     flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0].price
@@ -161,7 +161,7 @@
                 <td>
                   {{
                     flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-                      .passengerFareBreakDowns[0].changePenaltyDTOs[0].curency | exchange: 'code'
+                      .passengerFareBreakDowns[0].changePenaltyDTOs[0].curency | exchange: 'code' | currencyLabel
                   }}
                   {{ getChangePrice() | exchange: 'value' | arabicNumber }} {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>

@@ -37,7 +37,7 @@
           <app-baggage-info [baggageInfo]="baggageInfo" />
         <div class="price">
           <div class="currency">
-              {{airItineraries[0].itinTotalFare.currencyCode| exchange: 'code'}}
+              {{airItineraries[0].itinTotalFare.currencyCode| exchange: 'code' | currencyLabel}}
           </div>
           <div class="amount">
               {{airItineraries[0].itinTotalFare.amount | exchange: 'value' | arabicNumber }}

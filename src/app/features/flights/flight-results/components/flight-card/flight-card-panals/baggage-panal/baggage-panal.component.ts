@@ -20,7 +20,7 @@ export class BaggagePanalComponent implements OnInit {
       return baggage[0]==='0' ? (baggage[0]) : (' 1 x ' + baggage[0] + 'KGs')  ;
     }
 
-    return baggage ? (baggage[0] === '0' ? (baggage[0]):((baggage[0] + 'x 23KG' ))): '1 x 23KG';
+    return baggage ? (baggage[0] === '0' ? (baggage[0]):((baggage[0] + ' x 23KG' ))): '1 x 23KG';
   }
 
   get getUnit() {

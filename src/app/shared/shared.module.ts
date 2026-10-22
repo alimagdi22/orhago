@@ -81,6 +81,7 @@ import { ScrollSectionDirective } from './directives/scroll-section.directive';
 import { CustomDateRangePipe } from './pipes/custom-date-range.pipe';
 import { TimeFormatPipe } from './pipes/timeFormat.pipe';
 import { ArabicNumberPipe } from './pipes/arabic-number.pipe';
+import { CurrencyLabelPipe } from './pipes/currency-label.pipe';
 import { NoFlightsComponent } from '../features/flights/flight-results/components/no-flights/no-flights.component';
 import { RpHotelsUiModule } from 'rp-hotels-ui';
 import { HotelSearchBoxComponent } from './components/hotels/hotel-search-box/hotel-search-box.component';
@@ -201,9 +202,9 @@ export const SharedDirectives = [
   RestrictArabicDirective,
 ];
 @NgModule({
-  declarations: [SharedComponents, SharedDirectives, FlightPathComponent, DestInputComponent, DateInputComponent, MobileViewCabinClassComponent, CustomDateRangePipe, TimeFormatPipe, ArabicNumberPipe, FlightDetailsAppComponent, FlightDetailsHeaderAppComponent, FlightDetailsBodyAppComponent, InputHeaderAppComponent, ItineraryAppComponent,FlightPathAppComponent, BaggageDetailsAppComponent, FlexFareAppComponent, FlexFareCardAppComponent,HotelSearchBoxComponent, LocationInputComponent, HotelDateInputComponent, MobileLocationInputComponent, MobileDateInputComponent, GuestRoomSelectorComponent, MobileGuestRoomSelectorComponent, HotelSummaryComponent, HotelCheckoutStepsComponent],
+  declarations: [SharedComponents, SharedDirectives, FlightPathComponent, DestInputComponent, DateInputComponent, MobileViewCabinClassComponent, CustomDateRangePipe, TimeFormatPipe, ArabicNumberPipe, CurrencyLabelPipe, FlightDetailsAppComponent, FlightDetailsHeaderAppComponent, FlightDetailsBodyAppComponent, InputHeaderAppComponent, ItineraryAppComponent,FlightPathAppComponent, BaggageDetailsAppComponent, FlexFareAppComponent, FlexFareCardAppComponent,HotelSearchBoxComponent, LocationInputComponent, HotelDateInputComponent, MobileLocationInputComponent, MobileDateInputComponent, GuestRoomSelectorComponent, MobileGuestRoomSelectorComponent, HotelSummaryComponent, HotelCheckoutStepsComponent],
   imports: [MatrialComponents, ImportedModules, CommonModule],
-  exports: [MatrialComponents, ImportedModules, SharedComponents, SharedDirectives, CustomDateRangePipe, TimeFormatPipe, ArabicNumberPipe],
+  exports: [MatrialComponents, ImportedModules, SharedComponents, SharedDirectives, CustomDateRangePipe, TimeFormatPipe, ArabicNumberPipe, CurrencyLabelPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })

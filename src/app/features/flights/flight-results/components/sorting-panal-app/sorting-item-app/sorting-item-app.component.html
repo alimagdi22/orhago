@@ -2,6 +2,6 @@
   <div class="sort-item__title">{{ 'results.sort.' + sortItem.title | translate  }}</div>
   <div class="sort-item__price">
     <span class="value" *ngIf="sortItem.currency">{{ sortItem.price | exchange : 'value' | arabicNumber }} </span>
-    <span  class="currency">{{ sortItem.currency | exchange : 'code'}}</span>
+    <span  class="currency">{{ sortItem.currency | exchange : 'code' | currencyLabel}}</span>
   </div>
 </div>

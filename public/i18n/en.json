@@ -317,6 +317,14 @@
       "Baggage": "Baggage"
     },
 
+    "flightType": {
+      "oneWay": "One Way",
+      "roundTrip": "Round Trip",
+      "roundtrip": "Round Trip",
+      "multiCity": "Multi City",
+      "multicity": "Multi City"
+    },
+
     "itinerary": {
       "Departure": "Departure",
       "Arrive": "Return",

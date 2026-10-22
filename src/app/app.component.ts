@@ -242,9 +242,32 @@ export class AppComponent implements OnInit {
       },
     };
 
+    let envOrhas = {
+      offlineSeats: 'http://41.223.55.14:7025',
+      searchflow: 'https://flightsearch.orhas.com',
+      BookingFlow: 'https://flightflow.orhas.com',
+      FareRules: 'https://flightprov.orhas.com',
+      asm: 'https://backofficeapi.orhas.com',
+      Apihotels: 'https://hotelsapi.orhas.com',
+      users: 'https://flightsearch.orhas.com',
+      admin: 'https://adminapi.orhas.com',
+      getDPayment: 'https://adminapi.orhas.com/',
+      bookHotels: 'https://staginghotels.orhas.com',
+      prepay: 'https://prepayapi.orhas.com',
+      backOffice: 'https://backofficeapi.orhas.com',
+      FlightTop: 'https://flightsearch.orhas.com',
+      staticPages: 'https://cms.orhas.com',
+      offers: {
+        getAll: 'http://41.215.243.36:7893/api/GetAllOffersAPI?POS=',
+        getByID: 'http://41.215.243.36:7893/api/GetOfferByIdAPI?OfferId=',
+        BookOffer: 'http://41.215.243.36:7895/api/BookOffer',
+        RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
+      },
+    };
+
 
     this.environment.envConfiguration(envRP);
-    this.hotelEnvironmentService.envConfiguration(envRP);
+    this.hotelEnvironmentService.envConfiguration(envOrhas);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {
       this.homeService.setSelectedCurrency(defaultCurrency);

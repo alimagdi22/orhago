@@ -42,7 +42,7 @@
     </div>
 
     <div class="hotel-card__price col-md-3 col-12">
-        <p class="hotel-card__price__total"><span>{{ hotel.sellCurrency | exchange: 'code' }}</span>  {{ hotel.TotalSellPrice | exchange: 'value' | arabicNumber }}</p>
+        <p class="hotel-card__price__total"><span>{{ hotel.sellCurrency | exchange: 'code' | currencyLabel }}</span>  {{ hotel.TotalSellPrice | exchange: 'value' | arabicNumber }}</p>
         <p class="hotel-card__price__per">{{ 'hotelCard.Per night' | translate }}</p>
         <app-main-button [mainButtonInfo]="viewDealButton" [title]="'hotelCard.View Deal' | translate" (clickMainButton)="onClickViewDeal()" />
     </div>

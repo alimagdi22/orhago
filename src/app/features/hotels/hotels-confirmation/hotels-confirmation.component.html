@@ -37,14 +37,14 @@
         <header class="col-12 row">
             <span class="title col-lg-8 col-12">{{ 'hotelPayment.Payment Summary' | translate }}</span>
             <span class="sub-title col-lg-2 col-4">{{ 'hotelPayment.Total' | translate }}</span>
-            <span class="price col-lg-2 col-8">{{ confirmationData.hotel.sellCurrency | exchange: 'code' }} {{ confirmationData.hotel.TotalSellPrice | exchange: 'value' | arabicNumber }}</span>
+            <span class="price col-lg-2 col-8">{{ confirmationData.hotel.sellCurrency | exchange: 'code' | currencyLabel }} {{ confirmationData.hotel.TotalSellPrice | exchange: 'value' | arabicNumber }}</span>
         </header>
     
         <body class="col-12 row">
             <p class="col-12">{{ 'hotelPayment.Payment Timeline' | translate }}</p>
             
             <p class="col-8">{{ 'hotelPayment.Pay now' | translate }}</p>
-            <p class="col-4">{{ confirmationData.hotel.sellCurrency | exchange: 'code' }} {{ confirmationData.hotel.TotalSellPrice | exchange: 'value' | arabicNumber }}</p>
+            <p class="col-4">{{ confirmationData.hotel.sellCurrency | exchange: 'code' | currencyLabel }} {{ confirmationData.hotel.TotalSellPrice | exchange: 'value' | arabicNumber }}</p>
             
             <!-- <p class="col-12 row">
                 <span class="col-8">{{ 'hotelPayment.Pay at Property' | translate }}</span>

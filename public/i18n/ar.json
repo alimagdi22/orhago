@@ -305,6 +305,13 @@
       "Fare Rules": "قواعد الرحلة",
       "Baggage": "الأمتعة"
     },
+    "flightType": {
+      "oneWay": "ذهاب فقط",
+      "roundTrip": "ذهاب وعودة",
+      "roundtrip": "ذهاب وعودة",
+      "multiCity": "مدن متعددة",
+      "multicity": "مدن متعددة"
+    },
 
     "itinerary": {
       "Departure": "المغادرة",
@@ -570,5 +577,7 @@
     "reset": "Reset Filters",
     "PropertySearch": "بحث"
   }
+
+
 
 }

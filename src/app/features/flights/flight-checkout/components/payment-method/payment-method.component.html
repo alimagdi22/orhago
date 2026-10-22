@@ -87,7 +87,7 @@
       <div class="payment-total-price fw-bold fs-4">
         <span>
           {{ totalPaymentAmount | exchange: 'value' | arabicNumber }}
-          {{ totalCurrencyCode | exchange: 'code' }}
+          {{ totalCurrencyCode | exchange: 'code' | currencyLabel }}
         </span>
       </div>
 

@@ -28,7 +28,7 @@
             @if (!isFreeCancellation(rule)) {
               <div class="rule-penalty mt-1">
                 <span class="penalty-label">{{ 'hotelRooms.Penalty' | translate }}:</span>
-                <span class="penalty-amount fw-bold">{{ (rule.Price || rule.Cost || rule.price || rule.cost) | arabicNumber }} {{ rule.Curency || rule.currency || '' }}</span>
+                <span class="penalty-amount fw-bold">{{ (rule.Price || rule.Cost || rule.price || rule.cost) | arabicNumber }} {{ (rule.Curency || rule.currency || '') | currencyLabel }}</span>
               </div>
             }@else{
               <div class="rule-penalty mt-1">

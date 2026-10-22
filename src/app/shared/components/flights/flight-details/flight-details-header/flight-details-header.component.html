@@ -7,13 +7,13 @@
           {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityName }} 
         </p>
     }
-    ({{flightResultService.response?.searchCriteria?.flightType}})
+    {{flightResultService.response?.searchCriteria?.flightType === 'oneway' ? ('flightDetails.flightType.oneWay' | translate) : flightResultService.response?.searchCriteria?.flightType === 'roundtrip' ? ('flightDetails.flightType.roundtrip' | translate) : ('flightDetails.flightType.multicity' | translate)}}
   </div>
 
   @if (sharedService.isSegmentPresent(['flight-checkout'])) {
     <div class="price col-5">
       <p class="price__text">
-        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
         {{ (flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
             ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount
             : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3')) | arabicNumber }}
@@ -35,10 +35,10 @@
     <div class="price col-4 align-items-end">
       <div class="d-flex flex-column align-items-center justify-content-center w-50">
         <p class="price__text">
-          {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+          {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
           {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3' | arabicNumber }}
         </p>
-        <p class="price__caption">Price per adult</p>
+        <p class="price__caption">{{ 'flightDetails.pricePerAdult' | translate }}</p>
       </div>
     </div>
 

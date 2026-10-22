@@ -8,6 +8,12 @@ const UNIT_REPLACEMENTS: [RegExp, string][] = [
   [/(?<![a-zA-Z])kgs?\b/gi, 'كجم'],
   [/\bpieces?\b/gi, 'قطعة'],
   [/(?<![a-zA-Z])pcs?\b/gi, 'قطعة'],
+  [/ساعات/g, 'س'],
+  [/ساعة/g, 'س'],
+  [/دقائق/g, 'د'],
+  [/دقيقة/g, 'د'],
+  [/(?<![a-zA-Z])h\b/gi, 'س'],
+  [/(?<![a-zA-Z])m\b/gi, 'د'],
 ];
 
 @Pipe({

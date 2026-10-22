@@ -25,7 +25,7 @@
   <!-- @if (sharedService.isSegmentPresent(['flight-checkout'])) {
     <div class="price col-5">
       <p class="price__text">
-        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
         {{ (flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
             ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount
             : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value')) | arabicNumber }}
@@ -46,7 +46,7 @@
   } @else {
     <div class="price col-4">
       <p class="price__text">
-        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
+        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
         {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | arabicNumber }}
       </p>
       <p class="price__caption">Price per adult</p>
