@@ -327,8 +327,8 @@ export class AppComponent implements OnInit {
     };
 
 
-    this.environment.envConfiguration(envOrhas);
-    this.hotelEnvironmentService.envConfiguration(envOrhas);
+    this.environment.envConfiguration(envWego);
+    this.hotelEnvironmentService.envConfiguration(envWego);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {
       this.homeService.setSelectedCurrency(defaultCurrency);
