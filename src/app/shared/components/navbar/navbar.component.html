@@ -8,9 +8,9 @@
   >
     <nav class="container">
       @if(isScrolled){
-        <img src="assets/images/logo-white.svg" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        <img src="assets/images/logo-white.png" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
       }@else {
-        <img src="assets/images/logo.jpeg" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        <img src="assets/images/logo.png" width="320" height="51" title="Logo" class="logo normal-logo" routerLink="/" (click)="sharedService.scrollToTop()" />
       }
       @if (sharedService.isSegmentPresent(['flight-results'])) {
         <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
@@ -38,7 +38,7 @@
           <button
             class="custom-button regional-btn"
             [ngClass]="{ 'scroll-button': isScrolled }"
-            (click)="openRegionalPopup('currency')"
+            (click)="openRegionalPopup()"
             *ngIf="this.homePageService.selectedCurrency"
             type="button"
           >
@@ -50,11 +50,12 @@
               title="Flag Icon"
             />
             <span class="currency-code">{{ this.homePageService.selectedCurrency['Currency_Code'] | currencyLabel }}</span>
-            <span class="dot-divider">•</span>
-            <!-- <span class="lang-code">{{ translate.currentLang == 'en' ? 'EN' : 'AR' }}</span>
-            <img src="assets/icons/arrow-down.svg" title="Arrow Down" class="arrow-down-icon" /> -->
           </button>
         }
+        <div class="lang-switch" [class.scroll-button]="isScrolled" role="group" [attr.aria-label]="translate.currentLang === 'en' ? 'Language' : 'اللغة'">
+          <button type="button" [class.active]="translate.currentLang === 'en'" (click)="selectLang('en')">EN</button>
+          <button type="button" [class.active]="translate.currentLang === 'ar'" (click)="selectLang('ar')">عربي</button>
+        </div>
 
         @if (isAuthenticated) {
           <app-drop-down />
@@ -74,14 +75,20 @@
 <div class="mobile-nav-wrapper">
   <section class="top-nav">
     <div>
-      <img src="assets/images/logo.jpeg" width="130" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+      <img src="assets/images/logo.png" width="130" title="Logo" class="logo mobile-logo" routerLink="/" (click)="sharedService.scrollToTop()" />
     </div>
 
-    <button type="button" class="burger-btn" (click)="toggleSidebar()" aria-label="Toggle Menu">
-      <span class="burger-bar"></span>
-      <span class="burger-bar"></span>
-      <span class="burger-bar"></span>
-    </button>
+    <div class="top-nav-end">
+      <!-- <div class="lang-switch" role="group" [attr.aria-label]="translate.currentLang === 'en' ? 'Language' : 'اللغة'">
+        <button type="button" [class.active]="translate.currentLang === 'en'" (click)="selectLang('en')">EN</button>
+        <button type="button" [class.active]="translate.currentLang === 'ar'" (click)="selectLang('ar')">عربي</button>
+      </div> -->
+      <button type="button" class="burger-btn" (click)="toggleSidebar()" aria-label="Toggle Menu">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
   </section>
 </div>
 
@@ -103,14 +110,14 @@
           <span class="arrow-icon">›</span>
         </li>
 
-        <li (click)="openLangPopup()">
+        <li class="lang-menu-item">
           <div class="menu-item-content">
             <span class="menu-icon">🌐</span>
             <span class="menu-label">{{ translate.currentLang === 'en' ? 'Language' : 'اللغة' }}</span>
           </div>
-          <div class="menu-item-value">
-            {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
-            <span class="arrow-icon">›</span>
+          <div class="lang-switch" role="group" [attr.aria-label]="translate.currentLang === 'en' ? 'Language' : 'اللغة'">
+            <button type="button" [class.active]="translate.currentLang === 'en'" (click)="selectLang('en')">EN</button>
+            <button type="button" [class.active]="translate.currentLang === 'ar'" (click)="selectLang('ar')">عربي</button>
           </div>
         </li>
 
@@ -163,42 +170,17 @@
   <button mat-menu-item (click)="updateLang('ar')">AR</button>
 </mat-menu>
 
-<!-- Unified Modern Regional Popup Dialog (Currency & Language) -->
 @if (isRegionalPopupOpen) {
   <div class="popup-backdrop" (click)="closeRegionalPopup()">
     <div class="popup-card regional-modal" (click)="$event.stopPropagation()">
       <div class="popup-header">
         <div class="header-title">
-          <h3>{{ translate.currentLang === 'en' ? 'Regional Settings' : 'إعدادات المنطقة' }}</h3>
+          <h3>{{ translate.currentLang === 'en' ? 'Currency' : 'العملة' }}</h3>
         </div>
         <button type="button" class="popup-close-btn" (click)="closeRegionalPopup()">&times;</button>
       </div>
 
-      <!-- Popup Nav Tabs -->
-      <div class="popup-tabs">
-        <button
-          type="button"
-          class="tab-btn"
-          [class.active]="activePopupTab === 'currency'"
-          (click)="setActivePopupTab('currency')"
-        >
-          <span class="tab-icon">💱</span>
-          <span>{{ translate.currentLang === 'en' ? 'Currency' : 'العملة' }}</span>
-        </button>
-        <button
-          type="button"
-          class="tab-btn"
-          [class.active]="activePopupTab === 'lang'"
-          (click)="setActivePopupTab('lang')"
-        >
-          <span class="tab-icon">🌐</span>
-          <span>{{ translate.currentLang === 'en' ? 'Language' : 'اللغة' }}</span>
-        </button>
-      </div>
-
       <div class="popup-body">
-        <!-- Currency Tab Content -->
-        @if (activePopupTab === 'currency') {
           <div class="tab-content">
             <div class="search-box">
               <span class="search-icon">🔍</span>
@@ -235,40 +217,6 @@
               }
             </div>
           </div>
-        }
-
-        <!-- Language Tab Content -->
-        @if (activePopupTab === 'lang') {
-          <div class="tab-content">
-            <div
-              class="popup-option"
-              [class.selected]="translate.currentLang === 'en'"
-              (click)="selectLang('en')"
-            >
-              <div class="lang-info">
-                <span class="flag-icon-emoji">🇬🇧</span>
-                <span class="option-name">English (EN)</span>
-              </div>
-              @if (translate.currentLang === 'en') {
-                <span class="check-mark">✓</span>
-              }
-            </div>
-
-            <div
-              class="popup-option"
-              [class.selected]="translate.currentLang === 'ar'"
-              (click)="selectLang('ar')"
-            >
-              <div class="lang-info">
-                <span class="flag-icon-emoji">🇰🇼</span>
-                <span class="option-name">العربية (AR)</span>
-              </div>
-              @if (translate.currentLang === 'ar') {
-                <span class="check-mark">✓</span>
-              }
-            </div>
-          </div>
-        }
       </div>
     </div>
   </div>

@@ -42,8 +42,14 @@
 
 .logo {
   cursor: pointer;
-  width: 120px;
-  height: 96%;
+  width: 7%;
+  height: 100%;
+  &.normal-logo {
+    height: 70px !important;
+  }
+  &.mobile-logo {
+    width : 17% !important;
+  }
 }
 
 .manage-booking-button {
@@ -125,6 +131,12 @@
   height: 60px;
   padding: 0 18px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  .top-nav-end {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
   .burger-btn {
     background: transparent;
@@ -250,6 +262,68 @@
         color: #94a3b8;
       }
     }
+  }
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  background: transparent;
+  color: #333;
+  overflow: hidden;
+
+  button {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    & + button {
+      border-inline-start: 1.5px solid #333;
+    }
+
+    &.active {
+      background: map-get($map: $colors, $key: 'main');
+      color: #ffffff;
+    }
+
+    &:hover:not(.active) {
+      background-color: #f0f0f0;
+    }
+  }
+
+  &.scroll-button {
+    color: #ffffff;
+    border-color: #ffffff;
+    background: transparent;
+
+    button + button {
+      border-inline-start-color: #ffffff;
+    }
+
+    button.active {
+      background: #ffffff;
+      color: map-get($map: $colors, $key: 'main');
+    }
+
+    button:hover:not(.active) {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.lang-menu-item {
+  cursor: default;
+
+  &:hover {
+    background-color: transparent;
   }
 }
 

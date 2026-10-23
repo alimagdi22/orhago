@@ -64,7 +64,7 @@ header {
 
 @media (max-width:768px){
   header{
-    justify-content: space-around;
+    justify-content: flex-start;
     .price {
       &__text {
         font-size: 17px;
@@ -74,7 +74,7 @@ header {
         white-space: nowrap;
       }
       .price-details{
-        flex-direction: column !important;
+        flex-direction: row !important;
         .d-sm-none{
           display: none !important;
         }
