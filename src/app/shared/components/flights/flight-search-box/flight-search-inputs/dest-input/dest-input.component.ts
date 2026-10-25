@@ -4,12 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { TranslateService } from '@ngx-translate/core';
 import { FlightSearchService } from 'rp-travel-ui';
-import { catchError, debounceTime, distinctUntilChanged, of, Subject, Subscription, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, Subscription, switchMap, take } from 'rxjs';
 import { IAirPort } from '../../../../../models/flights/airport.model';
 import { ISelectedDest } from '../../../../../models/flights/selectedDest.model';
 import { SharedService } from '../../../../../shared.service';
 import { MobileViewDestInputComponent } from './mobile-view-dest-input/mobile-view-dest-input.component';
 import { IAirPortTranslated } from '../../../../../../core/models/airport.model';
+import { UserLocationService } from '../../../../../../core/services/user-location.service';
 
 export type TDestinations = 'departing' | 'landing';
 
@@ -46,6 +47,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   public translate = inject(TranslateService);
   public flightSearchService = inject(FlightSearchService);
   public sharedService = inject(SharedService);
+  private userLocationService = inject(UserLocationService);
 
   constructor(private dialog: MatDialog) {}
 
@@ -66,8 +68,12 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
         this.onSelectDestintation(this.destination, cachedAirport, this.index);
       }
     } else if (this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
-      const kuwaitAirport = this.sharedService.initialRecommendedAirports[1];
-      this.onSelectDestintation(this.destination, kuwaitAirport, this.index);
+      if (this.index === 0) {
+        this.applyLocationDeparting();
+      } else {
+        const kuwaitAirport = this.sharedService.initialRecommendedAirports[1];
+        this.onSelectDestintation(this.destination, kuwaitAirport, this.index);
+      }
     }
 
     this.subscription.add(
@@ -101,6 +107,16 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
             this.cities = [];
           }
         })
+    );
+  }
+
+  private applyLocationDeparting(): void {
+    this.subscription.add(
+      this.userLocationService.departingAirport$.pipe(take(1)).subscribe((airport) => {
+        if (this.flightItem.get('departing')?.value) return;
+        if (!this.sharedService.selectedDestions[this.index]) return;
+        this.onSelectDestintation(this.destination, airport, this.index);
+      }),
     );
   }
 

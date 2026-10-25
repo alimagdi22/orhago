@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MostSearchedFlightsService } from './features/home/components/flight-deals/most-searched-flights.service';
 import { EnvironmentService as hotelsEnvironment2 } from 'rp-hotels-ui';
 import { SeoService } from './core/services/seo.service';
+import { UserLocationService } from './core/services/user-location.service';
 import { RouterOutlet, Router } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { jwtDecode } from 'jwt-decode';
@@ -40,6 +41,7 @@ export class AppComponent implements OnInit {
   toastr = inject(ToastrService);
   public hotelsEnvironment = inject(hotelsEnvironment2);
   seoService = inject(SeoService);
+  userLocationService = inject(UserLocationService);
   router = inject(Router);
   platformId = inject(PLATFORM_ID);
   isBrowser = isPlatformBrowser(this.platformId);
@@ -89,6 +91,7 @@ export class AppComponent implements OnInit {
     }
 
     if (this.isBrowser) {
+      this.userLocationService.start();
       const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
       if (!token || token === 'null' || token === 'undefined') {
         this.initializeGoogleOneTap();
