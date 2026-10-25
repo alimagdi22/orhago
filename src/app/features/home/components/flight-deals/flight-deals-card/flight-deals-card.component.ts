@@ -37,9 +37,11 @@ export class FlightDealsCardComponent implements OnInit, OnChanges {
   }
 
   updateImage(): void {
-    const airport = this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO?.[this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO.length - 1]
+    const airport = this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[0]?.flightDTO?.[this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.[this.mostSearchedFlight?.cheapestAirItinerary?.allJourney?.flights?.length -1]?.flightDTO.length - 1]
       ?.arrivalTerminalAirport as any;
-    const cityImage = airport?.en?.cityImage || airport?.cityImage;
+    const cityImage = `https://images.orhas.com/cities/${airport?.en?.cityCode}.png`|| airport?.cityImage;
+    console.log(cityImage);
+    
     if (!cityImage || typeof cityImage !== 'string') {
       this.displayImage = this.defaultImage;
     } else {

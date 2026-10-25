@@ -66,6 +66,8 @@ header {
   header{
     justify-content: flex-start;
     .price {
+      flex-direction: row !important;
+      gap: 5px;
       &__text {
         font-size: 17px;
         white-space: nowrap;

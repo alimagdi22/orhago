@@ -66,9 +66,8 @@ export class CheckoutFooterComponent {
       }
 
       this.sharedService.users = this.flightCheckoutService.usersArray.value;
-      // this line skips the second step of the checkout process
+      // Skip the review step and show payment. The checkout page scrolls to the card once it is rendered.
       this.sharedService.checkoutSteps = 2;
-      this.sharedService.goToNextCheckoutStep();
       
     }
   }

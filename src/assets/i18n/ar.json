@@ -281,6 +281,13 @@
     "paymentStep": "الدفع",
     "payment": {
       "chooseCard": "اختر البطاقة",
+      "securePayment": "دفع آمن",
+      "flightFare": "سعر الرحلة",
+      "extraServices": "خدمات إضافية",
+      "gatewayFee": "رسوم الدفع",
+      "totalAmount": "المبلغ الإجمالي",
+      "selectMethod": "اختر طريقة الدفع",
+      "paymentSecure": "دفعك آمن ومشفّر. نستخدم بروتوكولات أمان قياسية لحماية بياناتك.",
       "cardNumber": "رقم البطاقة",
       "expiration": "تاريخ الانتهاء",
       "cvc": "رمز الأمان (CVC)",

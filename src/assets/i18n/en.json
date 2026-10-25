@@ -283,6 +283,13 @@
     "paymentStep": "Payment",
     "payment": {
       "chooseCard": "Choose Card",
+      "securePayment": "Secure Payment",
+      "flightFare": "Flight fare",
+      "extraServices": "Extra services",
+      "gatewayFee": "Payment fee",
+      "totalAmount": "Total amount",
+      "selectMethod": "Select payment method",
+      "paymentSecure": "Your payment is secure and encrypted. We use industry-standard security protocols to protect your data.",
       "cardNumber": "Card Number",
       "expiration": "Expiration",
       "cvc": "CVC",

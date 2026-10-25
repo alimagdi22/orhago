@@ -42,13 +42,10 @@
 
 .logo {
   cursor: pointer;
-  width: 7%;
+  width: 15%;
   height: 100%;
-  &.normal-logo {
-    height: 70px !important;
-  }
   &.mobile-logo {
-    width : 17% !important;
+    width : 40% !important;
   }
 }
 

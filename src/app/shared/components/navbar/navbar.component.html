@@ -10,7 +10,7 @@
       @if(isScrolled){
         <img src="assets/images/logo-white.png" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
       }@else {
-        <img src="assets/images/logo.png" width="320" height="51" title="Logo" class="logo normal-logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        <img src="assets/images/logo.png" width="320" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
       }
       @if (sharedService.isSegmentPresent(['flight-results'])) {
         <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />

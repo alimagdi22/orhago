@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, AfterViewChecked } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input-gg';
@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './flight-checkout.component.html',
   styleUrl: './flight-checkout.component.scss',
 })
-export class FlightCheckoutComponent implements OnInit, OnDestroy {
+export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDestroy {
   translate = inject(TranslateService);
   sharedService = inject(SharedService);
   flightCheckoutService = inject(FlightCheckoutService);
@@ -65,8 +65,53 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
   brandedFareId = 0;
   wegoClickId = '';
   private loadedFlightKey = '';
+  private scrolledToContact = false;
+  private scrolledToPayment = false;
+  private paymentScrollTimer: ReturnType<typeof setTimeout> | null = null;
+  private contactScrollTimer: ReturnType<typeof setTimeout> | null = null;
+  private previousScrollRestoration: ScrollRestoration | null = null;
+
+  ngAfterViewChecked(): void {
+    if (typeof document === 'undefined') return;
+
+    if (
+      !this.scrolledToContact &&
+      !this.flightCheckoutService.loader &&
+      !this.flightResultService.isBrandedFaresLoading &&
+      this.contactScrollTimer == null
+    ) {
+      this.contactScrollTimer = setTimeout(() => this.scrollToContact(), 150);
+    }
+
+    if (!this.scrolledToPayment && this.sharedService.checkoutSteps >= 2 && this.paymentScrollTimer == null) {
+      this.paymentScrollTimer = setTimeout(() => {
+        this.paymentScrollTimer = null;
+        const payment = document.getElementById('payment-card-container');
+        if (!payment || typeof window === 'undefined') return;
+
+        this.scrolledToPayment = true;
+        const top = payment.getBoundingClientRect().top + window.scrollY - 96;
+        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+      }, 80);
+    }
+  }
+
+  private scrollToContact(): void {
+    this.contactScrollTimer = null;
+    const contact = document.getElementById('checkout-contact-group');
+    if (!contact || typeof window === 'undefined') return;
+
+    this.scrolledToContact = true;
+    const top = contact.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
 
   ngOnInit(): void {
+    if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+      this.previousScrollRestoration = history.scrollRestoration;
+      history.scrollRestoration = 'manual';
+    }
+
     this.homePageService.getCountries('en');
 
     this.subscription.add(
@@ -327,6 +372,15 @@ export class FlightCheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.paymentScrollTimer != null) {
+      clearTimeout(this.paymentScrollTimer);
+    }
+    if (this.contactScrollTimer != null) {
+      clearTimeout(this.contactScrollTimer);
+    }
+    if (this.previousScrollRestoration && typeof history !== 'undefined') {
+      history.scrollRestoration = this.previousScrollRestoration;
+    }
     this.subscription.unsubscribe();
     this.sharedService.checkoutSteps = 0;
     this.sharedService.showPayment = false;

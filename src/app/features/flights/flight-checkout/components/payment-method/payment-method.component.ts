@@ -33,6 +33,8 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
   selectedOption: number | null = null;
   selectedGatway!: mergedGates;
   checked = false;
+  methodInvalid = false;
+  termsInvalid = false;
 
   mpgsSessionId = '';
   showMPGSPayment = false;
@@ -123,11 +125,9 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
   get offlineServiceAmount(): number {
     const service: flightOfflineService | undefined = this.flightCheckoutService.organizedOfllineServices?.[2];
     const selectedServices: string[] = this.flightCheckoutService.selectedOfflineServices || [];
-    if (!service || !selectedServices.length) return 0;
+    if (!service?.serviceCode || !selectedServices.includes(service.serviceCode)) return 0;
 
-    const isSelected = (service.serviceCode && selectedServices.includes(service.serviceCode)) || selectedServices.length > 0;
-
-    return isSelected && service.servicePrice ? service.servicePrice : 0;
+    return service.servicePrice || 0;
   }
 
   get totalPaymentAmount(): number {
@@ -143,6 +143,7 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
   }
 
   selectOption(index: number, gateway: any): void {
+    this.methodInvalid = false;
     this.selectedGatway = gateway;
     this.selectedOption = index;
     this.sharedService.selectedGateway = gateway;
@@ -220,6 +221,22 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
         },
       },
     });
+  }
+
+  onTermsChange(checked: boolean): void {
+    if (checked) {
+      this.termsInvalid = false;
+    }
+  }
+
+  onPay(): void {
+    if (this.flightCheckoutService.saveBookingLoadeer) return;
+
+    this.methodInvalid = !this.selectedGatway;
+    this.termsInvalid = !this.checked;
+    if (this.methodInvalid || this.termsInvalid) return;
+
+    this.submit(this.selectedGatway);
   }
 
   submit(selectedMethod: mergedGates) {

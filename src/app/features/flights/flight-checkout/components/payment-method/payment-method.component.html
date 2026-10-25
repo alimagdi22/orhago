@@ -1,118 +1,141 @@
-<div class="payment-card-container">
-  <h2 class="payment-card-title">{{ 'checkout.payment.chooseCard' | translate }}</h2>
+<div class="payment-card-container" id="payment-card-container">
+  <div class="secure-payment-header">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+      <line x1="1" y1="10" x2="23" y2="10"></line>
+      <circle cx="6" cy="15" r="2"></circle>
+    </svg>
+    <h2>{{ 'checkout.payment.securePayment' | translate }}</h2>
+  </div>
 
   <div class="section" *ngIf="paymentData$ | async as paymentData; else loading">
-    <!-- Payment Options / Card Logos -->
-    <div class="payment-method-options d-flex gap-3 mb-4">
-      <div *ngFor="let gateway of paymentData; let i = index">
-        <div
-          class="gateway-option"
-          [ngClass]="{ selected: selectedOption === i }"
-          (click)="selectOption(i, gateway)"
-        >
-          <img [alt]="gateway.PaymentMethod" [src]="gateway.cardImg" class="gateway-card-img" />
-        </div>
+    <div class="amount-box">
+      <div class="amount-row">
+        <span class="amount-label">{{ 'checkout.payment.flightFare' | translate }}</span>
+        <span class="amount-line">
+          {{ totalFlightAmount | exchange: 'value' | arabicNumber }}
+          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+        </span>
+      </div>
+
+      <div class="amount-row" *ngIf="offlineServiceAmount > 0">
+        <span class="amount-label">{{ 'checkout.payment.extraServices' | translate }}</span>
+        <span class="amount-line">
+          {{ offlineServiceAmount | exchange: 'value' | arabicNumber }}
+          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+        </span>
+      </div>
+
+      <div class="amount-row" *ngIf="gatewayAmount > 0">
+        <span class="amount-label">{{ 'checkout.payment.gatewayFee' | translate }}</span>
+        <span class="amount-line">
+          {{ gatewayAmount | exchange: 'value' | arabicNumber }}
+          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+        </span>
+      </div>
+
+      <div class="amount-row amount-total">
+        <span class="amount-label">{{ 'checkout.payment.totalAmount' | translate }}</span>
+        <span class="amount-value">
+          {{ totalPaymentAmount | exchange: 'value' | arabicNumber }}
+          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+        </span>
       </div>
     </div>
 
-    <!-- Loading spinner inside Choose Card if MPGS loading -->
-    <div *ngIf="showMPGSPayment && !mpgsSessionInitialized" class="center-spinner-container my-4">
-      <mat-spinner diameter="50" color="primary"></mat-spinner>
+    <div class="payment-method-section">
+      <span class="section-label">{{ 'checkout.payment.selectMethod' | translate }}</span>
+      <div class="payment-buttons" [class.invalid]="methodInvalid">
+        <button
+          type="button"
+          class="payment-btn"
+          *ngFor="let gateway of paymentData; let i = index"
+          [class.selected]="selectedOption === i"
+          (click)="selectOption(i, gateway)"
+        >
+          <img *ngIf="gateway.cardImg" [alt]="gateway.PaymentMethod" [src]="gateway.cardImg" />
+          <svg *ngIf="!gateway.cardImg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>
+          <!-- <span>{{ gateway.PaymentMethod }}</span> -->
+        </button>
+      </div>
     </div>
 
-    <!-- MPGS Card Form -->
-    <div [style.display]="showMPGSPayment ? 'block' : 'none'" class="payment-session container">
+    <div *ngIf="showMPGSPayment && !mpgsSessionInitialized" class="center-spinner-container">
+      <mat-spinner diameter="42" color="primary"></mat-spinner>
+    </div>
+
+    <div [style.display]="showMPGSPayment ? 'block' : 'none'" class="payment-session">
       <div class="card-form-grid" [ngClass]="{ 'invisible-section': !mpgsSessionInitialized }">
-        <div class="form-group full-width mb-3">
+        <div class="form-group">
           <label class="form-label">{{ 'checkout.payment.cardNumber' | translate }}</label>
-          <div class="input-wrapper">
-            <input
-              type="text"
-              id="card-number"
-              placeholder="12345678987"
-              class="form-control custom-payment-input"
-              readonly
-            />
-          </div>
+          <input type="text" id="card-number" placeholder="12345678987" class="custom-payment-input" readonly />
         </div>
 
-        <div class="row g-3 mb-3">
-          <div class="col-6">
+        <div class="card-form-row">
+          <div class="form-group">
             <label class="form-label">{{ 'checkout.payment.expiration' | translate }}</label>
-            <div class="d-flex gap-2">
-              <input type="text" id="expiry-month" placeholder="MM" class="form-control custom-payment-input" readonly />
-              <input type="text" id="expiry-year" placeholder="YY" class="form-control custom-payment-input" readonly />
+            <div class="expiry-fields">
+              <input type="text" id="expiry-month" placeholder="MM" class="custom-payment-input" readonly />
+              <input type="text" id="expiry-year" placeholder="YY" class="custom-payment-input" readonly />
             </div>
           </div>
-          <div class="col-6">
+          <div class="form-group">
             <label class="form-label">{{ 'checkout.payment.cvc' | translate }}</label>
-            <input
-              type="text"
-              id="security-code"
-              placeholder="3 or 4 digits"
-              class="form-control custom-payment-input"
-              readonly
-            />
+            <input type="text" id="security-code" placeholder="3 or 4 digits" class="custom-payment-input" readonly />
           </div>
         </div>
 
-        <div class="form-group full-width mb-3">
+        <div class="form-group">
           <label class="form-label">{{ 'checkout.payment.nameOnCard' | translate }}</label>
           <input
             type="text"
             id="cardholder-name"
-            placeholder="{{ 'checkout.payment.nameOnCardPlaceholder' | translate }}"
-            class="form-control custom-payment-input"
+            [placeholder]="'checkout.payment.nameOnCardPlaceholder' | translate"
+            class="custom-payment-input"
             readonly
           />
         </div>
       </div>
     </div>
 
-    <!-- Agreement Checkbox -->
-    <div class="terms-agreement-row d-flex align-items-center mt-3 gap-2">
-      <label class="custom-checkbox-label d-flex align-items-center gap-2">
-        <input type="checkbox" [(ngModel)]="checked" class="form-check-input" />
-        <span class="terms-text">
-          {{ 'checkout.payment.conditionStart' | translate }}
-          <a class="terms-link text-decoration-underline" [routerLink]="['/terms']" target="_blank">
-            {{ 'checkout.payment.conditionEnd' | translate }}
-          </a>
-        </span>
-      </label>
-    </div>
+    <label class="terms-agreement-row" [class.invalid]="termsInvalid">
+      <input type="checkbox" [(ngModel)]="checked" (ngModelChange)="onTermsChange($event)" />
+      <span>
+        {{ 'checkout.payment.conditionStart' | translate }}
+        <a [routerLink]="['/terms']" target="_blank">{{ 'checkout.payment.conditionEnd' | translate }}</a>
+      </span>
+    </label>
 
-    <!-- Price and Pay Button -->
-    <div class="payment-action-footer d-flex align-items-center justify-content-between mt-4">
-      <div class="payment-total-price fw-bold fs-4">
-        <span>
-          {{ totalPaymentAmount | exchange: 'value' | arabicNumber }}
-          {{ totalCurrencyCode | exchange: 'code' | currencyLabel }}
-        </span>
-      </div>
+    <button
+      type="button"
+      class="pay-btn"
+      (click)="onPay()"
+      [disabled]="flightCheckoutService.saveBookingLoadeer"
+    >
+      <span *ngIf="!flightCheckoutService.saveBookingLoadeer">{{ 'checkout.payment.pay' | translate }}</span>
+      <mat-progress-spinner
+        *ngIf="flightCheckoutService.saveBookingLoadeer"
+        diameter="22"
+        mode="indeterminate"
+        color="accent"
+      ></mat-progress-spinner>
+    </button>
 
-      <button
-        class="pay-btn btn btn-success px-5 py-2 fw-semibold rounded-3"
-        (click)="submit(selectedGatway)"
-        [disabled]="!checked || !selectedGatway || flightCheckoutService.saveBookingLoadeer"
-      >
-        <span *ngIf="!flightCheckoutService.saveBookingLoadeer">
-          {{ 'checkout.payment.pay' | translate }}
-        </span>
-        <mat-progress-spinner
-          *ngIf="flightCheckoutService.saveBookingLoadeer"
-          diameter="24"
-          mode="indeterminate"
-          color="accent"
-          class="d-inline-block"
-        ></mat-progress-spinner>
-      </button>
+    <div class="secure-payment-footer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <span>{{ 'checkout.payment.paymentSecure' | translate }}</span>
     </div>
   </div>
 
   <ng-template #loading>
-    <div class="center-spinner-container my-5 text-center">
-      <mat-spinner diameter="50" color="primary" class="mx-auto"></mat-spinner>
+    <div class="center-spinner-container">
+      <mat-spinner diameter="42" color="primary"></mat-spinner>
     </div>
   </ng-template>
 </div>

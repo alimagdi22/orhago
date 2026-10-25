@@ -17,10 +17,10 @@
       <ng-container [formGroup]="flightCheckoutService.usersForm">
         <ng-container formArrayName="users">
           @for (user of flightCheckoutService.usersArray.controls | slice: 0 : 1; track $index; let i = $index) {
-            <h3 class="col-12">{{ 'checkout.contactInfo' | translate }}</h3>
+            <h3 class="col-12 mt-5">{{ 'checkout.contactInfo' | translate }}</h3>
 
             <ng-container [formGroupName]="i">
-              <div class="custom-radio-group">
+              <div class="custom-radio-group" id="checkout-contact-group">
                 <div>
                   <label>{{ 'checkout.contactNumber' | translate }}</label>
 
