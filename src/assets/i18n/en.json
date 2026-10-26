@@ -116,11 +116,11 @@
     },
     "exploreTitle": "Explore popular flights and hotels",
     "adContent": {
-      "title": "Unlock exclusive features available only on the Travelo app. Download it now!",
+      "title": "Unlock exclusive features available only on the Orhas app. Download it now!",
       "features": [
         "Enjoy more than ten practical features tailored exclusively for app users",
         "Discover our Explore page for popular Destinations, Weekend Getaways, Travel News and more.",
-        "Swift checkout process on the Travelo app with offline booking access, various discounts and password-less logins."
+        "Swift checkout process on the Orhas app with offline booking access, various discounts and password-less logins."
       ],
       "scanToDownload": "Scan to download"
     },
@@ -307,7 +307,7 @@
     },
     "contactInfo": "Contact Info",
     "contactNumber": "Contact Number",
-    "gmail": "Gmail",
+    "gmail": "Email",
     "email": "Email",
     "Adult": "Adult",
     "Child": "Child",
@@ -483,7 +483,7 @@
       "firstNamePlaceholder": "First Name",
       "lastName": "Last Name",
       "lastNamePlaceholder": "Last Name",
-      "gmail": "Gmail",
+      "gmail": "Email",
       "emailPlaceholder": "Email",
       "contactNumber": "Contact Number",
       "privacyPolicy": "I give Orhas permission to send me informational and promotional emails and text messages in accordance with the",
@@ -493,7 +493,7 @@
     },
 
     "changePassword": {
-      "gmail": "Gmail",
+      "gmail": "Email",
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmNewPassword": "Confirm New Password",

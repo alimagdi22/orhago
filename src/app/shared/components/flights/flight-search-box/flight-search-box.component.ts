@@ -31,19 +31,19 @@ export class FlightSearchBoxComponent implements OnInit {
 
     if (this.isBrowser) {
       try {
-        form = JSON.parse(localStorage.getItem('form') as string);
+        // form = JSON.parse(localStorage.getItem('form') as string);
         flightType = localStorage.getItem('flightType');
       } catch (e) {}
     }
 
-    if (form && this.isBrowser) {
-      let cityPattern = form.Flights?.[0]?.departing;
-      let pattern = /,/;
-      if (cityPattern && !pattern.test(cityPattern)) {
-        localStorage.removeItem('form');
-        form = null;
-      }
-    }
+    // if (form && this.isBrowser) {
+    //   let cityPattern = form.Flights?.[0]?.departing;
+    //   let pattern = /,/;
+    //   if (cityPattern && !pattern.test(cityPattern)) {
+    //     localStorage.removeItem('form');
+    //     form = null;
+    //   }
+    // }
 
     this.flightSearchService.initSearchForm(form);
 

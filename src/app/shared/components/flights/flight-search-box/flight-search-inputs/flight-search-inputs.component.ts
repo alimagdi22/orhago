@@ -102,7 +102,7 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
       };
     }
 
-    let form = this.isBrowser ? JSON.parse(localStorage.getItem('form') as string) : null;
+    // let form = this.isBrowser ? JSON.parse(localStorage.getItem('form') as string) : null;
 
     if (this.isBrowser) {
       this.restoreDestinationTypeFromCache();
@@ -228,9 +228,9 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
           .catch(() => {
             this.isSelectButtonLoading = false;
           });
-        if (this.isBrowser) {
-          localStorage.setItem('form', JSON.stringify(this.flightSearchService.searchFlight?.value));
-        }
+        // if (this.isBrowser) {
+        //   localStorage.setItem('form', JSON.stringify(this.flightSearchService.searchFlight?.value));
+        // }
       } else {
         this.flightSearchService.searchFlight?.markAllAsTouched();
         this.flightSearchService.searchFlight?.get('returnDate')?.markAsTouched();

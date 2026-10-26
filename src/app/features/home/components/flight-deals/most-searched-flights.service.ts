@@ -74,9 +74,9 @@ export class MostSearchedFlightsService {
   }
 
   goToSearchResults(searchCriteria: SearchCriteria) {
-    if (this.isBrowser) {
-      localStorage.removeItem('form');
-    }
+    // if (this.isBrowser) {
+    //   localStorage.removeItem('form');
+    // }
 
     const currentLang = this.translate.currentLang || searchCriteria.language || 'en';
     this.translate.use(searchCriteria.language || currentLang);

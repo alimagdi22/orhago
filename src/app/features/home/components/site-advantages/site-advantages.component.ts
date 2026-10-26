@@ -22,7 +22,7 @@ export class SiteAdvantagesComponent implements AfterViewInit {
 
       en: {
         title: 'Countless options',
-        description: 'Travelo compares flights from 450+ airlines to bring you the best deals.',
+        description: 'Orhas compares flights from 450+ airlines to bring you the best deals.',
         image: 'world-icon.svg',
       },
     },

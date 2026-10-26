@@ -67,9 +67,9 @@ export class MobileViewDateInputComponent {
       this.flightSearchService.searchFlight.get('returnDate')?.setValue('');
     }
 
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      localStorage.setItem('form', JSON.stringify(this.flightSearchService.searchFlight.value));
-    }
+    // if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    //   localStorage.setItem('form', JSON.stringify(this.flightSearchService.searchFlight.value));
+    // }
 
     this.backToSearchBox();
   }

@@ -17,30 +17,28 @@ export class UserLocationService {
   start(): void {
     if (this.started || !isPlatformBrowser(this.platformId)) return;
     this.started = true;
-    if (this.hasSavedDeparting()) return;
 
     this.loadLocation()
       .then((location) => {
-        if (this.hasSavedDeparting()) return;
         this.departingAirportSubject.next(resolveDepartingAirport(location));
       })
       .catch(() => {
-        if (this.hasSavedDeparting()) return;
         this.departingAirportSubject.next(resolveDepartingAirport(null));
       });
   }
 
-  private hasSavedDeparting(): boolean {
-    try {
-      const departing = JSON.parse(localStorage.getItem('departing') ?? 'null');
-      if (Array.isArray(departing) && departing[0]) return true;
-
-      const form = JSON.parse(localStorage.getItem('form') ?? 'null');
-      return !!form?.Flights?.[0]?.departing;
-    } catch {
-      return false;
-    }
-  }
+  // private hasSavedDeparting(): boolean {
+  //   try {
+  //     const departing = JSON.parse(localStorage.getItem('departing') ?? 'null');
+  //     if (Array.isArray(departing) && departing[0]) return true;
+  //
+  //     // const form = JSON.parse(localStorage.getItem('form') ?? 'null');
+  //     // return !!form?.Flights?.[0]?.departing;
+  //     return false;
+  //   } catch {
+  //     return false;
+  //   }
+  // }
 
   private async loadLocation(): Promise<IpLocationNames | null> {
     const response = await fetch('https://ipapi.co/json/');

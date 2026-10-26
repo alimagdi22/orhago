@@ -152,6 +152,12 @@ label {
   }
 }
 
+.privacy-policy-link {
+  color: map-get($map: $colors, $key: 'main');
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .actions {
   display: flex;
   gap: 10px;

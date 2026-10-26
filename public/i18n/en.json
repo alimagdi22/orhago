@@ -46,7 +46,7 @@
     "mostSearched": "Most searched flights",
     "popularAirlines": "Most Popular Airlines",
     "cardTitle": "Countless options",
-    "cardDescription": "Travelo compares flights from 450+ airlines to bring you the best deals",
+    "cardDescription": "Orhas compares flights from 450+ airlines to bring you the best deals",
     "bestDeals": "The best Flight deals",
     "bestDealsDescription": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. flytoall  has something for every traveler",
     "popularDestination": "The popular destinations",
@@ -223,7 +223,7 @@
       "firstNamePlaceholder": "First Name",
       "lastName": "Last Name",
       "lastNamePlaceholder": "Last Name",
-      "gmail": "Gmail",
+      "email": "Email",
       "emailPlaceholder": "Email",
       "contactNumber": "Contact Number",
       "privacyPolicy": "I give Orhas permission to send me informational and promotional emails and text messages in accordance with the",
@@ -237,7 +237,7 @@
     },
 
     "changePassword": {
-      "gmail": "Gmail",
+      "gmail": "Email",
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmNewPassword": "Confirm New Password",
