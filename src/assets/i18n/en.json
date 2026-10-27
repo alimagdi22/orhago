@@ -339,7 +339,7 @@
     "pnr": "PNR: ",
     "bookingDate": "Booking Date: ",
     "passengerName": "Passenger Name",
-    "passengerNumber": "Passenger Number",
+    "passengerNumber": "Passport Number",
     "ticket": "Ticket",
     "airlinePNR": "Airline PNR",
     "flightDetails": "Flight Details",
@@ -355,7 +355,10 @@
     "fareDetails": "Fare Details",
     "fare": "Fare",
     "tax": "Tax",
-    "total": "Total"
+    "total": "Total",
+    "paymentError": "Something went wrong during payment. Our customer service will help you complete your booking.",
+    "newSearch": "New search",
+    "confirmationHeader": "Congratulations! Your booking is confirmed."
   },
 
   "about": {

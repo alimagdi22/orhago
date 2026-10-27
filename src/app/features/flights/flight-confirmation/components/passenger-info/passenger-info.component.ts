@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { PassengersDetailsEntity } from 'rp-travel-ui';
+import { Component, Input, inject } from '@angular/core';
+import { ConfirmationService, PassengersDetailsEntity } from 'rp-travel-ui';
 
 @Component({
   standalone: false,
@@ -25,4 +25,5 @@ export class PassengerInfoComponent {
   };
 
   @Input() airlinePNR = '';
+  flightConfirmationService = inject(ConfirmationService);
 }

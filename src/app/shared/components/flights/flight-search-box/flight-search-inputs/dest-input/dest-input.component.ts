@@ -126,7 +126,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.add(
       this.userLocationService.departingAirport$.pipe(take(1)).subscribe((airport) => {
         if (!this.sharedService.selectedDestions[this.index]) return;
-        this.onSelectDestintation(this.destination, airport, this.index);
+        this.onSelectDestintation(this.destination, airport, this.index, false, false);
       }),
     );
   }
@@ -263,7 +263,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     this.searchSubject.next(searchString);
   }
 
-  onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false) {
+  onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false, moveFocus: boolean = true) {
     if (!city) {
       return;
     }
@@ -305,6 +305,10 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       this.sharedService.flightType === 'multi-city' ||
       this.sharedService.flightType === 'MultiCity'
     ) {
+      return;
+    }
+
+    if (!moveFocus) {
       return;
     }
 

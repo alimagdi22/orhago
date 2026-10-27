@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FlightConfirmationRoutingModule } from './flight-confirmation-routing.module';
 import { FlightConfirmationComponent } from './flight-confirmation.component';
+import { PreConfirmationComponent } from './components/pre-confirmation/pre-confirmation.component';
 import { ConfirmationHeaderComponent } from './components/confirmation-header/confirmation-header.component';
 import { BookingInfoComponent } from './components/booking-info/booking-info.component';
 import { PassengerInfoComponent } from './components/passenger-info/passenger-info.component';
@@ -19,6 +20,7 @@ import { FlightInfoStopsComponent } from './components/confirmation-flight-detai
 @NgModule({
   declarations: [
     FlightConfirmationComponent,
+    PreConfirmationComponent,
     ConfirmationHeaderComponent,
     BookingInfoComponent,
     PassengerInfoComponent,

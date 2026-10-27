@@ -1,17 +1,24 @@
-@if (this.confirmationService.loading) {
+@if (confirmationService.loading) {
   <div class="loader">
     <mat-spinner />
+  </div>
+} @else if (confirmationService.error || !confirmationService.confirmationData) {
+  <div class="pre-confirmation">
+    <h1>{{ 'confirmation.paymentError' | translate }}</h1>
+    <app-main-button
+      [mainButtonInfo]="searchButton"
+      [title]="'confirmation.newSearch' | translate"
+      (clickMainButton)="navigateToHome()"
+    />
   </div>
 } @else {
   <div class="section">
     <main class="container">
       <app-confirmation-header />
-      @if (confirmationService.confirmationData) {
-        <app-booking-info
-          [bookingId]="confirmationService.confirmationData.hgNumber"
-          [pnr]="confirmationService.confirmationData.pnr"
-        />
-      }
+      <app-booking-info
+        [bookingId]="confirmationService.confirmationData.hgNumber"
+        [pnr]="confirmationService.confirmationData.pnr"
+      />
 
       <div class="passengers">
         @for (passenger of passangers; track $index) {
@@ -27,6 +34,7 @@
         [totalFare]="confirmationService.confirmationData.airItineraries[0].itinTotalFare"
         [adds]="confirmationService.confirmationData.additionalServicesAmount"
       />
+      <img [src]="confirmationService.wgoDeebUrl" width="1" height="1" alt="" />
     </main>
   </div>
 }
