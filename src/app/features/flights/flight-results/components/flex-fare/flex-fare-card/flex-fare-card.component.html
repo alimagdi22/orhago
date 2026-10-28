@@ -86,7 +86,7 @@
 
       <!-- Mobile Right Price Delta -->
       <span class="mobile-only mobile-price-delta" [ngClass]="{'is-checkout': sharedService.isWegoCheckout}" (click)="onClickSelect($event)">
-        +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value') : 0) | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+        +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value': brand.itinTotalFare.currencyCode) : 0) | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
@@ -145,7 +145,7 @@
   </div>
 
   <strong class="mobile-only mobile-price-delta" (click)="onClickSelect($event)">
-    +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value') : 0) | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+    +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value': brand.itinTotalFare.currencyCode) : 0) | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
     
   </strong>
 
@@ -187,7 +187,7 @@
   <div class="card-footer-row desktop-only">
     <div class="price-container">
       <span class="price-value">
-        +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value') : 0) | arabicNumber }}
+        +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value': brand.itinTotalFare.currencyCode) : 0) | arabicNumber }}
       </span>
       <span class="price-currency">
         {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}

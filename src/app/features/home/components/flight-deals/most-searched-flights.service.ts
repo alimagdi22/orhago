@@ -47,7 +47,7 @@ export class MostSearchedFlightsService {
     }
 
     this.http
-      .get<MostSearchedFlightsResponse[]>('https://flightsearch.flytoall.com/api/GetCheapestFlights?resCount=5')
+      .get<MostSearchedFlightsResponse[]>('https://flightsearch.orhas.com/api/GetCheapestFlights?resCount=5')
       .pipe(
         timeout(10000),
         retry(1),

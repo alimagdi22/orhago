@@ -1,7 +1,7 @@
 <div class="wrapper">
   <app-secondary-button
     [secondaryButtonInfo]="processToPayment"
-    [title]="('checkout.processToPayment' | translate) + ': ' + ((flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex] ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount : flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount) | exchange: 'value' | arabicNumber) + ' ' + (flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode | exchange: 'code' | currencyLabel)"
+    [title]="('checkout.processToPayment' | translate) + ': ' + (fareAmount | exchange: 'value': fareCurrency | arabicNumber) + ' ' + (fareCurrency | exchange: 'code' | currencyLabel)"
     (clickSecondaryButton)="onClick(false)"
     [mobileStyles]="{
       width: '296px',
@@ -14,7 +14,7 @@
   @if(flightCheckoutService.organizedOfllineServices.length) {
     <app-main-button
       [mainButtonInfo]="payWithServiceButton"
-      [title]="('checkout.payWithWhatsapp' | translate) + ' ' + ((flightCheckoutService.organizedOfllineServices[2].currency | exchange: 'code' | currencyLabel) + ' ' + (flightCheckoutService.organizedOfllineServices[2].servicePrice | exchange: 'value' | arabicNumber) | exchange)"
+      [title]="('checkout.payWithWhatsapp' | translate) + ' ' + ((flightCheckoutService.organizedOfllineServices[2].currency | exchange: 'code' | currencyLabel) + ' ' + (flightCheckoutService.organizedOfllineServices[2].servicePrice | exchange: 'value': flightCheckoutService.organizedOfllineServices[2].currency | arabicNumber))"
       (clickMainButton)="onClick(true)"
       [mobileStyles]="{
         fontSize:'15px'

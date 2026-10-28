@@ -111,15 +111,20 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     if (this.sharedService.selectedBrandedIndex !== -1 && brandedBrand?.itinTotalFare?.amount) {
       return brandedBrand.itinTotalFare.amount;
     }
-    return (
+    const amount =
       this.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount ||
       this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount ||
-      0
-    );
+      0;
+    const bakedInFee = Math.min(this.flightCheckoutService.serviceFees || 0, this.offlineServiceAmount);
+    return Math.max(amount - bakedInFee, 0);
   }
 
   get gatewayAmount(): number {
     return this.sharedService.selectedGateway?.Amount || 0;
+  }
+
+  get gatewayCurrency(): string {
+    return this.sharedService.selectedGateway?.Currency || this.totalCurrencyCode;
   }
 
   get offlineServiceAmount(): number {
@@ -130,15 +135,50 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     return service.servicePrice || 0;
   }
 
+  get offlineServiceCurrency(): string {
+    return this.flightCheckoutService.organizedOfllineServices?.[2]?.currency || this.totalCurrencyCode;
+  }
+
   get totalPaymentAmount(): number {
-    return this.totalFlightAmount + this.gatewayAmount + this.offlineServiceAmount;
+    return (
+      this.toSelectedCurrency(this.totalFlightAmount, this.totalCurrencyCode) +
+      this.toSelectedCurrency(this.gatewayAmount, this.gatewayCurrency) +
+      this.toSelectedCurrency(this.offlineServiceAmount, this.offlineServiceCurrency)
+    );
+  }
+
+  private toSelectedCurrency(amount: number, source: string): number {
+    const selected = this.homePageService.selectedCurrency;
+    if (!amount || !source || !selected?.Currency_Code || source === selected.Currency_Code) {
+      return amount || 0;
+    }
+
+    const sourceRate = this.currencyRate(source);
+    const targetRate = Number(selected.rate);
+    if (!sourceRate || !targetRate) return amount;
+
+    const converted = (amount / sourceRate) * targetRate;
+    const factor = targetRate === 1 ? 1000 : 100;
+    return parseFloat((Math.round(converted * factor) / factor).toFixed(targetRate === 1 ? 3 : 2));
+  }
+
+  private currencyRate(code: string): number {
+    const rate = Number(this.homePageService.allCurrency?.find((currency) => currency.Currency_Code === code)?.rate);
+    if (rate > 0) return rate;
+    if (code === this.homePageService.selectedCurrency?.Currency_Code) {
+      const selectedRate = Number(this.homePageService.selectedCurrency.rate);
+      if (selectedRate > 0) return selectedRate;
+    }
+    return 0;
   }
 
   get totalCurrencyCode(): string {
+    const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
     return (
+      brand?.itinTotalFare?.currencyCode ||
       this.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
       this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
-      'KWD'
+      ''
     );
   }
 

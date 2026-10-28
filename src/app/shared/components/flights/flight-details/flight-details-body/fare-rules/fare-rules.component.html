@@ -28,13 +28,13 @@
                 {{ passengerFareBreakDown.passengerQuantity }}
                 {{ sharedService.getPassengerTypeName(passengerFareBreakDown.passengerType) }} ({{
                   passengerFareBreakDown.passengerQuantity
-                }}× {{ passengerFareBreakDown.flightFaresDTOs[0].fareAmount | exchange: 'value' | arabicNumber }})
+                }}× {{ passengerFareBreakDown.flightFaresDTOs[0].fareAmount | exchange: 'value': passengerFareBreakDown.flightFaresDTOs[0].currencyCode | arabicNumber }})
               </td>
               <td>
                 {{ passengerFareBreakDown.flightFaresDTOs[0].currencyCode | exchange: 'code' | currencyLabel }}
                 {{
                   passengerFareBreakDown.flightFaresDTOs[0].fareAmount * passengerFareBreakDown.passengerQuantity
-                    | exchange: 'value' | arabicNumber }}
+                    | exchange: 'value': passengerFareBreakDown.flightFaresDTOs[0].currencyCode | arabicNumber }}
               </td>
             </tr>
           }

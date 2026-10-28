@@ -40,11 +40,11 @@
       <div class="flight-deal-card__footer__price">
         <span class="flight-deal-card__footer__price__old">
           {{ mostSearchedFlight.searchCriteria.currency | exchange: 'code' | currencyLabel }}
-          {{ mostSearchedFlight.originalPrice | exchange: 'value' | arabicNumber }}*
+          {{ mostSearchedFlight.originalPrice | exchange: 'value': mostSearchedFlight.searchCriteria.currency | arabicNumber }}*
         </span>
         <span class="flight-deal-card__footer__price__new">
           {{ mostSearchedFlight.searchCriteria.currency | exchange: 'code' | currencyLabel }}
-          {{ mostSearchedFlight.originalPrice | discount: mostSearchedFlight.discountPercentage | exchange: 'value' | arabicNumber }}
+          {{ mostSearchedFlight.originalPrice | discount: mostSearchedFlight.discountPercentage | exchange: 'value': mostSearchedFlight.searchCriteria.currency | arabicNumber }}
         </span>
       </div>
 

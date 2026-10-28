@@ -18,7 +18,7 @@
       <div class="row-4">
         <div class="deal-box">
           <app-main-button [mainButtonInfo]="viewDealButton" [title]="'hotelCard.View Deal' | translate" (clickMainButton)="onClickViewDeal()" />
-          <div class="price">{{ hotel.TotalSellPrice | exchange: 'value' | arabicNumber }} {{ hotel.sellCurrency | exchange: 'code' | currencyLabel }}</div>
+          <div class="price">{{ hotel.TotalSellPrice | exchange: 'value': hotel.sellCurrency | arabicNumber }} {{ hotel.sellCurrency | exchange: 'code' | currencyLabel }}</div>
         </div>
       </div>
     </div>

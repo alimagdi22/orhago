@@ -66,18 +66,27 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
   wegoClickId = '';
   private loadedFlightKey = '';
   private scrolledToContact = false;
+  private scrolledToBrands = false;
   private scrolledToPayment = false;
   private paymentScrollTimer: ReturnType<typeof setTimeout> | null = null;
   private contactScrollTimer: ReturnType<typeof setTimeout> | null = null;
+  private brandScrollTimer: ReturnType<typeof setTimeout> | null = null;
   private previousScrollRestoration: ScrollRestoration | null = null;
 
   ngAfterViewChecked(): void {
     if (typeof document === 'undefined') return;
 
+    const brandsVisible = !!this.wegoClickId && !this.sharedService.wegoBrandSelected;
+    const checkoutReady = !this.flightCheckoutService.loader && !this.flightResultService.isBrandedFaresLoading;
+
+    if (brandsVisible && !this.scrolledToBrands && checkoutReady && this.brandScrollTimer == null) {
+      this.brandScrollTimer = setTimeout(() => this.scrollToBrands(), 150);
+    }
+
     if (
+      !brandsVisible &&
       !this.scrolledToContact &&
-      !this.flightCheckoutService.loader &&
-      !this.flightResultService.isBrandedFaresLoading &&
+      checkoutReady &&
       this.contactScrollTimer == null
     ) {
       this.contactScrollTimer = setTimeout(() => this.scrollToContact(), 150);
@@ -90,10 +99,20 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
         if (!payment || typeof window === 'undefined') return;
 
         this.scrolledToPayment = true;
-        const top = payment.getBoundingClientRect().top + window.scrollY - 96;
+        const top = payment.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
       }, 80);
     }
+  }
+
+  private scrollToBrands(): void {
+    this.brandScrollTimer = null;
+    const brands = document.getElementById('checkout-branded-fares');
+    if (!brands || typeof window === 'undefined') return;
+
+    this.scrolledToBrands = true;
+    const top = brands.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
   }
 
   private scrollToContact(): void {
@@ -126,7 +145,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
 
     this.subscription.add(
       this.route.queryParams.subscribe((params) => {
-        const providerKey = params['providerKey'] ? params['providerKey'] : params['pkey'];
+        const providerKey = params['providerKey'] || params['pkey'] || params['PKey'];
         const flightKey = `${params['sid']}|${params['sequenceNum']}|${providerKey}`;
         this.wegoClickId = params['wego_click_id'] || '';
         this.brandedFareId = params['brandFareId'];
@@ -377,6 +396,9 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     }
     if (this.contactScrollTimer != null) {
       clearTimeout(this.contactScrollTimer);
+    }
+    if (this.brandScrollTimer != null) {
+      clearTimeout(this.brandScrollTimer);
     }
     if (this.previousScrollRestoration && typeof history !== 'undefined') {
       history.scrollRestoration = this.previousScrollRestoration;

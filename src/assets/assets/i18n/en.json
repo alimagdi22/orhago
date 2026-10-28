@@ -124,12 +124,12 @@
     },
     "flightDeals": {
       "title": "The best Flight deals",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler",
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler",
       "book": "Book"
     },
     "hotelDeals": {
       "title": "Popular Searches",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler"
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler"
     },
     "populerCities": {
       "title": "Popular cities for hotels"
@@ -234,7 +234,7 @@
       "dateChangeFee": "Date change fee:",
       "allChangesNote": "All Changes are prior to scheduled departure of the first flight. Does not include additional no-show charges.",
       "pleaseNote": "Please Note: The add-on service charges, convenience fee, and the discount you have received using a coupon code is non-refundable. The final refund amount will be adjusted as per the deductions.",
-      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Taj doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
+      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Orhas doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
     },
 
     "baggage": {
@@ -284,7 +284,7 @@
       "conditionEnd": "Terms and Conditions",
       "pay": "Pay",
       "errorTitle": "Whoops!",
-      "errorMessage": "Purchase failed. Please try different card or check your current card information",
+      "errorMessage": "Sorry, an error occurred during the booking process, please try again later",
       "tryAgain": "Let's try again",
       "successTitle": "You Got the Ticket!",
       "successMessage": "The ticket purchase was successful.",
@@ -325,7 +325,7 @@
     "passengerName": "Passenger Name",
     "passengerNumber": "Passenger Number",
     "ticket": "Ticket",
-    "airlinePNR": "Airline PNR",
+    "airlinePNR": "Airline Reference",
     "flightDetails": "Flight Details",
     "airlineRef": "Airline Ref:",
     "Departure": "Departure",
@@ -469,7 +469,7 @@
       "gmail": "Email",
       "emailPlaceholder": "Email",
       "contactNumber": "Contact Number",
-      "privacyPolicy": "I give Taj permission to send me informational and promotional emails and text messages in accordance with the",
+      "privacyPolicy": "I give Orhas permission to send me informational and promotional emails and text messages in accordance with the",
       "privacyPolicyLink": "Privacy Policy",
       "changePassword": "Change Password",
       "save": "Save"

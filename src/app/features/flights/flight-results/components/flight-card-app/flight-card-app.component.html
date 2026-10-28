@@ -40,7 +40,7 @@
               {{airItineraries[0].itinTotalFare.currencyCode| exchange: 'code' | currencyLabel}}
           </div>
           <div class="amount">
-              {{airItineraries[0].itinTotalFare.amount | exchange: 'value' | arabicNumber }}
+              {{airItineraries[0].itinTotalFare.amount | exchange: 'value': airItineraries[0].itinTotalFare.currencyCode | arabicNumber }}
           </div>
         </div>
       </div>

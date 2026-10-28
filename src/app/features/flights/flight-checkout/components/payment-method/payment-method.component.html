@@ -13,7 +13,7 @@
       <div class="amount-row">
         <span class="amount-label">{{ 'checkout.payment.flightFare' | translate }}</span>
         <span class="amount-line">
-          {{ totalFlightAmount | exchange: 'value' | arabicNumber }}
+          {{ totalFlightAmount | exchange: 'value': totalCurrencyCode | arabicNumber }}
           <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
         </span>
       </div>
@@ -21,24 +21,24 @@
       <div class="amount-row" *ngIf="offlineServiceAmount > 0">
         <span class="amount-label">{{ 'checkout.payment.extraServices' | translate }}</span>
         <span class="amount-line">
-          {{ offlineServiceAmount | exchange: 'value' | arabicNumber }}
-          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+          {{ offlineServiceAmount | exchange: 'value': offlineServiceCurrency | arabicNumber }}
+          <span>{{ offlineServiceCurrency | exchange: 'code' | currencyLabel }}</span>
         </span>
       </div>
 
       <div class="amount-row" *ngIf="gatewayAmount > 0">
         <span class="amount-label">{{ 'checkout.payment.gatewayFee' | translate }}</span>
         <span class="amount-line">
-          {{ gatewayAmount | exchange: 'value' | arabicNumber }}
-          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+          {{ gatewayAmount | exchange: 'value': gatewayCurrency | arabicNumber }}
+          <span>{{ gatewayCurrency | exchange: 'code' | currencyLabel }}</span>
         </span>
       </div>
 
       <div class="amount-row amount-total">
         <span class="amount-label">{{ 'checkout.payment.totalAmount' | translate }}</span>
         <span class="amount-value">
-          {{ totalPaymentAmount | exchange: 'value' | arabicNumber }}
-          <span>{{ totalCurrencyCode | exchange: 'code' | currencyLabel }}</span>
+          {{ totalPaymentAmount | exchange: 'value': homePageService.selectedCurrency.Currency_Code | arabicNumber }}
+          <span>{{ homePageService.selectedCurrency.Currency_Code | exchange: 'code' | currencyLabel }}</span>
         </span>
       </div>
     </div>

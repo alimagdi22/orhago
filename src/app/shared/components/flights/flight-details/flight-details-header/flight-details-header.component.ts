@@ -13,6 +13,23 @@ export class FlightDetailsHeaderComponent {
   sharedService = inject(SharedService);
   flightResultService = inject(FlightResultService);
 
+  get fareAmount(): number {
+    const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
+    if (this.sharedService.selectedBrandedIndex !== -1 && brand?.itinTotalFare?.amount) {
+      return brand.itinTotalFare.amount;
+    }
+    return this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || 0;
+  }
+
+  get fareCurrency(): string {
+    const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
+    return (
+      brand?.itinTotalFare?.currencyCode ||
+      this.sharedService.selectedFlightItinerary?.itinTotalFare?.currencyCode ||
+      ''
+    );
+  }
+
   selectButton: IMainButton = {
     height: '48px',
     width: '100%',
