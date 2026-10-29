@@ -22,7 +22,7 @@
     },
     "contact": {
       "email": "support@orhas.com",
-      "phone": "+971 66414350",
+      "phone": "+971559146282",
       "address": "UAE - Dubai"
     },
     "copyright": "&copy; 2025 orhas. All rights reserved."
@@ -273,6 +273,7 @@
   "checkout": {
     "Depart": "Depart",
     "Arrival": "Arrival",
+    "andBack": "and back",
     "Direct": "Direct",
     "Transit": "Transit",
     "seeMoreDetails": "See more details",

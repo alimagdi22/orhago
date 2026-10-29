@@ -1,7 +1,32 @@
+<div class="route-heading">
+  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.searchCriteria?.flights[0]?.departingFrom }}</h2>
+  <span class="route-arrow" [class.is-round]="isRoundTrip" aria-hidden="true">
+    @if (isRoundTrip) {
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 8h13" />
+        <path d="M13 4l4 4-4 4" />
+        <path d="M20 16H7" />
+        <path d="M11 12l-4 4 4 4" />
+      </svg>
+    } @else {
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M13 6l6 6-6 6" />
+      </svg>
+    }
+  </span>
+  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.searchCriteria?.flights[0]?.arrivingTo }}</h2>
+  @if (isRoundTrip) {
+    <span class="route-return">{{ 'checkout.andBack' | translate }}</span>
+  }
+</div>
 <div class="wrapper">
   @for (flight of flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights; track $index) {
     <div class="container margin-top flight-info">
-      <header>{{ flight.flightAirline.airlineName }} ({{ flight.flightAirline.airlineCode }})</header>
+      <header class="d-flex justify-content-between">
+        <span class="fw-bold">{{ flight.flightAirline.airlineName }}</span>
+        <img class="img-fluid" [src]="flight.flightAirline.airlineLogo" [alt]="flight.flightAirline.airlineName">
+      </header>
 
       <div class="row between">
         <app-flight-info-dest class="col-3" [isDepart]="true" [flightSegment]="flight?.flightDTO?.[0] ?? null" />

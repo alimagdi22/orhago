@@ -1,5 +1,5 @@
-import { ViewportScroller } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { isPlatformBrowser, ViewportScroller } from '@angular/common';
+import { Component, inject, OnDestroy, OnInit, AfterViewChecked, PLATFORM_ID } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input-gg';
@@ -66,7 +66,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
   wegoClickId = '';
 
   selectedFlight: selectedFlight | null = null;
-  cdr = inject(ChangeDetectorRef);
+  private platformId = inject(PLATFORM_ID);
   private loadedFlightKey = '';
   private scrolledToContact = false;
   private scrolledToBrands = false;
@@ -90,7 +90,6 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
           if (this.brandedFareId) {
             this.sharedService.applyBrandFareId(this.brandedFareId);
           }
-          this.cdr.detectChanges();
         },
       }),
     );
@@ -98,17 +97,24 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     this.subscription.add(
       this.flightCheckoutService.selectedFlightLang.subscribe({
         next: () => {
-          if (this.flightCheckoutService.selectedFlight) {
-            this.selectedFlight = this.flightCheckoutService.selectedFlight;
-            this.cdr.detectChanges();
+          const flight = this.flightCheckoutService.selectedFlight;
+          if (!flight) return;
+
+          this.selectedFlight = flight;
+          const language = String(flight.searchCriteria?.language || '').toLowerCase().startsWith('ar')
+            ? 'ar'
+            : 'en';
+          if (language !== this.translate.currentLang) {
+            this.translate.use(language);
           }
+          this.applyFlightCurrency(flight.searchCriteria?.currency);
         },
       }),
     );
 
     this.subscription.add(
       this.route.queryParams.subscribe((params) => {
-        const providerKey = params['providerKey'] || params['pkey'] || params['PKey'];
+        const providerKey = params['providerKey'] || params['pkey'] || params['PKey']  || params['pKey']  || params['Pkey'];
         const flightKey = `${params['sid']}|${params['sequenceNum']}|${providerKey}`;
         this.wegoClickId = params['wego_click_id'] || params['Wego_click_id'] || '';
         this.brandedFareId = params['brandFareId'];
@@ -144,7 +150,6 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
 
         this.wegoClickId = params['wego_click_id'] || '';
 
-        this.translate.use((this.flightCheckoutService.selectedFlight?.searchCriteria.language || '')); // switch language to Arabic
         if (this.wegoClickId) {
           const searchId = String(params['sid']).split('_')[0];
           if (searchId && searchId !== 'undefined') {
@@ -241,8 +246,33 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     console.log(this.flightCheckoutService.usersArray.controls, 'users');
   }
 
+  private applyFlightCurrency(code: string | undefined): void {
+    const currencyCode = String(code || '').trim().toUpperCase();
+    if (!currencyCode) return;
+
+    const apply = () => {
+      const match = this.homePageService.allCurrency.find(
+        (currency) => currency.Currency_Code?.toUpperCase() === currencyCode,
+      );
+      if (!match) return false;
+      this.homePageService.setSelectedCurrency(match);
+      return true;
+    };
+
+    if (apply()) return;
+
+    if (!this.homePageService.allCurrency.length && !this.homePageService.loader) {
+      this.homePageService.getCurrency('AED');
+    }
+
+    const waitForCurrencies = this.homePageService.notify.subscribe(() => {
+      if (apply()) waitForCurrencies.unsubscribe();
+    });
+    this.subscription.add(waitForCurrencies);
+  }
+
   ngAfterViewChecked(): void {
-    if (typeof document === 'undefined') return;
+    if (!isPlatformBrowser(this.platformId)) return;
 
     const brandsVisible =
       !!this.wegoClickId &&
@@ -273,9 +303,6 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
         const top = payment.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
       }, 80);
-    }
-    if (this.selectedFlight) {
-      this.translate.setDefaultLang(this.selectedFlight.searchCriteria.language);
     }
   }
 

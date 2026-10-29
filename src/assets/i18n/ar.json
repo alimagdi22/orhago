@@ -21,7 +21,7 @@
     },
     "contact": {
       "email": "support@orhas.com",
-      "phone": "+971 66414350",
+      "phone": "+971559146282",
       "address": "الامارات العربية المتحدة . دبي"
     },
     "copyright": "&copy; 2025 اورهاس. جميع الحقوق محفوظة."
@@ -271,6 +271,7 @@
   "checkout": {
     "Depart": "المغادرة",
     "Arrival": "الوصول",
+    "andBack": "وعودة",
     "Direct": "مباشر",
     "Transit": "ترانزيت",
     "seeMoreDetails": "عرض المزيد من التفاصيل",

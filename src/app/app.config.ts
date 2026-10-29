@@ -1,8 +1,7 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideTranslateService, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -18,13 +17,24 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay, withNoHttpTransferCache } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
+import { catchError, Observable, of } from 'rxjs';
 
 registerLocaleData(localeAr);
 
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
-  new TranslateHttpLoader(http, './assets/i18n/', '.json');
+class AppTranslateLoader implements TranslateLoader {
+  constructor(private http: HttpClient) {}
+
+  getTranslation(lang: string): Observable<Record<string, unknown>> {
+    const code = String(lang || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+    return this.http.get<Record<string, unknown>>(`/assets/i18n/${code}.json`).pipe(
+      catchError(() => of({})),
+    );
+  }
+}
+
+const httpLoaderFactory = (http: HttpClient) => new AppTranslateLoader(http);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -63,7 +73,7 @@ export const appConfig: ApplicationConfig = {
       return null as any;
     }),
     DatePipe,
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
   ],
 };
 

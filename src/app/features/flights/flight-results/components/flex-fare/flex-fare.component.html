@@ -1,7 +1,7 @@
 <!-- Mobile Header (Image 1) -->
 <header class="mobile-header d-lg-none">
   <div class="mobile-header-top">
-    <h3 class="title">{{'flightResults.FlightPackage'| translate}}</h3>
+    <h3 class="title fw-bold mt-4">{{'flightResults.FlightPackage'| translate}}</h3>
     @if (!flightResultService.isBrandedFaresLoading) {
       <button type="button" class="close-btn" (click)="sharedService.isBrandedFaresShowed = false">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -15,8 +15,8 @@
 </header>
 
 <!-- Desktop Subtitle Header (Image 2) -->
-<div class="desktop-header d-none d-lg-block">
-  <p class="subtitle">{{ 'flightResults.selectBrandedFareMsg' | translate }}</p>
+<div class="desktop-header d-none d-lg-block mt-4">
+  <h5 class="subtitle fw-bold">{{ 'flightResults.selectBrandedFareMsg' | translate }}</h5>
 </div>
 
 @if (flightResultService.isBrandedFaresLoading) {

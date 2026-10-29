@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
     // };
 
     const currentLang = typeof localStorage !== 'undefined' && typeof window !== 'undefined' ? localStorage.getItem('lang') : null;
-    const activeLang = currentLang || 'en';
+    const activeLang = String(currentLang || 'en').toLowerCase().startsWith('ar') ? 'ar' : 'en';
 
     this.translate.use(activeLang);
     if (typeof localStorage !== 'undefined' && typeof window !== 'undefined' && !currentLang) {
@@ -286,7 +286,7 @@ export class AppComponent implements OnInit {
       BookingFlow: 'https://flightflow.orhas.com',
       FareRules: 'https://flightprov.orhas.com',
       asm: 'https://backofficeapi.orhas.com',
-      Apihotels: 'http://localhost:8120',
+      Apihotels: 'x:8120',
       // Apihotels: 'https://hotelsapi.orhas.com',
       users: 'https://flightsearch.orhas.com',
       admin: 'https://adminapi.orhas.com',

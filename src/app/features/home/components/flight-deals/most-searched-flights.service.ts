@@ -78,8 +78,12 @@ export class MostSearchedFlightsService {
     //   localStorage.removeItem('form');
     // }
 
-    const currentLang = this.translate.currentLang || searchCriteria.language || 'en';
-    this.translate.use(searchCriteria.language || currentLang);
+    const currentLang = String(this.translate.currentLang || searchCriteria.language || 'en')
+      .toLowerCase()
+      .startsWith('ar')
+      ? 'ar'
+      : 'en';
+    this.translate.use(currentLang);
     this.homePageService.getCountries(searchCriteria.language || currentLang);
     if ((this.sharedService as any).isFirstRequest !== undefined) {
       (this.sharedService as any).isFirstRequest = false;

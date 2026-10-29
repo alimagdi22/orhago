@@ -55,8 +55,6 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   constructor() {
-    console.log(this.flightResultService.currentSelectedBrands,'brands');
-    
     this.subscription.add(
       this.flightResultService.brandedFareNotifier.asObservable().subscribe({
         next: () => {
@@ -101,6 +99,7 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
           1024: { slidesPerView: 3 },
         },
       });
+      if (typeof swiperEl.initialize !== 'function') return;
       swiperEl.initialize();
     }
 

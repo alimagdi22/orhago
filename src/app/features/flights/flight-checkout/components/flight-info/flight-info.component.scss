@@ -1,6 +1,49 @@
 @import '../../../../../../sass/variables';
 @import '../../../../../../sass/colors';
 
+.route-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.route-place {
+  margin: 0;
+  color: #213567;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.route-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(33, 53, 103, 0.08);
+  color: #213567;
+}
+
+.route-return {
+  margin: 0;
+  color: #213567;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+:host-context([dir='rtl']) .route-arrow:not(.is-round) svg {
+  transform: scaleX(-1);
+}
+
 .wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -22,10 +65,14 @@ header {
   border-top-left-radius: $base-radius-small;
   border-top-right-radius: $base-radius-small;
 
-  padding: 20px;
+  padding: 20px 20px 20px 20px;
   margin-inline: -20px;
   margin-bottom: 30px;
   background-color: map-get($map: $colors, $key: 'off-white');
+
+  img{
+    max-width: 6%;
+  }
 }
 
 div {

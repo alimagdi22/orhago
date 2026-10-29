@@ -59,8 +59,10 @@
             class="feature-text"
             [attr.dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
           >
-            <bdi>{{ translate.currentLang === 'en' ? '1 piece' : '1 قطعة' }}</bdi>
-            <span>&nbsp;×&nbsp;</span>
+            @if(baggageAllowanceDetail.baggageAllowanceInfo.unit == 'KG' || baggageAllowanceDetail.baggageAllowanceInfo.unit == 'kilogram') {
+              <bdi>{{ translate.currentLang === 'en' ? '1 piece' : '1 قطعة' }}</bdi>
+              <span>&nbsp;×&nbsp;</span>
+            }
             <bdi>
               {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
               {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
