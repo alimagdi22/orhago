@@ -58,9 +58,10 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.flightResultService.currentSelectedBrands,'brands');
     
     this.subscription.add(
-      this.flightResultService.notify.asObservable().subscribe({
+      this.flightResultService.brandedFareNotifier.asObservable().subscribe({
         next: () => {
           this.totalPages = Math.ceil(this.flightResultService.currentSelectedBrands.length / this.itemsPerPage);
+          setTimeout(() => this.initSwiper());
         },
       }),
     );
@@ -75,25 +76,7 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('nextBtn', { static: false }) nextBtn!: ElementRef<HTMLButtonElement>;
 
   ngAfterViewInit(): void {
-    const swiperEl = this.swiperEl?.nativeElement;
-    if (!swiperEl || !this.prevBtn?.nativeElement || !this.nextBtn?.nativeElement) return;
-
-    const swiperParams = {
-      spaceBetween: 16,
-      navigation: {
-        prevEl: this.prevBtn.nativeElement,
-        nextEl: this.nextBtn.nativeElement,
-      },
-      breakpoints: {
-        0: { slidesPerView: this.sharedService.isWegoCheckout ? 1.15 : 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      },
-    };
-
-    Object.assign(swiperEl, swiperParams);
-    swiperEl.dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
-    swiperEl.initialize();
+    this.initSwiper();
 
     this.subscription.add(
       this.translate.onLangChange.subscribe(() => {
@@ -102,16 +85,37 @@ export class FlexFareComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  updateSwiperDir(): void {
-    if (this.swiperEl?.nativeElement) {
-      const swiperEl = this.swiperEl.nativeElement;
-      const dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
-      swiperEl.dir = dir;
-      if (swiperEl.swiper) {
-        swiperEl.swiper.changeLanguage?.(this.translate.currentLang);
-        swiperEl.swiper.update();
-      }
+  private initSwiper(): void {
+    const swiperEl = this.swiperEl?.nativeElement;
+    if (!swiperEl || !this.prevBtn?.nativeElement || !this.nextBtn?.nativeElement) return;
+    if (!swiperEl.swiper) {
+      Object.assign(swiperEl, {
+        spaceBetween: 16,
+        navigation: {
+          prevEl: this.prevBtn.nativeElement,
+          nextEl: this.nextBtn.nativeElement,
+        },
+        breakpoints: {
+          0: { slidesPerView: this.sharedService.isWegoCheckout ? 1.15 : 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        },
+      });
+      swiperEl.initialize();
     }
+
+    this.updateSwiperDir();
+  }
+
+  updateSwiperDir(): void {
+    const swiperEl = this.swiperEl?.nativeElement;
+    const swiper = swiperEl?.swiper;
+    if (!swiperEl || !swiper) return;
+
+    const direction = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
+    swiperEl.dir = direction;
+    swiper.changeLanguageDirection(direction);
+    swiper.navigation?.update?.();
   }
 
   onSelectContinue() {

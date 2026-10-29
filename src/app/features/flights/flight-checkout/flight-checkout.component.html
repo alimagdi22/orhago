@@ -3,7 +3,7 @@
 } @else {
   <div class="container margin-bottom">
     <app-flight-info />
-    @if (wegoClickId && !sharedService.wegoBrandSelected) {
+    @if (wegoClickId && !sharedService.wegoBrandSelected && flightResultService.currentSelectedBrands.length) {
       <div id="checkout-branded-fares" class="checkout-branded-fares">
         @if (sharedService.wegoBrandRequiredError) {
           <p class="brand-required-error">{{ 'checkout.selectBrandRequired' | translate }}</p>

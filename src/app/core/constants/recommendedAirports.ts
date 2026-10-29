@@ -65,7 +65,7 @@ export const initialRecommendedAirports: IAirPortTranslated[] = [
     en: {
       airportCode: 'IST',
       airportName: 'Istanbul',
-      cityName: 'Istanbul Ataturk',
+      cityName: 'Istanbul Airport',
       cityCode: 'IST',
       countryCode: 'TR',
       countryName: 'Turkey',
@@ -73,7 +73,7 @@ export const initialRecommendedAirports: IAirPortTranslated[] = [
     },
     ar: {
       airportCode: 'IST',
-      airportName: 'Istanbul Ataturk',
+      airportName: 'مطار اسطنبول الدولي',
       cityName: 'اسطنبول',
       cityCode: 'IST',
       countryCode: 'TR',

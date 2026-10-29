@@ -57,13 +57,13 @@ export class FlightDealsComponent implements AfterViewInit, OnInit {
   }
 
   private updateSwiperDir(): void {
-    if (this.swiperEl?.nativeElement) {
-      const isRtl = this.translate.currentLang === 'ar';
-      this.swiperEl.nativeElement.dir = isRtl ? 'rtl' : 'ltr';
-      if (this.swiperEl.nativeElement.swiper) {
-        this.swiperEl.nativeElement.swiper.changeLanguage(isRtl ? 'ar' : 'en');
-        this.swiperEl.nativeElement.swiper.update();
-      }
-    }
+    const swiperEl = this.swiperEl?.nativeElement;
+    const swiper = swiperEl?.swiper;
+    if (!swiperEl || !swiper) return;
+
+    const direction = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
+    swiperEl.dir = direction;
+    swiper.changeLanguageDirection(direction);
+    swiper.navigation?.update?.();
   }
 }

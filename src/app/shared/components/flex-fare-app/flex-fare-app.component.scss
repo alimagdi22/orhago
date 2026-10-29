@@ -146,6 +146,7 @@ swiper-container {
 
 :host-context([dir='rtl']) .fare-nav svg {
   transform: scaleX(-1);
+  transform-origin: center;
 }
 
 @media (max-width: 768px) {

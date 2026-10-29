@@ -18,11 +18,7 @@
             </td>
             <td></td>
           </tr>
-          @for (
-            passengerFareBreakDown of flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-              .passengerFareBreakDowns;
-            track $index
-          ) {
+          @for (passengerFareBreakDown of farePassengers; track $index) {
             <tr>
               <td>
                 {{ passengerFareBreakDown.passengerQuantity }}
@@ -38,32 +34,30 @@
               </td>
             </tr>
           }
-          <tr>
-            <td>
-              <strong>{{ 'flightDetails.fareRules.taxesFees' | translate }}</strong>
-            </td>
-            <td>
-              {{
-                flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
-                  .flightFaresDTOs[1].currencyCode | exchange: 'code' | currencyLabel
-              }}
-              {{ getTotelTaxFare() | exchange: 'value' | arabicNumber }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>{{ 'flightDetails.fareRules.totalPrice' | translate }}</strong>
-            </td>
-            <td>
-              <strong
-                >{{
-                  flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-                    .passengerFareBreakDowns[0].flightFaresDTOs[2].currencyCode | exchange: 'code' | currencyLabel
-                }}
-                {{ getTotelBaseFare() | exchange: 'value' | arabicNumber }}</strong
-              >
-            </td>
-          </tr>
+          @if (firstPassenger?.flightFaresDTOs?.[1]) {
+            <tr>
+              <td>
+                <strong>{{ 'flightDetails.fareRules.taxesFees' | translate }}</strong>
+              </td>
+              <td>
+                {{ firstPassenger.flightFaresDTOs[1].currencyCode | exchange: 'code' | currencyLabel }}
+                {{ getTotelTaxFare() | exchange: 'value': firstPassenger.flightFaresDTOs[1].currencyCode | arabicNumber }}
+              </td>
+            </tr>
+          }
+          @if (firstPassenger?.flightFaresDTOs?.[2]) {
+            <tr>
+              <td>
+                <strong>{{ 'flightDetails.fareRules.totalPrice' | translate }}</strong>
+              </td>
+              <td>
+                <strong
+                  >{{ firstPassenger.flightFaresDTOs[2].currencyCode | exchange: 'code' | currencyLabel }}
+                  {{ getTotelBaseFare() | exchange: 'value': firstPassenger.flightFaresDTOs[2].currencyCode | arabicNumber }}</strong
+                >
+              </td>
+            </tr>
+          }
         </table>
       </div>
 
@@ -82,43 +76,27 @@
             </tr>
           </thead>
           <tbody>
-            @if (
-              flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
-                .cancelPenaltyDTOs.length
-            ) {
+            @if (firstPassenger?.cancelPenaltyDTOs?.length) {
               <tr>
                 <td>
-                  @for (
-                    sector of flightResultService.currentSelectedBrands[
-                      sharedService.selectedBrandedIndex
-                    ].passengerFareBreakDowns[0].cancelPenaltyDTOs[0].sector.split(',');
-                    track $index
-                  ) {
+                  @for (sector of firstPassenger.cancelPenaltyDTOs[0].sector.split(','); track $index) {
                     <p>{{ sector }}</p>
                   }
                 </td>
                 <td>
-                  {{
-                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-                      .passengerFareBreakDowns[0].cancelPenaltyDTOs[0].curency | exchange: 'code' | currencyLabel
-                  }}
-                  {{ getCancellationPrice() | exchange: 'value' | arabicNumber }}
+                  {{ firstPassenger.cancelPenaltyDTOs[0].curency | exchange: 'code' | currencyLabel }}
+                  {{ getCancellationPrice() | exchange: 'value': firstPassenger.cancelPenaltyDTOs[0].curency | arabicNumber }}
                   {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>
             }
 
-            @if (flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0]) {
+            @if (fareAdminCharges[0]) {
               <tr>
                 <td>{{ 'flightDetails.fareRules.adminCharges' | translate }}</td>
                 <td>
-                  {{
-                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0]
-                      .curency | exchange: 'code' | currencyLabel
-                  }}
-                  {{
-                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].adminCharges[0].price
-                      | exchange: 'value' | arabicNumber }}
+                  {{ fareAdminCharges[0].curency | exchange: 'code' | currencyLabel }}
+                  {{ fareAdminCharges[0].price | exchange: 'value': fareAdminCharges[0].curency | arabicNumber }}
                   {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>
@@ -142,28 +120,18 @@
             </tr>
           </thead>
           <tbody>
-            @if (
-              flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].passengerFareBreakDowns[0]
-                .changePenaltyDTOs.length
-            ) {
+            @if (firstPassenger?.changePenaltyDTOs?.length) {
               <tr>
                 <td>
-                  @for (
-                    sector of flightResultService.currentSelectedBrands[
-                      sharedService.selectedBrandedIndex
-                    ].passengerFareBreakDowns[0].changePenaltyDTOs[0].sector.split(',');
-                    track $index
-                  ) {
+                  @for (sector of firstPassenger.changePenaltyDTOs[0].sector.split(','); track $index) {
                     <p>{{ sector }}</p>
                   }
                 </td>
 
                 <td>
-                  {{
-                    flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-                      .passengerFareBreakDowns[0].changePenaltyDTOs[0].curency | exchange: 'code' | currencyLabel
-                  }}
-                  {{ getChangePrice() | exchange: 'value' | arabicNumber }} {{ 'flightDetails.fareRules.perPassenger' | translate }}
+                  {{ firstPassenger.changePenaltyDTOs[0].curency | exchange: 'code' | currencyLabel }}
+                  {{ getChangePrice() | exchange: 'value': firstPassenger.changePenaltyDTOs[0].curency | arabicNumber }}
+                  {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>
             }

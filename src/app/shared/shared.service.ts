@@ -308,7 +308,11 @@ export class SharedService {
   }
 
   blockCheckoutWithoutBrand(): boolean {
-    if (!this.isWegoCheckout || this.wegoBrandSelected) {
+    if (
+      !this.isWegoCheckout ||
+      this.wegoBrandSelected ||
+      !this.flightResultService.currentSelectedBrands.length
+    ) {
       return false;
     }
 

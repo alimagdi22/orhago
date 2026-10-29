@@ -117,14 +117,15 @@ export class FlexFareAppComponent implements AfterViewInit, OnDestroy {
     }
 
     Object.assign(swiperEl, swiperParams);
-    swiperEl.dir = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
 
     if (!swiperEl.swiper) {
       swiperEl.initialize();
-    } else {
-      swiperEl.swiper.changeLanguage?.(this.translate.currentLang);
-      swiperEl.swiper.update();
     }
+
+    const direction = this.translate.currentLang === 'ar' ? 'rtl' : 'ltr';
+    swiperEl.dir = direction;
+    swiperEl.swiper?.changeLanguageDirection(direction);
+    swiperEl.swiper?.navigation?.update?.();
   }
 
   get getTotalPassenger() {

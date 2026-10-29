@@ -27,9 +27,7 @@
   @if (flightResultService.currentSelectedBrands.length) {
     <!-- Desktop Horizontal Swiper Layout (Image 2: Swipe Right & Left) -->
     <div
-      class="desktop-swiper-wrapper"
-      [class.d-none]="!sharedService.isWegoCheckout"
-      [class.d-lg-block]="!sharedService.isWegoCheckout"
+      class="desktop-swiper-wrapper d-none d-lg-block"
       [class.checkout-horizontal]="sharedService.isWegoCheckout"
     >
       <div class="fare-swiper">
@@ -81,7 +79,7 @@
     </div>
 
     <!-- Mobile Vertical Stacked Layout (Image 1: Swipe Up & Down) -->
-    <div class="mobile-cards-stack d-lg-none" [class.d-none]="sharedService.isWegoCheckout">
+    <div class="mobile-cards-stack d-lg-none">
       @for (brand of flightResultService.currentSelectedBrands; track $index) {
         <div class="mobile-card-item">
           <app-flex-fare-card

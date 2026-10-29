@@ -1,9 +1,9 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input-gg';
-import { FlightCheckoutService, FlightResultService, HomePageService } from 'rp-travel-ui';
+import { FlightCheckoutService, FlightResultService, HomePageService , selectedFlight } from 'rp-travel-ui';
 import { Subscription } from 'rxjs';
 import { IMainButton } from '../../../shared/models/flights/mainButton.model';
 import { SharedService } from '../../../shared/shared.service';
@@ -64,6 +64,9 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
 
   brandedFareId = 0;
   wegoClickId = '';
+
+  selectedFlight: selectedFlight | null = null;
+  cdr = inject(ChangeDetectorRef);
   private loadedFlightKey = '';
   private scrolledToContact = false;
   private scrolledToBrands = false;
@@ -72,58 +75,6 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
   private contactScrollTimer: ReturnType<typeof setTimeout> | null = null;
   private brandScrollTimer: ReturnType<typeof setTimeout> | null = null;
   private previousScrollRestoration: ScrollRestoration | null = null;
-
-  ngAfterViewChecked(): void {
-    if (typeof document === 'undefined') return;
-
-    const brandsVisible = !!this.wegoClickId && !this.sharedService.wegoBrandSelected;
-    const checkoutReady = !this.flightCheckoutService.loader && !this.flightResultService.isBrandedFaresLoading;
-
-    if (brandsVisible && !this.scrolledToBrands && checkoutReady && this.brandScrollTimer == null) {
-      this.brandScrollTimer = setTimeout(() => this.scrollToBrands(), 150);
-    }
-
-    if (
-      !brandsVisible &&
-      !this.scrolledToContact &&
-      checkoutReady &&
-      this.contactScrollTimer == null
-    ) {
-      this.contactScrollTimer = setTimeout(() => this.scrollToContact(), 150);
-    }
-
-    if (!this.scrolledToPayment && this.sharedService.checkoutSteps >= 2 && this.paymentScrollTimer == null) {
-      this.paymentScrollTimer = setTimeout(() => {
-        this.paymentScrollTimer = null;
-        const payment = document.getElementById('payment-card-container');
-        if (!payment || typeof window === 'undefined') return;
-
-        this.scrolledToPayment = true;
-        const top = payment.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
-      }, 80);
-    }
-  }
-
-  private scrollToBrands(): void {
-    this.brandScrollTimer = null;
-    const brands = document.getElementById('checkout-branded-fares');
-    if (!brands || typeof window === 'undefined') return;
-
-    this.scrolledToBrands = true;
-    const top = brands.getBoundingClientRect().top + window.scrollY - 96;
-    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
-  }
-
-  private scrollToContact(): void {
-    this.contactScrollTimer = null;
-    const contact = document.getElementById('checkout-contact-group');
-    if (!contact || typeof window === 'undefined') return;
-
-    this.scrolledToContact = true;
-    const top = contact.getBoundingClientRect().top + window.scrollY - 96;
-    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
-  }
 
   ngOnInit(): void {
     if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
@@ -139,6 +90,18 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
           if (this.brandedFareId) {
             this.sharedService.applyBrandFareId(this.brandedFareId);
           }
+          this.cdr.detectChanges();
+        },
+      }),
+    );
+
+    this.subscription.add(
+      this.flightCheckoutService.selectedFlightLang.subscribe({
+        next: () => {
+          if (this.flightCheckoutService.selectedFlight) {
+            this.selectedFlight = this.flightCheckoutService.selectedFlight;
+            this.cdr.detectChanges();
+          }
         },
       }),
     );
@@ -147,7 +110,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
       this.route.queryParams.subscribe((params) => {
         const providerKey = params['providerKey'] || params['pkey'] || params['PKey'];
         const flightKey = `${params['sid']}|${params['sequenceNum']}|${providerKey}`;
-        this.wegoClickId = params['wego_click_id'] || '';
+        this.wegoClickId = params['wego_click_id'] || params['Wego_click_id'] || '';
         this.brandedFareId = params['brandFareId'];
 
         if (this.brandedFareId) {
@@ -181,6 +144,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
 
         this.wegoClickId = params['wego_click_id'] || '';
 
+        this.translate.use((this.flightCheckoutService.selectedFlight?.searchCriteria.language || '')); // switch language to Arabic
         if (this.wegoClickId) {
           const searchId = String(params['sid']).split('_')[0];
           if (searchId && searchId !== 'undefined') {
@@ -190,16 +154,20 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
           if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
             localStorage.setItem('click_id', this.wegoClickId);
           }
+
+
         }
 
         this.brandedFareId = params['brandFareId'];
 
-        this.flightResultService.getBrandedFares(
-          String(params['sid']).split('_')[0],
-          params['sequenceNum'],
-          params['providerKey'] ?? '0',
-          String(params['sid']).split('_')[1] ?? '0',
-        );
+        if (this.wegoClickId) {
+          this.flightResultService.getBrandedFares(
+            String(params['sid']).split('_')[0],
+            params['sequenceNum'],
+            providerKey || '0',
+            String(params['sid']).split('_')[1] ?? '0',
+          );
+        }
       }),
     );
 
@@ -272,6 +240,66 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     );
     console.log(this.flightCheckoutService.usersArray.controls, 'users');
   }
+
+  ngAfterViewChecked(): void {
+    if (typeof document === 'undefined') return;
+
+    const brandsVisible =
+      !!this.wegoClickId &&
+      !this.sharedService.wegoBrandSelected &&
+      this.flightResultService.currentSelectedBrands.length > 0;
+    const checkoutReady = !this.flightCheckoutService.loader && !this.flightResultService.isBrandedFaresLoading;
+
+    if (brandsVisible && !this.scrolledToBrands && checkoutReady && this.brandScrollTimer == null) {
+      this.brandScrollTimer = setTimeout(() => this.scrollToBrands(), 150);
+    }
+
+    if (
+      !brandsVisible &&
+      !this.scrolledToContact &&
+      checkoutReady &&
+      this.contactScrollTimer == null
+    ) {
+      this.contactScrollTimer = setTimeout(() => this.scrollToContact(), 150);
+    }
+
+    if (!this.scrolledToPayment && this.sharedService.checkoutSteps >= 2 && this.paymentScrollTimer == null) {
+      this.paymentScrollTimer = setTimeout(() => {
+        this.paymentScrollTimer = null;
+        const payment = document.getElementById('payment-card-container');
+        if (!payment || typeof window === 'undefined') return;
+
+        this.scrolledToPayment = true;
+        const top = payment.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+      }, 80);
+    }
+    if (this.selectedFlight) {
+      this.translate.setDefaultLang(this.selectedFlight.searchCriteria.language);
+    }
+  }
+
+
+  private scrollToBrands(): void {
+    this.brandScrollTimer = null;
+    const brands = document.getElementById('checkout-branded-fares');
+    if (!brands || typeof window === 'undefined') return;
+
+    this.scrolledToBrands = true;
+    const top = brands.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
+
+  private scrollToContact(): void {
+    this.contactScrollTimer = null;
+    const contact = document.getElementById('checkout-contact-group');
+    if (!contact || typeof window === 'undefined') return;
+
+    this.scrolledToContact = true;
+    const top = contact.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
+
 
   countrySearchFields: SearchCountryField[] = [
     SearchCountryField.Name,

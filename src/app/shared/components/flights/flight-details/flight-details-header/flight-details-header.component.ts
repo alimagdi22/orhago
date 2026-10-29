@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { IMainButton } from '../../../../models/flights/mainButton.model';
 import { SharedService } from '../../../../shared.service';
 import { FlightResultService } from 'rp-travel-ui';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: false,
@@ -12,7 +13,7 @@ import { FlightResultService } from 'rp-travel-ui';
 export class FlightDetailsHeaderComponent {
   sharedService = inject(SharedService);
   flightResultService = inject(FlightResultService);
-
+  translate = inject(TranslateService);
   get fareAmount(): number {
     const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
     if (this.sharedService.selectedBrandedIndex !== -1 && brand?.itinTotalFare?.amount) {
