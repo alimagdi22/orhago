@@ -12,9 +12,13 @@
                   {{flights[0].flightDTO[flights[0].flightDTO.length - 1]?.arrivalTerminalAirport?.cityName}} ({{flights[0].flightDTO[flights[0].flightDTO.length - 1]?.arrivalTerminalAirport?.cityCode}})
               </span>
 
-              <div dir="ltr">
+              <div>
                   <span> - {{flights[0].flightDTO[0]?.departureDate | date: 'dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'}} - </span>
               </div>
+
+                @if (flights.length > 1) {
+                    <span>  {{flights[flights.length - 1].flightDTO[flights[flights.length - 1].flightDTO.length - 1]?.arrivalDate | date: 'dd MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US'}} - </span>
+                }
 
               <div class="passenger" dir="rtl">
                   {{flightResultService.response?.searchCriteria?.totalPassengersNum}} {{ translate.currentLang === 'en' ? 'Pax' : 'راكب'}}

@@ -7,7 +7,7 @@
           {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityName }} 
         </p>
     }
-    {{flightResultService.response?.searchCriteria?.flightType === 'oneway' ? ('flightDetails.flightType.oneWay' | translate) : flightResultService.response?.searchCriteria?.flightType === 'roundtrip' ? ('flightDetails.flightType.roundtrip' | translate) : ('flightDetails.flightType.multicity' | translate)}}
+    {{(flightResultService.response?.searchCriteria?.flightType === 'oneway' || flightResultService.response?.searchCriteria?.flightType === 'Oneway' || flightResultService.response?.searchCriteria?.flightType === 'ONEWAY') ? ('flightDetails.flightType.oneWay' | translate) : (flightResultService.response?.searchCriteria?.flightType === 'roundtrip' || flightResultService.response?.searchCriteria?.flightType === 'Roundtrip' || flightResultService.response?.searchCriteria?.flightType === 'roundTrip' || flightResultService.response?.searchCriteria?.flightType === 'RoundTrip' || flightResultService.response?.searchCriteria?.flightType === 'ROUNDTRIP') ? ('flightDetails.flightType.roundtrip' | translate) : ('flightDetails.flightType.multicity' | translate)}}
   </div>
 
   @if (sharedService.isSegmentPresent(['flight-checkout'])) {
