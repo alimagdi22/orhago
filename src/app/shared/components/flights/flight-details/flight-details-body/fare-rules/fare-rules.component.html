@@ -24,13 +24,13 @@
                 {{ passengerFareBreakDown.passengerQuantity }}
                 {{ sharedService.getPassengerTypeName(passengerFareBreakDown.passengerType) }} ({{
                   passengerFareBreakDown.passengerQuantity
-                }}× {{ passengerFareBreakDown.flightFaresDTOs[0].fareAmount | exchange: 'value': passengerFareBreakDown.flightFaresDTOs[0].currencyCode | arabicNumber }})
+                }}× {{ passengerFareBreakDown.flightFaresDTOs[0].fareAmount | exchange: 'value': passengerFareBreakDown.flightFaresDTOs[0].currencyCode | number: '1.0-2' | arabicNumber }})
               </td>
               <td>
                 {{ passengerFareBreakDown.flightFaresDTOs[0].currencyCode | exchange: 'code' | currencyLabel }}
                 {{
                   passengerFareBreakDown.flightFaresDTOs[0].fareAmount * passengerFareBreakDown.passengerQuantity
-                    | exchange: 'value': passengerFareBreakDown.flightFaresDTOs[0].currencyCode | arabicNumber }}
+                    | exchange: 'value': passengerFareBreakDown.flightFaresDTOs[0].currencyCode | number: '1.0-2' | arabicNumber }}
               </td>
             </tr>
           }
@@ -41,7 +41,7 @@
               </td>
               <td>
                 {{ firstPassenger.flightFaresDTOs[1].currencyCode | exchange: 'code' | currencyLabel }}
-                {{ getTotelTaxFare() | exchange: 'value': firstPassenger.flightFaresDTOs[1].currencyCode | arabicNumber }}
+                {{ getTotelTaxFare() | exchange: 'value': firstPassenger.flightFaresDTOs[1].currencyCode | number: '1.0-2' | arabicNumber }}
               </td>
             </tr>
           }
@@ -53,7 +53,7 @@
               <td>
                 <strong
                   >{{ firstPassenger.flightFaresDTOs[2].currencyCode | exchange: 'code' | currencyLabel }}
-                  {{ getTotelBaseFare() | exchange: 'value': firstPassenger.flightFaresDTOs[2].currencyCode | arabicNumber }}</strong
+                  {{ getTotelBaseFare() | exchange: 'value': firstPassenger.flightFaresDTOs[2].currencyCode | number: '1.0-2' | arabicNumber }}</strong
                 >
               </td>
             </tr>
@@ -85,7 +85,7 @@
                 </td>
                 <td>
                   {{ firstPassenger.cancelPenaltyDTOs[0].curency | exchange: 'code' | currencyLabel }}
-                  {{ getCancellationPrice() | exchange: 'value': firstPassenger.cancelPenaltyDTOs[0].curency | arabicNumber }}
+                  {{ getCancellationPrice() | exchange: 'value': firstPassenger.cancelPenaltyDTOs[0].curency | number: '1.0-2' | arabicNumber }}
                   {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>
@@ -96,7 +96,7 @@
                 <td>{{ 'flightDetails.fareRules.adminCharges' | translate }}</td>
                 <td>
                   {{ fareAdminCharges[0].curency | exchange: 'code' | currencyLabel }}
-                  {{ fareAdminCharges[0].price | exchange: 'value': fareAdminCharges[0].curency | arabicNumber }}
+                  {{ fareAdminCharges[0].price | exchange: 'value': fareAdminCharges[0].curency | number: '1.0-2' | arabicNumber }}
                   {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>
@@ -130,7 +130,7 @@
 
                 <td>
                   {{ firstPassenger.changePenaltyDTOs[0].curency | exchange: 'code' | currencyLabel }}
-                  {{ getChangePrice() | exchange: 'value': firstPassenger.changePenaltyDTOs[0].curency | arabicNumber }}
+                  {{ getChangePrice() | exchange: 'value': firstPassenger.changePenaltyDTOs[0].curency | number: '1.0-2' | arabicNumber }}
                   {{ 'flightDetails.fareRules.perPassenger' | translate }}
                 </td>
               </tr>

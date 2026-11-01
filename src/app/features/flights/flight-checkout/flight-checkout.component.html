@@ -195,6 +195,7 @@
                         <label>{{ 'checkout.dateOfBirth' | translate }}</label>
                         <div
                           class="custom-input-container"
+                          checkoutDateLtr
                           [ngStyle]="{ borderColor: isInputValid(user, 'dateOfBirth') ? 'red' : '' }"
                         >
                           <span class="input-icon">
@@ -206,7 +207,7 @@
                             [placeholder]="'checkout.selectDate' | translate"
                             (click)="dateOfBirthPicker.open()"
                             formControlName="dateOfBirth"
-                            type="datetime"
+                            type="text"
                             [max]="getMaxDate(user.value.PassengerType)"
                             [min]="getMinDate(user.value.PassengerType)"
                             readonly
@@ -340,6 +341,7 @@
                         <label>{{ 'checkout.passportExpiry' | translate }}</label>
                         <div
                           class="custom-input-container"
+                          checkoutDateLtr
                           [ngStyle]="{ borderColor: isInputValid(user, 'PassportExpiry') ? 'red' : '' }"
                         >
                           <input

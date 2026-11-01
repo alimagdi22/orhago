@@ -15,11 +15,11 @@
       <div class="price-details d-flex flex-row align-items-center justify-content-center gap-2 w-50">
         <p class="price__text mb-0">
           @if(translate.currentLang === 'ar') {
-            {{ fareAmount | exchange: 'value': fareCurrency | arabicNumber }}
+            {{ fareAmount | exchange: 'value': fareCurrency | number: '1.0-2' | arabicNumber }}
             {{ fareCurrency | exchange: 'code' | currencyLabel }}
           } @else {
             {{ fareCurrency | exchange: 'code' | currencyLabel }}
-            {{ fareAmount | exchange: 'value': fareCurrency | arabicNumber }}
+            {{ fareAmount | exchange: 'value': fareCurrency | number: '1.0-2' | arabicNumber }}
           }
         </p>
         <span class="d-sm-none">
@@ -43,11 +43,11 @@
       <div class="price-details d-flex flex-row align-items-center justify-content-center gap-2 w-50">
         <p class="price__text mb-0">
           @if(translate.currentLang === 'ar') {
-            {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value': sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | arabicNumber }}
+            {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value': sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
             {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
           } @else {
             {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
-            {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value': sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | arabicNumber }}
+            {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value': sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
           }
         </p>
         <span class="d-sm-none">

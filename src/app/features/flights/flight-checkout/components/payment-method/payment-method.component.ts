@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnInit, OnDestroy, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, inject, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../../../shared/shared.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ declare var PaymentSession: any;
   templateUrl: './payment-method.component.html',
   styleUrl: './payment-method.component.scss',
 })
-export class PaymentMethodComponent implements OnInit, OnDestroy {
+export class PaymentMethodComponent implements OnInit, DoCheck, OnDestroy {
   public sharedService = inject(SharedService);
   private translateService = inject(TranslateService);
   private route = inject(ActivatedRoute);
@@ -263,6 +263,12 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngDoCheck(): void {
+    if (this.flightCheckoutService.paymentError || this.sharedService.isPaymentModalShowed) {
+      this.flightCheckoutService.saveBookingLoadeer = false;
+    }
+  }
+
   onTermsChange(checked: boolean): void {
     if (checked) {
       this.termsInvalid = false;
@@ -287,14 +293,21 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     const currentCurrency = this.selectedFlight?.searchCriteria?.currency || 'KWD';
     const pcc = this.flightCheckoutService.pcc || this.searchParams.pcc || '0';
 
-    this.flightCheckoutService.newPaymentSaveBooking(
-      currentCurrency,
-      'notPremium',
-      pcc,
-      +this.brandedFareId || 0,
-      selectedMethod,
-      this.mpgsSessionId ? this.mpgsSessionId.replaceAll('"', '') : '',
-    );
+    try {
+      this.flightCheckoutService.newPaymentSaveBooking(
+        currentCurrency,
+        'notPremium',
+        pcc,
+        +this.brandedFareId || 0,
+        selectedMethod,
+        this.mpgsSessionId ? this.mpgsSessionId.replaceAll('"', '') : '',
+      );
+    } catch (error) {
+      console.error('Payment failed before the request started:', error);
+      this.flightCheckoutService.saveBookingLoadeer = false;
+      this.flightCheckoutService.paymentError = true;
+      this.sharedService.isPaymentModalShowed = true;
+    }
   }
 
   redirectToHome() {

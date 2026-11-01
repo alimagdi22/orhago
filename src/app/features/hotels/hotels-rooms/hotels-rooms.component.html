@@ -117,7 +117,7 @@
   <div class="pricing-card">
     <div class="card-body">
       <p>{{ hotelRoomsService.roomsData.sellCurrency | currencyLabel }}
-        <span class="price">{{ hotelRoomsService.roomsData.TotalSellPrice | arabicNumber }}</span>
+        <span class="price">{{ hotelRoomsService.roomsData.TotalSellPrice | number: '1.0-2' | arabicNumber }}</span>
       </p>
       <button class="select-button" (click)="openPopup()">Select Rooms</button>
     </div>

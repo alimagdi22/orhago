@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FlightCheckoutRoutingModule } from './flight-checkout-routing.module';
 import { FlightCheckoutComponent } from './flight-checkout.component';
+import { CheckoutDateLtrDirective } from './checkout-date-ltr.directive';
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 import { FlightInfoDestComponent } from './components/flight-info/flight-info-dest/flight-info-dest.component';
 import { FlightInfoPathComponent } from './components/flight-info/flight-info-path/flight-info-path.component';
@@ -18,6 +19,7 @@ import { PaymentMethodComponent } from './components/payment-method/payment-meth
 @NgModule({
   declarations: [
     FlightCheckoutComponent,
+    CheckoutDateLtrDirective,
     FlightInfoComponent,
     FlightInfoDestComponent,
     FlightInfoPathComponent,

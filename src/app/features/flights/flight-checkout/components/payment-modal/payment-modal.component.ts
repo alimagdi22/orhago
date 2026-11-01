@@ -19,6 +19,7 @@ export class PaymentModalComponent {
   closeModal() {
     this.sharedService.isPaymentModalShowed = false;
     this.flightCheckoutService.paymentError = false;
+    this.flightCheckoutService.saveBookingLoadeer = false;
   }
 
   goToHomePage() {

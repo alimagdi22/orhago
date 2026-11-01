@@ -1,4 +1,4 @@
 <div class="sort-item" [class.active]="sortItem.isActive">
   <span class="sort-item__title">{{ 'results.sort.' + sortItem.title | translate }}</span>
-  <span class="sort-item__number">{{ sortItem.price | exchange: 'value': sortItem.currency | arabicNumber }}</span>
+  <span class="sort-item__number">{{ sortItem.price | exchange: 'value': sortItem.currency | number: '1.0-2' | arabicNumber }}</span>
 </div>

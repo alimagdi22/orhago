@@ -247,6 +247,14 @@ ngx-intl-tel-input {
   transform: scaleX(-1);
 }
 
+.cdk-overlay-pane:has(.custom-datepicker-panel) {
+  direction: ltr;
+}
+
+.custom-datepicker-panel {
+  direction: ltr;
+}
+
 :host ::ng-deep .swiper-wrapper {
   justify-content: center !important;
 }

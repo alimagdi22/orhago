@@ -299,6 +299,8 @@
       "conditionStart": "I agree to the",
       "conditionEnd": "Terms and Conditions",
       "pay": "Pay",
+      "preparingTitle": "Just a moment, you're nearly there!",
+      "preparingMessage": "We're getting your booking ready so you can proceed securely to payment.",
       "errorTitle": "Whoops!",
       "errorMessage": "Sorry, an error occurred during the booking process, please try again later",
       "tryAgain": "Let's try again",
