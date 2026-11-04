@@ -14,6 +14,13 @@
     color: white;
   }
 
+  &.disabled {
+    color: #bbb;
+    background-color: transparent;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
   &.range {
     background-color: map-get($map: $colors, $key: 'secondary');
     color: white;

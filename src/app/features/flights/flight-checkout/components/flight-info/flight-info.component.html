@@ -1,5 +1,5 @@
 <div class="route-heading">
-  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.searchCriteria?.flights[0]?.departingFrom }}</h2>
+  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[0]?.flightDTO[0].departureTerminalAirport.cityName }}</h2>
   <span class="route-arrow" [class.is-round]="isRoundTrip" aria-hidden="true">
     <!-- @if (isRoundTrip) {
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -15,7 +15,7 @@
       </svg>
     <!-- } -->
   </span>
-  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.searchCriteria?.flights[0]?.arrivingTo }}</h2>
+  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights.length - 1]?.flightDTO[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights.length - 1]?.flightDTO.length - 1].departureTerminalAirport.cityName }}</h2>
   @if (isRoundTrip) {
     <span class="route-return">{{ 'checkout.andBack' | translate }}</span>
   }

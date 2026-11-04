@@ -2,16 +2,17 @@
 
 <div class="calenderMobile_datepicker">
   <ngb-datepicker
+    #datePicker
     [displayMonths]="2"
     [dayTemplate]="dayCalander"
-    [startDate]="data.isReturnDate ? returnDate : departingDate"
+    [startDate]="data.isReturnDate ? departingDate : departingDate"
     [minDate]="data.isReturnDate ? departingDate : minDepartingDate"
     (dateSelect)="onDateSelection($event)"
   />
 
   <ng-template #dayCalander let-date>
     @if (data.flightType === 'round-trip') {
-      <span class="custom-day" [class.focused]="isSelected(date)" [class.range]="isInside(date)">{{ date.day }}</span>
+      <span class="custom-day" [class.focused]="isSelected(date)" [class.range]="isInside(date)" [class.disabled]="data.isReturnDate && date.before(departingDate)">{{ date.day }}</span>
     } @else {
       <span class="custom-day" [class.focused]="isSelected(date)">{{ date.day }}</span>
     }

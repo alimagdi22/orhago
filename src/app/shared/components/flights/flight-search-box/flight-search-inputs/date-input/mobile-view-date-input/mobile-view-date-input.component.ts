@@ -1,6 +1,6 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { FlightSearchService } from 'rp-travel-ui';
 
 @Component({
@@ -12,6 +12,8 @@ import { FlightSearchService } from 'rp-travel-ui';
 export class MobileViewDateInputComponent {
   public calendar = inject(NgbCalendar);
   public flightSearchService = inject(FlightSearchService);
+
+  @ViewChild('datePicker') datePicker?: NgbDatepicker;
 
   departingDate: NgbDate = new NgbDate(1999, 1, 9);
   returnDate: NgbDate = new NgbDate(1999, 1, 9);
@@ -52,24 +54,28 @@ export class MobileViewDateInputComponent {
   }
 
   onDateSelection(date: NgbDate) {
+    if (this.data.isReturnDate && date.before(this.departingDate)) return;
+
     if (this.data.isReturnDate) {
       this.flightSearchService.searchFlight
         .get('returnDate')
         ?.setValue(`${date.year}-${date.month.toString().padStart(2, '0')}-${date.day}`);
-    } else {
-      this.flightSearchService.flightsArray
-        .at(this.data.index)
-        ?.get('departingD')
-        ?.setValue(`${date.year}-${date.month.toString().padStart(2, '0')}-${date.day}`);
+      this.backToSearchBox();
+      return;
     }
 
-    if (!this.data.isReturnDate) {
-      this.flightSearchService.searchFlight.get('returnDate')?.setValue('');
-    }
+    this.flightSearchService.flightsArray
+      .at(this.data.index)
+      ?.get('departingD')
+      ?.setValue(`${date.year}-${date.month.toString().padStart(2, '0')}-${date.day}`);
+    this.flightSearchService.searchFlight.get('returnDate')?.setValue('');
+    this.departingDate = new NgbDate(date.year, date.month, date.day);
 
-    // if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-    //   localStorage.setItem('form', JSON.stringify(this.flightSearchService.searchFlight.value));
-    // }
+    if (this.data.flightType === 'round-trip') {
+      this.data.isReturnDate = true;
+      setTimeout(() => this.datePicker?.navigateTo(this.departingDate));
+      return;
+    }
 
     this.backToSearchBox();
   }

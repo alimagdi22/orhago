@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, Input, OnChanges, OnInit, output, SimpleChanges, ViewChild } from '@angular/core';
-import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { FlightSearchService } from 'rp-travel-ui';
 import { SharedService } from '../../../../../shared.service';
 import { AbstractControl } from '@angular/forms';
@@ -23,6 +23,7 @@ export class DateInputComponent implements OnChanges, OnInit {
   openCabinMenu = output<void>();
 
   @ViewChild('calenderTrigger') calenderTrigger!: ElementRef;
+  @ViewChild('datePicker') datePicker?: NgbDatepicker;
 
   calendar = inject(NgbCalendar);
   flightSearchService = inject(FlightSearchService);
@@ -30,7 +31,8 @@ export class DateInputComponent implements OnChanges, OnInit {
   translate = inject(TranslateService);
   
   minDate = this.calendar.getToday();
-  departDate: any = null;
+  departDate: NgbDate | null = null;
+  calendarStart: NgbDate = this.calendar.getToday();
 
   startDateValue: any;
   endDateValue: Date = new Date(2023, 9, 30);
@@ -39,13 +41,23 @@ export class DateInputComponent implements OnChanges, OnInit {
   constructor(private dialog: MatDialog) {}
   
   ngOnInit(): void {
-    this.departDate = this.generateCalendarDate(this.flightSearchService.flightsArray.at(this.index).get('departingD')?.value);
+    this.refreshCalendarBounds();
   }
   
   ngOnChanges(simpleChanges: SimpleChanges): void {
     if(this.openCalendar && !simpleChanges['openCalendar']?.firstChange && this.flightType !== 'multi-city') {
+      this.refreshCalendarBounds();
       this.calenderTrigger.nativeElement?.click();
     }
+  }
+
+  prepareCalendar(): void {
+    this.refreshCalendarBounds();
+  }
+
+  onCalendarOpened(): void {
+    if (!this.isReturnDateSelected || !this.departDate) return;
+    setTimeout(() => this.datePicker?.navigateTo(this.departDate!));
   }
   
   closeCalendar(e: Event) {
@@ -53,7 +65,9 @@ export class DateInputComponent implements OnChanges, OnInit {
     this.calenderTrigger.nativeElement?.click();
   }
 
-    onDateSelection(date: NgbDate, index: number) {      
+    onDateSelection(date: NgbDate, index: number) {
+      if (this.isDayDisabled(date)) return;
+
       if (this.isReturnDateSelected) {
         this.flightSearchService.searchFlight.get('returnDate')?.setValue(new Date(date.year, date.month - 1, date.day));
         this.openCabinMenu.emit();
@@ -86,14 +100,24 @@ export class DateInputComponent implements OnChanges, OnInit {
       };
     }
 
-    generateCalendarDate(dateArg: string) {
-      const date = new Date(dateArg);
-  
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-  
-      return { year, month, day };
+    generateCalendarDate(dateArg: string | Date | null | undefined): NgbDate | null {
+      return this.toNgbDate(dateArg);
+    }
+
+    private refreshCalendarBounds(): void {
+      const raw =
+        this.flightSearchService.flightsArray.at(0)?.get('departingD')?.value ??
+        this.flightSearchService.flightsArray.at(this.index)?.get('departingD')?.value;
+      const departure = this.toNgbDate(raw);
+      this.departDate = departure;
+      this.calendarStart = this.isReturnDateSelected && departure ? departure : departure || this.calendar.getToday();
+    }
+
+    private toNgbDate(value: unknown): NgbDate | null {
+      if (!value) return null;
+      const date = value instanceof Date ? value : new Date(value as string);
+      if (Number.isNaN(date.getTime())) return null;
+      return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
     }
 
     multiCityDateChecker(curIndex: number) {
@@ -143,15 +167,16 @@ export class DateInputComponent implements OnChanges, OnInit {
       const departingDate = this.generateCalendarDate(
         this.flightSearchService.flightsArray.at(index).get('departingD')?.value,
       );
-  
-      return (
-        date.year + '-' + date.month + '-' + date.day ===
-        `${departingDate.year}-${departingDate.month}-${departingDate.day}`
-      );
+      if (!departingDate) return false;
+
+      return date.equals(departingDate);
     }
 
-    isDisabled(date: NgbDate) {
-      date.before(this.minDate);
+    isDayDisabled(date: NgbDate): boolean {
+      if (this.isReturnDateSelected && this.departDate) {
+        return date.before(this.departDate);
+      }
+      return date.before(this.minDate);
     }
 
     isHovered(date: NgbDate) {
@@ -162,14 +187,16 @@ export class DateInputComponent implements OnChanges, OnInit {
       const departingDate = this.generateCalendarDate(
         this.flightSearchService.flightsArray.at(0).get('departingD')?.value,
       );
-  
+      if (!departingDate || !this.hoveredDate) return false;
+
       return date.after(departingDate) && date.before(this.hoveredDate);
     }
   
     isReturnSelected(date: NgbDate) {
       const returnDate = this.generateCalendarDate(this.flightSearchService.searchFlight.get('returnDate')?.value);
-  
-      return date.year + '-' + date.month + '-' + date.day === `${returnDate.year}-${returnDate.month}-${returnDate.day}`;
+      if (!returnDate) return false;
+
+      return date.equals(returnDate);
     }
 
       onClickInput(index: number) {

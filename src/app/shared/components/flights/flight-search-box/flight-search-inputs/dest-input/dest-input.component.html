@@ -116,26 +116,28 @@
         </mat-autocomplete>
 
         <mat-menu #popularDest="matMenu" class="popular-dest">
-          <p class="popular-dest__title">{{ 'home.search.popularDest' | translate }}</p>
-          <ul class="popular-dest__list">
-            @for (city of sharedService.initialRecommendedAirports; track $index) {
-              <li
-                class="popular-dest__list__item"
-                [ngStyle]="{ borderBottom: '1px solid #CBCBCB' }"
-                (click)="
-                  onSelectPopularDestination(destination, city[sharedService.lang].cityName + ',' + city[sharedService.lang].airportCode, index);
-                  onSelectDestintation(destination, city, index)
-                "
-              >
-                <img
-                  src="assets/icons/location-icon.svg"
-                  title="Location Icon"
-                  class="popular-dest__list__item__icon"
-                />
-                <span class="popular-dest__list__item__location">{{ city[sharedService.lang].cityName }}</span>
-              </li>
-            }
-          </ul>
+          <div [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
+            <p class="popular-dest__title">{{ 'home.search.popularDest' | translate }}</p>
+            <ul class="popular-dest__list">
+              @for (city of sharedService.initialRecommendedAirports; track $index) {
+                <li
+                  class="popular-dest__list__item"
+                  [ngStyle]="{ borderBottom: '1px solid #CBCBCB' }"
+                  (click)="
+                    onSelectPopularDestination(destination, city[sharedService.lang].cityName + ',' + city[sharedService.lang].airportCode, index);
+                    onSelectDestintation(destination, city, index)
+                  "
+                >
+                  <img
+                    src="assets/icons/location-icon.svg"
+                    title="Location Icon"
+                    class="popular-dest__list__item__icon"
+                  />
+                  <span class="popular-dest__list__item__location">{{ city[sharedService.lang].cityName }}</span>
+                </li>
+              }
+            </ul>
+          </div>
         </mat-menu>
 
         @if(isDestNotValid(index)) {
