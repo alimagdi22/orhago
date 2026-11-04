@@ -184,6 +184,11 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
   onSubmit() {
     this.flightSearchService.flightsArray.at(0)?.markAllAsTouched();
     this.flightSearchService.searchFlight?.get('returnDate')?.markAsTouched();
+    if (this.hasSameEndpoints()) {
+      this.flightSearchService.flightsArray.controls.forEach((group) => group.updateValueAndValidity());
+      this.isSelectButtonLoading = false;
+      return;
+    }
     this.isSelectButtonLoading = true;
 
     const lang = this.translate.currentLang || 'en';
@@ -275,6 +280,18 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
 
     this.sharedService.selectedDestions.splice(index, 1);
     this.flightSearchService.removeFlight(index);
+  }
+
+  private hasSameEndpoints(): boolean {
+    return this.flightSearchService.flightsArray.controls.some((group) => {
+      const departing = this.placeCode(group.get('departing')?.value);
+      const landing = this.placeCode(group.get('landing')?.value);
+      return !!departing && departing === landing;
+    });
+  }
+
+  private placeCode(value: string): string {
+    return String(value || '').split(',').pop()?.trim().toLowerCase() || '';
   }
 
   isDepartingNotValid(index: number) {

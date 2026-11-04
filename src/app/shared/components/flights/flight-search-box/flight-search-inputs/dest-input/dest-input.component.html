@@ -3,7 +3,7 @@
     <ng-container [formGroupName]="index">
       <div
         class="dest"
-        [matMenuTriggerFor]="(sharedService.screenWidth >= 1200 && !isLoading) ? popularDest : null"
+        [matMenuTriggerFor]="(sharedService.screenWidth >= 1200 && !isLoading && !cities.length && !suppressRecommended) ? popularDest : null"
         #menuTrigger="matMenuTrigger"
         (click)="onClickDestBox()"
         (menuOpened)="onMenuOpen()"
@@ -65,7 +65,7 @@
               <!-- City Option (All Airports) -->
               <mat-option
                 [value]="group.airports[0][sharedService.lang].cityName + ',' + group.airports[0][sharedService.lang].cityCode"
-                (onSelectionChange)="onSelectCity(destination, group.airports[0], index)"
+                (onSelectionChange)="onAutocompleteOptionSelected($event, group.airports[0], index, true)"
                 class="dropdown-list__item city-option"
               >
                 <div class="dropdown-list__item__wrapper">
@@ -91,7 +91,7 @@
               @for (airport of group.airports; track airport[sharedService.lang].airportCode) {
                 <mat-option
                   [value]="airport[sharedService.lang].cityName + ',' + airport[sharedService.lang].airportCode"
-                  (onSelectionChange)="onSelectDestintation(destination, airport, index, false)"
+                  (onSelectionChange)="onAutocompleteOptionSelected($event, airport, index, false)"
                   class="dropdown-list__item airport-option"
                 >
                   <div class="dropdown-list__item__wrapper">
@@ -140,9 +140,14 @@
           </div>
         </mat-menu>
 
-        @if(isDestNotValid(index)) {
+        @if(isDestNotValid(index) && !samePlaceError) {
           <p class="error-message">
             {{ 'home.search.enterDestination' | translate }}
+          </p>
+        }
+        @if (samePlaceError) {
+          <p class="error-message">
+            {{ 'home.search.sameDestination' | translate }}
           </p>
         }
       </div>

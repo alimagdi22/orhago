@@ -112,7 +112,8 @@
       "addFlight": "Add Flight",
       "addFlightNote": "Maximum of 4 different flights can be added",
       "searchTicket": "Search Ticket",
-      "enterDestination": "Enter your destination city"
+      "enterDestination": "Enter your destination city",
+      "sameDestination": "Departure and arrival can't be the same"
     },
     "exploreTitle": "Explore popular flights and hotels",
     "adContent": {

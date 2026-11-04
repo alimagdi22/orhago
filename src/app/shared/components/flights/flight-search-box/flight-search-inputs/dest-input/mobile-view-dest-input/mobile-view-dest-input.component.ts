@@ -23,6 +23,8 @@ export class MobileViewDestInputComponent implements OnInit, OnDestroy {
   public translate = inject(TranslateService);
   public flightSearchService = inject(FlightSearchService);
   public isLoading = false;
+  public samePlaceError = false;
+  public searchTerm = '';
   public sharedService = inject(SharedService);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { destination: TDestinations; flightItem: AbstractControl; index: number; dismiss: Function }) {}
@@ -64,6 +66,7 @@ export class MobileViewDestInputComponent implements OnInit, OnDestroy {
 
   onInputDirection(e: Event): void {
     const value = (e.target as HTMLInputElement).value;
+    this.searchTerm = value;
 
     if (value && value.trim()) {
       this.isLoading = true;
@@ -112,14 +115,22 @@ export class MobileViewDestInputComponent implements OnInit, OnDestroy {
     }
 
     const langObj = city[this.sharedService.lang];
-    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = langObj;
     const code = isCitySelection ? langObj.cityCode : langObj.airportCode;
-    this.data.flightItem.get(dest)?.setValue(langObj.cityName + ',' + code);
+    const other = dest === 'departing' ? 'landing' : 'departing';
+    const otherCode = String(this.data.flightItem.get(other)?.value || '').split(',').pop()?.trim().toLowerCase();
+    if (code && otherCode && code.trim().toLowerCase() === otherCode) {
+      this.samePlaceError = true;
+      return;
+    }
+    this.samePlaceError = false;
+    this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = langObj;
 
     this.flightSearchService.flightsArray
       .at(index)
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(true);
+
+    this.data.flightItem.get(dest)?.setValue(langObj.cityName + ',' + code);
 
     this.data.dismiss();
   }

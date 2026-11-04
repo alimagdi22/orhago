@@ -109,7 +109,8 @@
       "addFlight": "إضافة رحلة",
       "addFlightNote": "يمكن إضافة 4 رحلات مختلفة كحد أقصى",
       "searchTicket": "البحث عن تذكرة",
-      "enterDestination": "أدخل وجهتك"
+      "enterDestination": "أدخل وجهتك",
+      "sameDestination": "لا يمكن أن تكون المغادرة والوصول نفس الوجهة"
     },
     "exploreTitle": "استكشف أشهر الرحلات والفنادق",
     "adContent": {

@@ -6,6 +6,13 @@
     padding: 10px;
 }
 
+.error-message {
+    margin: 8px 0 0;
+    color: #c0392b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
 .form-control {
     display: block;
     width: 100%;
@@ -113,4 +120,4 @@
   color: gray;
   height: 50vh;
 }
-
+

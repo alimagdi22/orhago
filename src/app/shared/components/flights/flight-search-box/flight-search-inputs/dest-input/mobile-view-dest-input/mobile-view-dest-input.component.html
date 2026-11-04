@@ -13,6 +13,9 @@
   (input)="onInputDirection($event)"
 />
 <hr />
+@if (samePlaceError) {
+  <p class="error-message">{{ 'home.search.sameDestination' | translate }}</p>
+}
 </div>
 
 <div class="options-container">
@@ -24,7 +27,7 @@
     </div>
   }
 } @else {
-  @if (!cities.length || !data.flightItem.get(data.destination)?.value) {
+  @if (!searchTerm.trim() || !cities.length) {
     <h4 class="text-center">{{ 'searchBox.recommendedAirports' | translate }}</h4>
     @for (airport of getRecommendedAirports() | limitTo: 5; track $index) {
       <div
@@ -99,4 +102,4 @@
   }
 }
 </div>
-
+

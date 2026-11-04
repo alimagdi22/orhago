@@ -22,6 +22,30 @@ export class FlightDetailsHeaderComponent {
     return this.sharedService.selectedFlightItinerary?.itinTotalFare?.amount || 0;
   }
 
+  get flightTypeLabel(): string {
+    const type =
+      this.normalizeFlightType(this.flightResultService.response?.searchCriteria?.flightType) ||
+      this.normalizeFlightType(this.sharedService.flightType) ||
+      this.flightTypeFromJourney();
+
+    if (type === 'oneway') return 'flightDetails.flightType.oneWay';
+    if (type === 'roundtrip') return 'flightDetails.flightType.roundtrip';
+    return 'flightDetails.flightType.multicity';
+  }
+
+  private normalizeFlightType(value: unknown): string {
+    const text = String(value ?? '').trim().toLowerCase();
+    if (!text) return '';
+    return text.replace(/[\s_-]+/g, '');
+  }
+
+  private flightTypeFromJourney(): string {
+    const count = this.sharedService.selectedFlightItinerary?.allJourney?.flights?.length || 0;
+    if (count <= 1) return 'oneway';
+    if (count === 2) return 'roundtrip';
+    return 'multicity';
+  }
+
   get fareCurrency(): string {
     const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
     return (
