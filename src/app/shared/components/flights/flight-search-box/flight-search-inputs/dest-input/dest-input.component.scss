@@ -253,13 +253,17 @@ img {
 }
 
 .error-message {
-  width: 150px;
   position: absolute;
+  top: calc(100% + 6px);
+  white-space: nowrap;
+  inset-inline-start: 0;
+  width: 100%;
   font-family: Open Sans;
   font-weight: 400;
   font-size: 12px;
+  line-height: 1.35;
   color: #EC1B1B;
-  bottom: -20px;
+  z-index: 2;
 }
 
 p {

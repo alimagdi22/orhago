@@ -47,7 +47,7 @@ export class MostSearchedFlightsService {
     }
 
     this.http
-      .get<MostSearchedFlightsResponse[]>('https://flightsearch.flytoall.com/api/GetCheapestFlights?resCount=5')
+      .get<MostSearchedFlightsResponse[]>('https://flightsearch.orhas.com/api/GetCheapestFlights?resCount=5')
       .pipe(
         timeout(10000),
         retry(1),
@@ -74,12 +74,16 @@ export class MostSearchedFlightsService {
   }
 
   goToSearchResults(searchCriteria: SearchCriteria) {
-    if (this.isBrowser) {
-      localStorage.removeItem('form');
-    }
+    // if (this.isBrowser) {
+    //   localStorage.removeItem('form');
+    // }
 
-    const currentLang = this.translate.currentLang || searchCriteria.language || 'en';
-    this.translate.use(searchCriteria.language || currentLang);
+    const currentLang = String(this.translate.currentLang || searchCriteria.language || 'en')
+      .toLowerCase()
+      .startsWith('ar')
+      ? 'ar'
+      : 'en';
+    this.translate.use(currentLang);
     this.homePageService.getCountries(searchCriteria.language || currentLang);
     if ((this.sharedService as any).isFirstRequest !== undefined) {
       (this.sharedService as any).isFirstRequest = false;

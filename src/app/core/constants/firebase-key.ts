@@ -1,11 +1,11 @@
 ﻿export const firebaseConfig = {
-  apiKey: 'AIzaSyAMCEVaw7wYfpouaK_TdNphXVyK05GtKhU',
-  authDomain: 'roundpixel-login.firebaseapp.com',
-  projectId: 'roundpixel-login',
-  storageBucket: 'roundpixel-login.firebasestorage.app',
-  messagingSenderId: '610383860782',
-  appId: '1:610383860782:web:9425d8f3df1239ad96fbbf',
-  measurementId: 'G-B0QTWNVJD3',
+  apiKey: "AIzaSyA-Sx5CgQfDZP7vDtePRGUOrRIuNCFugs0",
+  authDomain: "orhas-588de.firebaseapp.com",
+  projectId: "orhas-588de",
+  storageBucket: "orhas-588de.firebasestorage.app",
+  messagingSenderId: "937766979818",
+  appId: "1:937766979818:web:5f2e2c6be8b98459466f93",
+  measurementId: "G-3FM62BYX9Q",
   googleClientId:
-    '610383860782-vifipvu63oj564q0v9jht26r2ubqbamt.apps.googleusercontent.com',
+    '796491333260-9qb26for75d5fpvdudlgqfk4sshnmug7.apps.googleusercontent.com',
 };

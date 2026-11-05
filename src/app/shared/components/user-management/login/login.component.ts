@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (status) => {
           if (status === LOGIN_STATUS.success || status === 'login' || status === 'google-login') {
             this.isLoggingIn = true;
+            this.sharedService.isLoginLoading = true;
             this.userProfileService.getUserProfile();
           } else if (status === LOGIN_STATUS.faild) {
             this.error = true;
@@ -48,18 +49,28 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.userProfileService.notify.subscribe({
-        next: () => {
-          if (this.isLoggingIn || this.isGoogleLoading || this.authService.isLoading) {
-            this.isLoggingIn = false;
-            this.isGoogleLoading = false;
-            this.authService.isLoading = false;
+        next: (status) => {
+          if (!(this.isLoggingIn || this.isGoogleLoading)) {
+            return;
+          }
+
+          this.isLoggingIn = false;
+          this.isGoogleLoading = false;
+          this.authService.isLoading = false;
+
+          if (status === 0) {
             this.sharedService.isLogInSheetShowed = false;
+          } else {
+            this.error = true;
           }
         },
         error: () => {
           this.isLoggingIn = false;
           this.isGoogleLoading = false;
           this.authService.isLoading = false;
+          this.sharedService.isLoginLoading = false;
+          this.sharedService.loginProfilePending = false;
+          this.error = true;
         },
       }),
     );
@@ -71,6 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.error = true;
     } else {
       this.isLoggingIn = true;
+      this.sharedService.isLoginLoading = true;
       this.authService.loginSubmit();
     }
   }
@@ -95,6 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   googleLoginSubmit() {
     this.error = false;
     this.isGoogleLoading = true;
+    this.sharedService.isLoginLoading = true;
 
     from(this.googleAuthService.loginWithGoogle())
       .pipe(
@@ -138,12 +151,16 @@ export class LoginComponent implements OnInit, OnDestroy {
             console.error('Google Login Failed:', res);
             this.error = true;
             this.isGoogleLoading = false;
+            this.sharedService.isLoginLoading = false;
+            this.sharedService.loginProfilePending = false;
           }
         },
         error: (error) => {
           console.error('Google Login Submit Error:', error);
           this.error = true;
           this.isGoogleLoading = false;
+          this.sharedService.isLoginLoading = false;
+          this.sharedService.loginProfilePending = false;
         },
       });
   }

@@ -13,6 +13,7 @@
 <mat-menu #baggageInfoMenu="matMenu" [hasBackdrop]="false" class="baggage-info-popover-menu">
   <div
     class="baggage-popover-content"
+    [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
     [ngClass]="translate.currentLang === 'ar' ? 'ar' : 'en'"
     (mouseenter)="onContentMouseEnter()"
     (mouseleave)="onContentMouseLeave()"
@@ -36,7 +37,7 @@
         <div class="baggage-item-row has-subtitle">
           <div class="item-main-line">
             <div class="baggage-row d-flex">
-              <span class="item-qty">{{ normalBaggage() }}</span>
+              <span class="item-qty">{{ normalBaggage() | arabicNumber }}</span>
               <img src="assets/icons/travel-bag-icon.svg" class="item-icon" alt="Cabin baggage" />
             </div>
             <span class="item-text">X {{ 'flightDetails.baggage.checkedBaggage' | translate }}</span>
@@ -46,7 +47,7 @@
         <!-- Personal Item -->
         <div class="baggage-item-row">
           <div class="baggage-row d-flex">
-            <span class="item-qty">1</span>
+            <span class="item-qty">{{ '1' | arabicNumber }}</span>
             <img src="assets/icons/hand-bag-icon.svg" class="item-icon" alt="Personal item" />
           </div>
           <span class="item-text">X {{ 'flightDetails.baggage.personalItem' | translate }}</span>
@@ -56,12 +57,12 @@
         <div class="baggage-item-row has-subtitle">
           <div class="item-main-line">
             <div class="baggage-row d-flex">
-              <span class="item-qty">1</span>
+              <span class="item-qty">{{ '1' | arabicNumber }}</span>
               <img src="assets/icons/travel-bag-icon.svg" class="item-icon" alt="Cabin baggage" />
             </div>
             <span class="item-text"> X {{ 'flightDetails.baggage.cabinBaggage' | translate }}</span>
           </div>
-          <div class="item-sub-text">(45 x 38 x 23) · 7 kg</div>
+          <div class="item-sub-text">{{ '(45 x 38 x 23) · 7 kg' | arabicNumber }}</div>
         </div>
       </div>
     </div>

@@ -43,10 +43,7 @@ export class NavbarComponent implements OnInit {
   selectedLang = 'EN';
   
   isSidebarOpen = false;
-  isLangPopupOpen = false;
-  isCurrencyPopupOpen = false;
   isRegionalPopupOpen = false;
-  activePopupTab: 'lang' | 'currency' = 'currency';
   currencySearchQuery = '';
 
   subscription = new Subscription();
@@ -129,12 +126,12 @@ export class NavbarComponent implements OnInit {
   }
 
   updateLang(lang: 'ar' | 'en') {
-    if (this.isBrowser) {
-      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-        localStorage.setItem('lang', lang);
-      }
-      location.reload();
+    if (this.translate.currentLang === lang || !this.isBrowser) return;
+
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('lang', lang);
     }
+    location.reload();
   }
 
   onClickSignIn() {
@@ -162,8 +159,7 @@ export class NavbarComponent implements OnInit {
     this.isSidebarOpen = false;
   }
 
-  openRegionalPopup(tab: 'lang' | 'currency' = 'currency') {
-    this.activePopupTab = tab;
+  openRegionalPopup() {
     this.currencySearchQuery = '';
     this.isRegionalPopupOpen = true;
   }
@@ -173,26 +169,14 @@ export class NavbarComponent implements OnInit {
     this.currencySearchQuery = '';
   }
 
-  setActivePopupTab(tab: 'lang' | 'currency') {
-    this.activePopupTab = tab;
-  }
-
-  openLangPopup() {
-    this.openRegionalPopup('lang');
-  }
-
-  closeLangPopup() {
-    this.closeRegionalPopup();
-  }
-
   selectLang(lang: 'ar' | 'en') {
-    this.updateLang(lang);
-    this.closeRegionalPopup();
+    if (this.translate.currentLang === lang) return;
     this.closeSidebar();
+    this.updateLang(lang);
   }
 
   openCurrencyPopup() {
-    this.openRegionalPopup('currency');
+    this.openRegionalPopup();
   }
 
   closeCurrencyPopup() {

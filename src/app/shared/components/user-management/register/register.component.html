@@ -157,7 +157,19 @@
   <div class="register__actions">
     <div>
       <mat-checkbox color="primary" />
-      <p>{{ 'user.register.termsAgreement' | translate }}</p>
+      <p class="mb-0">
+        {{ 'user.register.termsAgreementPrefix' | translate }}<a
+          href="/terms"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ 'footer.links.terms' | translate }}</a
+        >{{ 'user.register.termsAgreementAnd' | translate }}<a
+          href="/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ 'footer.links.privacyPolicy' | translate }}</a
+        >
+      </p>
     </div>
 
     <button (click)="onSubmit()" [disabled]="isLoading || registerForm.invalid">

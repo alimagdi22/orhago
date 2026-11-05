@@ -1,3 +1,3 @@
 <p class="price__value" [attr.aria-label]="title">
-  {{ homePageService.selectedCurrency?.Currency_Code }} {{ price | number: '1.0-0' }}
+  {{ homePageService.selectedCurrency?.Currency_Code | currencyLabel }} {{ price | number: '1.0-2' | arabicNumber }}
 </p>

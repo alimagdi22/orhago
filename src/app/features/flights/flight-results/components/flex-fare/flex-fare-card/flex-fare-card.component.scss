@@ -116,6 +116,9 @@
       font-weight: 700;
       color: #1a202c;
       gap: 4px;
+      &.is-checkout{
+        display: none;
+      }
     }
 
     .feature-row {
@@ -204,6 +207,9 @@
 
   .mobile-only {
     display: flex !important;
+    &.is-checkout{
+      display: none !important;
+    }
   }
 
   .fare-card-wrapper {

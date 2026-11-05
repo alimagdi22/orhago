@@ -49,7 +49,9 @@
   </p>
 </div>
 
-<div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
-<aside class="mobile-sidebar-panel" [class.open]="isSidebarOpen">
+@if (isSidebarOpen) {
+  <div class="sidebar-overlay" (click)="toggleSidebar()"></div>
+}
+<aside class="mobile-sidebar-panel d-lg-none" [class.open]="isSidebarOpen">
   <app-filter-panal (click)="filterUpdated()" />
 </aside>

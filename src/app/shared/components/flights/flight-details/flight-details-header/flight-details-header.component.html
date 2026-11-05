@@ -7,21 +7,26 @@
           {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityName }} 
         </p>
     }
-    ({{flightResultService.response?.searchCriteria?.flightType}})
+    {{ flightTypeLabel | translate }}
   </div>
 
   @if (sharedService.isSegmentPresent(['flight-checkout'])) {
     <div class="price col-5">
-      <p class="price__text">
-        {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-        {{
-          flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex]
-            ? flightResultService.currentSelectedBrands[sharedService.selectedBrandedIndex].itinTotalFare.amount
-            : (sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3')
-        }}
-      </p>
-
-      <p class="price__caption">{{ 'flightDetails.pricePerAdult' | translate }}</p>
+      <div class="price-details d-flex flex-row align-items-center justify-content-center gap-2 w-50">
+        <p class="price__text mb-0">
+          @if(translate.currentLang === 'ar') {
+            {{ fareAmount | exchange: 'value': fareCurrency | number: '1.0-2' | arabicNumber }}
+            {{ fareCurrency | exchange: 'code' | currencyLabel }}
+          } @else {
+            {{ fareCurrency | exchange: 'code' | currencyLabel }}
+            {{ fareAmount | exchange: 'value': fareCurrency | number: '1.0-2' | arabicNumber }}
+          }
+        </p>
+        <span class="d-sm-none">
+          -
+        </span>
+        <p class="price__caption  mb-0">{{ 'flightDetails.pricePerAdult' | translate }}</p>
+      </div>
     </div>
 
     @if(sharedService.screenWidth >= 1200) {
@@ -34,13 +39,21 @@
     />
     }
   } @else {
-    <div class="price col-4 align-items-end">
-      <div class="d-flex flex-column align-items-center justify-content-center w-50">
-        <p class="price__text">
-          {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-          {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value' | number:'1.0-3' }}
+    <div class="price col-4 align-items-center">
+      <div class="price-details d-flex flex-row align-items-center justify-content-center gap-2 w-50">
+        <p class="price__text mb-0">
+          @if(translate.currentLang === 'ar') {
+            {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value': sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
+            {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+          } @else {
+            {{ sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+            {{ sharedService.selectedFlightItinerary.itinTotalFare.amount | exchange: 'value': sharedService.selectedFlightItinerary.itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
+          }
         </p>
-        <p class="price__caption">Price per adult</p>
+        <span class="d-sm-none">
+          -
+        </span>
+        <p class="price__caption mb-0">{{ 'flightDetails.pricePerAdult' | translate }}</p>
       </div>
     </div>
 

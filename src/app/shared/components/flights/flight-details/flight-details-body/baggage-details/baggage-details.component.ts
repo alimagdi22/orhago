@@ -1,4 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { FlightCheckoutService, FlightResultService, IBaggageInformation, ISearchCriteria } from 'rp-travel-ui';
 import { SharedService } from '../../../../../shared.service';
 @Component({
@@ -11,6 +12,7 @@ export class BaggageDetailsComponent {
   sharedService = inject(SharedService);
   flightCheckoutService = inject(FlightCheckoutService)
    public flightResultService = inject(FlightResultService);
+  translate = inject(TranslateService);
   baggageInfo: IBaggageInformation = this.sharedService.selectedFlightItinerary.baggageInformation[0];
   @Input() searchCriteria?: ISearchCriteria;
 

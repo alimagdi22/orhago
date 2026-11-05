@@ -125,7 +125,7 @@
     <mat-checkbox color="primary" />
     <p>
       {{ 'user.profile.privacyPolicy' | translate }}
-      <span>{{ 'user.profile.privacyPolicyLink' | translate }}</span>
+      <span (click)="onNavigateToPrivacyPolicy()" class="privacy-policy-link">{{ 'user.profile.privacyPolicyLink' | translate }}</span>
     </p>
   </div>
 

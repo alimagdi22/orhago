@@ -50,11 +50,14 @@
       align-items: center;
 
       p {
-        cursor: pointer;
-
         font-size: 14px;
         color: #686872;
-        text-align: right;
+        text-align: start;
+
+        a {
+          color: map-get($map: $colors, $key: 'main');
+          text-decoration: underline;
+        }
       }
 
       input[type='checkbox']:checked {

@@ -1,15 +1,17 @@
 import { Component, ElementRef, EventEmitter, inject, Input, OnChanges, OnDestroy, OnInit, output, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { TranslateService } from '@ngx-translate/core';
 import { FlightSearchService } from 'rp-travel-ui';
-import { catchError, debounceTime, distinctUntilChanged, of, Subject, Subscription, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, Subject, Subscription, switchMap, take } from 'rxjs';
 import { IAirPort } from '../../../../../models/flights/airport.model';
 import { ISelectedDest } from '../../../../../models/flights/selectedDest.model';
 import { SharedService } from '../../../../../shared.service';
 import { MobileViewDestInputComponent } from './mobile-view-dest-input/mobile-view-dest-input.component';
 import { IAirPortTranslated } from '../../../../../../core/models/airport.model';
+import { UserLocationService } from '../../../../../../core/services/user-location.service';
 
 export type TDestinations = 'departing' | 'landing';
 
@@ -39,13 +41,17 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   public cities: IAirPortTranslated[] = [];
   public isLoading = false;
   public isFocused = false;
+  public samePlaceError = false;
+  public suppressRecommended = false;
 
   private subscription = new Subscription();
   private searchSubject = new Subject<string>();
+  private blurTimer: ReturnType<typeof setTimeout> | null = null;
 
   public translate = inject(TranslateService);
   public flightSearchService = inject(FlightSearchService);
   public sharedService = inject(SharedService);
+  private userLocationService = inject(UserLocationService);
 
   constructor(private dialog: MatDialog) {}
 
@@ -56,18 +62,35 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    let airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.destination) : null) as string) as (IAirPortTranslated & { _isCitySelection?: boolean })[];
+    const restoredDeparting = this.destination === 'departing' && this.restoreSavedDeparting();
+    if (this.destination === 'departing' && this.index === 0 && !restoredDeparting) {
+      this.applyLocationDeparting();
+    }
 
-    if (airports && airports[this.index]) {
-      const cachedAirport = airports[this.index];
-      if (cachedAirport._isCitySelection) {
-        this.onSelectCity(this.destination, cachedAirport, this.index);
-      } else {
-        this.onSelectDestintation(this.destination, cachedAirport, this.index);
+    // let airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.destination) : null) as string) as (IAirPortTranslated & { _isCitySelection?: boolean })[];
+    //
+    // if (this.destination === 'departing' && airports && airports[this.index]) {
+    //   const cachedAirport = airports[this.index];
+    //   if (cachedAirport._isCitySelection) {
+    //     this.onSelectCity(this.destination, cachedAirport, this.index);
+    //   } else {
+    //     this.onSelectDestintation(this.destination, cachedAirport, this.index);
+    //   }
+    // } else if (this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
+    //   const kuwaitAirport = this.sharedService.initialRecommendedAirports[1];
+    //   this.onSelectDestintation(this.destination, kuwaitAirport, this.index);
+    // }
+
+    if (this.destination === 'landing') {
+      const airports = JSON.parse((typeof window !== 'undefined' && typeof localStorage !== 'undefined' ? localStorage.getItem(this.destination) : null) as string) as (IAirPortTranslated & { _isCitySelection?: boolean })[];
+      if (airports && airports[this.index]) {
+        const cachedAirport = airports[this.index];
+        if (cachedAirport._isCitySelection) {
+          this.onSelectCity(this.destination, cachedAirport, this.index);
+        } else {
+          this.onSelectDestintation(this.destination, cachedAirport, this.index);
+        }
       }
-    } else if (this.destination === 'departing' && !this.flightItem.get('departing')?.value) {
-      const kuwaitAirport = this.sharedService.initialRecommendedAirports[1];
-      this.onSelectDestintation(this.destination, kuwaitAirport, this.index);
     }
 
     this.subscription.add(
@@ -95,12 +118,53 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
           next: (data: any) => {
             this.isLoading = false;
             this.cities = data as IAirPortTranslated[];
+            if (this.cities?.length) {
+              this.closeRecommendedMenu();
+            }
           },
           error: () => {
             this.isLoading = false;
             this.cities = [];
           }
         })
+    );
+  }
+
+  private restoreSavedDeparting(): boolean {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') return false;
+
+    try {
+      const airports = JSON.parse(localStorage.getItem(this.destination) ?? 'null') as (IAirPortTranslated & { _isCitySelection?: boolean })[] | null;
+      const cachedAirport = airports?.[this.index];
+      if (!cachedAirport?.[this.sharedService.lang]) return false;
+
+      this.onSelectDestintation(this.destination, cachedAirport, this.index, !!cachedAirport._isCitySelection, false);
+      if (this.index === 0) {
+        this.userLocationService.departingApplied = true;
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  private applyLocationDeparting(): void {
+    if (this.userLocationService.departingApplied) return;
+
+    this.subscription.add(
+      this.userLocationService.departingAirport$.pipe(take(1)).subscribe((airport) => {
+        if (this.userLocationService.departingApplied) return;
+
+        const current = String(this.flightItem.get(this.destination)?.value || '').trim();
+        if (current) {
+          this.userLocationService.departingApplied = true;
+          return;
+        }
+        if (!this.sharedService.selectedDestions[this.index]) return;
+
+        this.userLocationService.departingApplied = true;
+        this.onSelectDestintation(this.destination, airport, this.index, false, false);
+      }),
     );
   }
 
@@ -124,12 +188,13 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
         this.destinationInput.nativeElement.select();
       }
 
-      if (this.isLoading) {
+      if (this.isLoading || this.cities.length) {
+        this.closeRecommendedMenu();
         return;
       }
 
-      const inputValue = this.flightItem.get(this.destination)?.value;
-      if (!inputValue || !this.cities.length) {
+      const inputValue = String(this.flightItem.get(this.destination)?.value || '').trim();
+      if (!inputValue) {
         const trigger = this.menuTrigger?.first;
         if (trigger && !trigger.menuOpen) {
           trigger.openMenu();
@@ -143,7 +208,9 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onInputBlur() {
-    setTimeout(() => {
+    if (this.blurTimer) clearTimeout(this.blurTimer);
+    this.blurTimer = setTimeout(() => {
+      this.blurTimer = null;
       const selected = this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity'];
       if (selected?.cityName) {
         this.isFocused = false;
@@ -166,6 +233,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
 
     this.cities = [];
     this.isLoading = false;
+    this.suppressRecommended = false;
     this.isFocused = true;
 
     setTimeout(() => {
@@ -184,12 +252,16 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     return `${city.airportName} - ${city.countryName} (${city.airportCode})`;
   }
 
+  private closeRecommendedMenu(): void {
+    const trigger = this.menuTrigger?.first;
+    if (trigger?.menuOpen) {
+      trigger.closeMenu();
+    }
+  }
+
   onMenuOpen() {
-    if (this.isLoading) {
-      const trigger = this.menuTrigger?.first;
-      if (trigger && trigger.menuOpen) {
-        trigger.closeMenu();
-      }
+    if (this.isLoading || this.cities.length) {
+      this.closeRecommendedMenu();
       return;
     }
 
@@ -215,17 +287,20 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       ?.setValue(false);
 
     const searchString = this.flightSearchService.flightsArray.at(index).get(dest)?.value;
+    const term = String(searchString || '').trim();
 
     if (!searchString) {
       this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = null;
     }
 
-    const trigger = this.menuTrigger?.first;
-    if (trigger?.menuOpen) {
-      trigger.closeMenu();
+    this.suppressRecommended = !!term;
+    if (term) {
+      this.closeRecommendedMenu();
     }
 
-    if (searchString && searchString.trim()) {
+    this.samePlaceError = false;
+
+    if (term) {
       this.isLoading = true;
       this.cities = [];
     } else {
@@ -236,10 +311,33 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     this.searchSubject.next(searchString);
   }
 
-  onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false) {
+  onAutocompleteOptionSelected(
+    event: MatOptionSelectionChange,
+    city: IAirPortTranslated,
+    index: number,
+    isCitySelection: boolean,
+  ): void {
+    if (!event.isUserInput || !event.source.selected) return;
+    if (this.blurTimer) {
+      clearTimeout(this.blurTimer);
+      this.blurTimer = null;
+    }
+    this.onSelectDestintation(this.destination, city, index, isCitySelection);
+  }
+
+  onSelectDestintation(dest: TDestinations, city: IAirPortTranslated, index: number, isCitySelection: boolean = false, moveFocus: boolean = true) {
     if (!city) {
       return;
     }
+
+    const langObj = city[this.sharedService.lang];
+    if (!langObj) return;
+    const code = isCitySelection ? langObj.cityCode : langObj.airportCode;
+    if (this.matchesOtherPlace(dest, index, `${langObj.cityName},${code}`)) {
+      this.samePlaceError = true;
+      return;
+    }
+    this.samePlaceError = false;
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const airports = JSON.parse(localStorage.getItem(dest) ?? '[]');
@@ -250,7 +348,6 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       localStorage.setItem(dest, JSON.stringify(airports));
     }
 
-    const langObj = city[this.sharedService.lang];
     this.sharedService.selectedDestions[index][dest === 'departing' ? 'departingCity' : 'landingCity'] = {
       ...langObj,
       isCitySelection,
@@ -261,11 +358,7 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       .get(dest === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')
       ?.setValue(true);
 
-    const code = isCitySelection ? langObj.cityCode : langObj.airportCode;
-    const selectedValue = `${langObj.cityName},${code}`;
-    const control = this.flightSearchService.flightsArray.at(index).get(dest);
-    control?.setValue(selectedValue);
-    queueMicrotask(() => control?.setValue(selectedValue));
+    this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(langObj.cityName + ',' + code);
 
     this.isFocused = false;
 
@@ -284,6 +377,10 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       this.sharedService.flightType === 'multi-city' ||
       this.sharedService.flightType === 'MultiCity'
     ) {
+      return;
+    }
+
+    if (!moveFocus) {
       return;
     }
 
@@ -319,6 +416,11 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onSelectPopularDestination(dest: string, value: string, index: number) {
+    if (this.matchesOtherPlace(dest as TDestinations, index, value)) {
+      this.samePlaceError = true;
+      return;
+    }
+    this.samePlaceError = false;
     this.flightSearchService.flightsArray.at(index).get(dest)?.setValue(value);
 
     if (this.sharedService.flightType === 'multi-city') {
@@ -336,6 +438,9 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     if (this.sharedService.screenWidth >= 1200) {
       return;
     }
+
+    const control = flightItem.get(destination);
+    const wasTouched = !!control?.touched;
 
     this.dialog.open(MobileViewDestInputComponent, {
       data: {
@@ -355,6 +460,19 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
       maxWidth: '100vw',
       panelClass: 'full-width-dialog',
       hasBackdrop: true
+    }).afterClosed().subscribe(() => {
+      const selected = this.flightSearchService.flightsArray
+        .at(index)
+        .get(destination === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')?.value;
+
+      if (selected || String(control?.value || '').trim()) {
+        this.samePlaceError = false;
+        return;
+      }
+
+      if (!wasTouched) {
+        control?.markAsUntouched();
+      }
     });
   }
 
@@ -362,14 +480,27 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     return !!this.sharedService.selectedDestions[this.index]?.[this.destination === 'departing' ? 'departingCity' : 'landingCity']?.isCitySelection;
   }
 
+  private matchesOtherPlace(dest: TDestinations, index: number, nextValue: string): boolean {
+    const nextCode = this.placeCode(nextValue);
+    if (!nextCode) return false;
+    const other = dest === 'departing' ? 'landing' : 'departing';
+    const otherValue = this.flightSearchService.flightsArray.at(index)?.get(other)?.value || '';
+    return nextCode === this.placeCode(otherValue);
+  }
+
+  private placeCode(value: string): string {
+    return String(value || '').split(',').pop()?.trim().toLowerCase() || '';
+  }
+
   isDestNotValid(index: number) {
-    return (
-      !this.flightSearchService.flightsArray.at(index).get(this.destination === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')?.value &&
-      this.flightSearchService.flightsArray.at(index).get(this.destination)?.touched
-    );
+    const group = this.flightSearchService.flightsArray.at(index);
+    const selected = group.get(this.destination === 'departing' ? 'isDepartingSelected' : 'isLandingSelected')?.value;
+    const control = group.get(this.destination);
+    return !selected && !String(control?.value || '').trim() && !!control?.touched;
   }
 
   ngOnDestroy(): void {
+    if (this.blurTimer) clearTimeout(this.blurTimer);
     this.subscription.unsubscribe();
   }
 }

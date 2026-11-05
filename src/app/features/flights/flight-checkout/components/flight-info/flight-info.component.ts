@@ -12,6 +12,13 @@ export class FlightInfoComponent {
   flightCheckoutService = inject(FlightCheckoutService);
   sharedService = inject(SharedService);
 
+  get isRoundTrip(): boolean {
+    const flightType = String(this.flightCheckoutService.selectedFlight?.searchCriteria?.flightType || '')
+      .toLowerCase()
+      .replace(/[\s_-]/g, '');
+    return flightType === 'roundtrip';
+  }
+
   showFlightDetails(airItinerary: IAirItinerary | null, e: Event, index: number) {
     e.stopPropagation();
     this.sharedService.selectedItinerary = index;

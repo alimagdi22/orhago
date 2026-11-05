@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MostSearchedFlightsService } from './features/home/components/flight-deals/most-searched-flights.service';
 import { EnvironmentService as hotelsEnvironment2 } from 'rp-hotels-ui';
 import { SeoService } from './core/services/seo.service';
+import { UserLocationService } from './core/services/user-location.service';
 import { RouterOutlet, Router } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { jwtDecode } from 'jwt-decode';
@@ -40,6 +41,7 @@ export class AppComponent implements OnInit {
   toastr = inject(ToastrService);
   public hotelsEnvironment = inject(hotelsEnvironment2);
   seoService = inject(SeoService);
+  userLocationService = inject(UserLocationService);
   router = inject(Router);
   platformId = inject(PLATFORM_ID);
   isBrowser = isPlatformBrowser(this.platformId);
@@ -63,6 +65,24 @@ export class AppComponent implements OnInit {
     this.toastr.error(message);
   }
 
+  private finishLogin(succeeded: boolean) {
+    this.sharedService.isLoginLoading = false;
+    this.sharedService.loginProfilePending = false;
+    this.authService.isLoading = false;
+
+    if (succeeded) {
+      this.sharedService.isLogInSheetShowed = false;
+      this.showSuccess(this.translate.currentLang === 'en' ? 'Welcome Back' : 'أهلاً بعودتك');
+      return;
+    }
+
+    this.showError(
+      this.translate.currentLang === 'en'
+        ? 'Invalid user or something went wrong ..'
+        : 'المستخدم غير صالح أو حدث خطأ ما ..',
+    );
+  }
+
   ngOnInit(): void {
     this.seoService.initRouteSeoListener();
 
@@ -71,6 +91,7 @@ export class AppComponent implements OnInit {
     }
 
     if (this.isBrowser) {
+      this.userLocationService.start();
       const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
       if (!token || token === 'null' || token === 'undefined') {
         this.initializeGoogleOneTap();
@@ -85,14 +106,31 @@ export class AppComponent implements OnInit {
 
     this.authService.notify.subscribe({
       next: (status) => {
-        if (status === LOGIN_STATUS.success) {
-          this.showSuccess(this.translate.currentLang === 'en' ? 'Welcome Back' : 'أهلاً بعودتك');
+        if (!this.sharedService.isLoginLoading) {
+          if (status === LOGIN_STATUS.success) {
+            this.showSuccess(this.translate.currentLang === 'en' ? 'Welcome Back' : 'أهلاً بعودتك');
+          }
+          return;
+        }
+
+        if (status === LOGIN_STATUS.success || status === 'google-login') {
+          this.sharedService.loginProfilePending = true;
+          return;
+        }
+
+        if (status === LOGIN_STATUS.faild) {
+          this.finishLogin(false);
         }
       },
     });
 
     this.userProfileService.notify.subscribe({
       next: (status) => {
+        if (this.sharedService.loginProfilePending && (status === 0 || status === 1)) {
+          this.finishLogin(status === 0);
+          return;
+        }
+
         if (status === 2) {
           this.showSuccess(this.translate.currentLang === 'en' ? 'Updated Successfully' : 'تم التحديث بنجاح');
         } else if (status === 1) {
@@ -119,7 +157,7 @@ export class AppComponent implements OnInit {
     // };
 
     const currentLang = typeof localStorage !== 'undefined' && typeof window !== 'undefined' ? localStorage.getItem('lang') : null;
-    const activeLang = currentLang || 'en';
+    const activeLang = String(currentLang || 'en').toLowerCase().startsWith('ar') ? 'ar' : 'en';
 
     this.translate.use(activeLang);
     if (typeof localStorage !== 'undefined' && typeof window !== 'undefined' && !currentLang) {
@@ -242,9 +280,60 @@ export class AppComponent implements OnInit {
       },
     };
 
+    let envOrhas = {
+      offlineSeats: 'http://41.223.55.14:7025',
+      searchflow: 'https://flightsearch.orhas.com',
+      BookingFlow: 'https://flightflow.orhas.com',
+      FareRules: 'https://flightprov.orhas.com',
+      asm: 'https://backofficeapi.orhas.com',
+      Apihotels: 'x:8120',
+      // Apihotels: 'https://hotelsapi.orhas.com',
+      users: 'https://flightsearch.orhas.com',
+      admin: 'https://adminapi.orhas.com',
+      getDPayment: 'https://adminapi.orhas.com/',
+      bookHotels: 'http://localhost:8120',
+      // bookHotels: 'https://staginghotels.orhas.com',
+      prepay: 'https://prepayapi.orhas.com',
+      backOffice: 'https://backofficeapi.orhas.com',
+      FlightTop: 'https://flightsearch.orhas.com',
+      staticPages: 'https://cms.orhas.com',
+      offers: {
+        getAll: 'http://41.215.243.36:7893/api/GetAllOffersAPI?POS=',
+        getByID: 'http://41.215.243.36:7893/api/GetOfferByIdAPI?OfferId=',
+        BookOffer: 'http://41.215.243.36:7895/api/BookOffer',
+        RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
+      },
+    };
+    
+    let envWego = {
+      offlineSeats: 'http://41.223.55.14:7025',
+      searchflow: 'https://wegosearch.orhas.com',
+      BookingFlow: 'https://wegobook.orhas.com',
+      FareRules: 'https://wegoprovider.orhas.com',
+      asm: 'https://backofficeapi.orhas.com',
+      Apihotels: 'https://hotelsapi.orhas.com',
+      hotelprepay: 'https://prepayapi.orhas.com',
+      users: 'https://usersapi.orhas.com',
+      admin: 'https://adminapi.orhas.com/',
+      getDPayment: 'https://adminapi.orhas.com/',
+      bookHotels: 'https://hotels.orhas.com',
+      prepay: 'https://prepayapi.orhas.com',
+      backOffice: 'https://backofficeapi.orhas.com',
+      FlightTop: 'https://flightsearch.orhas.com',
+      staticPages: 'https://cms.orhas.com',
+      offers: {
+        getAll: 'http://41.215.243.138:7893/api/GetAllOffersAPI?POS=',
+        getAllActive:
+          'http://41.215.243.138:7893/api/GetAllActiveOffersAPI?POS=',
+        getByID: 'http://41.215.243.138:7893/api/GetOfferByIdAPI?OfferId=',
+        BookOffer: 'http://41.215.243.138:7895/api/BookOffer',
+        RetriveItineraryDetails: '/api/Admin/RetriveItineraryDetails',
+      },
+    };
 
-    this.environment.envConfiguration(envRP);
-    this.hotelEnvironmentService.envConfiguration(envRP);
+
+    this.environment.envConfiguration(envOrhas);
+    this.hotelEnvironmentService.envConfiguration(envOrhas);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {
       this.homeService.setSelectedCurrency(defaultCurrency);
@@ -391,27 +480,29 @@ export class AppComponent implements OnInit {
     if (response.credential) {
       this.ngZone.run(() => {
         try {
+          this.sharedService.isLoginLoading = true;
           this.authService.isLoading = true;
           const idToken = response.credential;
           const googleUser = jwtDecode<any>(idToken);
-          console.log('One Tap Login user:', googleUser);
 
           const sub = this.authService.notify.subscribe((status) => {
             if (status === LOGIN_STATUS.success) {
               this.userProfileService.getUserProfile();
               this.router.navigate(['/']);
-              this.sharedService.isLogInSheetShowed = false;
               sub.unsubscribe();
             } else if (status === LOGIN_STATUS.faild) {
-              this.authService.isLoading = false;
               sub.unsubscribe();
             }
           });
 
           this.authService.googleLoginSubmit(googleUser);
+          if (!this.authService.isLoading) {
+            this.finishLogin(false);
+            sub.unsubscribe();
+          }
         } catch (error) {
           console.error('Error decoding One Tap credential:', error);
-          this.authService.isLoading = false;
+          this.finishLogin(false);
         }
       });
     }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnInit, OnDestroy, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, inject, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../../../shared/shared.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ declare var PaymentSession: any;
   templateUrl: './payment-method.component.html',
   styleUrl: './payment-method.component.scss',
 })
-export class PaymentMethodComponent implements OnInit, OnDestroy {
+export class PaymentMethodComponent implements OnInit, DoCheck, OnDestroy {
   public sharedService = inject(SharedService);
   private translateService = inject(TranslateService);
   private route = inject(ActivatedRoute);
@@ -33,6 +33,8 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
   selectedOption: number | null = null;
   selectedGatway!: mergedGates;
   checked = false;
+  methodInvalid = false;
+  termsInvalid = false;
 
   mpgsSessionId = '';
   showMPGSPayment = false;
@@ -109,40 +111,79 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     if (this.sharedService.selectedBrandedIndex !== -1 && brandedBrand?.itinTotalFare?.amount) {
       return brandedBrand.itinTotalFare.amount;
     }
-    return (
+    const amount =
       this.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount ||
       this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount ||
-      0
-    );
+      0;
+    const bakedInFee = Math.min(this.flightCheckoutService.serviceFees || 0, this.offlineServiceAmount);
+    return Math.max(amount - bakedInFee, 0);
   }
 
   get gatewayAmount(): number {
     return this.sharedService.selectedGateway?.Amount || 0;
   }
 
+  get gatewayCurrency(): string {
+    return this.sharedService.selectedGateway?.Currency || this.totalCurrencyCode;
+  }
+
   get offlineServiceAmount(): number {
     const service: flightOfflineService | undefined = this.flightCheckoutService.organizedOfllineServices?.[2];
     const selectedServices: string[] = this.flightCheckoutService.selectedOfflineServices || [];
-    if (!service || !selectedServices.length) return 0;
+    if (!service?.serviceCode || !selectedServices.includes(service.serviceCode)) return 0;
 
-    const isSelected = (service.serviceCode && selectedServices.includes(service.serviceCode)) || selectedServices.length > 0;
+    return service.servicePrice || 0;
+  }
 
-    return isSelected && service.servicePrice ? service.servicePrice : 0;
+  get offlineServiceCurrency(): string {
+    return this.flightCheckoutService.organizedOfllineServices?.[2]?.currency || this.totalCurrencyCode;
   }
 
   get totalPaymentAmount(): number {
-    return this.totalFlightAmount + this.gatewayAmount + this.offlineServiceAmount;
+    return (
+      this.toSelectedCurrency(this.totalFlightAmount, this.totalCurrencyCode) +
+      this.toSelectedCurrency(this.gatewayAmount, this.gatewayCurrency) +
+      this.toSelectedCurrency(this.offlineServiceAmount, this.offlineServiceCurrency)
+    );
+  }
+
+  private toSelectedCurrency(amount: number, source: string): number {
+    const selected = this.homePageService.selectedCurrency;
+    if (!amount || !source || !selected?.Currency_Code || source === selected.Currency_Code) {
+      return amount || 0;
+    }
+
+    const sourceRate = this.currencyRate(source);
+    const targetRate = Number(selected.rate);
+    if (!sourceRate || !targetRate) return amount;
+
+    const converted = (amount / sourceRate) * targetRate;
+    const factor = targetRate === 1 ? 1000 : 100;
+    return parseFloat((Math.round(converted * factor) / factor).toFixed(targetRate === 1 ? 3 : 2));
+  }
+
+  private currencyRate(code: string): number {
+    const rate = Number(this.homePageService.allCurrency?.find((currency) => currency.Currency_Code === code)?.rate);
+    if (rate > 0) return rate;
+    if (code === this.homePageService.selectedCurrency?.Currency_Code) {
+      const selectedRate = Number(this.homePageService.selectedCurrency.rate);
+      if (selectedRate > 0) return selectedRate;
+    }
+    return 0;
   }
 
   get totalCurrencyCode(): string {
+    const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
     return (
+      brand?.itinTotalFare?.currencyCode ||
       this.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
       this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
-      'KWD'
+      ''
     );
   }
 
   selectOption(index: number, gateway: any): void {
+    this.methodInvalid = false;
     this.selectedGatway = gateway;
     this.selectedOption = index;
     this.sharedService.selectedGateway = gateway;
@@ -222,6 +263,28 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngDoCheck(): void {
+    if (this.flightCheckoutService.paymentError || this.sharedService.isPaymentModalShowed) {
+      this.flightCheckoutService.saveBookingLoadeer = false;
+    }
+  }
+
+  onTermsChange(checked: boolean): void {
+    if (checked) {
+      this.termsInvalid = false;
+    }
+  }
+
+  onPay(): void {
+    if (this.flightCheckoutService.saveBookingLoadeer) return;
+
+    this.methodInvalid = !this.selectedGatway;
+    this.termsInvalid = !this.checked;
+    if (this.methodInvalid || this.termsInvalid) return;
+
+    this.submit(this.selectedGatway);
+  }
+
   submit(selectedMethod: mergedGates) {
     if (this.selectedGatway?.GatewayType === 'MPGS' && typeof PaymentSession !== 'undefined') {
       PaymentSession.updateSessionFromForm('card');
@@ -230,14 +293,21 @@ export class PaymentMethodComponent implements OnInit, OnDestroy {
     const currentCurrency = this.selectedFlight?.searchCriteria?.currency || 'KWD';
     const pcc = this.flightCheckoutService.pcc || this.searchParams.pcc || '0';
 
-    this.flightCheckoutService.newPaymentSaveBooking(
-      currentCurrency,
-      'notPremium',
-      pcc,
-      +this.brandedFareId || 0,
-      selectedMethod,
-      this.mpgsSessionId ? this.mpgsSessionId.replaceAll('"', '') : '',
-    );
+    try {
+      this.flightCheckoutService.newPaymentSaveBooking(
+        currentCurrency,
+        'notPremium',
+        pcc,
+        +this.brandedFareId || 0,
+        selectedMethod,
+        this.mpgsSessionId ? this.mpgsSessionId.replaceAll('"', '') : '',
+      );
+    } catch (error) {
+      console.error('Payment failed before the request started:', error);
+      this.flightCheckoutService.saveBookingLoadeer = false;
+      this.flightCheckoutService.paymentError = true;
+      this.sharedService.isPaymentModalShowed = true;
+    }
   }
 
   redirectToHome() {

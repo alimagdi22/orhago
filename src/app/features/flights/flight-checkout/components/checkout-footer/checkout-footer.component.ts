@@ -18,6 +18,23 @@ export class CheckoutFooterComponent {
 
   sharedService = inject(SharedService);
 
+  get fareAmount(): number {
+    const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
+    if (this.sharedService.selectedBrandedIndex !== -1 && brand?.itinTotalFare?.amount) {
+      return brand.itinTotalFare.amount;
+    }
+    return this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.amount || 0;
+  }
+
+  get fareCurrency(): string {
+    const brand = this.flightResultService.currentSelectedBrands?.[this.sharedService.selectedBrandedIndex];
+    return (
+      brand?.itinTotalFare?.currencyCode ||
+      this.flightCheckoutService.selectedFlight?.airItineraryDTO?.itinTotalFare?.currencyCode ||
+      ''
+    );
+  }
+
   /* Button Properties */
   payWithServiceButton: IMainButton = {
     height: '48px',
@@ -38,6 +55,10 @@ export class CheckoutFooterComponent {
   };
 
   onClick(isWhatsappService: boolean) {
+    if (this.sharedService.blockCheckoutWithoutBrand()) {
+      return;
+    }
+
     if (this.flightCheckoutService.usersArray.invalid) {
       for (var i = 0; i < this.flightCheckoutService.usersArray.length; i++) {
         if (this.flightCheckoutService.usersArray.at(i)?.invalid) {
@@ -62,7 +83,9 @@ export class CheckoutFooterComponent {
       }
 
       this.sharedService.users = this.flightCheckoutService.usersArray.value;
-      this.sharedService.goToNextCheckoutStep();
+      // Skip the review step and show payment. The checkout page scrolls to the card once it is rendered.
+      this.sharedService.checkoutSteps = 2;
+      
     }
   }
 }

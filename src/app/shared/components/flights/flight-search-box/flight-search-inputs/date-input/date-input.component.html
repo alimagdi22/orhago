@@ -1,5 +1,5 @@
 <div
-(click)="onClickInput(index)"
+(click)="prepareCalendar(); onClickInput(index)"
 [matMenuTriggerFor]="sharedService.screenWidth >= 1200 ? calender : null"
 #calenderTrigger
 #value
@@ -32,7 +32,7 @@ class="calander"
 }
 </div>
 
-<mat-menu #calender="matMenu" class="calenderMenu" (click)="$event.stopPropagation()">
+<mat-menu #calender="matMenu" class="calenderMenu" (click)="$event.stopPropagation()" (menuOpened)="onCalendarOpened()">
     <div class="date-summary">
       <div
         class="date-summary__departing"
@@ -57,25 +57,28 @@ class="calander"
     </div>
 
     <ngb-datepicker
+      #datePicker
       class="searchBoxPicker"
       [displayMonths]="2"
       (click)="$event.stopPropagation()"
       navigation="arrows"
       [dayTemplate]="calendarTemplate"
       outsideDays="hidden"
-      [minDate]="isReturnDateSelected ? departDate : minDate"
+      [startDate]="isReturnDateSelected ? calendarStart : (flightType === 'multi-city' && index > 0 ? calendarFocusDate() : null)"
+      [minDate]="pickerMinDate()"
+      [maxDate]="maxDate"
     />
 
     <ng-template #calendarTemplate let-date let-focused="focused" (click)="$event.stopPropagation()">
       <span
 
         class="custom-day"
-        (click)="onDateSelection(date, index); closeCalendar($event)"
-        [class.focused]="(isReturnDateSelected ? isReturnSelected(date) : false) || isDepartSelected(date, 0)"
-        [class.range]="isReturnDateSelected ? isRange(date) : false"
+        (click)="onDateSelection(date, index); isDayDisabled(date) ? $event.stopPropagation() : closeCalendar($event)"
+        [class.focused]="isCalendarFocused(date)"
+        [class.range]="isHoverRange(date)"
         [class.faded]="isHovered(date)"
-        [class.disabled]="isDisabled(date)"
-        (mouseenter)="hoveredDate = date"
+        [class.disabled]="isDayDisabled(date)"
+        (mouseenter)="isDayDisabled(date) ? null : hoveredDate = date"
         (mouseleave)="hoveredDate = null"
       >
         {{ date.day }}

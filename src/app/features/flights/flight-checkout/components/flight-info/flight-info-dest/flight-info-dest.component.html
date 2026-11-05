@@ -3,9 +3,7 @@
     <span class="info__dest">{{ (isDepart ? 'checkout.Depart' : 'checkout.Arrival') | translate }}</span>
     <div>
       <p class="info__time">
-        {{
-          isDepart ? (flightSegment.departureDate | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US') : (flightSegment.arrivalDate | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')
-        }}
+        {{ (isDepart ? (flightSegment.departureDate | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US') : (flightSegment.arrivalDate | date: 'shortTime' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US')) | arabicNumber }}
       </p>
       <p class="info__date">
         {{

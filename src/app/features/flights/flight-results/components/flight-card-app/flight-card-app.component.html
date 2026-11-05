@@ -24,8 +24,8 @@
           </div>
           <div class="departure">
             <i class="fa-regular fa-clock"></i>
-            <div class="time">{{ flight.elapsedTime| hourminute }}</div>
-            <div class="code"><app-stops-info [flight]="flight" matTooltip=" {{'results.card.transit' | translate}} {{ flight.flightDTO[0].transitTime | timeFormat}}" matTooltipPosition="above" class="col-xl-2 col-lg-12 col-12 stop" /></div>
+            <div class="time">{{ flight.elapsedTime| hourminute | arabicNumber }}</div>
+            <div class="code"><app-stops-info [flight]="flight" matTooltip=" {{'results.card.transit' | translate}} {{ flight.flightDTO[0].transitTime | timeFormat | arabicNumber }}" matTooltipPosition="above" class="col-xl-2 col-lg-12 col-12 stop" /></div>
           </div>
         </div>
 
@@ -37,10 +37,10 @@
           <app-baggage-info [baggageInfo]="baggageInfo" />
         <div class="price">
           <div class="currency">
-              {{airItineraries[0].itinTotalFare.currencyCode| exchange: 'code'}}
+              {{airItineraries[0].itinTotalFare.currencyCode| exchange: 'code' | currencyLabel}}
           </div>
           <div class="amount">
-              {{airItineraries[0].itinTotalFare.amount | exchange: 'value'}}
+              {{airItineraries[0].itinTotalFare.amount | exchange: 'value': airItineraries[0].itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
           </div>
         </div>
       </div>

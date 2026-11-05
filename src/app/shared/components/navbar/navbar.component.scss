@@ -160,8 +160,11 @@
 
 .logo {
   cursor: pointer;
-  width: 120px;
-  height: 96%;
+  width: 15%;
+  height: 100%;
+  &.mobile-logo {
+    width : 40% !important;
+  }
 }
 
 .manage-booking-button {
@@ -248,6 +251,12 @@
   :host-context(html.dark) & {
     background: #12111c;
     color: #f4f2ff;
+  }
+
+  .top-nav-end {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .burger-btn {
@@ -374,6 +383,72 @@
       }
     }
   }
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  background: transparent;
+  color: #333;
+  overflow: hidden;
+
+  button {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    & + button {
+      border-inline-start: 1.5px solid #333;
+    }
+
+    &.active {
+      background: map-get($map: $colors, $key: 'main');
+      color: #ffffff;
+    }
+
+    &:hover:not(.active) {
+      background-color: #f0f0f0;
+    }
+  }
+
+  &.scroll-button {
+    color: #ffffff;
+    border-color: #ffffff;
+    background: transparent;
+
+    button + button {
+      border-inline-start-color: #ffffff;
+    }
+
+    button.active {
+      background: #ffffff;
+      color: map-get($map: $colors, $key: 'main');
+    }
+
+    button:hover:not(.active) {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.lang-menu-item {
+  cursor: default;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.mobile-logo {
+  width: 50% !important;
 }
 
 .regional-btn {

@@ -13,6 +13,6 @@
   </div>
   <div class="col-12 col-md-5 col-xl-3 info">
     <p class="title">{{ 'confirmation.airlinePNR' | translate }}</p>
-    <p>{{ airlinePNR }}</p>
+    <p>{{ flightConfirmationService.confirmationData.airItineraries[0].allJourney.flights[0].flightDTO[0].supplierRefID }}</p>
   </div>
 </div>

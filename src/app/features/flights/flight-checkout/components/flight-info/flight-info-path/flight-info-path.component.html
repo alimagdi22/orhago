@@ -8,7 +8,7 @@
 >
   {{ (totalDuration | hourminute : translate.currentLang)
       .replace('ساعة', 'س')
-      .replace('دقيقة', 'د') }}
+      .replace('دقيقة', 'د') | arabicNumber }}
 </span>
     <span class="path__info__direct">{{ 'results.card.duration' | translate }}</span>
   </div>

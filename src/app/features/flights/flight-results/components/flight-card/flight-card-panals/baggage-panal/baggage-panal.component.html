@@ -1,12 +1,12 @@
 <span class="bag-chip bag-chip--label">
   <app-baggage-info [baggageInfo]="baggageInfo" />
   @if (isCabinOnly) {
-    {{ 'results.card.cabinBagOnly' | translate }}
+    {{ 'results.card.cabinBagOnly' | translate | arabicNumber }}
   } @else if (checkedKg) {
-    {{ 'results.card.checked' | translate: { weight: checkedKg } }}
+    {{ 'results.card.checked' | translate: { weight: checkedKg } | arabicNumber }}
   } @else if (pieceCount) {
-    {{ (pieceCount === '1' ? 'results.card.onePiece' : 'results.card.pieces') | translate: { count: pieceCount } }}
+    {{ (pieceCount === '1' ? 'results.card.onePiece' : 'results.card.pieces') | translate: { count: pieceCount } | arabicNumber }}
   } @else {
-    {{ baggageInfo?.baggage }}
+    {{ baggageInfo?.baggage | arabicNumber }}
   }
 </span>

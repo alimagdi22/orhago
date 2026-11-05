@@ -1,4 +1,11 @@
 <div class="container user-management">
+  <!-- @if (!loaded) {
+    <div class="cms-loader">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (cmsHtml) {
+    <div class="cms-content" [innerHTML]="cmsHtml"></div>
+  } @else if (loaded) { -->
   <main class="row between">
     <!-- Side Nav -->
 
@@ -9,17 +16,17 @@
         <li>
           <a href="tel:{{ 'footer.contact.phone' | translate }}">
             <img src="assets/icons/contact-us/call-icon.svg" />
-            <span>+97166414350</span>
+            <span>+971 55 914 6282</span>
           </a>
         </li>
         <li>
-          <a href="https://wa.me/97166414350" target="_blank">
+          <a href="https://wa.me/971559146282" target="_blank">
             <img src="assets/icons/contact-us/whatsapp-icon.svg" />
             <span>WhatsApp</span>
           </a>
         </li>
         <li>
-          <a href="mailto:info@orhas.com">
+          <a href="mailto:support@orhas.com">
             <img src="assets/icons/contact-us/mail-icon.svg" />
             <span>info&commat;orhas.com</span>
           </a>
@@ -113,4 +120,5 @@
       </div>
     </section>
   </main>
+  <!-- } -->
 </div>

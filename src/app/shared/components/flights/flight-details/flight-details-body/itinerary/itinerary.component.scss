@@ -8,6 +8,10 @@
 
   .itinerary {
     flex-basis: 45%;
+    direction: ltr;
+    &.ar-EG {
+      direction: rtl;
+    }
   }
 
   div {

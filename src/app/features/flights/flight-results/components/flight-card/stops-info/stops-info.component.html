@@ -18,4 +18,11 @@
       {{ flight.stopsNum }} {{ 'results.filter.stops' | translate }}
     }
   </span>
+  @for (segment of flight.flightDTO; track $index) {
+    @if ($index < flight.stopsNum) {
+      <p class="stop-airport">
+        {{ segment.arrivalTerminalAirport.airportCode }} - {{ formatDuration(segment.transitTime) | arabicNumber }}
+      </p>
+    }
+  }
 </section>

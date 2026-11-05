@@ -70,6 +70,10 @@ export class PopularAirlinesComponent implements OnInit {
 
   navigateToAirline(slug: string): void {
     if (slug) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
       this.router.navigate([`/airline/${slug}`]);
     }
   }

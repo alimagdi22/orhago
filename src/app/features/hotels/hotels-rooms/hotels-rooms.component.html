@@ -60,14 +60,14 @@
         <div class="info-item">
           <p class="item-body">
               <span>{{ "hotelRooms.Check In" | translate }}</span>
-              {{ checkInDate | date:'hh:mm a' }}
+              {{ checkInDate | date:'hh:mm a' | arabicNumber }}
           </p>
         </div>
 
         <div class="info-item">
           <p class="item-body">
               <span>{{ "hotelRooms.Check Out" | translate }}</span>
-              {{ checkOutDate | date:'hh:mm a' }}
+              {{ checkOutDate | date:'hh:mm a' | arabicNumber }}
           </p>
         </div>
       </div>
@@ -116,8 +116,8 @@
 <!-- @if(sharedService.screenWidth < 900 && !sharedService.isCitiesLoading){
   <div class="pricing-card">
     <div class="card-body">
-      <p>{{hotelRoomsService.roomsData.sellCurrency}}
-        <span class="price">{{ hotelRoomsService.roomsData.TotalSellPrice}}</span>
+      <p>{{ hotelRoomsService.roomsData.sellCurrency | currencyLabel }}
+        <span class="price">{{ hotelRoomsService.roomsData.TotalSellPrice | number: '1.0-2' | arabicNumber }}</span>
       </p>
       <button class="select-button" (click)="openPopup()">Select Rooms</button>
     </div>

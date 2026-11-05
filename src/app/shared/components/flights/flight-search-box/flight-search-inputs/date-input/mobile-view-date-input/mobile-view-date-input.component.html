@@ -2,18 +2,29 @@
 
 <div class="calenderMobile_datepicker">
   <ngb-datepicker
+    #datePicker
     [displayMonths]="2"
     [dayTemplate]="dayCalander"
-    [startDate]="data.isReturnDate ? returnDate : departingDate"
-    [minDate]="data.isReturnDate ? departingDate : minDepartingDate"
+    [startDate]="data.flightType === 'multi-city' && previousDate ? previousDate : departingDate"
+    [minDate]="mobileMinDate()"
+    [maxDate]="maxDate"
     (dateSelect)="onDateSelection($event)"
   />
 
   <ng-template #dayCalander let-date>
     @if (data.flightType === 'round-trip') {
-      <span class="custom-day" [class.focused]="isSelected(date)" [class.range]="isInside(date)">{{ date.day }}</span>
+      <span class="custom-day" [class.focused]="isSelected(date)" [class.range]="isInside(date)" [class.disabled]="isMobileDayDisabled(date) || (data.isReturnDate && date.before(departingDate))">{{ date.day }}</span>
+    } @else if (data.flightType === 'multi-city') {
+      <span
+        class="custom-day"
+        [class.focused]="isSelected(date) || isPreviousSelected(date)"
+        [class.range]="isHoverRange(date)"
+        [class.disabled]="isMobileDayDisabled(date)"
+        (mouseenter)="isMobileDayDisabled(date) ? null : hoveredDate = date"
+        (mouseleave)="hoveredDate = null"
+      >{{ date.day }}</span>
     } @else {
-      <span class="custom-day" [class.focused]="isSelected(date)">{{ date.day }}</span>
+      <span class="custom-day" [class.focused]="isSelected(date)" [class.disabled]="isMobileDayDisabled(date)">{{ date.day }}</span>
     }
   </ng-template>
 </div>

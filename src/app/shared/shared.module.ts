@@ -80,6 +80,8 @@ import { ScrollManagerDirective } from './directives/scroll-manager.directive';
 import { ScrollSectionDirective } from './directives/scroll-section.directive';
 import { CustomDateRangePipe } from './pipes/custom-date-range.pipe';
 import { TimeFormatPipe } from './pipes/timeFormat.pipe';
+import { ArabicNumberPipe } from './pipes/arabic-number.pipe';
+import { CurrencyLabelPipe } from './pipes/currency-label.pipe';
 import { NoFlightsComponent } from '../features/flights/flight-results/components/no-flights/no-flights.component';
 import { RpHotelsUiModule } from 'rp-hotels-ui';
 import { HotelSearchBoxComponent } from './components/hotels/hotel-search-box/hotel-search-box.component';
@@ -101,6 +103,8 @@ import { FlightPathAppComponent } from './components/flights/flight-details-app/
 import { BaggageDetailsAppComponent } from './components/flights/flight-details-app/flight-details-body-app/baggage-details-app/baggage-details-app.component';
 import { FlexFareAppComponent } from './components/flex-fare-app/flex-fare-app.component';
 import { FlexFareCardAppComponent } from './components/flex-fare-app/flex-fare-card-app/flex-fare-card-app.component';
+import { FlexFareComponent } from '../features/flights/flight-results/components/flex-fare/flex-fare.component';
+import { FlexFareCardComponent } from '../features/flights/flight-results/components/flex-fare/flex-fare-card/flex-fare-card.component';
 import { FlightSummaryComponent } from './components/flights/flight-summary/flight-summary.component';
 import { CheckoutStepsComponent } from './components/flights/checkout-steps/checkout-steps.component';
 
@@ -200,9 +204,9 @@ export const SharedDirectives = [
   RestrictArabicDirective,
 ];
 @NgModule({
-  declarations: [SharedComponents, SharedDirectives, FlightPathComponent, DestInputComponent, DateInputComponent, MobileViewCabinClassComponent, CustomDateRangePipe,TimeFormatPipe, FlightDetailsAppComponent, FlightDetailsHeaderAppComponent, FlightDetailsBodyAppComponent, InputHeaderAppComponent, ItineraryAppComponent,FlightPathAppComponent, BaggageDetailsAppComponent, FlexFareAppComponent, FlexFareCardAppComponent,HotelSearchBoxComponent, LocationInputComponent, HotelDateInputComponent, MobileLocationInputComponent, MobileDateInputComponent, GuestRoomSelectorComponent, MobileGuestRoomSelectorComponent, HotelSummaryComponent, HotelCheckoutStepsComponent],
+  declarations: [SharedComponents, SharedDirectives, FlightPathComponent, DestInputComponent, DateInputComponent, MobileViewCabinClassComponent, CustomDateRangePipe, TimeFormatPipe, ArabicNumberPipe, CurrencyLabelPipe, FlightDetailsAppComponent, FlightDetailsHeaderAppComponent, FlightDetailsBodyAppComponent, InputHeaderAppComponent, ItineraryAppComponent,FlightPathAppComponent, BaggageDetailsAppComponent, FlexFareAppComponent, FlexFareCardAppComponent, FlexFareComponent, FlexFareCardComponent, HotelSearchBoxComponent, LocationInputComponent, HotelDateInputComponent, MobileLocationInputComponent, MobileDateInputComponent, GuestRoomSelectorComponent, MobileGuestRoomSelectorComponent, HotelSummaryComponent, HotelCheckoutStepsComponent],
   imports: [MatrialComponents, ImportedModules, CommonModule],
-  exports: [MatrialComponents, ImportedModules, SharedComponents, SharedDirectives,CustomDateRangePipe, TimeFormatPipe],
+  exports: [MatrialComponents, ImportedModules, SharedComponents, SharedDirectives, CustomDateRangePipe, TimeFormatPipe, ArabicNumberPipe, CurrencyLabelPipe, FlexFareComponent, FlexFareCardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })

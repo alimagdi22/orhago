@@ -26,7 +26,9 @@
         <span class="brand__name">Orhas</span>
       </a>
 
-      @if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
+      @if (sharedService.isSegmentPresent(['flight-results'])) {
+        <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
+      } @else if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
         <app-hotel-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleHotelSearch()" />
       } @else if (sharedService.isSegmentPresent(['flight-checkout'])) {
         <app-checkout-steps [isScrolled]="isScrolled"/>
@@ -65,8 +67,8 @@
         @if (homePageService.loader) {
           <app-skeleton-loader [height]="'100%'" [ngStyle]="{ width: '64px' }" />
         } @else if (homePageService.selectedCurrency) {
-          <button class="tool-btn" (click)="openRegionalPopup('currency')" type="button">
-            <span>{{ homePageService.selectedCurrency['Currency_Code'] }}</span>
+          <button class="tool-btn" (click)="openRegionalPopup()" type="button">
+            <span>{{ homePageService.selectedCurrency['Currency_Code'] | currencyLabel }}</span>
             <svg viewBox="0 0 12 12" aria-hidden="true">
               <path d="M2.2 4.2 6 8l3.8-3.8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -78,6 +80,10 @@
             {{ 'navbar.manageBooking' | translate }}
           </button>
         }
+        <div class="lang-switch" [class.scroll-button]="isScrolled" role="group" [attr.aria-label]="translate.currentLang === 'en' ? 'Language' : 'اللغة'">
+          <button type="button" [class.active]="translate.currentLang === 'en'" (click)="selectLang('en')">EN</button>
+          <button type="button" [class.active]="translate.currentLang === 'ar'" (click)="selectLang('ar')">عربي</button>
+        </div>
 
         @if (isAuthenticated) {
           <app-drop-down />
@@ -118,11 +124,12 @@
         }
       </button>
       @if (homePageService.selectedCurrency) {
-        <button class="tool-btn" type="button" (click)="openRegionalPopup('currency')">
-          {{ homePageService.selectedCurrency['Currency_Code'] }}
+        <button class="tool-btn" type="button" (click)="openRegionalPopup()">
+          {{ homePageService.selectedCurrency['Currency_Code'] | currencyLabel }}
         </button>
       }
       <button type="button" class="burger-btn" (click)="toggleSidebar()" aria-label="Toggle Menu">
+        <span class="burger-bar"></span>
         <span class="burger-bar"></span>
         <span class="burger-bar"></span>
       </button>
@@ -135,7 +142,7 @@
     <div class="sidebar-backdrop" (click)="closeSidebar()"></div>
     <aside class="sidebar-drawer">
       <div class="sidebar-header">
-        <img src="assets/images/logo.jpeg" width="120" title="Logo" class="logo" routerLink="/" (click)="closeSidebar()" />
+        <img src="assets/images/logo.png" width="120" title="Logo" class="logo mobile-logo" routerLink="/" (click)="closeSidebar()" />
         <button type="button" class="close-btn" (click)="closeSidebar()">&times;</button>
       </div>
 
@@ -173,14 +180,14 @@
           <span class="arrow-icon">›</span>
         </li>
 
-        <li (click)="openLangPopup()">
+        <li class="lang-menu-item">
           <div class="menu-item-content">
             <span class="menu-icon">🌐</span>
             <span class="menu-label">{{ translate.currentLang === 'en' ? 'Language' : 'اللغة' }}</span>
           </div>
-          <div class="menu-item-value">
-            {{ translate.currentLang == 'en' ? 'EN' : 'AR' }}
-            <span class="arrow-icon">›</span>
+          <div class="lang-switch" role="group" [attr.aria-label]="translate.currentLang === 'en' ? 'Language' : 'اللغة'">
+            <button type="button" [class.active]="translate.currentLang === 'en'" (click)="selectLang('en')">EN</button>
+            <button type="button" [class.active]="translate.currentLang === 'ar'" (click)="selectLang('ar')">عربي</button>
           </div>
         </li>
 
@@ -198,7 +205,7 @@
             <span class="menu-label">{{ translate.currentLang === 'en' ? 'Currency' : 'العملة' }}</span>
           </div>
           <div class="menu-item-value">
-            {{ this.homePageService.selectedCurrency?.['Currency_Code'] }}
+            {{ this.homePageService.selectedCurrency?.['Currency_Code'] | currencyLabel }}
             <span class="arrow-icon">›</span>
           </div>
         </li>
@@ -224,7 +231,7 @@
 <mat-menu #currencyMenu="matMenu">
   <button mat-menu-item *ngFor="let currency of this.homePageService.allCurrency" (click)="updateCurrency(currency)">
     <img width="25" height="25" [src]="currency.Image_Url" title="Currency Icon" />
-    {{ currency['Currency_Code'] }}
+    {{ currency['Currency_Code'] | currencyLabel }}
   </button>
 </mat-menu>
 
@@ -233,42 +240,17 @@
   <button mat-menu-item (click)="updateLang('ar')">AR</button>
 </mat-menu>
 
-<!-- Unified Modern Regional Popup Dialog (Currency & Language) -->
 @if (isRegionalPopupOpen) {
   <div class="popup-backdrop" (click)="closeRegionalPopup()">
     <div class="popup-card regional-modal" (click)="$event.stopPropagation()">
       <div class="popup-header">
         <div class="header-title">
-          <h3>{{ translate.currentLang === 'en' ? 'Regional Settings' : 'إعدادات المنطقة' }}</h3>
+          <h3>{{ translate.currentLang === 'en' ? 'Currency' : 'العملة' }}</h3>
         </div>
         <button type="button" class="popup-close-btn" (click)="closeRegionalPopup()">&times;</button>
       </div>
 
-      <!-- Popup Nav Tabs -->
-      <div class="popup-tabs">
-        <button
-          type="button"
-          class="tab-btn"
-          [class.active]="activePopupTab === 'currency'"
-          (click)="setActivePopupTab('currency')"
-        >
-          <span class="tab-icon">💱</span>
-          <span>{{ translate.currentLang === 'en' ? 'Currency' : 'العملة' }}</span>
-        </button>
-        <button
-          type="button"
-          class="tab-btn"
-          [class.active]="activePopupTab === 'lang'"
-          (click)="setActivePopupTab('lang')"
-        >
-          <span class="tab-icon">🌐</span>
-          <span>{{ translate.currentLang === 'en' ? 'Language' : 'اللغة' }}</span>
-        </button>
-      </div>
-
       <div class="popup-body">
-        <!-- Currency Tab Content -->
-        @if (activePopupTab === 'currency') {
           <div class="tab-content">
             <div class="search-box">
               <span class="search-icon">🔍</span>
@@ -292,7 +274,7 @@
                 >
                   <div class="currency-info">
                     <img width="26" height="19" [src]="currency.Image_Url" [alt]="currency.Currency_Code" class="flag-img" />
-                    <span class="currency-code">{{ currency.Currency_Code }}</span>
+                    <span class="currency-code">{{ currency.Currency_Code | currencyLabel }}</span>
                   </div>
                   @if (homePageService.selectedCurrency?.Currency_Code === currency.Currency_Code) {
                     <span class="check-mark">✓</span>
@@ -305,40 +287,6 @@
               }
             </div>
           </div>
-        }
-
-        <!-- Language Tab Content -->
-        @if (activePopupTab === 'lang') {
-          <div class="tab-content">
-            <div
-              class="popup-option"
-              [class.selected]="translate.currentLang === 'en'"
-              (click)="selectLang('en')"
-            >
-              <div class="lang-info">
-                <span class="flag-icon-emoji">🇬🇧</span>
-                <span class="option-name">English (EN)</span>
-              </div>
-              @if (translate.currentLang === 'en') {
-                <span class="check-mark">✓</span>
-              }
-            </div>
-
-            <div
-              class="popup-option"
-              [class.selected]="translate.currentLang === 'ar'"
-              (click)="selectLang('ar')"
-            >
-              <div class="lang-info">
-                <span class="flag-icon-emoji">🇰🇼</span>
-                <span class="option-name">العربية (AR)</span>
-              </div>
-              @if (translate.currentLang === 'ar') {
-                <span class="check-mark">✓</span>
-              }
-            </div>
-          </div>
-        }
       </div>
     </div>
   </div>

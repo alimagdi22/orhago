@@ -1,0 +1,14 @@
+@if (loading) {
+  <div class="pre-confirmation">
+    <app-spinner-loader />
+  </div>
+} @else if (paymentErrorStatus) {
+  <div class="pre-confirmation">
+    <h1>{{ 'confirmation.paymentError' | translate }}</h1>
+    <app-main-button
+      [mainButtonInfo]="searchButton"
+      [title]="'confirmation.newSearch' | translate"
+      (clickMainButton)="navigateToHome()"
+    />
+  </div>
+}

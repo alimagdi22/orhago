@@ -1,4 +1,4 @@
-<div class="baggage-info">
+<div class="baggage-info" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
   <section class="inculded-sec">
     <div class="inculded-sec__header">
       <img src="assets/icons/checked-icon.svg" title="Checked Icon" />
@@ -13,17 +13,17 @@
             {{ item.flightDTO[0].departureTerminalAirport.cityName }} - {{ item.flightDTO[item.flightDTO.length - 1].arrivalTerminalAirport.cityName }}
           </div>
 
-          <div class="baggage-entry">
+          <div class="baggage-entry" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'" >
             <img src="assets/icons/travel-bag-icon.svg" alt="" />
-            {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].baggage) }} {{ 'flightDetails.baggage.cabin' | translate }}
+            {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].baggage) | arabicNumber }} {{ 'flightDetails.baggage.cabin' | translate }}
           </div>
 
-          <div class="hand-baggage">
+          <div class="hand-baggage" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
             <div class="hand-baggage-top">
               <img src="assets/icons/hand-bag-icon.svg" alt="" />
-              <span>1 x {{ 'flightDetails.baggage.hand' | translate }}</span>
+              <span>{{ 1 | arabicNumber }} x {{ 'flightDetails.baggage.hand' | translate }}</span>
             </div>
-            <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+            <div class="hand-baggage-details">{{ '(55 x 38 x 20) · 7kg' | arabicNumber }}</div>
           </div>
         </div>
       }
@@ -36,17 +36,17 @@
               {{ item.flightDTO[0].departureTerminalAirport.cityName }} - {{ item.flightDTO[item.flightDTO.length - 1].arrivalTerminalAirport.cityName }}
             </div>
 
-            <div class="baggage-entry">
+            <div class="baggage-entry" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
               <img src="assets/icons/travel-bag-icon.svg" alt="" />
-              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].childBaggage) }} x Checked Baggage
+              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].childBaggage) | arabicNumber }} x Checked Baggage
             </div>
 
-            <div class="hand-baggage">
+            <div class="hand-baggage" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
               <div class="hand-baggage-top">
                 <img src="assets/icons/hand-bag-icon.svg" alt="" />
-                <span>1 x Cabin Baggage</span>
+                <span>{{ 1 | arabicNumber }} x Cabin Baggage</span>
               </div>
-              <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+              <div class="hand-baggage-details">{{ '(55 x 38 x 20) · 7kg' | arabicNumber }}</div>
             </div>
           </div>
         }
@@ -60,17 +60,17 @@
               {{ item.flightDTO[0].departureTerminalAirport.cityName }} - {{ item.flightDTO[item.flightDTO.length - 1].arrivalTerminalAirport.cityName }}
             </div>
 
-            <div class="baggage-entry">
+            <div class="baggage-entry" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
               <img src="assets/icons/travel-bag-icon.svg" alt="" />
-              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].infantBaggage) }} x Checked Baggage
+              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].infantBaggage) | arabicNumber }} x Checked Baggage
             </div>
 
-            <div class="hand-baggage">
+            <div class="hand-baggage" [dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'">
               <div class="hand-baggage-top">
                 <img src="assets/icons/hand-bag-icon.svg" alt="" />
-                <span>1 x Cabin Baggage</span>
+                <span>{{ 1 | arabicNumber }} x Cabin Baggage</span>
               </div>
-              <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+              <div class="hand-baggage-details">{{ '(55 x 38 x 20) · 7kg' | arabicNumber }}</div>
             </div>
           </div>
         }

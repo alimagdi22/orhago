@@ -1,7 +1,7 @@
 <button type="button" class="sort-card" [class.active]="sortItem.isActive">
   <span class="sort-card__title">{{ 'results.sort.' + sortItem.title | translate }}</span>
   <span class="sort-card__meta">
-    <strong>{{ sortItem.currency | exchange: 'code' }} {{ sortItem.price | exchange: 'value' }}</strong>
-    <span>{{ durationLabel }}</span>
+    <strong>{{ sortItem.price | exchange: 'value': sortItem.currency | number: '1.0-2' | arabicNumber }}</strong>
+    <span>{{ durationLabel | arabicNumber }}</span>
   </span>
 </button>

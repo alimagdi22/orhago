@@ -13,7 +13,7 @@ header {
     text-align: start;
 
     &__main {
-      font-size: 24px;
+      font-size: 17px;
       font-weight: 600;
     }
 
@@ -25,9 +25,14 @@ header {
   .price {
     text-align: end;
 
+    &__caption {
+      white-space: nowrap;
+    }
+
     &__text {
       font-size: 24px;
       font-weight: 700;
+      white-space: nowrap;
     }
   }
 
@@ -59,14 +64,22 @@ header {
 
 @media (max-width:768px){
   header{
-    justify-content: space-around;
+    justify-content: flex-start;
     .price {
+      flex-direction: row !important;
+      gap: 5px;
       &__text {
         font-size: 17px;
         white-space: nowrap;
       }
       &__caption{
         white-space: nowrap;
+      }
+      .price-details{
+        flex-direction: row !important;
+        .d-sm-none{
+          display: none !important;
+        }
       }
     }
   }

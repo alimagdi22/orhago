@@ -1,11 +1,26 @@
 <div class="privacy-policy container">
-  <h1>{{ 'privacy.title' | translate }}</h1>
+  @if (!loaded) {
+    <div class="cms-loader">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (cmsHtml) {
+    <div class="cms-content" [innerHTML]="cmsHtml"></div>
+  } @else if (loaded) {
+    <h1>{{ 'privacy.headerTxt' | translate }}</h1>
 
-  <section>
-    <h3>{{ 'privacy.sectionTitle' | translate }}</h3>
-    <br />
-    <p>
-      {{ 'privacy.description' | translate }}
-    </p>
-  </section>
+    <section>
+      <h3>{{ 'privacy.one' | translate }}</h3>
+      <p>{{ 'privacy.oneTxt' | translate }}</p>
+    </section>
+
+    <section>
+      <h3>{{ 'privacy.two' | translate }}</h3>
+      <p>{{ 'privacy.twoTxt' | translate }}</p>
+    </section>
+
+    <section>
+      <h3>{{ 'privacy.three' | translate }}</h3>
+      <p>{{ 'privacy.threeTxt' | translate }}</p>
+    </section>
+  }
 </div>

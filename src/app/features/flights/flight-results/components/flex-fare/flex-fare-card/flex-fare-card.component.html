@@ -59,8 +59,10 @@
             class="feature-text"
             [attr.dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
           >
-            <bdi>{{ translate.currentLang === 'en' ? '1 piece' : '1 قطعة' }}</bdi>
-            <span>&nbsp;×&nbsp;</span>
+            @if(baggageAllowanceDetail.baggageAllowanceInfo.unit == 'KG' || baggageAllowanceDetail.baggageAllowanceInfo.unit == 'kilogram') {
+              <bdi>{{ translate.currentLang === 'en' ? '1 piece' : '1 قطعة' }}</bdi>
+              <span>&nbsp;×&nbsp;</span>
+            }
             <bdi>
               {{ baggageAllowanceDetail.baggageAllowanceInfo.size }}
               {{ baggageAllowanceDetail.baggageAllowanceInfo.unit }}
@@ -85,8 +87,8 @@
       <span class="section-title">{{ 'flightResults.flexibility' | translate }}</span>
 
       <!-- Mobile Right Price Delta -->
-      <span class="mobile-only mobile-price-delta" (click)="onClickSelect($event)">
-        +{{ priceDifference > 0 ? (priceDifference | exchange: 'value') : 0 }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' }}
+      <span class="mobile-only mobile-price-delta" [ngClass]="{'is-checkout': sharedService.isWegoCheckout}" (click)="onClickSelect($event)">
+        +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value': brand.itinTotalFare.currencyCode) : 0) | number: '1.0-2' | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
@@ -144,6 +146,11 @@
     </div>
   </div>
 
+  <strong class="mobile-only mobile-price-delta" (click)="onClickSelect($event)">
+    +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value': brand.itinTotalFare.currencyCode) : 0) | number: '1.0-2' | arabicNumber }} {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+    
+  </strong>
+
   <!-- Extra Services Section -->
   <!-- <div class="fare-section">
     <span class="section-title">Extra Services</span>
@@ -182,10 +189,10 @@
   <div class="card-footer-row desktop-only">
     <div class="price-container">
       <span class="price-value">
-        +{{ priceDifference > 0 ? (priceDifference | exchange: 'value') : 0 }}
+        +{{ (priceDifference > 0 ? (priceDifference | exchange: 'value': brand.itinTotalFare.currencyCode) : 0) | number: '1.0-2' | arabicNumber }}
       </span>
       <span class="price-currency">
-        {{ brand.itinTotalFare.currencyCode | exchange: 'code' }}
+        {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
       </span>
     </div>
 

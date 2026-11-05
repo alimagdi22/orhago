@@ -15,15 +15,15 @@
 
           <div class="baggage-entry">
             <img src="assets/icons/travel-bag-icon.svg" alt="" />
-            {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].baggage) }} {{ 'flightDetails.baggage.cabin' | translate }}
+            {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].baggage) | arabicNumber }} {{ 'flightDetails.baggage.cabin' | translate }}
           </div>
 
           <div class="hand-baggage">
             <div class="hand-baggage-top">
               <img src="assets/icons/hand-bag-icon.svg" alt="" />
-              <span>1 x {{ 'flightDetails.baggage.hand' | translate }}</span>
+              <span>{{ 1 | arabicNumber }} x {{ 'flightDetails.baggage.hand' | translate }}</span>
             </div>
-            <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+            <div class="hand-baggage-details">{{ '(55 x 38 x 20) · 7kg' | arabicNumber }}</div>
           </div>
         </div>
       }
@@ -38,15 +38,15 @@
 
             <div class="baggage-entry">
               <img src="assets/icons/travel-bag-icon.svg" alt="" />
-              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].childBaggage) }} x Checked Baggage
+              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].childBaggage) | arabicNumber }} x Checked Baggage
             </div>
 
             <div class="hand-baggage">
               <div class="hand-baggage-top">
                 <img src="assets/icons/hand-bag-icon.svg" alt="" />
-                <span>1 x Cabin Baggage</span>
+                <span>{{ 1 | arabicNumber }} x Cabin Baggage</span>
               </div>
-              <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+              <div class="hand-baggage-details">{{ '(55 x 38 x 20) · 7kg' | arabicNumber }}</div>
             </div>
           </div>
         }
@@ -62,15 +62,15 @@
 
             <div class="baggage-entry">
               <img src="assets/icons/travel-bag-icon.svg" alt="" />
-              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].infantBaggage) }} x Checked Baggage
+              {{ getBaggageCountOnlyOrRaw(sharedService.selectedFlightItinerary.baggageInformation[0].infantBaggage) | arabicNumber }} x Checked Baggage
             </div>
 
             <div class="hand-baggage">
               <div class="hand-baggage-top">
                 <img src="assets/icons/hand-bag-icon.svg" alt="" />
-                <span>1 x Cabin Baggage</span>
+                <span>{{ 1 | arabicNumber }} x Cabin Baggage</span>
               </div>
-              <div class="hand-baggage-details">(55 x 38 x 20) · 7kg</div>
+              <div class="hand-baggage-details">{{ '(55 x 38 x 20) · 7kg' | arabicNumber }}</div>
             </div>
           </div>
         }

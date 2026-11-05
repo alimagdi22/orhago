@@ -15,18 +15,20 @@
   },
 
   "footer": {
-    "about": "orhas is a leading online travel agency offering seamless booking experiences for flights, hotels, and more. Explore the world with us!",
+    "about": "Orhas is your trusted travel companion, making every journey simpler, smarter, and more enjoyable. From flights and hotels to unforgettable holiday experiences, we bring everything you need to explore the world together in one place.",
     "links": {
       "home": "Home",
       "aboutUs": "About Us",
       "application": "Application",
       "contactUs": "Contact Us",
       "privacyPolicy": "Privacy Policy",
-      "helpCenter": "Help Center"
+      "helpCenter": "Help Center",
+      "terms": "Terms and Conditions"
+
     },
     "contact": {
-      "email": "info@orhas.com",
-      "phone": "+971 66414350",
+      "email": "support@orhas.com",
+      "phone": "+971559146282",
       "address": "UAE - Dubai"
     },
     "copyright": "&copy; 2025 orhas. All rights reserved."
@@ -127,7 +129,8 @@
       "addFlight": "Add Flight",
       "addFlightNote": "Maximum of 4 different flights can be added",
       "searchTicket": "Search flights",
-      "enterDestination": "Enter your destination city"
+      "enterDestination": "Enter your destination city",
+      "sameDestination": "Departure and arrival can't be the same"
     },
     "promises": {
       "priceMatch": "We price match",
@@ -152,22 +155,22 @@
     },
     "exploreTitle": "Explore popular flights and hotels",
     "adContent": {
-      "title": "Unlock exclusive features available only on the Travelo app. Download it now!",
+      "title": "Unlock exclusive features available only on the Orhas app. Download it now!",
       "features": [
         "Enjoy more than ten practical features tailored exclusively for app users",
         "Discover our Explore page for popular Destinations, Weekend Getaways, Travel News and more.",
-        "Swift checkout process on the Travelo app with offline booking access, various discounts and password-less logins."
+        "Swift checkout process on the Orhas app with offline booking access, various discounts and password-less logins."
       ],
       "scanToDownload": "Scan to download"
     },
     "flightDeals": {
       "title": "The best Flight deals",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler",
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler",
       "book": "Book"
     },
     "hotelDeals": {
       "title": "Popular Searches",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Trivelo has something for every traveler"
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler"
     },
     "populerCities": {
       "title": "Popular cities for hotels"
@@ -272,6 +275,12 @@
       "Baggage": "Baggage"
     },
 
+    "flightType": {
+      "oneWay": "One Way",
+      "roundtrip": "Round Trip",
+      "multicity": "Multi City"
+    },
+
     "itinerary": {
       "Departure": "Departure",
       "Arrive": "Return",
@@ -334,6 +343,7 @@
   "checkout": {
     "Depart": "Depart",
     "Arrival": "Arrival",
+    "andBack": "and back",
     "Direct": "Direct",
     "Transit": "Transit",
     "seeMoreDetails": "See more details",
@@ -344,6 +354,13 @@
     "paymentStep": "Payment",
     "payment": {
       "chooseCard": "Choose Card",
+      "securePayment": "Secure Payment",
+      "flightFare": "Flight fare",
+      "extraServices": "Extra services",
+      "gatewayFee": "Payment fee",
+      "totalAmount": "Total amount",
+      "selectMethod": "Select payment method",
+      "paymentSecure": "Your payment is secure and encrypted. We use industry-standard security protocols to protect your data.",
       "cardNumber": "Card Number",
       "expiration": "Expiration",
       "cvc": "CVC",
@@ -352,8 +369,10 @@
       "conditionStart": "I agree to the",
       "conditionEnd": "Terms and Conditions",
       "pay": "Pay",
+      "preparingTitle": "Just a moment, you're nearly there!",
+      "preparingMessage": "We're getting your booking ready so you can proceed securely to payment.",
       "errorTitle": "Whoops!",
-      "errorMessage": "Purchase failed. Please try different card or check your current card information",
+      "errorMessage": "Sorry, an error occurred during the booking process, please try again later",
       "tryAgain": "Let's try again",
       "successTitle": "You Got the Ticket!",
       "successMessage": "The ticket purchase was successful.",
@@ -361,7 +380,7 @@
     },
     "contactInfo": "Contact Info",
     "contactNumber": "Contact Number",
-    "gmail": "Gmail",
+    "gmail": "Email",
     "email": "Email",
     "Adult": "Adult",
     "Child": "Child",
@@ -382,6 +401,7 @@
     "payWithWhatsapp": "Pay with WhatsApp Alerts @",
     "payWithoutWhatsapp": "Pay without WhatsApp Alerts",
     "processToPayment":"Proceed to Payment",
+    "selectBrandRequired": "Please select a fare to continue",
     "guestDetails":"Guest Details"
   },
 
@@ -392,9 +412,9 @@
     "pnr": "PNR: ",
     "bookingDate": "Booking Date: ",
     "passengerName": "Passenger Name",
-    "passengerNumber": "Passenger Number",
+    "passengerNumber": "Passport Number",
     "ticket": "Ticket",
-    "airlinePNR": "Airline PNR",
+    "airlinePNR": "Airline Reference",
     "flightDetails": "Flight Details",
     "airlineRef": "Airline Ref:",
     "Departure": "Departure",
@@ -408,7 +428,10 @@
     "fareDetails": "Fare Details",
     "fare": "Fare",
     "tax": "Tax",
-    "total": "Total"
+    "total": "Total",
+    "paymentError": "Something went wrong during payment. Our customer service will help you complete your booking.",
+    "newSearch": "New search",
+    "confirmationHeader": "Congratulations! Your booking is confirmed."
   },
 
   "about": {
@@ -477,7 +500,8 @@
       "passwordMismatch": "Password does not match.",
       "errorMessagePlaceholder": "Error Message Placeholder",
       "invalidUserError": "Invalid user or something went wrong ..",
-      "termsAgreement": "I agree with - and -",
+      "termsAgreementPrefix": "I agree with the ",
+      "termsAgreementAnd": " and the ",
       "signUp": "Sign Up",
       "signUpWithGoogle": "Sign Up with Google",
       "alreadyHaveAccount": "Already have an account?",
@@ -535,7 +559,7 @@
       "firstNamePlaceholder": "First Name",
       "lastName": "Last Name",
       "lastNamePlaceholder": "Last Name",
-      "gmail": "Gmail",
+      "gmail": "Email",
       "emailPlaceholder": "Email",
       "contactNumber": "Contact Number",
       "privacyPolicy": "I give Orhas permission to send me informational and promotional emails and text messages in accordance with the",
@@ -545,7 +569,7 @@
     },
 
     "changePassword": {
-      "gmail": "Gmail",
+      "gmail": "Email",
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmNewPassword": "Confirm New Password",
@@ -684,7 +708,7 @@
     "changeFeeNotApplies": "Change fee not apply",
     "brandedFares": "Branded Fares",
     "FlightPackage":"Select a flight package",
-    "selectBrandedFareMsg": "Please select a flight package to proceed to the checkout page.",
+    "selectBrandedFareMsg": "Please select a flight package to proceed .",
     "noBrandedFares": "No Branded Fares To Show",
     "showMoreFlights": "Show More Flights",
     "showLessFlights": "Show Less Flights",
@@ -707,9 +731,13 @@
   },
 
   "privacy": {
-    "title": "Privacy Policy",
-    "sectionTitle": "Information collection and use",
-    "description": "We collect only the necessary information to provide our services. Your data is securely stored and never shared without your consent."
+    "headerTxt": "Privacy Policy",
+    "one": "Our privacy",
+    "oneTxt": "As a customer of Abou Samra Travel as travasky.com, you are in complete control of your travel planning needs. This includes controlling the use of information you provide Abou Samra Travel as travasky.com. When you reserve or purchase travel services through Abou Samra Travel as travasky.com, we provide information about you to the airline, car rental agency, hotel, Abou Samra Travel as travasky.com or other involved third party to ensure the successful fulfilment of your travel arrangements. We also use information you provide during registration or as part of the reservation process to customize the content of our site to meet your specific needs and to make product improvements to Abou Samra Travel as travasky.com. Abou Samra Travel as travasky.com will send you an e-mail message confirming each reservation you transact online. We do not sell individual customer names or other private profile information to third parties. As a member or contest entrant you will occasionally receive updates from us about fare sales in your area, special offers, new Abou Samra Travel as travasky.com services and noteworthy news. We hope you will find these updates interesting and informative. Abou Samra Travel as travasky.com reserves the right to limit membership to those who will accept e-mails. We respect and will continue to respect the privacy of our customers who use Abou Samra Travel.",
+    "two": "DATA PROTECTION AND PRIVACY POLICY",
+    "twoTxt": "Privacy and Data Protection is a huge priority to our company and we respect and understand the importance. We preserve your personal information when visiting our site or communicate electronically with us and we commit to safeguard your personal information. We tend to collect information for the below: Contact details & Full Passengers names including date of birth, telephone number, address and email address Personal Information that is completed on our website when purchasing a product or service from us Personal Information provided to us when you communicate with us through our contact forms or speak to our customer service agents Personal information such as full names, address, contact numbers & email address for Job applicants who have applied for vacancies. If you subscribed to our Newsletter to receive weekly updates & offers on our products Details of your visits to our website to help gather information to provide an optimum service. We use cookies to track movement around our site such as traffic data, location data & also other communication data. There are certain circumstances where we need to collect sensitive personal data. It is rare but in these cases we need to oblige by the service provider rules & regulations. On notes like this, we act in your interest and only prepare this data having had your consent where necessary. Please note that we may have to share data with our worldwide trusted partners, such as Airlines, Hoteliers, Car Hire & Airport Parking services & other suppliers in order to arrange and confirm your booking. We may also have to disclose information to third parties in relation to concluding your product purchased & support services where required. We take reasonable steps to ensure your data is secure and any transactions from our website will be encrypted to ensure highest levels of safety. At times, we need to disclose your information required by the Law and a request is made by a legal authority. Other than this, we do not share any further information with any other companies. The transmission of information via the internet which is not encrypted can at any time result to unsecured data, therefore we cannot guarantee the security of this data and this will be at your own risk. Any relevant passwords related to your booking given to you by us, our partners or suppliers is solely your responsibility to keep this confidential. On a weekly note, we send you our Email Newsletter which consists of special travel offers, product update, competitions and forthcoming events. We use the email address you share with us for this newsletter and this is held on our secured database. If you do not wish to receive these newsletters, you may ask us in writing not to receive it or unsubscribe on the link provided on the Newsletter email. Your email address will automatically be removed from the list. As per our general policy, we monitor and record telephone calls, customer transactions and activities on our website to help improve our service and meet customer satisfaction. All recordings remain our sole property. In order to comply with the law & regulations, from time to time we update changes to our privacy policy which is reflected on this page. We highly suggest that you read this statement so that you are aware on how we use and gather information.",
+    "three": "COOKIES",
+    "threeTxt": "We use cookies which are small text files that are downloaded to your computer (or other electronic device) to help us improve our website, develop new methods and our services. Cookies enable us to gather information, track movement on our site, carry out research and statistical analysis and show details of online activity to help improve our content and services. Please be assured that we do not collect or store any of your passwords or sensitive data in this process."
   },
 
   "terms": {

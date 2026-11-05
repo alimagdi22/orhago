@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, from, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { AuthService } from 'rp-travel-ui';
 import { SharedService } from '../../shared/shared.service';
 
@@ -19,6 +20,20 @@ const GEO_FALLBACK_RESPONSE = new HttpResponse({ status: 200, body: GEO_FALLBACK
 const IPIFY_FALLBACK_RESPONSE = new HttpResponse({ status: 200, body: { ip: '197.54.32.31' } });
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
+  const router = inject(Router);
+  const wegoClickId = router.parseUrl(router.url).queryParams['wego_click_id'];
+  if (
+    typeof wegoClickId === 'string' &&
+    wegoClickId &&
+    req.url.includes('GetSelectedFlight') &&
+    !req.url.includes('wego_click_id=')
+  ) {
+    const separator = req.url.includes('?') ? '&' : '?';
+    req = req.clone({
+      url: `${req.url}${separator}wego_click_id=${encodeURIComponent(wegoClickId)}`,
+    });
+  }
+
   // Always pass static assets (i18n translations, images, icons) through immediately without intercepting
   if (req.url.includes('assets/')) {
     return next(req);

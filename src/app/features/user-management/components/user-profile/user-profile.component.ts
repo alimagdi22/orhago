@@ -4,6 +4,7 @@ import { IMainButton } from '../../../../shared/models/flights/mainButton.model'
 import { UserProfileService } from 'rp-travel-ui';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: false,
@@ -14,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class UserProfileComponent implements OnInit, OnDestroy {
   translate = inject(TranslateService);
   isChangePasswordShowed = false;
-
+  router = inject(Router);
   isPhoneNumberInvalid = false;
   CountryISO = CountryISO;
   genderOptions = ['Male', 'Female'];
@@ -138,6 +139,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   get getPasswordErrorMessage() {
     return this.userProfileService.getPasswordErrorMessage;
+  }
+
+  onNavigateToPrivacyPolicy() {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/privacy-policy'])
+    );
+    
+    window.open(url, '_blank');
   }
 
   ngOnDestroy(): void {

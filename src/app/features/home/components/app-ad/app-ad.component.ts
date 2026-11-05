@@ -18,7 +18,7 @@ export class AppAdComponent {
     return [
       'Enjoy more than ten practical features tailored exclusively for app users',
       'Discover our Explore page for popular Destinations, Weekend Getaways, Travel News and more.',
-      'Swift checkout process on the Travelo app with offline booking access, various discounts and password-less logins.',
+      'Swift checkout process on the Orhas app with offline booking access, various discounts and password-less logins.',
     ];
   }
 }

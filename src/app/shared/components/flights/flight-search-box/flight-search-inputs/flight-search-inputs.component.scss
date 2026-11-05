@@ -18,6 +18,14 @@
   gap: 15px;
 }
 
+.same-destination-error {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #c0392b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .dest,
 .calander,
 .cabin {
@@ -422,6 +430,10 @@ hr{
   grid-column: span 12;
   margin-top: 10px;
 
+  &--full .multi-city-footer {
+    grid-column: 6 / span 6;
+  }
+
   .add-flight-info {
     font-size: 12px;
     color: #393c43;
@@ -521,5 +533,9 @@ app-cabin-class {
     grid-column: auto;
     min-width: 0;
     line-height: 1.35;
+  }
+
+  .multi-city-action--full {
+    grid-template-areas: "passenger passenger";
   }
 }

@@ -115,16 +115,18 @@
           
         </ng-container>
       }
-      @if (flightType === 'multi-city' && flightSearchService.flightsArray.length < 4) {
-        <div class="multi-city-action">
-          <div class="add-flight-button">
-          <app-secondary-button
-            [title]="'+ ' + ('home.search.addFlight' | translate)"
-            [secondaryButtonInfo]="addFlightButton"
-            (clickSecondaryButton)="addFlight()"
-          />
-          </div>
-          <p class="add-flight-info">{{ 'home.search.addFlightNote' | translate }}</p>
+      @if (flightType === 'multi-city') {
+        <div class="multi-city-action" [class.multi-city-action--full]="flightSearchService.flightsArray.length >= 4">
+          @if (flightSearchService.flightsArray.length < 4) {
+            <div class="add-flight-button">
+            <app-secondary-button
+              [title]="'+ ' + ('home.search.addFlight' | translate)"
+              [secondaryButtonInfo]="addFlightButton"
+              (clickSecondaryButton)="addFlight()"
+            />
+            </div>
+            <p class="add-flight-info">{{ 'home.search.addFlightNote' | translate }}</p>
+          }
           @if (flightType === 'multi-city') {
             <div class="multi-city-footer">
               @if(sharedService.screenWidth <= 1200) {

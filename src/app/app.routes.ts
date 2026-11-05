@@ -43,7 +43,7 @@ export const routes: Routes = [
     component: PrivacyPolicyComponent,
   },
   {
-    path: 'terms-and-conditions',
+    path: 'terms',
     component: TermsAndConditionsComponent,
   },
   { path: 'hotels-results', loadChildren: () => import('./features/hotels/hotels-results/hotels-results.module').then(m => m.HotelsResultsModule) },

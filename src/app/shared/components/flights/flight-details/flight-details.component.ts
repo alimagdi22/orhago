@@ -1,6 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FlightResultService } from 'rp-travel-ui';
 import { SharedService } from '../../../shared.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: false,
@@ -11,6 +12,7 @@ import { SharedService } from '../../../shared.service';
 export class FlightDetailsComponent implements OnInit, OnDestroy {
   sharedService = inject(SharedService);
   flightResultService = inject(FlightResultService);
+  translate = inject(TranslateService);
 
   ngOnInit(): void {
     if (!this.sharedService.isSegmentPresent(['flight-checkout'])) {

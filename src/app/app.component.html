@@ -1,3 +1,9 @@
+@if (sharedService.isLoginLoading) {
+  <div class="login-page-loader">
+    <app-spinner-loader />
+  </div>
+}
+
 <app-navbar />
 
 <router-outlet />

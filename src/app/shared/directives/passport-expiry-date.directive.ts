@@ -12,10 +12,21 @@ export class PassportExpiryDateAdapter extends NativeDateAdapter {
     return super.format(date, displayFormat);
   }
 
+  constructor() {
+    super();
+    this.setLocale('en-US-u-nu-latn');
+  }
+
   override parse(value: string): Date | null {
     if (value) {
-      const [month, year] = value.split('/');
-      return new Date(+`20${year}`, +month - 1, 1);
+      const normalized = value.replace(/[٠-٩۰-۹]/g, (digit) => {
+        const arabic = '٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹';
+        return String(arabic.indexOf(digit) % 10);
+      });
+      const [month, year] = normalized.split('/');
+      const parsedYear = Number(String(year).replace(/\D/g, ''));
+      const fullYear = parsedYear < 100 ? 2000 + parsedYear : parsedYear;
+      return new Date(fullYear, Number(month) - 1, 1);
     }
     return null;
   }

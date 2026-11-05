@@ -1,4 +1,11 @@
 <main class="container wrapper">
+  @if (!loaded) {
+    <div class="cms-loader">
+      <mat-spinner diameter="48" />
+    </div>
+  } @else if (cmsHtml) {
+    <div class="cms-content" [innerHTML]="cmsHtml"></div>
+  } @else if (loaded) {
   <section class="row between gap-4 main-sec">
     <h1 class="col-12 col-lg-3">{{ 'about.title' | translate }}</h1>
 
@@ -88,4 +95,5 @@
     <h1>{{ 'about.visionTitle' | translate }}</h1>
     <p>{{ 'about.visionDescription' | translate }}</p>
   </section>
+  }
 </main>

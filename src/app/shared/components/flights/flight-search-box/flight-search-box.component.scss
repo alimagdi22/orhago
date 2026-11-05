@@ -11,11 +11,18 @@ form {
 
   @media (max-width:768px) {
     position: relative;
+    display: none;
   }
 
   &.ar{
     right: auto !important;
     left: 0;
+  }
+}
+
+.logo-container{
+  @media (max-width:768px) {
+    display: flex !important;
   }
 }
 

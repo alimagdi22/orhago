@@ -6,7 +6,7 @@
     <span class="airline__name">{{ flight.flightAirline.airlineName }}</span>
     @if (flightNo) {
       <span class="airline__meta">
-        {{ flightNo }}
+        {{ flightNo | arabicNumber }}
         @if (equipment) {
           <span class="airline__equip"> · {{ equipment }}</span>
         }

@@ -1,3 +1,15 @@
+.login-page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(2px);
+
+  ::ng-deep .loading-contanier {
+    height: 100%;
+  }
+}
+
 .flight-details-modal {
   width: 80%;
 }

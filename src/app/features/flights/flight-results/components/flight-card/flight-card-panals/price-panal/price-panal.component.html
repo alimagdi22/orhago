@@ -1,8 +1,8 @@
 <div class="price-panal">
   <div class="price-panal__copy">
     <p class="price-panal__price">
-      {{ airItinerary.itinTotalFare.currencyCode | exchange: 'code' }}
-      {{ airItinerary.itinTotalFare.amount | exchange: 'value' }}
+      {{ airItinerary.itinTotalFare.amount | exchange: 'value': airItinerary.itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
+      {{ airItinerary.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
     </p>
     @if (airItinerary.cabinClass) {
       <p class="price-panal__fare">{{ airItinerary.cabinClass }}</p>
