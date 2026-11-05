@@ -17,8 +17,11 @@ export class MobileViewDateInputComponent {
 
   departingDate: NgbDate = new NgbDate(1999, 1, 9);
   returnDate: NgbDate = new NgbDate(1999, 1, 9);
+  previousDate: NgbDate | null = null;
+  hoveredDate: NgbDate | null = null;
 
   minDepartingDate: NgbDate = new NgbDate(1999, 1, 9);
+  maxDate: NgbDate = new NgbDate(1999, 1, 9);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { isReturnDate: boolean; index: number; dismiss: Function; flightType: string }) {}
   
@@ -30,6 +33,12 @@ export class MobileViewDateInputComponent {
     this.returnDate = this.parseNgBootstrapDate(this.returnDate, returnDate, false);
 
     this.minDepartingDate = this.calendar.getToday();
+    this.maxDate = new NgbDate(this.minDepartingDate.year + 1, this.minDepartingDate.month, this.minDepartingDate.day);
+
+    if (this.data.flightType === 'multi-city' && this.data.index > 0) {
+      const previous = this.flightSearchService.flightsArray?.at(this.data.index - 1)?.get('departingD')?.value;
+      this.previousDate = previous ? this.parseNgBootstrapDate(new NgbDate(1999, 1, 9), previous, false) : null;
+    }
   }
 
   parseNgBootstrapDate(ngbDate: NgbDate, date: string, addDay: boolean) {
@@ -54,6 +63,7 @@ export class MobileViewDateInputComponent {
   }
 
   onDateSelection(date: NgbDate) {
+    if (this.isMobileDayDisabled(date)) return;
     if (this.data.isReturnDate && date.before(this.departingDate)) return;
 
     if (this.data.isReturnDate) {
@@ -96,5 +106,26 @@ export class MobileViewDateInputComponent {
 
   isInside(date: NgbDate) {
     return date.after(this.departingDate) && date.before(this.returnDate);
+  }
+
+  mobileMinDate(): NgbDate {
+    if (this.data.isReturnDate && !this.departingDate.before(this.minDepartingDate)) return this.departingDate;
+    if (this.data.flightType === 'multi-city' && this.previousDate && !this.previousDate.before(this.minDepartingDate)) {
+      return this.previousDate;
+    }
+    return this.minDepartingDate;
+  }
+
+  isMobileDayDisabled(date: NgbDate): boolean {
+    return date.after(this.maxDate) || date.before(this.mobileMinDate());
+  }
+
+  isPreviousSelected(date: NgbDate): boolean {
+    return !!this.previousDate && this.previousDate.equals(date);
+  }
+
+  isHoverRange(date: NgbDate): boolean {
+    if (!this.previousDate || !this.hoveredDate) return false;
+    return date.after(this.previousDate) && date.before(this.hoveredDate);
   }
 }

@@ -31,6 +31,7 @@ export class DateInputComponent implements OnChanges, OnInit {
   translate = inject(TranslateService);
   
   minDate = this.calendar.getToday();
+  maxDate = new NgbDate(this.minDate.year + 1, this.minDate.month, this.minDate.day);
   departDate: NgbDate | null = null;
   calendarStart: NgbDate = this.calendar.getToday();
 
@@ -56,8 +57,9 @@ export class DateInputComponent implements OnChanges, OnInit {
   }
 
   onCalendarOpened(): void {
-    if (!this.isReturnDateSelected || !this.departDate) return;
-    setTimeout(() => this.datePicker?.navigateTo(this.departDate!));
+    const target = this.calendarFocusDate();
+    if (!target) return;
+    setTimeout(() => this.datePicker?.navigateTo(target));
   }
   
   closeCalendar(e: Event) {
@@ -173,10 +175,57 @@ export class DateInputComponent implements OnChanges, OnInit {
     }
 
     isDayDisabled(date: NgbDate): boolean {
-      if (this.isReturnDateSelected && this.departDate) {
-        return date.before(this.departDate);
+      if (date.after(this.maxDate)) return true;
+      return date.before(this.pickerMinDate());
+    }
+
+    pickerMinDate(): NgbDate {
+      if (this.isReturnDateSelected && this.departDate && !this.departDate.before(this.minDate)) {
+        return this.departDate;
       }
-      return date.before(this.minDate);
+      if (this.flightType === 'multi-city' && this.index > 0) {
+        const previous = this.flightDateAt(this.index - 1);
+        if (previous && !previous.before(this.minDate)) return previous;
+      }
+      return this.minDate;
+    }
+
+    isCalendarFocused(date: NgbDate): boolean {
+      if (this.isReturnDateSelected) {
+        return this.isReturnSelected(date) || this.isDepartSelected(date, 0);
+      }
+
+      const ownSelected = this.isDepartSelected(date, this.index);
+      if (this.flightType === 'multi-city' && this.index > 0) {
+        return ownSelected || this.isDepartSelected(date, this.index - 1);
+      }
+      return ownSelected;
+    }
+
+    isHoverRange(date: NgbDate): boolean {
+      const anchor = this.hoverAnchor();
+      if (!anchor || !this.hoveredDate) return false;
+      return date.after(anchor) && date.before(this.hoveredDate);
+    }
+
+    calendarFocusDate(): NgbDate | null {
+      if (this.isReturnDateSelected) return this.departDate;
+      if (this.flightType === 'multi-city' && this.index > 0) {
+        return this.flightDateAt(this.index - 1);
+      }
+      return null;
+    }
+
+    private hoverAnchor(): NgbDate | null {
+      if (this.isReturnDateSelected) return this.departDate;
+      if (this.flightType === 'multi-city' && this.index > 0) {
+        return this.flightDateAt(this.index - 1);
+      }
+      return null;
+    }
+
+    private flightDateAt(index: number): NgbDate | null {
+      return this.generateCalendarDate(this.flightSearchService.flightsArray.at(index)?.get('departingD')?.value);
     }
 
     isHovered(date: NgbDate) {

@@ -13,6 +13,8 @@ export class UserLocationService {
   private readonly departingAirportSubject = new ReplaySubject<IAirPortTranslated>(1);
 
   readonly departingAirport$: Observable<IAirPortTranslated> = this.departingAirportSubject.asObservable();
+  /** IP city is written into the departure field once per app load. */
+  departingApplied = false;
 
   start(): void {
     if (this.started || !isPlatformBrowser(this.platformId)) return;

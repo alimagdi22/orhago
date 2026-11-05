@@ -64,8 +64,9 @@ class="calander"
       navigation="arrows"
       [dayTemplate]="calendarTemplate"
       outsideDays="hidden"
-      [startDate]="isReturnDateSelected ? calendarStart : null"
-      [minDate]="isReturnDateSelected ? departDate : minDate"
+      [startDate]="isReturnDateSelected ? calendarStart : (flightType === 'multi-city' && index > 0 ? calendarFocusDate() : null)"
+      [minDate]="pickerMinDate()"
+      [maxDate]="maxDate"
     />
 
     <ng-template #calendarTemplate let-date let-focused="focused" (click)="$event.stopPropagation()">
@@ -73,11 +74,11 @@ class="calander"
 
         class="custom-day"
         (click)="onDateSelection(date, index); isDayDisabled(date) ? $event.stopPropagation() : closeCalendar($event)"
-        [class.focused]="(isReturnDateSelected ? isReturnSelected(date) : false) || isDepartSelected(date, 0)"
-        [class.range]="isReturnDateSelected ? isRange(date) : false"
+        [class.focused]="isCalendarFocused(date)"
+        [class.range]="isHoverRange(date)"
         [class.faded]="isHovered(date)"
         [class.disabled]="isDayDisabled(date)"
-        (mouseenter)="hoveredDate = date"
+        (mouseenter)="isDayDisabled(date) ? null : hoveredDate = date"
         (mouseleave)="hoveredDate = null"
       >
         {{ date.day }}

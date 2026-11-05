@@ -62,7 +62,8 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.destination === 'departing' && this.index === 0) {
+    const restoredDeparting = this.destination === 'departing' && this.restoreSavedDeparting();
+    if (this.destination === 'departing' && this.index === 0 && !restoredDeparting) {
       this.applyLocationDeparting();
     }
 
@@ -129,10 +130,39 @@ export class DestInputComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  private restoreSavedDeparting(): boolean {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') return false;
+
+    try {
+      const airports = JSON.parse(localStorage.getItem(this.destination) ?? 'null') as (IAirPortTranslated & { _isCitySelection?: boolean })[] | null;
+      const cachedAirport = airports?.[this.index];
+      if (!cachedAirport?.[this.sharedService.lang]) return false;
+
+      this.onSelectDestintation(this.destination, cachedAirport, this.index, !!cachedAirport._isCitySelection, false);
+      if (this.index === 0) {
+        this.userLocationService.departingApplied = true;
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   private applyLocationDeparting(): void {
+    if (this.userLocationService.departingApplied) return;
+
     this.subscription.add(
       this.userLocationService.departingAirport$.pipe(take(1)).subscribe((airport) => {
+        if (this.userLocationService.departingApplied) return;
+
+        const current = String(this.flightItem.get(this.destination)?.value || '').trim();
+        if (current) {
+          this.userLocationService.departingApplied = true;
+          return;
+        }
         if (!this.sharedService.selectedDestions[this.index]) return;
+
+        this.userLocationService.departingApplied = true;
         this.onSelectDestintation(this.destination, airport, this.index, false, false);
       }),
     );
