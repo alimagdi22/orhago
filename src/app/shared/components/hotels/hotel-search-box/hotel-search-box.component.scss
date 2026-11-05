@@ -3,55 +3,28 @@
 }
 
 .hotel-search-container {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.3fr) minmax(0, 1fr) 180px;
-  align-items: start;
-  justify-content: center;
-  gap: 12px;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
   padding: 0;
   background: transparent;
 
-  ::ng-deep .location-group,
-  ::ng-deep .date-group .form-group,
-  ::ng-deep .selector-summary {
-    border: 1px solid #e0deec !important;
-    border-radius: 16px !important;
-    min-height: 76px;
-    height: 76px !important;
-    background: #ffffff;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-
-  ::ng-deep .location-group label,
-  ::ng-deep .date-group label,
-  ::ng-deep .selector-summary .head p {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    color: #646081 !important;
-    margin-bottom: 4px !important;
-  }
-
-  ::ng-deep .location-group input,
-  ::ng-deep .date-group .date-display,
-  ::ng-deep .selector-summary .summary-text {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    color: #1a191e;
-  }
-
   .search-field {
     position: relative;
+    display: block;
+    flex: 1 1 0;
     min-width: 0;
+
+    &:nth-child(2) {
+      flex: 2 1 0;
+    }
 
     app-location-input,
     app-hotel-date-input,
     app-guest-room-selector {
       display: block;
       width: 100%;
+      min-width: 0;
     }
   }
 
@@ -279,7 +252,22 @@
 
   .submit-group {
     display: flex;
-    align-self: center;
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: auto;
+    height: auto;
+
+    ::ng-deep .gradient-button {
+      height: auto !important;
+      min-height: 74px;
+      min-width: 148px;
+      padding: 0 28px !important;
+      border-radius: 12px !important;
+      font-family: 'Onest', sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      line-height: 1.2 !important;
+    }
 
     button {
       padding: 12px 20px;
@@ -310,7 +298,7 @@
     width: 100%;
     margin: 0;
     color: #ec1b1b;
-    font-family: Open Sans, sans-serif;
+    font-family: 'Onest', sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 1.3;
@@ -345,23 +333,6 @@
 }
 
 
-@media (min-width: 1001px) {
-  .hotel-search-container {
-    .search-field {
-      grid-row: 1;
-
-      &:nth-child(1) { grid-column: 1; }
-      &:nth-child(2) { grid-column: 2; }
-      &:nth-child(3) { grid-column: 3; }
-    }
-
-    .submit-group {
-      grid-column: 4;
-      grid-row: 1;
-    }
-  }
-}
-
 :host-context(html.dark) .hotel-search-container {
   ::ng-deep .location-group,
   ::ng-deep .date-group .form-group,
@@ -385,22 +356,33 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1199px) {
   .hotel-search-container {
-    grid-template-columns: minmax(0, 1fr);
+    flex-direction: column;
     width: 100%;
-    gap: 15px;
-    padding: 0 0 12px;
+    gap: 10px;
+    padding: 0;
+
+    .search-field,
+    .search-field:nth-child(2) {
+      flex: 1 1 auto;
+      width: 100%;
+    }
 
     .submit-group {
-      grid-column: 1;
-      grid-row: auto;
       width: 100%;
       height: auto;
 
       app-main-button {
         display: block;
         width: 100%;
+      }
+
+      ::ng-deep .gradient-button {
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 56px !important;
+        min-height: 56px !important;
       }
     }
 

@@ -16,12 +16,6 @@
             class="dest"
             [class.multi-city-sub-dest]="$index && flightType === 'multi-city'"
             [ngStyle]="{
-              borderColor:
-                isDepartingNotValid(i) ||
-                isLandingNotValid(i) ||
-                flightSearchService.flightsArray.at(i).errors?.['sameLocation']
-                  ? 'red'
-                  : '',
               gridColumn: flightType === 'multi-city' ? 'span 5' : 'span 4',
             }"
           >
@@ -30,6 +24,7 @@
               [flightItem]="item"
               [destination]="'departing'"
               class="col-5"
+              [class.is-invalid]="isDepartingNotValid(i)"
               (focusDestinationInput)="openlandingDestinationInput = openlandingDestinationInput + 1"
               (destinationTypeChange)="updateDestinationType($event)"
             />
@@ -47,6 +42,7 @@
               [focus]="openlandingDestinationInput"
               (focusDateInput)="openDepartingDateCalendar = openDepartingDateCalendar + 1"
               class="col-5"
+              [class.is-invalid]="isLandingNotValid(i)"
               (destinationTypeChange)="updateDestinationType($event)"
             />
           </section>
@@ -54,6 +50,7 @@
           <section
             class="calander"
             [class.multi-city-sub-calander]="$index && flightType === 'multi-city'"
+            [class.is-invalid]="isCalanderNotValid(i)"
             [ngStyle]="{ borderColor: isCalanderNotValid(i) ? 'red' : '' , gridColumn: flightType === 'multi-city' ? 'span 6' : 'span 4'}"
           >
             <app-date-input

@@ -83,3 +83,9 @@ form {
     background-color: #5029f4 !important;
   }
 }
+
+@media (max-width: 768px) {
+  ::ng-deep .radio-buttons .mat-mdc-radio-button .mdc-radio {
+    padding: 7% !important;
+  }
+}

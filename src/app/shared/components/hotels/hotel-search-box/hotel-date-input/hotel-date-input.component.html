@@ -2,16 +2,15 @@
   <!-- Check-in Date -->
   <div class="form-group checkin-group"
        [class.invalid]="checkInInvalid"
-       [ngStyle]="currentLang === 'en' ? {'border-radius': '10px 0 0 10px'} : {'border-radius': '0 10px 10px 0'}"
        [matMenuTriggerFor]="isMobile() ? null : dateMenu"
        (click)="openDatePicker('checkIn', $event)">
-    <label for="checkIn" [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
+    <label for="checkIn">
       {{ 'searchBox.checkIn' | translate }}
     </label>
 
     <div class="input-group">
       <div class="date-display">
-        {{ checkInControl.value | date:'d MMMM yyyy' }}
+        {{ checkInControl.value | date: 'EEE d MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
       </div>
     </div>
   </div>
@@ -19,16 +18,15 @@
   <!-- Check-out Date -->
   <div class="form-group checkout-group"
        [class.invalid]="checkOutInvalid"
-       [ngStyle]="currentLang === 'en' ? {'border-radius': '0 10px 10px 0'} : {'border-radius': '10px 0 0 10px'}"
        [matMenuTriggerFor]="isMobile() ? null : dateMenu"
        (click)="openDatePicker('checkOut', $event)">
-    <label for="checkOut" [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
+    <label for="checkOut">
       {{ 'searchBox.checkOut' | translate }}
     </label>
 
     <div class="input-group">
       <div class="date-display">
-        {{ checkOutControl.value | date:'d MMMM yyyy' }}
+        {{ checkOutControl.value | date: 'EEE d MMM' : undefined : translate.currentLang === 'ar' ? 'ar-EG' : 'en-US' }}
       </div>
     </div>
   </div>

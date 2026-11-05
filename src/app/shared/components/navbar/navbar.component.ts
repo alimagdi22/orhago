@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit {
 
   get isFlightsRoute(): boolean {
     const path = this.router.url.split('?')[0];
-    return path === '/' || path === '/flights';
+    return path === '/' || path === '/flights' || path.startsWith('/flight-results') || path.startsWith('/flight-fares');
   }
 
   get isHotelsRoute(): boolean {

@@ -28,9 +28,7 @@
         </span>
       </a>
 
-      @if (sharedService.isSegmentPresent(['flight-results'])) {
-        <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
-      } @else if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
+      @if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
         <app-hotel-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleHotelSearch()" />
       } @else if (sharedService.isSegmentPresent(['flight-checkout'])) {
         <app-checkout-steps [isScrolled]="isScrolled"/>

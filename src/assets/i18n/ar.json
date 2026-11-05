@@ -260,6 +260,27 @@
       "duration":"المدة الإجمالية",
       "transit": "وقت العبور"
 
+    },
+    "fares": {
+      "title": "اختر تعريفتك",
+      "subtitle": "كل التعريفات لنفس الرحلة. ما يتغير هو ما يشمله السعر فقط.",
+      "changeFlight": "تغيير الرحلة",
+      "pricesNote": "الأسعار بـ {{currency}}  ·  شاملة الضرائب",
+      "total": "الإجمالي",
+      "choose": "اختر {{name}}",
+      "recommended": "موصى به",
+      "empty": "لا توجد تعريفات لهذه الرحلة.",
+      "continue": "المتابعة إلى إتمام الحجز",
+      "cabinBag": "حقيبة المقصورة {{detail}}",
+      "noCabinBag": "بدون حقيبة مقصورة",
+      "checkedBag": "حقيبة مسجلة {{detail}}",
+      "noCheckedBag": "بدون حقيبة مسجلة",
+      "steps": {
+        "flight": "الرحلة",
+        "passengers": "المسافرون",
+        "extras": "الإضافات",
+        "payment": "الدفع"
+      }
     }
   },
 

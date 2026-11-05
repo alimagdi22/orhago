@@ -1,0 +1,120 @@
+<section class="stepper-bar">
+  <ol class="stepper">
+    <li class="is-current">
+      <span>1</span>
+      {{ 'results.fares.steps.flight' | translate }}
+    </li>
+    <li class="connector"></li>
+    <li>
+      <span>2</span>
+      {{ 'results.fares.steps.passengers' | translate }}
+    </li>
+    <li class="connector"></li>
+    <li>
+      <span>3</span>
+      {{ 'results.fares.steps.extras' | translate }}
+    </li>
+    <li class="connector"></li>
+    <li>
+      <span>4</span>
+      {{ 'results.fares.steps.payment' | translate }}
+    </li>
+  </ol>
+  <p class="stepper-bar__note">{{ 'results.fares.pricesNote' | translate: { currency: currencyCode | currencyLabel } }}</p>
+</section>
+
+<main class="fare-body">
+  @if (flight) {
+    <article class="selected-flight">
+      <span class="selected-flight__mark">{{ flight.airlineCode }}</span>
+      <div class="selected-flight__info">
+        <p>{{ flight.airlineName }}  ·  {{ flight.flightNo | arabicNumber }}</p>
+        <p>
+          {{ flight.departAt | date: 'EEE d MMM' : undefined : dateLocale }}
+          ·
+          {{ (flight.departAt | date: 'HH:mm' : undefined : dateLocale) | arabicNumber }}
+          {{ flight.departCode }}
+          →
+          {{ (flight.arriveAt | date: 'HH:mm' : undefined : dateLocale) | arabicNumber }}
+          {{ flight.arriveCode }}
+          ·
+          {{ durationLabel | arabicNumber }}
+          ·
+          @if (stopsKey) {
+            {{ stopsKey | translate }}
+          } @else {
+            {{ flight.stops | arabicNumber }} {{ 'results.filter.stops' | translate }}
+          }
+        </p>
+      </div>
+      <button type="button" (click)="changeFlight()">{{ 'results.fares.changeFlight' | translate }} ›</button>
+    </article>
+  }
+
+  <header class="fare-heading">
+    <h1>{{ 'results.fares.title' | translate }}</h1>
+    <p>{{ 'results.fares.subtitle' | translate }}</p>
+  </header>
+
+  @if (loading) {
+    <div class="fare-grid">
+      @for (slot of [1, 2, 3, 4]; track slot) {
+        <app-skeleton-loader height="341px" />
+      }
+    </div>
+  } @else if (empty) {
+    <div class="fare-empty">
+      <p>{{ 'results.fares.empty' | translate }}</p>
+      <button type="button" (click)="continueToCheckout()">{{ 'results.fares.continue' | translate }}</button>
+    </div>
+  } @else {
+    <div class="fare-scroller">
+      @if (canSlideFares) {
+        <button
+          type="button"
+          class="fare-arrow fare-arrow--prev"
+          (click)="scrollFares(-1)"
+          [disabled]="!canScrollPrev"
+          [attr.aria-label]="'checkout.previous' | translate"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M10 3.2 5.2 8 10 12.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      }
+      <div
+        class="fare-grid"
+        #fareTrack
+        [class.is-sliding]="canSlideFares"
+        [style.--fare-visible]="visibleCount"
+        (scroll)="onFareScroll()"
+        (pointerdown)="onFarePointerDown($event)"
+        (pointermove)="onFarePointerMove($event)"
+        (pointerup)="onFarePointerUp($event)"
+        (pointercancel)="onFarePointerUp($event)"
+      >
+        @for (brand of brands; track brand.brandId) {
+          <app-fare-option-card
+            [brand]="brand"
+            [sequenceNum]="sequenceNum"
+            [pcc]="pcc"
+            [providerKey]="providerKey"
+          />
+        }
+      </div>
+      @if (canSlideFares) {
+        <button
+          type="button"
+          class="fare-arrow fare-arrow--next"
+          (click)="scrollFares(1)"
+          [disabled]="!canScrollNext"
+          [attr.aria-label]="'checkout.next' | translate"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M6 3.2 10.8 8 6 12.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      }
+    </div>
+  }
+</main>

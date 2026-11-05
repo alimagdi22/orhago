@@ -262,6 +262,27 @@
       "select": "Select",
       "duration":"Total Duration",
       "transit": "Transit Time"
+    },
+    "fares": {
+      "title": "Choose your fare",
+      "subtitle": "All fares are for the same flight. Only what's included changes.",
+      "changeFlight": "Change flight",
+      "pricesNote": "Prices in {{currency}}  ·  incl. taxes",
+      "total": "total",
+      "choose": "Choose {{name}}",
+      "recommended": "Recommended",
+      "empty": "No fares are available for this flight.",
+      "continue": "Continue to checkout",
+      "cabinBag": "Cabin bag {{detail}}",
+      "noCabinBag": "No cabin bag",
+      "checkedBag": "Checked bag {{detail}}",
+      "noCheckedBag": "No checked bag",
+      "steps": {
+        "flight": "Flight",
+        "passengers": "Passengers",
+        "extras": "Extras",
+        "payment": "Payment"
+      }
     }
   },
 

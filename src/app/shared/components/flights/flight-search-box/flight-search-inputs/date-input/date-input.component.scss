@@ -3,9 +3,10 @@
 
 :host {
   display: flex;
+  position: relative;
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .calander {
@@ -16,7 +17,7 @@
 
   width: 100%;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
   height: 100%;
   box-sizing: border-box;
 

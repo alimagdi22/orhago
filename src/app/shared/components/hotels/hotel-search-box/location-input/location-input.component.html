@@ -5,16 +5,14 @@
      [class.mobile-clickable]="isMobile()">
 
   @if(searchForm.get('location')?.value) {
-    <button type="button" class="btn-close btn-close-white"
+    <button type="button" class="btn-close"
             [attr.aria-label]="'searchBox.close' | translate"
-            (click)="clearInput($event)"
-            [ngStyle]="currentLang==='ar'?{'left':'2%','right':'90%'}:{}">
+            (click)="clearInput($event)">
       <span>&times;</span>
     </button>
   }
 
-  <label for="location"
-         [ngStyle]="currentLang === 'en'?{'margin-left':'5px'}:{'margin-right':'5px'}">
+  <label for="location">
     {{ 'searchBox.Destination' | translate }}
   </label>
 

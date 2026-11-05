@@ -155,9 +155,59 @@
     line-height: 1.2 !important;
     white-space: nowrap;
   }
+
+  > .is-invalid app-date-input,
+  > .is-invalid .calander__to {
+    border-color: red;
+  }
+}
+
+.inputs-container:not(.inputs-container--trip) > .dest {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+
+  app-dest-input {
+    flex: 1 1 0;
+    width: auto !important;
+    max-width: none;
+    min-width: 0;
+    padding: 0 !important;
+    min-height: 74px;
+    display: flex;
+    border: 1px solid #8d89a3;
+    border-radius: 14px;
+    background: #fbfaff;
+  }
+
+  .dest__devider {
+    align-self: center;
+  }
+}
+
+app-dest-input.is-invalid {
+  border-color: red !important;
 }
 
 @media (max-width: 1199px) {
+  .inputs-container:not(.inputs-container--trip) > .dest {
+    flex-direction: column;
+    align-items: stretch;
+
+    .dest__devider {
+      display: none;
+    }
+
+    app-dest-input {
+      width: 100% !important;
+    }
+  }
+
   .inputs-container--trip {
     flex-direction: column;
     align-items: stretch;

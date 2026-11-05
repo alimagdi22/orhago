@@ -1,0 +1,129 @@
+:host {
+  display: flex;
+  min-width: 0;
+  height: auto;
+}
+
+.fare-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #eeecf6;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 3px rgba(21, 17, 63, 0.03),
+    0 4px 14px -3px rgba(21, 17, 63, 0.06);
+  font-family: 'Onest', sans-serif;
+  color: #1a191e;
+}
+
+.fare-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px 14px;
+
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.11px;
+  }
+}
+
+.fare-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+
+  strong {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.24px;
+  }
+
+  span {
+    color: #646081;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+}
+
+.fare-card__rule {
+  height: 1px;
+  background: #eeecf6;
+}
+
+.fare-card__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 0;
+  padding: 16px 20px 18px;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #4e4b66;
+  }
+
+  span {
+    flex: 0 0 auto;
+    color: #12a05c;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .is-off {
+    color: #646081;
+
+    span {
+      color: #646081;
+    }
+  }
+}
+
+button {
+  height: 48px;
+  margin: 0 20px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #5029f4;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+:host-context(html.dark) .fare-card {
+  background: #1a191e;
+  border-color: #2c2a3a;
+  color: #f7f4ff;
+
+  .fare-card__rule {
+    background: #2c2a3a;
+  }
+
+  .fare-card__price span,
+  .fare-card__lines .is-off {
+    color: #9a97ae;
+  }
+}

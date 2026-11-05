@@ -15,6 +15,11 @@ export const routes: Routes = [
       import('./features/flights/flight-results/flight-results.module').then((m) => m.FlightResultsModule),
   },
   {
+    path: 'flight-fares',
+    loadChildren: () =>
+      import('./features/flights/fare-selection/fare-selection.module').then((m) => m.FareSelectionModule),
+  },
+  {
     path: 'flight-checkout',
     loadChildren: () =>
       import('./features/flights/flight-checkout/flight-checkout.module').then((m) => m.FlightCheckoutModule),

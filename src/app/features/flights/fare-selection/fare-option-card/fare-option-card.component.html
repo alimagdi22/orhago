@@ -1,0 +1,27 @@
+<article class="fare-card">
+  <header class="fare-card__head">
+    <h2>{{ brand.brandName }}</h2>
+    <p class="fare-card__price">
+      <strong>
+        {{ brand.itinTotalFare.currencyCode | exchange: 'code' | currencyLabel }}
+        {{ brand.itinTotalFare.amount | exchange: 'value' : brand.itinTotalFare.currencyCode | number: '1.0-2' | arabicNumber }}
+      </strong>
+      <span>{{ 'results.fares.total' | translate }}</span>
+    </p>
+  </header>
+
+  <div class="fare-card__rule"></div>
+
+  <ul class="fare-card__lines">
+    @for (line of lines; track $index) {
+      <li [class.is-off]="!line.included">
+        <span>{{ line.included ? '✓' : '✕' }}</span>
+        <p>{{ line.key | translate: line.params }}</p>
+      </li>
+    }
+  </ul>
+
+  <button type="button" (pointerdown)="$event.stopPropagation()" (click)="choose()">
+    {{ 'results.fares.choose' | translate: { name: brand.brandName } }}
+  </button>
+</article>

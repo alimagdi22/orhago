@@ -3,9 +3,14 @@
 
 :host {
   display: flex;
+  position: relative;
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
+}
+
+:host:has(.error-message) {
+  z-index: 4;
 }
 
 .dest:hover {
@@ -33,7 +38,7 @@ img {
   cursor: text;
   width: 100%;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 
   height: 100%;
   box-sizing: border-box;
