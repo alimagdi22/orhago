@@ -12,10 +12,18 @@
   }
 }
 
+.container-fluid {
+  padding: 0;
+}
+
 .inputs-container {
   display: grid;
-  grid-template-columns: repeat(12,1fr);
-  gap: 15px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+}
+
+.inputs-container > section {
+  min-width: 0;
 }
 
 .same-destination-error {
@@ -29,78 +37,28 @@
 .dest,
 .calander,
 .cabin {
-  height: 85px;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  border: 1px solid #8D89A3;
-  background: #FBFAFF;
-  transition: all 0.2s;
-  border-radius: 16px;
-
-  &__devider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &__line {
-      display: none;
-    }
-
-    &__icon {
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-      &:active {
-        transform: scale(1);
-      }
-    }
-  }
-}
-
-.dest,
-.calander {
-  grid-column: span 4;
-  border: none;
-  background: transparent;
-  gap: 12px;
-  border-radius: 0;
-  align-items: center;
-}
-
-.dest app-dest-input,
-.calander app-date-input,
-.calander__to {
-  flex: 1 1 auto;
-  min-height: 87px;
-  width: auto !important;
-  max-width: none;
   min-width: 0;
-  min-width: 179px;
-  height: 87px;
   display: flex;
-  border: 1px solid #8D89A3;
-  border-radius: 16px;
-  background: #FBFAFF;
-  overflow: hidden;
+  align-items: stretch;
+  border: 1px solid #8d89a3;
+  background: #fbfaff;
+  border-radius: 14px;
+  height: 74px;
 }
 
 .dest__devider {
-  flex: 0 0 36px;
-  width: 36px;
-  height: 36px;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
   padding: 0;
   border: 1px solid #e0deec;
-  border-radius: 50%;
+  border-radius: 999px;
   background: #ffffff;
-  color: #1a191e;
+  color: #4e4b66;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
   cursor: pointer;
 
   svg {
@@ -111,6 +69,140 @@
 
 .calander__devider {
   display: none;
+}
+
+.inputs-container--trip {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+
+  > .dest,
+  > .calander {
+    display: contents;
+  }
+
+  app-dest-input,
+  app-date-input,
+  .calander__to {
+    flex: 1 1 0;
+    width: auto !important;
+    max-width: none;
+    padding: 0 !important;
+    min-width: 0;
+    height: auto;
+    min-height: 74px;
+    display: flex;
+    border: 1px solid #8d89a3;
+    border-radius: 14px;
+    background: #fbfaff;
+  }
+
+  .cabin,
+  .button {
+    flex: 0 0 auto;
+    height: auto;
+    align-self: stretch;
+    grid-column: auto;
+  }
+
+  .dest__devider {
+    align-self: center;
+  }
+
+  .cabin {
+    width: 170px;
+  }
+
+  .button {
+    display: flex;
+    align-items: stretch;
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .button app-main-button {
+    display: flex;
+    flex: 1 1 auto;
+    height: auto;
+  }
+
+  .button ::ng-deep .gradient-button {
+    flex: 1 1 auto;
+    align-self: stretch;
+    height: auto !important;
+    min-height: 74px;
+    width: auto !important;
+    min-width: 148px;
+    padding: 0 28px !important;
+    border-radius: 12px !important;
+    font-family: 'Onest', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button ::ng-deep .gradient-button span {
+    height: auto !important;
+    min-width: 0;
+    padding: 0 !important;
+    font-family: 'Onest', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1199px) {
+  .inputs-container--trip {
+    flex-direction: column;
+    align-items: stretch;
+
+    > .dest,
+    > .calander {
+      display: flex;
+      width: 100%;
+      height: auto;
+      border: 0;
+      background: transparent;
+      gap: 10px;
+    }
+
+    > .dest {
+      flex-direction: column;
+    }
+
+    .dest__devider {
+      display: none;
+    }
+
+    app-dest-input,
+    app-date-input,
+    .calander__to,
+    .cabin,
+    .button {
+      width: 100% !important;
+      flex: 1 1 auto;
+      height: auto;
+      min-height: 74px;
+    }
+
+    .button {
+      min-height: 0;
+    }
+
+    .button ::ng-deep .gradient-button {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 56px !important;
+      min-height: 56px !important;
+      flex: 1 1 auto;
+    }
+  }
 }
 
 :host-context(html.dark) {

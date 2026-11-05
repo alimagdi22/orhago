@@ -1,43 +1,64 @@
+:host {
+  display: block;
+  padding-bottom: 56px;
+}
+
 .section-head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin: 8px 0 18px;
+  margin: 0 0 20px;
   text-align: start;
 
   h2 {
     margin: 0;
     color: #1a191e;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Onest', sans-serif;
     font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.14px;
+    line-height: 1.2;
     text-align: start;
   }
 
   p {
-    max-width: 640px;
-    margin: 6px 0 0;
+    margin: 4px 0 0;
     color: #646081;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
-    line-height: 1.45;
+    font-family: 'Onest', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.55;
+    white-space: nowrap;
   }
 
   &__link {
     flex: 0 0 auto;
-    color: #5029f4;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #3f1fd1;
+    font-family: 'Onest', sans-serif;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 1.2;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   &__link-short {
     display: none;
   }
+}
+
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+app-flight-deals-card {
+  display: block;
+  min-width: 0;
+  height: 100%;
 }
 
 :host-context(html.dark) {
@@ -54,14 +75,28 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1100px) {
+  :host {
+    padding-bottom: 28px;
+  }
+
   .section-head {
+    margin-bottom: 14px;
+
     h2 {
-      font-size: 22px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.32;
     }
 
     p {
       display: none;
+    }
+
+    &__link {
+      font-size: 12px;
+      letter-spacing: 0.12px;
     }
 
     &__link-wide {
@@ -72,133 +107,9 @@
       display: inline;
     }
   }
-}
 
-h2 {
-  text-align: start;
-}
-
-.hide {
-  display: none;
-}
-
-swiper-slide {
-  display: flex;
-  height: auto;
-  align-items: stretch;
-}
-
-app-flight-deals-card {
-  display: block;
-  width: 100%;
-}
-
-.deals-swiper {
-  position: relative;
-}
-
-.deal-nav {
-  display: none;
-}
-
-swiper-container {
-  display: block;
-  padding-inline: 8px;
-}
-
-.deal-nav {
-  display: none;
-  position: absolute;
-  top: 50%;
-  z-index: 4;
-  width: 40px;
-  height: 40px;
-  margin: 0;
-  padding: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(33, 53, 103, 0.1);
-  background: rgba(255, 255, 255, 0.96);
-  color: #213567;
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.05),
-    0 8px 18px rgba(15, 23, 42, 0.1);
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transform: translateY(-50%);
-  transition:
-    background-color 0.22s ease,
-    color 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-
-  svg {
-    display: block;
-  }
-
-  &:hover:not(:disabled) {
-    background: #213567;
-    color: #ffffff;
-    border-color: #213567;
-    box-shadow: 0 10px 22px rgba(33, 53, 103, 0.28);
-    transform: translateY(-50%) scale(1.06);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(-50%) scale(0.96);
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(33, 53, 103, 0.35);
-    outline-offset: 2px;
-  }
-
-  &:disabled,
-  &.swiper-button-disabled {
-    opacity: 0.38;
-    cursor: default;
-    box-shadow: none;
-    background: rgba(255, 255, 255, 0.82);
-  }
-
-  &.swiper-button-lock {
-    display: none;
-  }
-}
-
-.deal-nav--prev {
-  inset-inline-start: -6px;
-}
-
-.deal-nav--next {
-  inset-inline-end: -6px;
-}
-
-:host-context([dir='rtl']) .deal-nav svg {
-  transform: scaleX(-1);
-  transform-origin: center;
-}
-
-@media (max-width: 768px) {
-  .deal-nav {
-    width: 34px;
-    height: 34px;
-  }
-
-  .deal-nav--prev {
-    inset-inline-start: 2px;
-  }
-
-  .deal-nav--next {
-    inset-inline-end: 2px;
-  }
-
-  .deal-nav {
-    display: none;
-  }
-
-  ::ng-deep .swiper-pagination-bullets {
-    display: none !important;
+  .route-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 }

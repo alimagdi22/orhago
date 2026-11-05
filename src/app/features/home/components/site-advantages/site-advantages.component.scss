@@ -2,6 +2,7 @@
 @import '../../../../../sass/colors';
 
 .advantage {
+  width: 100%;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -20,7 +21,8 @@
   }
 
   &__title {
-    font-weight: bold;
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
   }
 
   &__paragraph {
@@ -43,8 +45,14 @@
   display: none;
 }
 
+.advantages {
+  display: block;
+  width: 100%;
+}
+
 swiper-slide {
   display: flex;
   justify-content: center;
+  height: auto;
   margin-block: 25px;
 }

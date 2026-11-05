@@ -59,14 +59,19 @@ export class SiteAdvantagesComponent implements AfterViewInit {
       const swiper = this.swiperEl.nativeElement;
 
       Object.assign(swiper, {
+        slidesPerView: 3,
         spaceBetween: 20,
         pagination: { bulletClass: 'hide' },
         breakpoints: {
-          0: { slidesPerView: 1 }, // Mobile view (default)
-          768: { slidesPerView: 2 }, // Tablets
-          1024: { slidesPerView: 3 }, // Desktops
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
         },
       });
+
+      if (typeof swiper.initialize === 'function') {
+        swiper.initialize();
+      }
     }
   }
 

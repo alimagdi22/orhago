@@ -1,45 +1,15 @@
 <main>
   <section class="hero">
-    <div class="hero__panel">
+    <div class="hero__media">
+      <img class="hero__photo" src="assets/images/home/hero-istanbul.png" alt="" />
+      <div class="hero__scrim"></div>
+      <img class="hero__ribbon" src="assets/images/home/ribbon.svg" alt="" />
       <div class="hero__copy">
         <p class="hero__eyebrow">{{ 'home.heroEyebrow' | translate }}</p>
-        <h1>
-          <span>{{ 'home.heroTitle1' | translate }}</span>
-          <span>{{ 'home.heroTitle2' | translate }}</span>
-        </h1>
+        <h1>{{ 'home.heroTitle' | translate }}</h1>
         <p class="hero__subtitle">{{ 'home.heroSubtitle' | translate }}</p>
       </div>
-
-      <div class="hero__visual" aria-hidden="true">
-        <svg class="hero__mark" viewBox="0 0 320 320">
-          <path
-            d="M168 28c78 6 132 62 130 136-2 68-48 106-96 150-22 22-32 46-32 72"
-            fill="none"
-            stroke="white"
-            stroke-width="28"
-            stroke-linecap="round"
-          />
-          <path
-            d="M62 168c16-68 64-112 132-118"
-            fill="none"
-            stroke="white"
-            stroke-width="28"
-            stroke-linecap="round"
-          />
-          <circle cx="58" cy="186" r="22" fill="white" />
-        </svg>
-        <p class="hero__chip">{{ 'home.heroChip' | translate }}</p>
-      </div>
-
-      <svg class="hero__arc" viewBox="0 0 760 140" preserveAspectRatio="none" aria-hidden="true">
-        <path
-          d="M-20 118C140 18 360 8 560 78"
-          fill="none"
-          stroke="#ffba26"
-          stroke-width="22"
-          stroke-linecap="round"
-        />
-      </svg>
+      <p class="hero__chip">{{ 'home.heroChip' | translate }}</p>
     </div>
 
     @if (sharedService.isCitiesLoading) {

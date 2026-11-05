@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="2400" height="1400" viewBox="0 0 2400 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="stroke0_0_73" fill="white">
+<path d="M2400 700C2400 1086.6 1862.74 1400 1200 1400C537.258 1400 0 1086.6 0 700C0 313.401 537.258 0 1200 0C1862.74 0 2400 313.401 2400 700Z"/>
+</mask>
+<path id="ribbon" opacity="0.92" d="M2400 700C2400 1086.6 1862.74 1400 1200 1400C537.258 1400 0 1086.6 0 700C0 313.401 537.258 0 1200 0C1862.74 0 2400 313.401 2400 700Z" stroke-width="44" stroke="#FFAC00" mask="url(#stroke0_0_73)"/>
+</svg>

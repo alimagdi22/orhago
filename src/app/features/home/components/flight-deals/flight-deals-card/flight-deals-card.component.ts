@@ -51,7 +51,7 @@ export class FlightDealsCardComponent implements OnInit, OnChanges {
     const country = this.airportField('countryName');
     const duration = this.durationLabel;
     if (country && duration) {
-      return `${country} · ${duration}`;
+      return `${country}  ·  ${duration}`;
     }
     return country || duration;
   }

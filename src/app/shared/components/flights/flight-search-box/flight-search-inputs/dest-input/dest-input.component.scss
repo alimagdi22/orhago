@@ -1,6 +1,13 @@
 @import '../../../../../../../sass/variables';
 @import '../../../../../../../sass/colors';
 
+:host {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .dest:hover {
   .dest__placeholder__clear {
     visibility: visible;
@@ -22,20 +29,31 @@ img {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   cursor: text;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
 
   height: 100%;
   box-sizing: border-box;
 
-  padding: 8px 12px;
-  font-size: 14px;
-  padding-right: 10px;
+  padding: 12px 28px 12px 16px;
+  gap: 3px;
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  justify-content: center;
 
   &__country,
   &__date {
-    font-weight: 700;
-    font-size: 16px;
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #1a191e;
+    display: block;
+    width: 100%;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -48,38 +66,45 @@ img {
     align-items: center;
 
     span {
+      font-family: 'Onest', sans-serif;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      line-height: 1.2;
+      letter-spacing: 0.88px;
       text-transform: uppercase;
       color: #646081;
     }
 
     &__clear {
+      position: absolute;
+      top: 8px;
+      inset-inline-end: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid;
+      border: 1px solid #8d89a3;
       border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 16px;
-      visibility: hidden;
-      color: map-get($map: $colors, $key: 'secondary');
-      transition: all 0.1s;
+      width: 16px;
+      height: 16px;
+      font-size: 11px;
+      line-height: 1;
+      background: #ffffff;
+      visibility: visible;
+      color: #4e4b66;
       cursor: pointer;
-      position: relative;
-      z-index: 1;
-      &:hover {
-        transform: scale(1.4);
-      }
+      z-index: 2;
     }
   }
 
   &__airport-id {
-    font-size: 11px;
-    font-weight: 500;
-    color: #555;
+    font-family: 'Onest', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #646081;
+    display: block;
+    width: 100%;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -134,10 +159,17 @@ img {
   border: none;
   outline: none;
   padding: 0;
-  font-size: 13px;
-  color: #000;
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1a191e;
   background: transparent;
   width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:focus {
     box-shadow: none;

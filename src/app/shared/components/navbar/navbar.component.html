@@ -22,8 +22,10 @@
   <div class="wrapper" [class.shadow]="isScrolled">
     <nav class="site-header container">
       <a class="brand" routerLink="/" (click)="sharedService.scrollToTop()">
-        <ng-container *ngTemplateOutlet="brandMark" />
-        <span class="brand__name">Orhas</span>
+        <span class="brand__logo">
+          <img src="assets/images/home/logo-mark.svg" alt="" width="23" height="17" />
+          <img src="assets/images/home/logo-word.svg" alt="Orhas" width="39" height="11" />
+        </span>
       </a>
 
       @if (sharedService.isSegmentPresent(['flight-results'])) {
@@ -101,8 +103,10 @@
 <div class="mobile-nav-wrapper">
   <section class="top-nav">
     <a class="brand" routerLink="/" (click)="sharedService.scrollToTop()">
-      <ng-container *ngTemplateOutlet="brandMark" />
-      <span class="brand__name">Orhas</span>
+      <span class="brand__logo brand__logo--mobile">
+        <img src="assets/images/home/logo-mark.svg" alt="" width="21" height="16" />
+        <img src="assets/images/home/logo-word.svg" alt="Orhas" width="36" height="10" />
+      </span>
     </a>
 
     <div class="mobile-tools">

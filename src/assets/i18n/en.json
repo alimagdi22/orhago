@@ -92,10 +92,11 @@
   "home": {
     "bannarTitle": "Plan your imagination and book it",
     "heroEyebrow": "Flights · Hotels · Cars · Transfers",
-    "heroTitle1": "One search.",
-    "heroTitle2": "The whole journey.",
+    "heroTitle": "Go Boundless.",
+    "heroTitle1": "Go Boundless.",
+    "heroTitle2": "",
     "heroSubtitle": "Compare 450+ airlines, 1.4 million properties, chauffeur transfers and car hire — priced in your currency, booked in one checkout.",
-    "heroChip": "Istanbul · from AED 890",
+    "heroChip": "Istanbul  ·  from AED 890",
     "search": {
       "flights": "Flights",
       "hotels": "Hotels",
@@ -164,8 +165,8 @@
       "scanToDownload": "Scan to download"
     },
     "flightDeals": {
-      "title": "The best Flight deals",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler",
+      "title": "Popular from Dubai",
+      "description": "Live fares, updated continuously",
       "book": "Book"
     },
     "hotelDeals": {

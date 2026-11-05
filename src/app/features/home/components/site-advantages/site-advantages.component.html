@@ -1,4 +1,4 @@
-<swiper-container #swiperEl class="wrapper row center gap-4">
+<swiper-container #swiperEl class="advantages" init="false" [dir]="lang === 'ar' ? 'rtl' : 'ltr'">
   @for (card of cards; track $index) {
     <swiper-slide>
       <div class="advantage">

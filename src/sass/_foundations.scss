@@ -8,8 +8,8 @@
 //   still carry family and weight, and size only when the number before the
 //   slash was fully visible.
 
-$font-display: 'Bricolage Grotesque', sans-serif;
-$font-body: 'Plus Jakarta Sans', sans-serif;
+$font-display: 'Onest', sans-serif;
+$font-body: 'Onest', sans-serif;
 
 // Violet is the primary scale. Starred brand steps: 50, 300, 500, 900.
 $violet: (
@@ -34,7 +34,7 @@ $amber: (
   50: #fff6e0,
   100: #ffe9b8,
   200: #ffd980,
-  300: #ffcb4d,
+  300: #ffc84d,
   400: #ffba26,
   500: #ffac00,
   // Amber Glow
@@ -59,33 +59,33 @@ $neutral: (
   0: #ffffff,
   25: #fbfaff,
   50: #f7f6fc,
-  100: #eeecf7,
+  100: #eeecf6,
   200: #e0deec,
   300: #c7c4d8,
   400: #9a97ae,
   450: #8d89a3,
   500: #646081,
   // Slate Violet
-  600: #4e4866,
+  600: #4e4b66,
   700: #38364b,
 );
 
 // Semantic captions were cropped. These are the chip colours.
 $semantic-green: (
-  50: #e8f7f0,
-  500: #13a05c,
+  50: #e8f7ef,
+  500: #12a05c,
   600: #0b7a45,
 );
 
 $semantic-warning: (
   50: #fff4e0,
-  500: #8e6000,
+  500: #8f6000,
 );
 
 $semantic-red: (
-  50: #fcecec,
-  500: #df3130,
-  600: #b02626,
+  50: #fdecec,
+  500: #e03131,
+  600: #b02525,
 );
 
 $foundation-colors: (
@@ -124,108 +124,23 @@ $color-slate-violet: map-get($neutral, 500);
 
 // size is font-size. line-height is the board's percentage when it was fully visible.
 $type-styles: (
-  'display-xl': (
-    family: $font-display,
-    weight: 800,
-    size: null,
-    line-height: null,
-  ),
-  'display-l': (
-    family: $font-display,
-    weight: 800,
-    size: null,
-    line-height: null,
-  ),
-  'display-m': (
-    family: $font-display,
-    weight: 700,
-    size: 36px,
-    line-height: null,
-  ),
-  'heading-l': (
-    family: $font-display,
-    weight: 700,
-    size: 28px,
-    line-height: null,
-  ),
-  'heading-m': (
-    family: $font-display,
-    weight: 600,
-    size: null,
-    line-height: null,
-  ),
-  'heading-s': (
-    family: $font-display,
-    weight: 600,
-    size: null,
-    line-height: null,
-  ),
-  'body-l': (
-    family: $font-body,
-    weight: 400,
-    size: 17px,
-    line-height: null,
-  ),
-  'body-m': (
-    family: $font-body,
-    weight: 400,
-    size: 15px,
-    line-height: null,
-  ),
-  'body-s': (
-    family: $font-body,
-    weight: 400,
-    size: 13px,
-    line-height: null,
-  ),
-  'label-l': (
-    family: $font-body,
-    weight: 600,
-    size: 15px,
-    line-height: null,
-  ),
-  'label-m': (
-    family: $font-body,
-    weight: 600,
-    size: 14px,
-    line-height: null,
-  ),
-  'label-s': (
-    family: $font-body,
-    weight: 600,
-    size: 12px,
-    line-height: null,
-  ),
-  'overline': (
-    family: $font-body,
-    weight: 700,
-    size: 11px,
-    line-height: 120%,
-  ),
-  'price-xl': (
-    family: $font-body,
-    weight: 700,
-    size: 32px,
-    line-height: 110%,
-  ),
-  'price-l': (
-    family: $font-body,
-    weight: 700,
-    size: 24px,
-    line-height: 114.9%,
-  ),
-  'price-m': (
-    family: $font-body,
-    weight: 700,
-    size: 18px,
-    line-height: 120%,
-  ),
-  'price-strike': (
-    family: $font-body,
-    weight: 500,
-    size: 14px,
-    line-height: null,
-  ),
+  'display-xl': (family: $font-display, weight: 900, size: 64px, line-height: 1.02, tracking: -0.02em),
+  'display-l': (family: $font-display, weight: 800, size: 48px, line-height: 1.04, tracking: 0),
+  'display-m': (family: $font-display, weight: 700, size: 36px, line-height: 1.1, tracking: -0.01em),
+  'heading-l': (family: $font-display, weight: 700, size: 28px, line-height: 1.2, tracking: -0.005em),
+  'heading-m': (family: $font-display, weight: 600, size: 22px, line-height: 1.28, tracking: -0.005em),
+  'heading-s': (family: $font-display, weight: 600, size: 18px, line-height: 1.32, tracking: 0),
+  'body-l': (family: $font-body, weight: 400, size: 17px, line-height: 1.55, tracking: 0),
+  'body-m': (family: $font-body, weight: 400, size: 15px, line-height: 1.55, tracking: 0),
+  'body-s': (family: $font-body, weight: 400, size: 13px, line-height: 1.5, tracking: 0),
+  'label-l': (family: $font-body, weight: 600, size: 15px, line-height: 1.2, tracking: 0),
+  'label-m': (family: $font-body, weight: 600, size: 14px, line-height: 1.2, tracking: 0),
+  'label-s': (family: $font-body, weight: 600, size: 12px, line-height: 1.2, tracking: 0.01em),
+  'overline': (family: $font-body, weight: 700, size: 11px, line-height: 1.2, tracking: 0.08em),
+  'price-xl': (family: $font-body, weight: 700, size: 32px, line-height: 1.1, tracking: 0),
+  'price-l': (family: $font-body, weight: 700, size: 24px, line-height: 1.15, tracking: 0),
+  'price-m': (family: $font-body, weight: 700, size: 18px, line-height: 1.2, tracking: -0.005em),
+  'price-strike': (family: $font-body, weight: 500, size: 14px, line-height: 1.2, tracking: 0),
 );
 
 @mixin type($name) {
@@ -247,6 +162,11 @@ $type-styles: (
   @if $leading != null {
     line-height: $leading;
   }
+
+  $tracking: map-get($style, tracking);
+  @if $tracking != null {
+    letter-spacing: $tracking;
+  }
 }
 
 // Board labels: xs 6, sm 10, md 14, lg 20, xl 28, pill full.
@@ -266,8 +186,23 @@ $radius: (
   'pill': $radius-pill,
 );
 
-// card, raised, popover, modal. Numeric shadows are not on the board.
-$elevation-levels: 'card', 'raised', 'popover', 'modal';
+$elevation-card: 0 1px 3px rgba(21, 17, 63, 0.03), 0 4px 14px -3px rgba(21, 17, 63, 0.06);
+$elevation-popover: 0 4px 10px -2px rgba(21, 17, 63, 0.04), 0 22px 52px -10px rgba(21, 17, 63, 0.12);
+
+$bg-page: #fbfaff;
+$bg-surface: #ffffff;
+$bg-brand-subtle: #f4f2ff;
+$text-primary: #1a191e;
+$text-secondary: #4e4b66;
+$text-muted: #646081;
+$text-brand: #3f1fd1;
+$text-inverse: #ffffff;
+$action-primary: #5029f4;
+$action-dark: #1a191e;
+$border-subtle: #eeecf6;
+$border-default: #e0deec;
+$border-strong: #c7c4d8;
+$border-input: #8d89a3;
 
 @mixin foundation-custom-properties {
   @each $group, $scale in $foundation-colors {
@@ -290,4 +225,21 @@ $elevation-levels: 'card', 'raised', 'popover', 'modal';
   @each $name, $value in $radius {
     --radius-#{$name}: #{$value};
   }
+
+  --bg-page: #{$bg-page};
+  --bg-surface: #{$bg-surface};
+  --bg-brand-subtle: #{$bg-brand-subtle};
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-muted: #{$text-muted};
+  --text-brand: #{$text-brand};
+  --text-inverse: #{$text-inverse};
+  --action-primary: #{$action-primary};
+  --action-dark: #{$action-dark};
+  --border-subtle: #{$border-subtle};
+  --border-default: #{$border-default};
+  --border-strong: #{$border-strong};
+  --border-input: #{$border-input};
+  --elevation-card: #{$elevation-card};
+  --elevation-popover: #{$elevation-popover};
 }

@@ -34,27 +34,39 @@ form {
   margin-top: -7px;
 }
 
+.flight-fields {
+  margin: 0;
+}
+
 .radio-buttons {
   display: flex;
-  margin-bottom: 14px;
-  gap: 18px;
-
-  font-size: 16px;
+  align-items: center;
+  margin: 10px 4px 14px;
+  gap: 22px;
+  font-family: 'Onest', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
   text-wrap: nowrap;
-  text-overflow: ellipsis;
 
   @media (max-width: 1200px) {
     flex-wrap: wrap;
     justify-content: flex-start;
-    font-size: 14px;
     gap: 8px 16px;
   }
 }
 
-::ng-deep .mdc-form-field > label {
-  margin-inline-start: 2px !important;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  color: #3a3850;
+::ng-deep .radio-buttons .mdc-label {
+  margin-inline-start: 8px !important;
+  font-family: 'Onest', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  color: #4e4b66 !important;
+}
+
+::ng-deep .radio-buttons .mat-mdc-radio-checked .mdc-label {
+  color: #1a191e !important;
 }
 
 ::ng-deep .radio-buttons {

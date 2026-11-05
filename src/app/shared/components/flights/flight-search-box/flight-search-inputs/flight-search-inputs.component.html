@@ -1,5 +1,5 @@
 <div class="container-fluid" [formGroup]="flightSearchService.searchFlight">
-  <div class="inputs-container">
+  <div class="inputs-container" [class.inputs-container--trip]="flightType !== 'multi-city'">
     <ng-container formArrayName="Flights">
       @for (
         item of flightType === 'multi-city'

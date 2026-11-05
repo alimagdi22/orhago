@@ -1,17 +1,30 @@
 @import '../../../../../../../sass/variables';
 @import '../../../../../../../sass/colors';
 
+:host {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .calander {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
   height: 100%;
   box-sizing: border-box;
 
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 12px 16px;
+  gap: 3px;
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  justify-content: center;
 
   cursor: pointer;
 
@@ -19,17 +32,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Onest', sans-serif;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    line-height: 1.2;
+    letter-spacing: 0.88px;
     text-transform: uppercase;
     color: #646081;
     margin-bottom: 0 !important;
   }
 
   &__date {
-    font-weight: 700;
-    font-size: 16px;
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #1a191e;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
