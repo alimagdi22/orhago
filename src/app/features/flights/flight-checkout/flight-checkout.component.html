@@ -1,7 +1,23 @@
 @if (flightCheckoutService.loader || flightResultService.isBrandedFaresLoading) {
   <app-spinner-loader />
 } @else {
-  <div class="container margin-bottom">
+  <section class="checkout-stepper" aria-label="Checkout">
+    <ol class="stepper">
+      @for (step of checkoutStepsView; track step.key; let index = $index) {
+        @if (index > 0) {
+          <li class="connector" [class.is-done]="flowStep + 1 > index" aria-hidden="true"></li>
+        }
+        <li class="step" [class.is-current]="flowStep + 1 === index" [class.is-done]="flowStep + 1 > index">
+          <span>{{ flowStep + 1 > index ? '✓' : index + 1 }}</span>
+          {{ step.key | translate }}
+        </li>
+      }
+    </ol>
+    <p>{{ 'checkout.encrypted' | translate }}</p>
+  </section>
+
+  <div class="checkout-page">
+    <div class="checkout-main">
     <app-flight-info />
     @if (wegoClickId && !sharedService.wegoBrandSelected && flightResultService.currentSelectedBrands.length) {
       <div id="checkout-branded-fares" class="checkout-branded-fares">
@@ -13,16 +29,20 @@
     }
     <!-- <app-checkout-steps [id]="0" /> -->
 
-    @if (!sharedService.showPayment) {
+    @if (sharedService.checkoutSteps === 0) {
+      <header class="checkout-heading">
+        <h2>{{ 'checkout.whoTravelling' | translate }}</h2>
+        <p>{{ 'checkout.whoTravellingNote' | translate }}</p>
+      </header>
       <ng-container [formGroup]="flightCheckoutService.usersForm">
         <ng-container formArrayName="users">
+          <div class="contact-block">
           @for (user of flightCheckoutService.usersArray.controls | slice: 0 : 1; track $index; let i = $index) {
-            <h3 class="col-12 mt-5">{{ 'checkout.contactInfo' | translate }}</h3>
-
             <ng-container [formGroupName]="i">
-              <div class="custom-radio-group" id="checkout-contact-group">
+              <div class="custom-radio-group contact-card" id="checkout-contact-group">
+                <h3 class="section-title">{{ 'checkout.contactDetails' | translate }}</h3>
                 <div>
-                  <label>{{ 'checkout.contactNumber' | translate }}</label>
+                  <label>{{ 'checkout.mobile' | translate }}</label>
 
                   @if (sharedService.checkoutSteps >= 1) {
                     <div class="custom-input-container">
@@ -63,7 +83,7 @@
                 <div>
                   <label>{{ 'checkout.gmail' | translate }}</label>
                   <div
-                    class="custom-input-container"
+                    class="custom-input-container p-0"
                     [ngStyle]="{ borderColor: user.get('email')?.invalid && user.get('email')?.touched ? 'red' : '' }"
                   >
                     <span class="input-icon">
@@ -77,6 +97,7 @@
                         title="Email"
                         [placeholder]="'checkout.email' | translate"
                         formControlName="email"
+                        class="email-input"
                       />
                     }
                   </div>
@@ -104,29 +125,40 @@
               </div>
             </ng-container>
           }
+          </div>
 
+          <div class="passenger-block">
           @for (user of flightCheckoutService.usersArray.controls; track $index; let i = $index) {
-            <div class="expansion-container">
-              <app-expansion-panel
-                [title]="
-                  ('checkout.' + sharedService.getPassengerTypeName(user.value.PassengerType) | translate) + ' ' + getPassengerNumber(i)
-                "
-                [id]="i"
-              >
+            <div class="passenger-card" [id]="i">
+              <div class="passenger-card__head">
+                <h3>
+                  {{ ('checkout.' + sharedService.getPassengerTypeName(user.value.PassengerType) | translate) + ' ' + getPassengerNumber(i) }}
+                </h3>
+                @if (i === 0) {
+                  <span>{{ 'checkout.leadPassenger' | translate }}</span>
+                }
+              </div>
                 @if (sharedService.checkoutSteps === 0) {
                   <ng-container [formGroupName]="i">
-                    <div class="custom-radio-group">
-                      <label
-                        *ngFor="let option of genderOptions"
-                        class="radio-btn"
-                        [ngStyle]="{ borderColor: isInputValid(user, 'title') ? 'red' : '' }"
-                      >
-                        <input type="radio" [value]="option" formControlName="title" />
-                        {{ 'checkout.' + option | translate }}
-                      </label>
+                    <div class="passenger-fields">
+                      <div class="field-row">
+                      <div class="field title-field">
+                        <label>{{ 'checkout.fieldTitle' | translate }}</label>
+                        <div
+                          class="custom-input-container"
+                          [ngStyle]="{ borderColor: isInputValid(user, 'title') ? 'red' : '' }"
+                        >
+                          <select formControlName="title">
+                            <option value="" disabled>{{ 'checkout.fieldTitle' | translate }}</option>
+                            <option *ngFor="let option of genderOptions" [value]="option">
+                              {{ 'checkout.' + option | translate }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
 
-                      <div>
-                        <label>{{ 'checkout.firstName' | translate }}</label>
+                      <div class="field first-field">
+                        <label>{{ 'checkout.firstMiddle' | translate }}</label>
 
                         <div
                           class="custom-input-container"
@@ -160,7 +192,7 @@
                         }
                       </div>
 
-                      <div>
+                      <div class="field last-field">
                         <label>{{ 'checkout.lastName' | translate }}</label>
 
                         <div
@@ -191,7 +223,7 @@
                         }
                       </div>
 
-                      <div>
+                      <div class="field dob-field">
                         <label>{{ 'checkout.dateOfBirth' | translate }}</label>
                         <div
                           class="custom-input-container"
@@ -242,7 +274,7 @@
                         }
                       </div>
 
-                      <div>
+                      <div class="field passport-field">
                         <label>{{ 'checkout.passportNumber' | translate }}</label>
 
                         <div
@@ -251,7 +283,7 @@
                         >
                           <input
                             type="text"
-                            [placeholder]="'checkout.passportNumber' | translate"
+                            [placeholder]="'checkout.passportPlaceholder' | translate"
                             formControlName="PassportNumber"
                           />
                         </div>
@@ -289,8 +321,8 @@
                         </mat-option>
                       </mat-autocomplete>
 
-                      <div>
-                        <label>{{ 'checkout.country' | translate }}</label>
+                      <div class="field country-field">
+                        <label>{{ 'checkout.nationality' | translate }}</label>
 
                         <div
                           class="custom-input-container"
@@ -337,7 +369,7 @@
                           </p>
                         }
                       </div>
-                      <div>
+                      <div class="field expiry-field">
                         <label>{{ 'checkout.passportExpiry' | translate }}</label>
                         <div
                           class="custom-input-container"
@@ -347,7 +379,7 @@
                           <input
                             matInput
                             [matDatepicker]="passportExpiryPicker"
-                            placeholder="MM/YY"
+                            [placeholder]="'checkout.expiryPlaceholder' | translate"
                             (click)="passportExpiryPicker.open()"
                             formControlName="PassportExpiry"
                             readonly
@@ -382,6 +414,7 @@
                             Error Message Placeholder
                           </p>
                         }
+                      </div>
                       </div>
                     </div>
                   </ng-container>
@@ -467,45 +500,111 @@
                             title="Passport Expiry Date"
                             disabled
                           />
-                        </div>
-                      </div>
-                    </div>
-                  </ng-container>
-                }
-              </app-expansion-panel>
-            </div>
+                  </div>
+                </div>
+                <p class="contact-note">{{ 'checkout.contactNote' | translate }}</p>
+              </div>
+            </ng-container>
           }
+          </div>
+          }
+          </div>
         </ng-container>
       </ng-container>
+    }
+
+    @if (sharedService.checkoutSteps === 1) {
+      <section class="extras">
+        <header>
+          <h2>{{ 'checkout.extrasTitle' | translate }}</h2>
+          <p>{{ 'checkout.extrasSubtitle' | translate }}</p>
+        </header>
+        @if (flightCheckoutService.organizedOfllineServices.length) {
+          @for (service of flightCheckoutService.organizedOfllineServices; track service.serviceCode) {
+            <article class="extra-card" [class.is-added]="isServiceAdded(service)">
+              <div class="extra-card__copy">
+                @if (service.recommended) {
+                  <span class="extra-card__badge">{{ 'checkout.recommended' | translate }}</span>
+                }
+                <h3>{{ serviceName(service) }}</h3>
+                @if (serviceDescription(service)) {
+                  <p>{{ serviceDescription(service) }}</p>
+                }
+              </div>
+              <div class="extra-card__action">
+                <strong>
+                  {{ service.servicePrice | exchange: 'value' : service.currency | number: '1.0-2' | arabicNumber }}
+                  {{ service.currency | exchange: 'code' | currencyLabel }}
+                </strong>
+                <button type="button" (click)="toggleService(service)">
+                  {{ (isServiceAdded(service) ? 'checkout.added' : 'checkout.add') | translate }}
+                </button>
+              </div>
+            </article>
+          }
+        } @else {
+          <p class="extras__empty">{{ 'checkout.noExtras' | translate }}</p>
+        }
+      </section>
     }
 
     @if (sharedService.checkoutSteps >= 2) {
       <app-payment-method [brandedFareId]="sharedService.selectedBrandFareId || brandedFareId" />
     }
+    </div>
 
-    @if (sharedService.checkoutSteps === 1 && !sharedService.showPayment) {
-      <div class="navigation-btns">
-        <app-secondary-button
-          [title]="'checkout.previous' | translate"
-          [secondaryButtonInfo]="previousButton"
-          (clickSecondaryButton)="sharedService.goToPreviousCheckoutStep()"
-          [ngStyle]="{
-            visibility: sharedService.checkoutSteps === 1 ? 'visible' : 'hidden',
-          }"
-        />
-        <app-main-button
-          [title]="'checkout.next' | translate"
-          [mainButtonInfo]="nextButton"
-          (clickMainButton)="onClickNext()"
-          [isLoading]="flightCheckoutService.saveBookingLoadeer || sharedService.isIframeLoading"
-        />
+    <aside class="trip-summary">
+      <h2>{{ 'checkout.yourTrip' | translate }}</h2>
+      @if (selectedItinerary) {
+        <div class="trip-summary__route">
+          <p>
+            {{ selectedItinerary.allJourney?.flights?.[0]?.flightDTO?.[0]?.departureTerminalAirport?.cityName }}
+            →
+            {{ selectedItinerary.allJourney?.flights?.[0]?.flightDTO?.[selectedItinerary.allJourney?.flights?.[0]?.flightDTO?.length - 1]?.arrivalTerminalAirport?.cityName }}
+          </p>
+          @if (selectedBrandName || adultCount) {
+            <p>
+              @if (selectedBrandName) { {{ selectedBrandName }} }
+              @if (selectedBrandName && adultCount) { · }
+              @if (adultCount) { {{ adultCount }} {{ 'checkout.Adult' | translate }} }
+            </p>
+          }
+        </div>
+      }
+      <div class="trip-summary__rule"></div>
+      <div class="trip-summary__line">
+        <span>{{ 'checkout.baseFare' | translate }}</span>
+        <span>{{ tripBase | exchange: 'value' : tripCurrency | number: '1.0-2' | arabicNumber }} {{ tripCurrency | exchange: 'code' | currencyLabel }}</span>
       </div>
-    }
+      @if (tripTaxes > 0) {
+        <div class="trip-summary__line">
+          <span>{{ 'checkout.taxes' | translate }}</span>
+          <span>{{ tripTaxes | exchange: 'value' : tripCurrency | number: '1.0-2' | arabicNumber }} {{ tripCurrency | exchange: 'code' | currencyLabel }}</span>
+        </div>
+      }
+      @for (service of flightCheckoutService.organizedOfllineServices; track service.serviceCode) {
+        @if (isServiceAdded(service)) {
+          <div class="trip-summary__line">
+            <span>{{ serviceName(service) }}</span>
+            <span>{{ service.servicePrice | exchange: 'value' : service.currency | number: '1.0-2' | arabicNumber }} {{ service.currency | exchange: 'code' | currencyLabel }}</span>
+          </div>
+        }
+      }
+      <div class="trip-summary__rule"></div>
+      <div class="trip-summary__total">
+        <span>{{ 'checkout.total' | translate }}</span>
+        <strong>{{ tripTotal | exchange: 'value' : tripCurrency | number: '1.0-2' | arabicNumber }} {{ tripCurrency | exchange: 'code' | currencyLabel }}</strong>
+      </div>
+      @if (flowStep === 0) {
+        <button type="button" class="trip-summary__continue" (click)="continuePassengers()">{{ 'checkout.continue' | translate }}</button>
+      } @else if (flowStep === 1) {
+        <button type="button" class="trip-summary__back" (click)="previousStep()">{{ 'checkout.previous' | translate }}</button>
+        <button type="button" class="trip-summary__continue" (click)="continueExtras()">{{ 'checkout.continueToPayment' | translate }}</button>
+      } @else {
+        <button type="button" class="trip-summary__back" (click)="previousStep()">{{ 'checkout.previous' | translate }}</button>
+      }
+    </aside>
   </div>
-}
-
-@if (sharedService.checkoutSteps < 1) {
-  <app-checkout-footer (choseService)="checkPhoneNumberValidation()" />
 }
 
 @if (sharedService.isPaymentModalShowed || flightCheckoutService.paymentError) {

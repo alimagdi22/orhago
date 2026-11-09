@@ -49,7 +49,6 @@ export class NavbarComponent implements OnInit {
   subscription = new Subscription();
 
   private readonly productNavHiddenOn = [
-    'flight-checkout',
     'flight-confirmation',
     'hotels-results',
     'hotel-results',
@@ -67,7 +66,7 @@ export class NavbarComponent implements OnInit {
 
   get isFlightsRoute(): boolean {
     const path = this.router.url.split('?')[0];
-    return path === '/' || path === '/flights' || path.startsWith('/flight-results') || path.startsWith('/flight-fares');
+    return path === '/' || path === '/flights' || path.startsWith('/flight-results') || path.startsWith('/flight-fares') || path.startsWith('/flight-checkout');
   }
 
   get isHotelsRoute(): boolean {

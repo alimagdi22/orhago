@@ -30,8 +30,6 @@
 
       @if (sharedService.isSegmentPresent(['hotels-results', 'hotel-results'])) {
         <app-hotel-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleHotelSearch()" />
-      } @else if (sharedService.isSegmentPresent(['flight-checkout'])) {
-        <app-checkout-steps [isScrolled]="isScrolled"/>
       } @else if (sharedService.isSegmentPresent(['hotels-rooms', 'hotel-rooms', 'hotels-checkout', 'hotel-checkout', 'hotels-confirmation', 'hotel-confirmation'])) {
         <app-hotel-checkout-steps [isScrolled]="isScrolled" />
       } @else {

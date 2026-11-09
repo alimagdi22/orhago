@@ -4,7 +4,7 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input-gg';
-import { FlightCheckoutService, FlightResultService, HomePageService , selectedFlight } from 'rp-travel-ui';
+import { Brand, FlightCheckoutService, FlightResultService, flightOfflineService, HomePageService , selectedFlight } from 'rp-travel-ui';
 import { Subscription } from 'rxjs';
 import { IMainButton } from '../../../shared/models/flights/mainButton.model';
 import { SharedService } from '../../../shared/shared.service';
@@ -114,6 +114,13 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
           }
           this.applyFlightCurrency(flight.searchCriteria?.currency);
         },
+      }),
+    );
+
+    this.clearPreselectedOfflineServices();
+    this.subscription.add(
+      this.flightCheckoutService.offlineServicesResponse.subscribe(() => {
+        queueMicrotask(() => this.clearPreselectedOfflineServices());
       }),
     );
 
@@ -482,6 +489,180 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
       this.isPhoneNumberInvalid = true;
     } else {
       this.isPhoneNumberInvalid = false;
+    }
+  }
+
+  get flowStep(): number {
+    return Math.min(Math.max(this.sharedService.checkoutSteps, 0), 2);
+  }
+
+  get checkoutStepsView() {
+    return [
+      { key: 'results.fares.steps.flight' },
+      { key: 'results.fares.steps.passengers' },
+      { key: 'results.fares.steps.extras' },
+      { key: 'results.fares.steps.payment' },
+    ];
+  }
+
+  get selectedItinerary() {
+    return this.flightCheckoutService.selectedFlight?.airItineraryDTO;
+  }
+
+  get activeBrandFareId(): string | number | null {
+    const id = this.sharedService.selectedBrandFareId ?? (this.brandedFareId || null);
+    if (id === null || id === undefined || id === '' || Number(id) === -1) return null;
+    return id;
+  }
+
+  get selectedBrand(): Brand | null {
+    const id = this.activeBrandFareId;
+    if (id == null) return null;
+    const inMemory = this.flightResultService.currentSelectedBrands || [];
+    const match = inMemory.find((brand) => Number(brand.brandId) === Number(id));
+    if (match) return match;
+    return this.brandsFromCache().find((brand) => Number(brand.brandId) === Number(id)) || null;
+  }
+
+  get fareSource() {
+    return this.selectedBrand?.itinTotalFare || this.selectedItinerary?.itinTotalFare;
+  }
+
+  get tripCurrency(): string {
+    return this.fareSource?.currencyCode || '';
+  }
+
+  get addedServicesTotal(): number {
+    return (this.flightCheckoutService.organizedOfllineServices || [])
+      .filter((service) => this.isServiceAdded(service))
+      .reduce((sum, service) => sum + (Number(service.servicePrice) || 0), 0);
+  }
+
+  get tripTaxes(): number {
+    return this.fareSource?.totalTaxes || 0;
+  }
+
+  get tripBase(): number {
+    const fare = this.fareSource;
+    if (!fare) return 0;
+    if (this.selectedBrand) {
+      if (fare.fareAmount > 0) return fare.fareAmount;
+      return Math.max(0, (fare.amount || 0) - (fare.totalTaxes || 0));
+    }
+    const fees = this.flightCheckoutService.serviceFees || 0;
+    return Math.max(0, (fare.amount || 0) - (fare.totalTaxes || 0) - fees);
+  }
+
+  get tripTotal(): number {
+    const amount = this.fareSource?.amount || 0;
+    if (this.selectedBrand) return amount + this.addedServicesTotal;
+    return amount;
+  }
+
+  get selectedBrandName(): string {
+    return this.selectedBrand?.brandName || '';
+  }
+
+  private brandsFromCache(): Brand[] {
+    if (typeof sessionStorage === 'undefined') return [];
+    const params = this.route.snapshot.queryParams;
+    const sid = String(params['sid'] || '');
+    const searchId = sid.split('_')[0];
+    const pcc = sid.split('_')[1] || params['pcc'] || '';
+    const sequenceNum = params['sequenceNum'];
+    const providerKey = params['providerKey'] || params['pkey'] || '';
+    if (!searchId || sequenceNum == null || sequenceNum === '') return [];
+    const raw = sessionStorage.getItem(`${searchId}${sequenceNum}${providerKey}${pcc}`);
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  get adultCount(): number {
+    return this.flightCheckoutService.usersArray?.controls?.filter(
+      (user) => this.sharedService.getPassengerTypeName(user.value?.PassengerType) === 'Adult',
+    ).length || 0;
+  }
+
+  serviceName(service: flightOfflineService): string {
+    return this.lang === 'ar' ? service.serviceNameAr || service.serviceName : service.serviceName;
+  }
+
+  serviceDescription(service: flightOfflineService): string {
+    const raw = this.lang === 'ar'
+      ? service.serviceDescriptionAr || service.serviceDescription
+      : service.serviceDescription;
+    return (raw || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  isServiceAdded(service: flightOfflineService): boolean {
+    return !!service.added || this.flightCheckoutService.selectedOfflineServices?.includes(service.serviceCode);
+  }
+
+  clearPreselectedOfflineServices() {
+    const services = this.flightCheckoutService.allOfflineServices || [];
+    const preselected = services.filter((service) => service.recommended && service.added);
+    if (!preselected.length) return;
+
+    for (const service of preselected) {
+      service.added = false;
+      service.interaction = false;
+      const price = Number(service.servicePrice) || 0;
+      this.flightCheckoutService.priceWithRecommenedService = Math.max(
+        0,
+        (this.flightCheckoutService.priceWithRecommenedService || 0) - price,
+      );
+    }
+
+    const codes = new Set(preselected.map((service) => service.serviceCode));
+    this.flightCheckoutService.selectedOfflineServices = (
+      this.flightCheckoutService.selectedOfflineServices || []
+    ).filter((code) => !codes.has(code));
+  }
+
+  toggleService(service: flightOfflineService) {
+    if (this.isServiceAdded(service)) {
+      this.flightCheckoutService.removeOfflineService(service);
+      return;
+    }
+    this.flightCheckoutService.addOfflineService(service);
+  }
+
+  continuePassengers() {
+    if (this.sharedService.blockCheckoutWithoutBrand()) {
+      return;
+    }
+    this.checkPhoneNumberValidation();
+    if (this.flightCheckoutService.usersArray.invalid || this.isPhoneNumberInvalid) {
+      for (let i = 0; i < this.flightCheckoutService.usersArray.length; i++) {
+        const passenger = this.flightCheckoutService.usersArray.at(i);
+        if (passenger?.invalid) {
+          passenger.markAllAsTouched();
+          document.getElementById(i.toString())?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          this.checkPhoneNumberValidation();
+          break;
+        }
+      }
+      return;
+    }
+    this.sharedService.users = this.flightCheckoutService.usersArray.value;
+    this.sharedService.checkoutSteps = 1;
+    this.sharedService.scrollToTop();
+  }
+
+  continueExtras() {
+    this.sharedService.checkoutSteps = 2;
+    this.sharedService.scrollToTop();
+  }
+
+  previousStep() {
+    if (this.sharedService.checkoutSteps > 0) {
+      this.sharedService.checkoutSteps--;
+      this.sharedService.scrollToTop();
     }
   }
 
