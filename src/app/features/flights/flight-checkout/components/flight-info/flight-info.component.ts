@@ -18,6 +18,12 @@ export class FlightInfoComponent {
       .replace(/[\s_-]/g, '');
     return flightType === 'roundtrip';
   }
+  get isMultiCity(): boolean {
+    const flightType = String(this.flightCheckoutService.selectedFlight?.searchCriteria?.flightType || '')
+      .toLowerCase()
+      .replace(/[\s_-]/g, '');
+    return flightType === 'multicity';
+  }
 
   showFlightDetails(airItinerary: IAirItinerary | null, e: Event, index: number) {
     e.stopPropagation();

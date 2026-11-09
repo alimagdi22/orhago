@@ -78,6 +78,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
   private paymentAlignTimer: ReturnType<typeof setTimeout> | null = null;
   private contactScrollTimer: ReturnType<typeof setTimeout> | null = null;
   private brandScrollTimer: ReturnType<typeof setTimeout> | null = null;
+  private brandAlignTimer: ReturnType<typeof setTimeout> | null = null;
   private stopHoldingPayment: (() => void) | null = null;
   private previousScrollRestoration: ScrollRestoration | null = null;
 
@@ -386,12 +387,35 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
 
   private scrollToBrands(): void {
     this.brandScrollTimer = null;
-    const brands = document.getElementById('checkout-branded-fares');
-    if (!brands || typeof window === 'undefined') return;
+    const header = this.visibleFlexFareHeader();
+    if (!header || typeof window === 'undefined') return;
 
     this.scrolledToBrands = true;
-    const top = brands.getBoundingClientRect().top + window.scrollY - 96;
-    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+    this.sharedService.scrollElementToTop(header);
+
+    this.brandAlignTimer = setTimeout(() => {
+      this.brandAlignTimer = null;
+      const current = this.visibleFlexFareHeader();
+      if (!current) return;
+
+      const delta = current.getBoundingClientRect().top - this.sharedService.fixedNavbarHeight();
+      if (delta > 8) {
+        window.scrollTo({ top: Math.max(window.scrollY + delta, 0), behavior: 'auto' });
+      }
+    }, 500);
+  }
+
+  private visibleFlexFareHeader(): HTMLElement | null {
+    const headers = document.querySelectorAll<HTMLElement>(
+      '#checkout-branded-fares app-flex-fare .mobile-header, #checkout-branded-fares app-flex-fare .desktop-header',
+    );
+
+    return (
+      Array.from(headers).find((header) => {
+        const style = getComputedStyle(header);
+        return style.display !== 'none' && header.getBoundingClientRect().height > 0;
+      }) ?? null
+    );
   }
 
   private scrollToContact(): void {
@@ -548,6 +572,9 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     }
     if (this.brandScrollTimer != null) {
       clearTimeout(this.brandScrollTimer);
+    }
+    if (this.brandAlignTimer != null) {
+      clearTimeout(this.brandAlignTimer);
     }
     if (this.previousScrollRestoration && typeof history !== 'undefined') {
       history.scrollRestoration = this.previousScrollRestoration;

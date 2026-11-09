@@ -318,9 +318,32 @@ export class SharedService {
 
     this.wegoBrandRequiredError = true;
     if (typeof document !== 'undefined') {
-      document.getElementById('checkout-branded-fares')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        const error = document.querySelector<HTMLElement>('.brand-required-error');
+        if (!error) return;
+        const marginTop = parseFloat(getComputedStyle(error).marginTop) || 0;
+        this.scrollElementToTop(error, 'smooth', marginTop);
+      });
     }
     return true;
+  }
+
+  fixedNavbarHeight(): number {
+    if (typeof document === 'undefined') return 0;
+
+    return Array.from(document.querySelectorAll('app-navbar .wrapper, app-navbar .top-nav'))
+      .filter((element) => {
+        const style = getComputedStyle(element);
+        return style.display !== 'none' && style.position === 'fixed' && element.getBoundingClientRect().height > 0;
+      })
+      .reduce((height, element) => Math.max(height, element.getBoundingClientRect().height), 0);
+  }
+
+  scrollElementToTop(element: HTMLElement, behavior: ScrollBehavior = 'smooth', gap = 0): void {
+    if (typeof window === 'undefined') return;
+
+    const top = element.getBoundingClientRect().top + window.scrollY - this.fixedNavbarHeight() - gap;
+    window.scrollTo({ top: Math.max(top, 0), behavior });
   }
 
   goToNextCheckoutStep() {

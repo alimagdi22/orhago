@@ -15,7 +15,11 @@
       </svg>
     <!-- } -->
   </span>
-  <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights.length - 1]?.flightDTO[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights.length - 1]?.flightDTO.length - 1].departureTerminalAirport.cityName }}</h2>
+  @if (isMultiCity) {
+    <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights.length - 1]?.flightDTO[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights.length - 1]?.flightDTO.length - 1].arrivalTerminalAirport.cityName }}</h2>
+  } @else {
+    <h2 class="route-place">{{ flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[0]?.flightDTO[flightCheckoutService.selectedFlight?.airItineraryDTO?.allJourney?.flights[0]?.flightDTO.length - 1].arrivalTerminalAirport.cityName }}</h2>
+  }
   @if (isRoundTrip) {
     <span class="route-return">{{ 'checkout.andBack' | translate }}</span>
   }
