@@ -32,12 +32,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   token = '';
   images: string[] = [
     'assets/images/search-box/1.png',
-    'assets/images/search-box/2.png',
-    'assets/images/search-box/3.png',
-    'assets/images/search-box/4.png',
-    'assets/images/search-box/5.png',
-    'assets/images/search-box/6.png',
-    'assets/images/search-box/7.png',
+    // 'assets/images/search-box/2.png',
+    // 'assets/images/search-box/3.png',
+    // 'assets/images/search-box/4.png',
+    // 'assets/images/search-box/5.png',
+    // 'assets/images/search-box/6.png',
+    // 'assets/images/search-box/7.png',
   ];
   currentImage: string = this.images[0];
 

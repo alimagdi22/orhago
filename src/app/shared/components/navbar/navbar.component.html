@@ -8,9 +8,17 @@
   >
     <nav class="container">
       @if(isScrolled){
-        <img src="assets/images/logo-hogozati-white.png" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        @if(translate.currentLang === 'ar') {
+          <img src="assets/images/logo-arabic-white.png" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        } @else {
+          <img src="assets/images/logo-hogozati-white.png" width="280" height="40" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        }
       }@else {
+        @if(translate.currentLang === 'ar') {
+          <img src="assets/images/logo-arabic.jpg" width="400" height="51" title="Logo" class="logo" [ngClass]="{ 'arabic-logo': translate.currentLang === 'ar' }" routerLink="/" (click)="sharedService.scrollToTop()" />
+        } @else {
         <img src="assets/images/logo-hogozati.png" width="400" height="51" title="Logo" class="logo" routerLink="/" (click)="sharedService.scrollToTop()" />
+        }
       }
       @if (sharedService.isSegmentPresent(['flight-results'])) {
         <app-flight-summary [isScrolled]="isScrolled" (toggle)="sharedService.onToggleFlightSearch()" />
