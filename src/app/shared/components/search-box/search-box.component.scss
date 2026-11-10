@@ -14,6 +14,15 @@
   }
 }
 
+@media (max-width: 1100px) {
+  :host-context(html.dark) .search-box-wrapper {
+    background: #0f0d1c;
+    border-color: #3a3458;
+    color: #f4f2ff;
+    box-shadow: none;
+  }
+}
+
 .search-placeholder {
   margin: 8px 4px 12px;
   color: #646081;

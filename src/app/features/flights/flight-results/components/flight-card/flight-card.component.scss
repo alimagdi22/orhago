@@ -4,12 +4,13 @@
 .card {
   position: relative;
   background-color: #ffffff;
-  border-radius: 20px;
-  border: 1px solid #eceaf4;
-  box-shadow: 0 8px 24px rgba(26, 25, 30, 0.04);
-  padding: 18px 20px 14px;
+  border-radius: 16px;
+  border: 1px solid #e0deec;
+  box-shadow: none;
+  padding: 20px 24px 24px;
   margin-bottom: 28px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Onest', sans-serif;
+  color: #1a191e;
 }
 
 .card-main-content {
@@ -50,6 +51,16 @@
       background-position: bottom;
       background-repeat: repeat-x;
       background-size: auto 1px;
+
+      :host-context(html.dark) & {
+        background-image: repeating-linear-gradient(
+          to right,
+          #524a78 0,
+          #524a78 6px,
+          transparent 6px,
+          transparent 12px
+        );
+      }
     }
   }
 }
@@ -99,14 +110,15 @@
 }
 
 .card-foot {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px dashed #e4e1f0;
+  margin: 16px -24px 0;
+  padding: 16px 24px 0;
+  border-top: 1.5px dashed #c7c4d8;
 }
 
 .card-footer-bar {
@@ -177,10 +189,10 @@
 
 .footer-link {
   margin-inline-start: auto;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Onest', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #5029f4;
+  color: #3f1fd1;
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
@@ -204,12 +216,67 @@
 }
 
 :host-context(html.dark) .card {
-  background: #17151f;
-  border-color: #2e2b3c;
+  background: #ffffff;
+  border-color: #e0deec;
+  color: #1a191e;
 }
 
-:host-context(html.dark) .card-foot {
-  border-top-color: #2e2b3c;
+:host-context(html.dark) .card-foot,
+:host-context(html.dark) .desktop-inline-flex-fare {
+  border-top: 1.5px dashed #c7c4d8;
+}
+
+:host-context(html.dark) .card-foot::before,
+:host-context(html.dark) .card-foot::after {
+  content: none;
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0c0b12;
+  transform: translateY(-50%);
+}
+
+:host-context(html.dark) .card-foot::before {
+  content: '';
+  left: -9px;
+}
+
+:host-context(html.dark):host-context([dir='rtl']) .card-foot::before {
+  content: none;
+}
+
+:host-context(html.dark):host-context([dir='rtl']) .card-foot::after {
+  content: '';
+  right: -9px;
+}
+
+:host-context(html.dark) .leg-divider {
+  background-color: #eeecf6;
+}
+
+:host-context(html.dark) .refundable-badge {
+  background: #241c45;
+  color: #b7a6ff;
+
+  &.non-refundable {
+    background: #3a1824;
+    color: #ff8aa0;
+  }
+}
+
+:host-context(html.dark) .footer-link {
+  color: #b7a6ff;
+}
+
+:host-context(html.dark) .footer-pill-btn {
+  border-color: #5029f4;
+}
+
+:host-context(html.dark) .deal-chip {
+  background: #143024;
+  color: #7dcea0;
 }
 
 @keyframes expandFlexFare {
@@ -235,7 +302,7 @@
     .footer-pill-btn {
       gap: 6px;
       padding: 4px 10px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Onest', sans-serif;
       font-size: 11px;
       box-shadow: none;
 
@@ -276,11 +343,21 @@
 
   .card-foot {
     margin-top: 2px;
+    margin-inline: 0;
     padding-top: 0;
-    padding-inline-end: 96px;
+    padding-inline: 0 96px;
     border-top: 0;
     justify-content: flex-start;
     gap: 8px;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  :host-context(html.dark) .card-foot {
+    border-top: 0;
   }
 
   .footer-link {
@@ -324,5 +401,16 @@
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
+  }
+
+  :host-context(html.dark) .card {
+    background: #1c1830;
+    border-color: #3a3458;
+    color: #f4f2ff;
+  }
+
+  :host-context(html.dark) .deal-chip {
+    background: #143024;
+    color: #7dcea0;
   }
 }

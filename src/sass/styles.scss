@@ -36,6 +36,18 @@ html.dark body {
   background-color: #0c0b12;
 }
 
+html.dark .user-nav-menu.mat-mdc-menu-panel {
+  background: #17142a;
+}
+
+html.dark .user-nav-menu .mat-mdc-menu-item {
+  color: #f4f2ff;
+}
+
+html.dark .user-nav-menu .mat-mdc-menu-item img {
+  filter: brightness(0) invert(1);
+}
+
 /* Arabic-specific font */
 body.ar {
   font-family: 'Noto Sans Arabic', sans-serif;

@@ -89,3 +89,17 @@ form {
     padding: 7% !important;
   }
 }
+
+@media (max-width: 1100px) {
+  :host-context(html.dark) ::ng-deep .radio-buttons .mdc-label {
+    color: #c9c4e4 !important;
+  }
+
+  :host-context(html.dark) ::ng-deep .radio-buttons .mat-mdc-radio-checked .mdc-label {
+    color: #f4f2ff !important;
+  }
+
+  :host-context(html.dark) ::ng-deep .radio-buttons .mdc-radio__outer-circle {
+    border-color: #524a78 !important;
+  }
+}

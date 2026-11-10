@@ -1,36 +1,15 @@
-.section {
-  height: auto;
-  background-color: white;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  background-color: rgba(250, 250, 250, 1);
-  border-radius: 10px;
-}
-
-.passengers {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.custom_modal {
-  height: none;
-  width: none;
-
-  border-radius: 20px;
+:host {
+  display: block;
+  background: #fbfaff;
+  color: #1a191e;
+  font-family: 'Onest', sans-serif;
 }
 
 .loader {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 70vh;
 }
 
 .pre-confirmation {
@@ -46,9 +25,611 @@ main {
   h1 {
     max-width: 640px;
     margin: 0;
-    color: #0b1a30;
+    color: #1a191e;
     font-size: 22px;
     font-weight: 600;
     line-height: 1.5;
+  }
+}
+
+.success-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 44px 16px 40px;
+  background: #f4f2ff;
+  border-bottom: 1px solid #e0deec;
+  text-align: center;
+}
+
+.success-hero__logo {
+  width: auto;
+  height: 34px;
+}
+
+.success-hero__tick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: #12a05c;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.success-hero h1 {
+  margin: 0;
+  color: #1a191e;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.36px;
+}
+
+.success-hero__email {
+  margin: 0;
+  color: #646081;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.success-hero__ref {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #5029f4;
+
+  span {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.88px;
+    text-transform: uppercase;
+  }
+
+  strong {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
+
+.booked-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 56px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px 24px;
+  border: 1px solid #e0deec;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.card__head,
+.ticket__foot,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card__head {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eeecf6;
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0 0 0 auto;
+    color: #646081;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
+
+h2 {
+  margin: 0;
+  color: #1a191e;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.32;
+}
+
+.ticket {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket__main {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 26px 6px 24px;
+}
+
+.airline {
+  width: 196px;
+  flex: 0 0 196px;
+}
+
+.airline__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.airline__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #1a191e;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12px;
+}
+
+.airline__name {
+  color: #1a191e;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.airline__meta,
+.place__city,
+.route > p,
+.status span {
+  margin: 8px 0 0;
+  color: #646081;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.journey {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+.place {
+  width: 86px;
+  flex: 0 0 86px;
+}
+
+.place__time {
+  margin: 0;
+  color: #1a191e;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.09px;
+}
+
+.place__code {
+  margin: 3px 0 0;
+  color: #4e4b66;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+}
+
+.place__city {
+  margin-top: 3px;
+}
+
+.route {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+
+  > p {
+    margin: 0;
+  }
+}
+
+.route__line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c7c4d8;
+  }
+
+  span {
+    flex: 1 1 auto;
+    height: 2px;
+    margin: 0 2px;
+    border-radius: 2px;
+    background: #c7c4d8;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  white-space: nowrap;
+}
+
+.badge--trust {
+  background: #f4f2ff;
+  color: #3f1fd1;
+}
+
+.badge--neutral {
+  background: #f7f6fc;
+  color: #38364b;
+}
+
+.status {
+  width: 210px;
+  flex: 0 0 210px;
+  text-align: end;
+
+  p {
+    margin: 0;
+    color: #1a191e;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.24px;
+  }
+}
+
+.card--ticket .ticket__foot {
+  position: relative;
+  margin-inline: -24px;
+  padding-inline: 30px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fbfaff;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    left: -9px;
+  }
+
+  &::after {
+    right: -9px;
+  }
+}
+
+.ticket__foot {
+  padding: 16px 6px 0;
+  border-top: 1.5px dashed #c7c4d8;
+
+  button {
+    margin-inline-start: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #3f1fd1;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+}
+
+.actions {
+  flex-wrap: wrap;
+}
+
+.btn {
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.btn--primary {
+  border: 0;
+  background: #5029f4;
+  color: #ffffff;
+}
+
+.btn--secondary {
+  border: 1.5px solid #c7c4d8;
+  background: #ffffff;
+  color: #1a191e;
+}
+
+.next div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.next p {
+  margin: 0;
+  color: #1a191e;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.next span {
+  color: #646081;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.detail-card {
+  ::ng-deep {
+    h2,
+    .baggage-title {
+      margin: 0 0 8px;
+      color: #1a191e;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.32;
+    }
+
+    p,
+    pre,
+    span {
+      color: inherit;
+    }
+  }
+}
+
+.passengers {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .success-hero h1 {
+    font-size: 32px;
+  }
+
+  .success-hero__email {
+    font-size: 15px;
+  }
+
+  .card,
+  .booked-body {
+    width: min(1180px, calc(100% - 32px));
+  }
+
+  .ticket__main,
+  .journey {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .airline,
+  .place,
+  .status,
+  .journey {
+    width: auto;
+    flex-basis: auto;
+  }
+
+  .status {
+    text-align: start;
+  }
+
+  .place {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    align-items: baseline;
+  }
+
+  .success-hero__ref {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+:host-context(html.dark) {
+  background: #0f0d1c;
+  color: #f4f2ff;
+
+  .pre-confirmation h1,
+  h2,
+  .airline__name,
+  .place__time,
+  .status p,
+  .next p,
+  .btn--secondary {
+    color: #f4f2ff;
+  }
+
+  .success-hero {
+    background: #221c45;
+    border-bottom-color: #3a3458;
+  }
+
+  .success-hero h1 {
+    color: #f4f2ff;
+  }
+
+  .success-hero__email,
+  .card__head p,
+  .airline__meta,
+  .place__city,
+  .place__code,
+  .route > p,
+  .next span {
+    color: #9c96be;
+  }
+
+  .success-hero__tick {
+    background: #2fbf74;
+    color: #062816;
+  }
+
+  .success-hero__ref,
+  .btn--primary {
+    background: #6d4ff8;
+  }
+
+  .card:not(.card--ticket) {
+    background: #17142a;
+    border-color: #3a3458;
+  }
+
+  .card--ticket {
+    background: #ffffff;
+    border-color: #e0deec;
+    color: #1a191e;
+
+    h2,
+    .airline__name,
+    .place__time,
+    .place__code,
+    .status p {
+      color: #1a191e;
+    }
+
+    .card__head {
+      border-bottom-color: #eeecf6;
+    }
+
+    .card__head p,
+    .airline__meta,
+    .place__city,
+    .route > p {
+      color: #646081;
+    }
+
+    .airline__mark {
+      background: #5029f4;
+      color: #ffffff;
+    }
+
+    .route__line i,
+    .route__line span {
+      background: #c7c4d8;
+    }
+
+    .badge--trust {
+      background: #f4f2ff;
+      color: #3f1fd1;
+    }
+
+    .badge--neutral {
+      background: #1a191e;
+      color: #ffffff;
+    }
+
+    .ticket__foot {
+      border-top-color: #c7c4d8;
+
+      &::before,
+      &::after {
+        background: #0f0d1c;
+      }
+
+      button {
+        color: #3f1fd1;
+      }
+    }
+  }
+
+  .card__head {
+    border-bottom-color: #2a2545;
+  }
+
+  .airline__mark {
+    background: #6d4ff8;
+    color: #1a191e;
+  }
+
+  .route__line i,
+  .route__line span {
+    background: #524a78;
+  }
+
+  .badge--trust {
+    background: #221566;
+    color: #8e7aff;
+  }
+
+  .badge--neutral {
+    background: #1f1b36;
+    color: #c9c4e4;
+  }
+
+  .ticket__foot {
+    border-top-color: #524a78;
+
+    button {
+      color: #8e7aff;
+    }
+  }
+
+  .btn--secondary {
+    background: #17142a;
+    border-color: #524a78;
+  }
+
+  .detail-card ::ng-deep {
+    h2,
+    .baggage-title,
+    p,
+    pre,
+    span {
+      color: #f4f2ff;
+    }
   }
 }

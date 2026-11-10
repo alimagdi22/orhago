@@ -6,3 +6,12 @@
   font-family: var(--font-en);
   background-color: white;
 }
+
+:host-context(html.dark) .drop-down {
+  color: #f4f2ff;
+  background-color: transparent;
+
+  img {
+    filter: brightness(0) invert(1);
+  }
+}

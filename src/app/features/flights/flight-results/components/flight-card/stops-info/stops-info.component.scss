@@ -1,7 +1,7 @@
 :host {
   display: block;
   width: 100%;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Onest', sans-serif;
 }
 
 .timeline {
@@ -13,9 +13,10 @@
 
 .timeline__duration {
   margin: 0;
-  color: #8d89a3;
-  font-size: 12px;
-  font-weight: 500;
+  color: #646081;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .timeline__track {
@@ -29,24 +30,25 @@
 .timeline__line {
   flex: 1;
   height: 2px;
-  background: #d9d6e6;
+  background: #c7c4d8;
 }
 
 .timeline__dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #b7b3c9;
+  background: #c7c4d8;
 }
 
 .timeline__pill {
   z-index: 1;
-  padding: 3px 8px;
+  padding: 6px 10px;
   border-radius: 8px;
   background: #f4f2ff;
-  color: #5029f4;
+  color: #3f1fd1;
   font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.12px;
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -54,5 +56,39 @@
 @media (max-width: 1000px) {
   .timeline {
     min-width: 0;
+  }
+}
+
+:host-context(html.dark) {
+  .timeline__duration {
+    color: #646081;
+  }
+
+  .timeline__line,
+  .timeline__dot {
+    background: #c7c4d8;
+  }
+
+  .timeline__pill {
+    background: #f4f2ff;
+    color: #3f1fd1;
+  }
+}
+
+@media (max-width: 1000px) {
+  :host-context(html.dark) {
+    .timeline__duration {
+      color: #9a97ae;
+    }
+
+    .timeline__line,
+    .timeline__dot {
+      background: #524a78;
+    }
+
+    .timeline__pill {
+      background: #241c45;
+      color: #b7a6ff;
+    }
   }
 }

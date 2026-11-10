@@ -32,7 +32,10 @@
 
 @media (max-width: 1000px) {
   .content {
-    margin-top: 12px;
+    width: 100%;
+    max-width: 100% !important;
+    margin-top: 0;
+    padding-inline: 20px;
   }
 
   .flight-cards {
@@ -265,5 +268,23 @@ background-color: aqua;}
   }
   .search-toggle {
     display: none !important;
+  }
+}
+
+:host-context(html.dark) {
+  color: #f7f4ff;
+
+  .search-box,
+  .mobile-sidebar-panel,
+  .branded-fares-bottom-sheet,
+  .airlines-container {
+    background: #17151f;
+    color: #f7f4ff;
+  }
+
+  .loading-msg p,
+  .no-results,
+  .available-flights {
+    color: #f7f4ff;
   }
 }

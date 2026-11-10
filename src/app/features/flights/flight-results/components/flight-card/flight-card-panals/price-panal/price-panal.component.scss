@@ -1,6 +1,6 @@
 :host {
   display: block;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Onest', sans-serif;
 }
 
 .price-panal {
@@ -13,18 +13,19 @@
 .price-panal__price {
   margin: 0;
   color: #1a191e;
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.24px;
   line-height: 1;
   white-space: nowrap;
 }
 
 .price-panal__fare {
   margin: 6px 0 0;
-  color: #8d89a3;
+  color: #646081;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .select-btn {
@@ -36,8 +37,8 @@
   background: #5029f4;
   color: #ffffff;
   font-family: inherit;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
 
   &:disabled {
@@ -47,7 +48,11 @@
 }
 
 :host-context(html.dark) .price-panal__price {
-  color: #f7f4ff;
+  color: #1a191e;
+}
+
+:host-context(html.dark) .price-panal__fare {
+  color: #646081;
 }
 
 @media (max-width: 1000px) {
@@ -75,5 +80,13 @@
     margin-top: 0;
     padding: 8px 16px;
     font-size: 14px;
+  }
+
+  :host-context(html.dark) .price-panal__price {
+    color: #f4f2ff;
+  }
+
+  :host-context(html.dark) .price-panal__fare {
+    color: #9a97ae;
   }
 }

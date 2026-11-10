@@ -475,7 +475,25 @@
     "total": "الإجمالي  ",
     "paymentError": "حدث خطأ أثناء الدفع. سيساعدك فريق خدمة العملاء على إكمال الحجز.",
     "newSearch": "بحث جديد",
-    "confirmationHeader": "تهانينا! تم حجز رحلتك بنجاح."
+    "confirmationHeader": "تهانينا! تم حجز رحلتك بنجاح.",
+    "bookedTitle": "تم الحجز.",
+    "bookedEmail": "أرسلنا تذكرتك الإلكترونية إلى {{email}}",
+    "bookingReference": "مرجع الحجز",
+    "yourItinerary": "خط سير الرحلة",
+    "confirmed": "مؤكد",
+    "nonStop": "بدون توقف",
+    "stops": "{{count}} توقف",
+    "downloadTicket": "تنزيل التذكرة",
+    "addToCalendar": "إضافة إلى التقويم",
+    "manageBooking": "إدارة الحجز",
+    "whatNext": "ماذا يحدث بعد ذلك",
+    "checkInTitle": "يفتح تسجيل الوصول قبل المغادرة بـ 48 ساعة",
+    "checkInBody": "سنرسل لك تذكيراً ورابطاً عبر البريد.",
+    "cancelTitle": "راجع الإلغاء من إدارة الحجز",
+    "cancelBody": "يمكنك الإلغاء من إدارة الحجز إذا كانت الأجرة تسمح بالاسترداد.",
+    "addTripTitle": "أضف فندقاً أو توصيلة من المطار",
+    "addTripBody": "احجز بقية رحلتك على أورهاز واحتفظ بها في مكان واحد.",
+    "fareDetailsLink": "تفاصيل السعر"
   },
 
   "about": {

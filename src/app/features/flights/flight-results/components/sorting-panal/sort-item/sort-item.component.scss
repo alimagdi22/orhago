@@ -58,13 +58,21 @@
 
 :host-context(html.dark) {
   .sort-card {
-    background: #17151f;
-    border-color: #2e2b3c;
-    color: #f7f4ff;
+    background: #1c1830;
+    border-color: #3a3458;
+    color: #f4f2ff;
   }
 
   .active {
     background: #241c45;
     border-color: #8e7aff;
+
+    .sort-card__title {
+      color: #b7a6ff;
+    }
+  }
+
+  .sort-card__meta span {
+    color: #b7b3c9;
   }
 }

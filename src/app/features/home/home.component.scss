@@ -111,6 +111,34 @@ main {
 }
 
 @media (max-width: 1100px) {
+  :host-context(html.dark) .hero__media {
+    background: #15113f;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 140px;
+      top: -120px;
+      width: 420px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(109, 79, 248, 0.5) 0%, transparent 68%);
+    }
+
+    &::after {
+      left: 190px;
+      top: 40px;
+      width: 300px;
+      height: 230px;
+      background: radial-gradient(circle, rgba(80, 41, 244, 0.28) 0%, transparent 70%);
+    }
+  }
+
   .hero {
     &__media {
       height: 232px;
@@ -143,6 +171,14 @@ main {
       width: calc(100% - 40px);
       margin: -56px auto 20px;
     }
+  }
+
+  :host-context(html.dark) .hero {
+    background: #0c0b12;
+  }
+
+  :host-context(html.dark) .hero__media {
+    background: #15113f;
   }
 }
 
@@ -387,6 +423,26 @@ main > .container {
 }
 
 :host-context(html.dark) {
+  .explore-accordion-panel {
+    background: #17151f;
+    border-color: #3a3458;
+    box-shadow: none !important;
+
+    ::ng-deep .mat-expansion-panel-header,
+    ::ng-deep .mat-expansion-panel-body {
+      background: #17151f;
+    }
+
+    ::ng-deep .mat-expansion-panel-header .mat-expansion-panel-header-title,
+    ::ng-deep .accordion-title {
+      color: #f4f2ff;
+    }
+
+    ::ng-deep .mat-expansion-indicator::after {
+      color: #c9c4e4;
+    }
+  }
+
   .home-promises ul {
     background: #3a2a86;
   }

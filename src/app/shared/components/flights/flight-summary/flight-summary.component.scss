@@ -101,9 +101,9 @@
 
   .trip-bar__inner {
     align-items: center;
-    gap: 10px;
-    min-height: 0;
-    padding: 12px 14px;
+    gap: 12px;
+    min-height: 72px;
+    padding: 16px 20px;
     background: #f4f2ff;
   }
 
@@ -149,4 +149,12 @@
   @media (max-width: 1000px) {
     background: #1c1830;
   }
+}
+
+:host-context(html.dark) .trip-bar__back {
+  color: #f7f4ff;
+}
+
+:host-context(html.dark) .trip-bar__edit {
+  color: #b7a6ff;
 }

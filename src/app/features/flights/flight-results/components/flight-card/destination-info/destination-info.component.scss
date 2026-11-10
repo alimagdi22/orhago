@@ -1,6 +1,6 @@
 :host {
   display: block;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Onest', sans-serif;
 }
 
 .dest {
@@ -19,23 +19,26 @@
 
 .dest__time {
   color: #1a191e;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.09px;
+  line-height: 1.2;
 }
 
 .dest__code {
-  margin-top: 6px;
-  color: #1a191e;
-  font-size: 13px;
-  font-weight: 700;
+  margin-top: 3px;
+  color: #4e4b66;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12px;
+  line-height: 1.2;
 }
 
 .dest__city {
-  color: #8d89a3;
-  font-size: 12px;
-  font-weight: 500;
+  color: #646081;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 @media (max-width: 1000px) {
@@ -50,8 +53,27 @@
 }
 
 :host-context(html.dark) {
-  .dest__time,
+  .dest__time {
+    color: #1a191e;
+  }
+
   .dest__code {
-    color: #f7f4ff;
+    color: #4e4b66;
+  }
+
+  .dest__city {
+    color: #646081;
+  }
+}
+
+@media (max-width: 1000px) {
+  :host-context(html.dark) {
+    .dest__time {
+      color: #f4f2ff;
+    }
+
+    .dest__code {
+      color: #c9c4e4;
+    }
   }
 }

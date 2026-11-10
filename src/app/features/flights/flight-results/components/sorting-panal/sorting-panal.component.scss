@@ -96,6 +96,12 @@
 
     button {
       color: #f7f4ff;
+
+      &:hover,
+      &.is-current {
+        background: #241c45;
+        color: #b7a6ff;
+      }
     }
   }
 }

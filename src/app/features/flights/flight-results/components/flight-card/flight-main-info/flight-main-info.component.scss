@@ -1,6 +1,6 @@
 :host {
   display: block;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Onest', sans-serif;
 }
 
 .airline {
@@ -14,14 +14,14 @@
   display: grid;
   flex: 0 0 auto;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: transparent;
   color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12px;
 }
 
 .airline__copy {
@@ -42,13 +42,15 @@
 .airline__name {
   color: #1a191e;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .airline__meta {
-  color: #8d89a3;
-  font-size: 12px;
-  font-weight: 500;
+  color: #646081;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 @media (max-width: 1000px) {
@@ -59,11 +61,22 @@
 
 :host-context(html.dark) {
   .airline__name {
-    color: #f7f4ff;
+    color: #1a191e;
   }
 
-  .airline__mark {
-    background: #f4f2ff;
-    color: #1a191e;
+  .airline__meta {
+    color: #646081;
+  }
+}
+
+@media (max-width: 1000px) {
+  :host-context(html.dark) {
+    .airline__name {
+      color: #f4f2ff;
+    }
+
+    .airline__meta {
+      color: #9a97ae;
+    }
   }
 }

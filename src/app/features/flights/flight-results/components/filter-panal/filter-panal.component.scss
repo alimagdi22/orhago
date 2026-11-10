@@ -104,13 +104,13 @@
   color: #f7f4ff;
 
   .filter-card {
-    background: #17151f;
-    border-color: #2e2b3c;
+    background: #1c1830;
+    border-color: #3a3458;
     box-shadow: none;
   }
 
   .filter-section {
-    border-top-color: #2e2b3c;
+    border-top-color: #3a3458;
   }
 
   .filter-section__label,
@@ -120,5 +120,18 @@
 
   ::ng-deep .mat-mdc-checkbox .mdc-label {
     color: #f7f4ff;
+  }
+
+  .filter-card__clear {
+    color: #b7a6ff;
+  }
+
+  ::ng-deep .mat-mdc-checkbox {
+    --mdc-checkbox-unselected-icon-color: #524a78;
+    --mdc-checkbox-unselected-hover-icon-color: #8e7aff;
+    --mdc-checkbox-selected-icon-color: #6d4ff8;
+    --mdc-checkbox-selected-hover-icon-color: #6d4ff8;
+    --mdc-checkbox-selected-focus-icon-color: #6d4ff8;
+    --mdc-checkbox-selected-pressed-icon-color: #6d4ff8;
   }
 }

@@ -212,3 +212,47 @@
   }
 }
 
+::ng-deep html.dark .baggage-info-popover-menu {
+  &.mat-mdc-menu-panel,
+  &.mat-menu-panel {
+    background: #17151f !important;
+    border-color: #2e2b3c !important;
+  }
+
+  .baggage-popover-content,
+  .popover-title,
+  .section-title,
+  .item-qty,
+  .item-text,
+  .text-dark-bold {
+    color: #f7f4ff !important;
+  }
+
+  .popover-subtitle,
+  .item-sub-text,
+  .popover-footer-note,
+  .baggage-item-row {
+    color: #b7b3c9 !important;
+  }
+
+  .baggage-row,
+  .info-alert-box {
+    background: #241c45 !important;
+    border-color: #3a3550 !important;
+    color: #c9c4e4 !important;
+  }
+
+  .alert-message {
+    color: #c9c4e4 !important;
+  }
+
+  .popover-divider {
+    background: #2e2b3c !important;
+  }
+
+  .cancel-circle {
+    border-color: #b7b3c9;
+    color: #b7b3c9;
+  }
+}
+

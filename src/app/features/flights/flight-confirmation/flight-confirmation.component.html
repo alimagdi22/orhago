@@ -12,29 +12,141 @@
     />
   </div>
 } @else {
-  <div class="section">
-    <main class="container">
-      <app-confirmation-header />
-      <app-booking-info
-        [bookingId]="confirmationService.confirmationData.hgNumber"
-        [pnr]="confirmationService.confirmationData.pnr"
-      />
+  <section class="booked">
+    <header class="success-hero">
+      <img class="success-hero__logo" src="assets/images/logo-hogozati.png" alt="ORHAS" />
+      <span class="success-hero__tick" aria-hidden="true">✓</span>
+      <h1>{{ 'confirmation.bookedTitle' | translate }}</h1>
+      <p class="success-hero__email">{{ 'confirmation.bookedEmail' | translate: { email: bookingEmail } }}</p>
+      <div class="success-hero__ref">
+        <span>{{ 'confirmation.bookingReference' | translate }}</span>
+        <strong>{{ bookingReference }}</strong>
+      </div>
+    </header>
 
-      <div class="passengers">
-        @for (passenger of passangers; track $index) {
-          <app-passenger-info [passenger]="passenger" [airlinePNR]="confirmationService.confirmationData.pnr" />
+    <div class="booked-body">
+      <article class="card card--ticket">
+        <div class="card__head">
+          <h2>{{ 'confirmation.yourItinerary' | translate }}</h2>
+          @if (flights[0]?.flightDTO?.[0]?.departureDate) {
+            <p>
+              {{
+                flights[0].flightDTO[0].departureDate
+                  | date: 'EEE d MMM y' : undefined : dateLocale
+              }}
+            </p>
+          }
+        </div>
+
+        @for (flight of flights; track $index) {
+          <div class="ticket">
+            <div class="ticket__main">
+              <div class="airline">
+                <div class="airline__row">
+                  <span class="airline__mark">{{ airlineCode(flight) }}</span>
+                  <span class="airline__name">{{ flight.flightAirline.airlineName || 'N/A' }}</span>
+                </div>
+                @if (flightMeta(flight)) {
+                  <p class="airline__meta">{{ flightMeta(flight) }}</p>
+                }
+              </div>
+
+              <div class="journey">
+                <div class="place">
+                  <p class="place__time">
+                    {{ (flight.flightDTO[0].departureDate | date: 'HH:mm' : undefined : dateLocale) | arabicNumber }}
+                  </p>
+                  <p class="place__code">{{ flight.flightDTO[0].departureTerminalAirport.cityCode }}</p>
+                  <p class="place__city">{{ flight.flightDTO[0].departureTerminalAirport.cityName }}</p>
+                </div>
+                <div class="route">
+                  <p>{{ durationLabel(flight) | arabicNumber }}</p>
+                  <div class="route__line" aria-hidden="true"><i></i><span></span><i></i></div>
+                  <span class="badge badge--trust">{{ stopsLabel(flight) }}</span>
+                </div>
+                <div class="place">
+                  <p class="place__time">
+                    {{
+                      (flight.flightDTO[flight.flightDTO.length - 1].arrivalDate
+                        | date: 'HH:mm' : undefined : dateLocale
+                      ) | arabicNumber
+                    }}
+                  </p>
+                  <p class="place__code">
+                    {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityCode }}
+                  </p>
+                  <p class="place__city">
+                    {{ flight.flightDTO[flight.flightDTO.length - 1].arrivalTerminalAirport.cityName }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="status">
+                <p>{{ 'confirmation.confirmed' | translate }}</p>
+              </div>
+            </div>
+            <div class="ticket__foot">
+              @if (baggageLabel) {
+                <span class="badge badge--neutral">{{ baggageLabel }}</span>
+              }
+              <button type="button" (click)="showFareDetails()">{{ 'confirmation.fareDetailsLink' | translate }} ›</button>
+            </div>
+          </div>
         }
+      </article>
+
+      <div class="actions">
+        <button type="button" class="btn btn--primary" (click)="downloadTicket()">
+          {{ 'confirmation.downloadTicket' | translate }}
+        </button>
+        <button type="button" class="btn btn--secondary" (click)="addToCalendar()">
+          {{ 'confirmation.addToCalendar' | translate }}
+        </button>
+        <button type="button" class="btn btn--secondary" (click)="manageBooking()">
+          {{ 'confirmation.manageBooking' | translate }}
+        </button>
       </div>
 
-      <app-confirmation-flight-details [flights]="flights" />
+      <article class="card next">
+        <h2>{{ 'confirmation.whatNext' | translate }}</h2>
+        <div>
+          <p>{{ 'confirmation.checkInTitle' | translate }}</p>
+          <span>{{ 'confirmation.checkInBody' | translate }}</span>
+        </div>
+        <div>
+          <p>{{ 'confirmation.cancelTitle' | translate }}</p>
+          <span>{{ 'confirmation.cancelBody' | translate }}</span>
+        </div>
+        <div>
+          <p>{{ 'confirmation.addTripTitle' | translate }}</p>
+          <span>{{ 'confirmation.addTripBody' | translate }}</span>
+        </div>
+      </article>
 
-      <app-baggage-info [baggages]="confirmationService.confirmationData.airItineraries[0].baggageInformation" />
-      <app-contact-info [passenger]="passangers[0]" [email]="confirmationService.confirmationData.bookingEmail" />
-      <app-fare-details
-        [totalFare]="confirmationService.confirmationData.airItineraries[0].itinTotalFare"
-        [adds]="confirmationService.confirmationData.additionalServicesAmount"
-      />
+      <article class="card detail-card">
+        <div class="passengers">
+          @for (passenger of passangers; track $index) {
+            <app-passenger-info [passenger]="passenger" [airlinePNR]="confirmationService.confirmationData.pnr" />
+          }
+        </div>
+      </article>
+
+      <article class="card detail-card">
+        <app-baggage-info [baggages]="confirmationService.confirmationData.airItineraries[0].baggageInformation" />
+      </article>
+
+      <article class="card detail-card">
+        <app-contact-info [passenger]="passangers[0]" [email]="confirmationService.confirmationData.bookingEmail" />
+      </article>
+
+      <article class="card detail-card" id="fare-details">
+        <app-fare-details
+          [totalFare]="confirmationService.confirmationData.airItineraries[0].itinTotalFare"
+          [adds]="confirmationService.confirmationData.additionalServicesAmount"
+        />
+      </article>
+
       <img [src]="confirmationService.wgoDeebUrl" width="1" height="1" alt="" />
-    </main>
-  </div>
+    </div>
+  </section>
 }

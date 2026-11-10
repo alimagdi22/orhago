@@ -477,7 +477,25 @@
     "total": "Total",
     "paymentError": "Something went wrong during payment. Our customer service will help you complete your booking.",
     "newSearch": "New search",
-    "confirmationHeader": "Congratulations! Your booking is confirmed."
+    "confirmationHeader": "Congratulations! Your booking is confirmed.",
+    "bookedTitle": "You're booked.",
+    "bookedEmail": "We've sent your e-ticket to {{email}}",
+    "bookingReference": "Booking reference",
+    "yourItinerary": "Your itinerary",
+    "confirmed": "Confirmed",
+    "nonStop": "Non-stop",
+    "stops": "{{count}} stops",
+    "downloadTicket": "Download e-ticket",
+    "addToCalendar": "Add to calendar",
+    "manageBooking": "Manage booking",
+    "whatNext": "What happens next",
+    "checkInTitle": "Check in opens 48 hours before departure",
+    "checkInBody": "We'll email you a reminder and a link.",
+    "cancelTitle": "Review cancellation from Manage booking",
+    "cancelBody": "Cancel from Manage booking if your fare allows a refund.",
+    "addTripTitle": "Add a hotel or airport transfer",
+    "addTripBody": "Book the rest of your trip on ORHAS and keep it in one place.",
+    "fareDetailsLink": "Fare details"
   },
 
   "about": {

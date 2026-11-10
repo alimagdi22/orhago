@@ -43,3 +43,14 @@
 :host-context(html.dark) .search-box-header__list__item.active {
   background: #5029f4;
 }
+
+@media (max-width: 1100px) {
+  :host-context(html.dark) .search-box-header__list__item {
+    color: #c9c4e4;
+
+    &.active {
+      background: #5029f4;
+      color: #ffffff;
+    }
+  }
+}

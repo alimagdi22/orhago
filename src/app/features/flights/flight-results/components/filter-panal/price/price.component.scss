@@ -30,3 +30,16 @@
     border: 2px solid #5029f4;
   }
 }
+
+:host-context(html.dark) ::ng-deep .mat-mdc-slider.mat-primary {
+  --mdc-slider-inactive-track-color: #3a3550;
+  --mat-slider-inactive-track-color: #3a3550;
+  --mdc-slider-active-track-color: #8e7aff;
+  --mat-slider-active-track-color: #8e7aff;
+  --mdc-slider-handle-color: #f7f4ff;
+  --mat-slider-handle-color: #f7f4ff;
+
+  .mdc-slider__thumb-knob {
+    border-color: #8e7aff;
+  }
+}
