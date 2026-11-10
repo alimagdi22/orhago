@@ -122,7 +122,7 @@
               @for (city of sharedService.initialRecommendedAirports; track $index) {
                 <li
                   class="popular-dest__list__item"
-                  [ngStyle]="{ borderBottom: '1px solid #CBCBCB' }"
+                  [ngStyle]="{ borderBottom: '1px solid #d9d9d9' }"
                   (click)="
                     onSelectPopularDestination(destination, city[sharedService.lang].cityName + ',' + city[sharedService.lang].airportCode, index);
                     onSelectDestintation(destination, city, index)

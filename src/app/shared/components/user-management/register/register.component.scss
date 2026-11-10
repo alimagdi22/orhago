@@ -27,7 +27,7 @@
 
       label {
         text-align: start;
-        color: #686872;
+        color: #666666;
       }
 
       input {
@@ -51,7 +51,7 @@
 
       p {
         font-size: 14px;
-        color: #686872;
+        color: #666666;
         text-align: start;
 
         a {
@@ -95,7 +95,7 @@
 
       &:focus {
         outline: none;
-        box-shadow: 0 0 5px rgba(0, 128, 0, 0.8);
+        box-shadow: 0 0 5px rgba(2, 131, 200, 0.8);
       }
 
       img {
@@ -118,7 +118,7 @@
   }
 
   &__footer {
-    color: #686872;
+    color: #666666;
 
     span {
       cursor: pointer;

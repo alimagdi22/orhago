@@ -11,7 +11,7 @@ label {
   position: relative;
   display: flex;
   align-items: center;
-  border: 1px solid #d3d3d3;
+  border: 1px solid #d9d9d9;
   border-radius: 8px;
   background-color: #f5f5f5;
   padding: 8px 12px;
@@ -27,7 +27,7 @@ label {
     color: #333;
 
     &::placeholder {
-      color: #aaa;
+      color: #999999;
       font-size: 14px;
     }
   }
@@ -58,7 +58,7 @@ label {
 
 .contactDetails {
   background-color: #fff;
-  border: 0.5px solid #bdbdbd;
+  border: 0.5px solid #cccccc;
   border-radius: 5px;
   padding: 3rem 1rem;
   margin-top: 1rem;
@@ -84,7 +84,7 @@ label {
       }
       input {
         width: 100%;
-        border: 1px solid #bdbdbd;
+        border: 1px solid #cccccc;
         border-radius: 5px;
         padding: 0.8rem 0 0.8rem 3rem;
       }
@@ -101,7 +101,7 @@ label {
     input {
       width: 100%;
       border-radius: 5px;
-      border: 0.5px solid #bdbdbd;
+      border: 0.5px solid #cccccc;
       padding: 0.8rem;
     }
     .applyCopon {

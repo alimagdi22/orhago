@@ -16,7 +16,7 @@
 
   &__placeholder {
     font-size: 13px;
-    color: #555;
+    color: #666666;
     margin: 0;
     margin-bottom: 0;
   }
@@ -24,14 +24,14 @@
   &__guests {
     font-weight: 700;
     font-size: 13px;
-    color: #111;
+    color: #000000;
     margin: 0;
   }
 
   &__type {
     font-size: 12px;
     font-weight: 600;
-    color: #777;
+    color: #666666;
     margin: 0;
   }
 }
@@ -100,7 +100,7 @@
       &:hover {
         color: map-get($map: $colors, $key: 'main');
         border-color: map-get($map: $colors, $key: 'main');
-        background-color: #f5faf1;
+        background-color: #e7f4fb;
       }
     }
   }

@@ -9,7 +9,7 @@
   width: 100%;
   min-height: 380px;
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e5e5;
   border-radius: 12px;
   padding: 18px;
   cursor: pointer;
@@ -23,19 +23,19 @@
 
   /* Accent colors - Desktop default: Top border */
   &.accent-blue {
-    border-top: 4px solid #007bff;
+    border-top: 4px solid #0283c8;
   }
   &.accent-green {
-    border-top: 4px solid #28a745;
+    border-top: 4px solid #0283c8;
   }
   &.accent-red {
-    border-top: 4px solid #dc3545;
+    border-top: 4px solid #d01212;
   }
 
   /* Active/Selected State */
   &.active {
     background-color: #f2faf5;
-    border-color: #28a745;
+    border-color: #0283c8;
   }
 
   .card-header-row {
@@ -53,14 +53,14 @@
       .brand-title {
         font-size: 16px;
         font-weight: 700;
-        color: #1a202c;
+        color: #000000;
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
 
       .cabin-label {
         font-size: 12px;
-        color: #718096;
+        color: #666666;
         margin-top: 2px;
       }
     }
@@ -74,7 +74,7 @@
         width: 22px;
         height: 22px;
         border-radius: 50%;
-        background-color: #28a745;
+        background-color: #0283c8;
         color: #ffffff;
         display: flex;
         align-items: center;
@@ -85,7 +85,7 @@
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        border: 2px solid #cbd5e0;
+        border: 2px solid #d9d9d9;
         background-color: #ffffff;
       }
     }
@@ -108,13 +108,13 @@
     .section-title {
       font-size: 13px;
       font-weight: 700;
-      color: #2d3748;
+      color: #333333;
     }
 
     .mobile-price-delta {
       font-size: 15px;
       font-weight: 700;
-      color: #1a202c;
+      color: #000000;
       gap: 4px;
     }
 
@@ -124,14 +124,14 @@
       gap: 8px;
       width: 100%;
       font-size: 13px;
-      color: #4a5568;
+      color: #333333;
       line-height: 1.4;
 
       .feature-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: #4a5568;
+        color: #333333;
         flex-shrink: 0;
       }
 
@@ -145,10 +145,10 @@
         align-items: center;
         cursor: pointer;
         margin-inline-start: 4px;
-        color: #a0aec0;
+        color: #999999;
 
         &:hover {
-          color: #4a5568;
+          color: #333333;
         }
       }
     }
@@ -161,7 +161,7 @@
     gap: 10px;
     margin-top: auto;
     padding-top: 12px;
-    border-top: 1px solid #edf2f7;
+    border-top: 1px solid #f5f5f5;
     width: 100%;
 
     .price-container {
@@ -172,13 +172,13 @@
       .price-value {
         font-size: 22px;
         font-weight: 800;
-        color: #1a202c;
+        color: #000000;
       }
 
       .price-currency {
         font-size: 13px;
         font-weight: 600;
-        color: #4a5568;
+        color: #333333;
       }
     }
 
@@ -208,31 +208,31 @@
 
   .fare-card-wrapper {
     min-height: auto;
-    border-top: 1px solid #e2e8f0 !important;
+    border-top: 1px solid #e5e5e5 !important;
 
     /* Mobile Left border accent */
     &.accent-blue {
-      border-left: 4px solid #007bff !important;
+      border-left: 4px solid #0283c8 !important;
     }
     &.accent-green {
-      border-left: 4px solid #28a745 !important;
+      border-left: 4px solid #0283c8 !important;
     }
     &.accent-red {
-      border-left: 4px solid #dc3545 !important;
+      border-left: 4px solid #d01212 !important;
     }
 
     [dir='rtl'] & {
       &.accent-blue {
         border-left: none !important;
-        border-right: 4px solid #007bff !important;
+        border-right: 4px solid #0283c8 !important;
       }
       &.accent-green {
         border-left: none !important;
-        border-right: 4px solid #28a745 !important;
+        border-right: 4px solid #0283c8 !important;
       }
       &.accent-red {
         border-left: none !important;
-        border-right: 4px solid #dc3545 !important;
+        border-right: 4px solid #d01212 !important;
       }
     }
 

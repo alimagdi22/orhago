@@ -1,16 +1,18 @@
-/* theme colors */
+/* Identity: #0283c8, black, white. Neutrals are mixes of black and white. Red is for errors only. */
 
-$green: #213567;
-$yellow: #daedfe;
-$white: #f4f4f4;
-$off-white: #daedfe;
+$blue: #0283c8;
+$blue-dark: #016fa8;
+$blue-soft: #e7f4fb;
+$green: $blue;
+$yellow: $blue-soft;
+$white: #ffffff;
+$off-white: $blue-soft;
 $black: #000000;
-$black-light: #1d1d1d;
-$gray: #8f8f8f;
-$gray-dark: #7a7a7a;
-$gray-border: #cbcbcb;
-$red: #ec1b1b;
-$blue: #1877f2;
+$black-light: #111111;
+$gray: #666666;
+$gray-dark: #333333;
+$gray-border: #d9d9d9;
+$red: #d01212;
 
 /* typography */
 

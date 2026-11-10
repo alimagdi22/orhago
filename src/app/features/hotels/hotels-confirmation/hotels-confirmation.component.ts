@@ -12,7 +12,7 @@ import { IMainButton } from '../../../shared/models/flights/mainButton.model';
     class: 'container',
     style: `
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; 
-      background-color: #FAFAFA; 
+      background-color: #f7f7f7; 
       border-radius: 12px; 
       display: block;
       margin-block: 60px;

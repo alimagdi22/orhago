@@ -55,7 +55,7 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
     height: '42px',
     width: '100%',
     borderRadius: '6px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
 
@@ -64,7 +64,7 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
     height: '56px',
     width: '100%',
     borderRadius: '6px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
 
@@ -72,7 +72,7 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
     height: '64px',
     width: '100%',
     borderRadius: '12px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
 
@@ -80,7 +80,7 @@ export class FlightSearchInputsComponent implements AfterViewInit, OnInit {
     height: '42px',
     width: '130px',
     borderRadius: '6px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
 

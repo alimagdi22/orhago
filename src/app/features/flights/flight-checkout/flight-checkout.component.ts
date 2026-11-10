@@ -55,7 +55,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     height: '48px',
     width: '248px',
     borderRadius: '12px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color:'white'
   };
 

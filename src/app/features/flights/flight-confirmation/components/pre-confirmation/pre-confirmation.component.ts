@@ -23,7 +23,7 @@ export class PreConfirmationComponent implements OnInit, OnDestroy {
     height: '48px',
     width: '220px',
     borderRadius: '8px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
 

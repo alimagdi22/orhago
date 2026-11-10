@@ -8,7 +8,7 @@
   transition: background-position 0.4s ease-in-out;
 
   &:not(:disabled) {
-    background-color: var(--mdc-filled-button-container-color, #213567);
+    background-color: var(--mdc-filled-button-container-color, #0283c8);
     color: var(--mdc-filled-button-label-text-color, inherit);
   }
 

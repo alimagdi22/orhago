@@ -31,11 +31,11 @@ img {
 }
 
 .alert {
-  border: 1px solid red;
+  border: 1px solid #d01212;
 }
 
 .custom-phone-container {
-  border: 1px solid #d3d3d3;
+  border: 1px solid #d9d9d9;
 }
 
 .custom-phone-container,
@@ -52,7 +52,7 @@ img {
 
 ngx-intl-tel-input {
   .iti__selected-flag {
-    background-color: #e1e7ee;
+    background-color: #e7f4fb;
     border-radius: 7px 0 0 7px;
     padding: 5px 10px;
   }
@@ -71,7 +71,7 @@ ngx-intl-tel-input {
     color: #333;
 
     &::placeholder {
-      color: #aaa;
+      color: #999999;
       font-size: 14px;
     }
   }
@@ -165,20 +165,20 @@ ngx-intl-tel-input {
   }
 
   .ngb-dp-day.disabled {
-    color: #808080 !important;
+    color: #666666 !important;
   }
 
   .custom-day.disabled {
-    color: #bbb;
-    background-color: #f0f0f0;
+    color: #cccccc;
+    background-color: #f5f5f5;
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;
   }
 
   .custom-day.disabled:hover {
-    background-color: #f0f0f0;
-    color: #bbb;
+    background-color: #f5f5f5;
+    color: #cccccc;
   }
 
   .custom-day.focused {
@@ -258,89 +258,85 @@ ngx-intl-tel-input {
 :host ::ng-deep .swiper-wrapper {
   justify-content: center !important;
 }
-// Define the custom primary palette using your blue color (#213567)
+// Brand primary #0283c8, accent black, warn red
 $green-palette: (
-  50: #e8ebf0,
-  100: #c6d0e3,
-  200: #a0adc6,
-  300: #7a8aa9,
-  400: #5d6e93,
-  500: #213567,
-  // Main blue
-  600: #1d2f5f,
-  700: #182754,
-  800: #13204a,
-  900: #0a1339,
+  50: #e7f4fb,
+  100: #c5e6f6,
+  200: #9ed5f0,
+  300: #6ec2e8,
+  400: #3aaddf,
+  500: #0283c8,
+  600: #016fa8,
+  700: #014e7e,
+  800: #013e68,
+  900: #01365a,
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #fff,
-    400: #fff,
-    500: #fff,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
   ),
 );
 
-$yellow-palette: (
-  50: #fff8e1,
-  100: #ffecb3,
-  200: #ffe082,
-  300: #ffd54f,
-  400: #ffca28,
-  500: #d3a939,
-  // Main yellow
-  600: #b78932,
-  700: #9b6a2a,
-  800: #7f4b23,
-  900: #5d311a,
+$black-palette: (
+  50: #f7f7f7,
+  100: #e5e5e5,
+  200: #cccccc,
+  300: #999999,
+  400: #666666,
+  500: #000000,
+  600: #000000,
+  700: #000000,
+  800: #000000,
+  900: #000000,
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #000,
-    400: #000,
-    500: #000,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
   ),
 );
 
-// Define other palettes (e.g., warn palette using red)
 $red-palette: (
-  50: #ffebee,
-  100: #ffcdd2,
-  200: #ef9a9a,
-  300: #e57373,
-  400: #ef5350,
-  500: #ec1b1b,
-  // Main red
-  600: #d01716,
-  700: #c41411,
-  800: #b0140f,
-  900: #930c0c,
+  50: #fdecec,
+  100: #f9c9c9,
+  200: #f4a3a3,
+  300: #ee7a7a,
+  400: #e14d4d,
+  500: #d01212,
+  600: #b01010,
+  700: #900e0e,
+  800: #700b0b,
+  900: #500808,
   contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #000,
-    400: #000,
-    500: #fff,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
   ),
 );
 
 // Define the palettes
 $custom-primary: mat.m2-define-palette($green-palette);
-$custom-accent: mat.m2-define-palette($yellow-palette);
+$custom-accent: mat.m2-define-palette($black-palette);
 $custom-warn: mat.m2-define-palette($red-palette);
 
 // Define the theme
@@ -401,7 +397,7 @@ p{
 .baggage-popover-content {
   padding: 18px 20px;
   font-family: inherit;
-  color: #1f2937;
+  color: #111111;
   box-sizing: border-box;
 
   .popover-header {
@@ -410,14 +406,14 @@ p{
     .popover-title {
       font-size: 18px;
       font-weight: 700;
-      color: #111827;
+      color: #000000;
       margin: 0;
       line-height: 1.2;
     }
 
     .popover-subtitle {
       font-size: 12px;
-      color: #6b7280;
+      color: #666666;
       font-weight: 400;
       display: block;
       margin-top: 3px;
@@ -441,13 +437,13 @@ p{
         width: 18px;
         height: 18px;
         border-radius: 50%;
-        border: 1.5px solid #374151;
+        border: 1.5px solid #333333;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 11px;
         font-weight: 600;
-        color: #374151;
+        color: #333333;
         line-height: 1;
         flex-shrink: 0;
       }
@@ -455,7 +451,7 @@ p{
       .section-title {
         font-size: 14px;
         font-weight: 700;
-        color: #111827;
+        color: #000000;
       }
     }
 
@@ -470,7 +466,7 @@ p{
       align-items: center;
       gap: 8px;
       font-size: 13px;
-      color: #374151;
+      color: #333333;
 
       &.has-subtitle {
         flex-direction: column;
@@ -486,7 +482,7 @@ p{
 
       .item-qty {
         font-weight: 600;
-        color: #111827;
+        color: #000000;
         font-size: 13px;
         min-width: 10px;
       }
@@ -500,17 +496,17 @@ p{
       .item-text {
         font-size: 13px;
         font-weight: 500;
-        color: #374151;
+        color: #333333;
 
         &.text-dark-bold {
           font-weight: 600;
-          color: #111827;
+          color: #000000;
         }
       }
 
       .item-sub-text {
         font-size: 11px;
-        color: #9ca3af;
+        color: #999999;
         margin-left: 36px;
 
         [dir="rtl"] & {
@@ -523,8 +519,8 @@ p{
 
   .info-alert-box {
     margin-top: 12px;
-    background-color: #f0fdf4;
-    border: 1px solid #86efac;
+    background-color: #e7f4fb;
+    border: 1px solid #9ed5f0;
     border-radius: 10px;
     padding: 10px 12px;
     display: flex;
@@ -541,7 +537,7 @@ p{
     .alert-message {
       font-size: 12px;
       line-height: 1.4;
-      color: #15803d;
+      color: #0283c8;
       margin: 0;
       font-weight: 500;
     }
@@ -549,14 +545,14 @@ p{
 
   .popover-divider {
     height: 1px;
-    background-color: #f3f4f6;
+    background-color: #f5f5f5;
     margin: 14px 0;
   }
 
   .popover-footer-note {
     font-size: 11px;
     line-height: 1.45;
-    color: #6b7280;
+    color: #666666;
     margin: 0;
     font-weight: 400;
   }

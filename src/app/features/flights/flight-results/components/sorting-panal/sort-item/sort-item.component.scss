@@ -11,26 +11,26 @@
   &__title {
     font-size: 15px;
     font-weight: 600;
-    color: #0f172a;
+    color: #000000;
   }
 
   &__number {
     font-size: 15px;
     font-weight: 600;
-    color: #0f172a;
+    color: #000000;
   }
 
   &.active {
-    background-color: #daedfe;
+    background-color: #e7f4fb;
 
     .sort-item__title,
     .sort-item__number {
-      color: #213567;
+      color: #0283c8;
       font-weight: 700;
     }
   }
 
   &:hover:not(.active) {
-    background-color: #f8fafc;
+    background-color: #f7f7f7;
   }
 }

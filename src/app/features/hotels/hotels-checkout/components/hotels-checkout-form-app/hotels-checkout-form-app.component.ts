@@ -10,7 +10,7 @@ import { CountryISO } from 'ngx-intl-tel-input-gg';
   templateUrl: './hotels-checkout-form-app.component.html',
   styleUrl: './hotels-checkout-form-app.component.scss',
   host: {
-    style: 'background-color: #FAFAFA; border-radius: 12px'
+    style: 'background-color: #f7f7f7; border-radius: 12px'
   }
 })
 export class HotelsCheckoutFormAppComponent {

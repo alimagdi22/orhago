@@ -139,22 +139,22 @@ export class AppComponent implements OnInit {
       },
     });
 
-    let defaultCurrency = {
-      ID: 4039,
-      Currency_Code: 'AED',
-      Currency_Name: 'United Arab Emirates Dirham',
-      Is_Base_Currency: true,
-      Image_Url: 'https://images.travelnow.global/Content/Currencies/AED.JPG',
-      rate: 1,
-    };
     // let defaultCurrency = {
-    //   ID: 2026,
-    //   Currency_Code: 'EGP',
-    //   Currency_Name: 'Egyptian Pound',
+    //   ID: 4039,
+    //   Currency_Code: 'AED',
+    //   Currency_Name: 'United Arab Emirates Dirham',
     //   Is_Base_Currency: true,
-    //   Image_Url: 'https://images.Travasky.com/Content/Currencies/EGP.JPG',
+    //   Image_Url: 'https://images.travelnow.global/Content/Currencies/AED.JPG',
     //   rate: 1,
     // };
+    let defaultCurrency = {
+      ID: 2026,
+      Currency_Code: 'EGP',
+      Currency_Name: 'Egyptian Pound',
+      Is_Base_Currency: true,
+      Image_Url: 'https://images.Travasky.com/Content/Currencies/EGP.JPG',
+      rate: 1,
+    };
 
     const currentLang = typeof localStorage !== 'undefined' && typeof window !== 'undefined' ? localStorage.getItem('lang') : null;
     const activeLang = String(currentLang || 'en').toLowerCase().startsWith('ar') ? 'ar' : 'en';
@@ -332,8 +332,8 @@ export class AppComponent implements OnInit {
     };
 
 
-    this.environment.envConfiguration(envOrhas);
-    this.hotelEnvironmentService.envConfiguration(envOrhas);
+    this.environment.envConfiguration(envRP);
+    this.hotelEnvironmentService.envConfiguration(envRP);
 
     if (!this.sharedService.isSegmentPresent(['checkout'])) {
       this.homeService.setSelectedCurrency(defaultCurrency);

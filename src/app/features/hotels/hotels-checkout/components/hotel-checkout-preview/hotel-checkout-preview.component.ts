@@ -13,7 +13,7 @@ import { CancellationPolicyComponent } from '../../../hotels-rooms/components/ca
   styleUrl: './hotel-checkout-preview.component.scss',
   host: {
     class: 'row',
-    style: 'background-color: #FAFAFA; border-radius: 12px'
+    style: 'background-color: #f7f7f7; border-radius: 12px'
   }
 })
 export class HotelCheckoutPreviewComponent implements OnInit {

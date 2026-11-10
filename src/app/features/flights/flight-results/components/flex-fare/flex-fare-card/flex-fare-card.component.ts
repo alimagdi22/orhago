@@ -51,7 +51,7 @@ export class FlexFareCardComponent implements OnInit {
     height: '36px',
     width: '100%',
     borderRadius: '6px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
   get priceDifference(): number {

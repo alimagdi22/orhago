@@ -21,7 +21,7 @@
 .same-destination-error {
   grid-column: 1 / -1;
   margin: 0;
-  color: #c0392b;
+  color: #d01212;
   font-size: 13px;
   font-weight: 600;
 }
@@ -125,7 +125,7 @@
         height: 20px;
         font-size: 18px;
         visibility: hidden;
-        color: map-get($map: $colors, $key: 'secondary');
+        color: map-get($map: $colors, $key: 'main');
         transition: all 0.1s;
 
         &:hover {
@@ -370,7 +370,7 @@ hr{
 
   .add-flight-info {
     font-size: 12px;
-    color: #393c43;
+    color: #333333;
     margin-bottom: 0;
     grid-column: span 3;
   }

@@ -23,7 +23,7 @@ export class HotelCardAppComponent {
     borderRadius: '6px',
     height: '36px',
     width: '100%',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white'
   }
 

@@ -10,7 +10,7 @@ import { HotelCheckoutService } from 'rp-hotels-ui';
   templateUrl: './hotel-checkout-form.component.html',
   styleUrl: './hotel-checkout-form.component.scss',
   host: {
-    style: 'background-color: #FAFAFA; border-radius: 12px'
+    style: 'background-color: #f7f7f7; border-radius: 12px'
   }
 })
 export class HotelCheckoutFormComponent {

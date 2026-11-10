@@ -9,7 +9,7 @@
   },
 
   "footer": {
-    "about": "Orhas is your trusted travel companion, making every journey simpler, smarter, and more enjoyable. From flights and hotels to unforgettable holiday experiences, we bring everything you need to explore the world together in one place.",
+    "about": "Hogozati is your trusted travel companion, making every journey simpler, smarter, and more enjoyable. From flights and hotels to unforgettable holiday experiences, we bring everything you need to explore the world together in one place.",
     "links": {
       "home": "Home",
       "aboutUs": "About Us",
@@ -21,11 +21,11 @@
 
     },
     "contact": {
-      "email": "support@orhas.com",
-      "phone": "+971559146282",
-      "address": "UAE - Dubai"
+      "email": "Development@round-pixel.net",
+      "phone": "+201023245981",
+      "address": "Egypt, Cairo, El Maadi"
     },
-    "copyright": "&copy; 2025 orhas. All rights reserved."
+    "copyright": "&copy; 2025 Hogozati. All rights reserved."
   },
 
     "searchBox": {
@@ -117,22 +117,22 @@
     },
     "exploreTitle": "Explore popular flights and hotels",
     "adContent": {
-      "title": "Unlock exclusive features available only on the Orhas app. Download it now!",
+      "title": "Unlock exclusive features available only on the Hogozati app. Download it now!",
       "features": [
         "Enjoy more than ten practical features tailored exclusively for app users",
         "Discover our Explore page for popular Destinations, Weekend Getaways, Travel News and more.",
-        "Swift checkout process on the Orhas app with offline booking access, various discounts and password-less logins."
+        "Swift checkout process on the Hogozati app with offline booking access, various discounts and password-less logins."
       ],
       "scanToDownload": "Scan to download"
     },
     "flightDeals": {
       "title": "The best Flight deals",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler",
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Hogozati has something for every traveler",
       "book": "Book"
     },
     "hotelDeals": {
       "title": "Popular Searches",
-      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Orhas has something for every traveler"
+      "description": "Discover our featured destinations and find the perfect getaway. Whether you’re seeking for relaxation, adventure or cultural experience. Hogozati has something for every traveler"
     },
     "populerCities": {
       "title": "Popular cities for hotels"
@@ -243,7 +243,7 @@
       "dateChangeFee": "Date change fee:",
       "allChangesNote": "All Changes are prior to scheduled departure of the first flight. Does not include additional no-show charges.",
       "pleaseNote": "Please Note: The add-on service charges, convenience fee, and the discount you have received using a coupon code is non-refundable. The final refund amount will be adjusted as per the deductions.",
-      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Orhas doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
+      "airlinePolicyNote": "*Airlines stop accepting cancellation/change requests 4 - 72 hours before departure of the flight, depending on the airline. The airline fee is indicative based on an automated interpretation of airline fare rules. Hogozati doesn't guarantee the accuracy of this information. The change/cancellation fee may also vary based on fluctuations in currency conversion rates. For exact cancellation/change fee, please call us at our customer care number."
     },
 
     "baggage": {
@@ -368,9 +368,9 @@
   "about": {
     "title": "Redefining Travel Experiences",
     "gateway": "Your Gateway to memorable journeys",
-    "description": "orhas is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
+    "description": "Hogozati is a trusted online travel platform that connects travelers with the best flight and hotel options worldwide. Our mission is to make travel planning effortless and enjoyable.",
     "storyTitle": "Our Story",
-    "storyDescription": "orhas was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
+    "storyDescription": "Hogozati was founded in 2020 with the goal of making travel a comfortable and enjoyable experience for everyone. We believe that journeys begin with a simple step, and we’re here to be your first partner in that step.",
     "advantages": {
       "exclusiveDeals": "Exclusive Deals",
       "exclusiveDealsDesc": "Access to unbeatable prices on flights, hotels and vacation packages.",
@@ -493,7 +493,7 @@
       "gmail": "Email",
       "emailPlaceholder": "Email",
       "contactNumber": "Contact Number",
-      "privacyPolicy": "I give Orhas permission to send me informational and promotional emails and text messages in accordance with the",
+      "privacyPolicy": "I give Hogozati permission to send me informational and promotional emails and text messages in accordance with the",
       "privacyPolicyLink": "Privacy Policy",
       "changePassword": "Change Password",
       "save": "Save"
@@ -674,6 +674,6 @@
   "terms": {
     "title": "Terms And Conditions",
     "sectionTitle": "Information collection and use",
-    "description": "By using orhas, you agree to our Terms of Service. We are not responsible for any issues arising from third-party services. Please read our Privacy Policy for more details."
+    "description": "By using Hogozati, you agree to our Terms of Service. We are not responsible for any issues arising from third-party services. Please read our Privacy Policy for more details."
   }
 }

@@ -25,7 +25,7 @@ export class CabinClassComponent implements OnInit {
     height: '42px',
     width: '100%',
     borderRadius: '6px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color: 'white',
   };
 

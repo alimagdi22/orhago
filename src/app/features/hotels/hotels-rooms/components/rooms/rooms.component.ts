@@ -14,7 +14,7 @@ import { SharedService } from '../../../../../shared/shared.service';
   styleUrl: './rooms.component.scss',
   host: {
     class: "row",
-    style: 'background-color: white; border: 1px solid #DFDFDF; border-radius: 6px; margin-bottom: 10px'
+    style: 'background-color: white; border: 1px solid #e5e5e5; border-radius: 6px; margin-bottom: 10px'
   },
   changeDetection: ChangeDetectionStrategy.OnPush
 })

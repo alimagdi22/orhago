@@ -15,7 +15,7 @@
   }
 
   &.disabled {
-    color: #bbb;
+    color: #cccccc;
     background-color: transparent;
     pointer-events: none;
     opacity: 0.5;
@@ -54,5 +54,5 @@
   justify-content: space-evenly;
 }
 ::ng-deep .calenderMobile_datepicker .ngb-dp-day.disabled {
-  color: #808080 !important;
+  color: #666666 !important;
 }

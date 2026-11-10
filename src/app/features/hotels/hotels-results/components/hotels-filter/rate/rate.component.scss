@@ -7,13 +7,13 @@
   input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    accent-color: #0a8a00;
+    accent-color: #0283c8;
     cursor: pointer;
   }
 
   label {
     font-size: 15px;
-    color: #222;
+    color: #111111;
     cursor: pointer;
   }
 }
@@ -31,7 +31,7 @@
   align-items: center;
   padding: 6px 12px;
   border-radius: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #d9d9d9;
   background-color: #fff;
   font-size: 14px;
   color: #000;
@@ -45,9 +45,9 @@
 }
 
 .rate-chip.active {
-  background-color: #fffbe6;
-  border-color: #FFD700;
-  color: #FFD700;
+  background-color: #e7f4fb;
+  border-color: #0283c8;
+  color: #0283c8;
   font-weight: 600;
 }
 .star-label {

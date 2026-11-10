@@ -15,7 +15,7 @@
     color: white;
 
     .activated {
-      color: #daedfe;
+      color: #e7f4fb;
     }
   }
 }
@@ -29,7 +29,7 @@ img{
 }
 
 // &.isScrolled{
-//   color: #3b82f6;
+//   color: #0283c8;
 // }
 .activated {
   color: map-get($map: $colors, $key: 'main');

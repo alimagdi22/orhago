@@ -40,7 +40,7 @@ export class CheckoutFooterComponent {
     height: '48px',
     width: 'none',
     borderRadius: '12px',
-    backgroundColor:'#70e879'
+    backgroundColor:'#0283c8'
   };
 
   payWithoutServiceButton: IMainButton = {

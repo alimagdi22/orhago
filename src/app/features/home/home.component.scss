@@ -99,7 +99,7 @@
   .explore-main-title {
     font-size: 26px;
     font-weight: 700;
-    color: #0f172a;
+    color: #000000;
     letter-spacing: -0.3px;
   }
 
@@ -111,14 +111,14 @@
 
   .explore-accordion-panel {
     border-radius: 16px !important;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e5e5e5;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
     background-color: #ffffff;
     overflow: hidden;
     transition: all 0.25s ease;
 
     &:hover {
-      border-color: #cbd5e1;
+      border-color: #e5e5e5;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06) !important;
     }
 
@@ -129,7 +129,7 @@
       .mat-expansion-panel-header-title {
         font-size: 17px;
         font-weight: 700;
-        color: #0f172a;
+        color: #000000;
         margin-right: 0;
 
         .title-icon {

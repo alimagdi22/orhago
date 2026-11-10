@@ -24,7 +24,7 @@ export class FlightDealsCardComponent implements OnInit, OnChanges {
     height: '30px',
     fontSize: '14px',
     width: '120px',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     color:'white'
   };
 

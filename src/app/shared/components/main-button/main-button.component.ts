@@ -17,7 +17,7 @@ export class MainButtonComponent {
     width: '100%',
     borderRadius: '6px',
     padding: '0',
-    backgroundColor: '#213567',
+    backgroundColor: '#0283c8',
     border: '0',
     color:'white'
   };

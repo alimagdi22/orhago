@@ -11,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e5e5;
 
     h2 {
       margin: 0;
@@ -44,7 +44,7 @@
 
   .room-configuration {
     padding: 16px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e5e5;
 
     &:last-child {
       border-bottom: none;
@@ -67,7 +67,7 @@
       border: none;
       font-size: 1.2em;
       cursor: pointer;
-      color: #ff3b30;
+      color: #d01212;
       padding: 4px;
     }
   }
@@ -92,7 +92,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #ddd;
+    border: 1px solid #d9d9d9;
     border-radius: 4px;
     overflow: hidden;
 
@@ -131,7 +131,7 @@
     select {
       width: 100%;
       padding: 10px;
-      border: 1px solid #ddd;
+      border: 1px solid #d9d9d9;
       border-radius: 4px;
       background-color: white;
     }
@@ -145,15 +145,15 @@
 
     .add-room-btn {
       background: none;
-      border: 1px dashed #ccc;
+      border: 1px dashed #d9d9d9;
       padding: 12px;
       width: 100%;
       cursor: pointer;
       border-radius: 4px;
 
       &:hover {
-        border-color: #007bff;
-        color: #007bff;
+        border-color: #0283c8;
+        color: #0283c8;
       }
 
       &:disabled {

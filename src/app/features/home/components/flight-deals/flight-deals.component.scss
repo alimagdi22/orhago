@@ -43,12 +43,12 @@ swiper-container {
   margin: 0;
   padding: 0;
   border-radius: 50%;
-  border: 1px solid rgba(33, 53, 103, 0.1);
+  border: 1px solid rgba(2, 131, 200, 0.1);
   background: rgba(255, 255, 255, 0.96);
-  color: #213567;
+  color: #0283c8;
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.05),
-    0 8px 18px rgba(15, 23, 42, 0.1);
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 8px 18px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,10 +66,10 @@ swiper-container {
   }
 
   &:hover:not(:disabled) {
-    background: #213567;
+    background: #0283c8;
     color: #ffffff;
-    border-color: #213567;
-    box-shadow: 0 10px 22px rgba(33, 53, 103, 0.28);
+    border-color: #0283c8;
+    box-shadow: 0 10px 22px rgba(2, 131, 200, 0.28);
     transform: translateY(-50%) scale(1.06);
   }
 
@@ -78,7 +78,7 @@ swiper-container {
   }
 
   &:focus-visible {
-    outline: 2px solid rgba(33, 53, 103, 0.35);
+    outline: 2px solid rgba(2, 131, 200, 0.35);
     outline-offset: 2px;
   }
 

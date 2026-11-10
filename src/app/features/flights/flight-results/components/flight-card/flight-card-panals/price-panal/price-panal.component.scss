@@ -12,20 +12,20 @@
   &__title {
     font-size: 13px;
     font-weight: 500;
-    color: #1e293b;
+    color: #000000;
     margin-bottom: 4px;
   }
 
   &__price {
     font-size: 22px;
     font-weight: 800;
-    color: #0f172a;
+    color: #000000;
     margin: 0;
   }
 
   .select-btn {
     width: 100%;
-    background-color: #213567;
+    background-color: #0283c8;
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
@@ -38,7 +38,7 @@
 
     &:hover:not(:disabled) {
       background-color: white;
-      color: #213567;
+      color: #0283c8;
       transform: scale(1.02);
     }
 

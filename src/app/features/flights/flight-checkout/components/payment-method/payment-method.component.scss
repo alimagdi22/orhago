@@ -8,10 +8,10 @@
   scroll-margin-top: 88px;
   margin-top: 24px;
   padding: 24px;
-  background: #f3f7ff;
-  border: 1px solid rgba(33, 53, 103, 0.08);
+  background: #e7f4fb;
+  border: 1px solid rgba(2, 131, 200, 0.08);
   border-radius: 16px;
-  color: #0b1a30;
+  color: #000000;
 }
 
 .secure-payment-header {
@@ -19,14 +19,14 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
-  color: #213567;
+  color: #0283c8;
 
   h2 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
     line-height: 28px;
-    color: #0b1a30;
+    color: #000000;
   }
 }
 
@@ -51,13 +51,13 @@
 .amount-label {
   font-size: 15px;
   font-weight: 500;
-  color: #5c6479;
+  color: #666666;
 }
 
 .amount-line {
   font-size: 14px;
   font-weight: 600;
-  color: #0b1a30;
+  color: #000000;
   white-space: nowrap;
 
   span {
@@ -67,14 +67,14 @@
 
 .amount-total {
   padding-top: 10px;
-  border-top: 1px solid #eef2ff;
+  border-top: 1px solid #e7f4fb;
 }
 
 .amount-value {
   font-size: 20px;
   font-weight: 700;
   line-height: 28px;
-  color: #213567;
+  color: #0283c8;
   white-space: nowrap;
 
   span {
@@ -93,7 +93,7 @@
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: #5c6479;
+  color: #666666;
 }
 
 .payment-buttons {
@@ -112,8 +112,8 @@
   padding: 10px 14px;
   border: 1.5px solid rgba(11, 26, 48, 0.08);
   border-radius: 12px;
-  background: #f3f7ff;
-  color: #5c6479;
+  background: #e7f4fb;
+  color: #666666;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -128,20 +128,20 @@
   }
 
   &:hover {
-    background: #e8f0ff;
+    background: #e7f4fb;
   }
 
   &.selected {
-    border-color: #213567;
-    background: #eff4ff;
-    color: #0b1a30;
+    border-color: #0283c8;
+    background: #e7f4fb;
+    color: #000000;
   }
 }
 
 .payment-buttons.invalid .payment-btn {
-  border-color: #dc2626;
-  background: #fff5f5;
-  color: #dc2626;
+  border-color: #d01212;
+  background: #fdecec;
+  color: #d01212;
 }
 
 .payment-session {
@@ -179,22 +179,22 @@
 .form-label {
   font-size: 13px;
   font-weight: 600;
-  color: #475569;
+  color: #666666;
 }
 
 .custom-payment-input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #d7e0ee;
+  border: 1px solid #e7f4fb;
   border-radius: 10px;
   background: #ffffff;
-  color: #334155;
+  color: #333333;
   font-size: 15px;
 
   &:focus {
     outline: none;
-    border-color: #213567;
-    box-shadow: 0 0 0 3px rgba(33, 53, 103, 0.12);
+    border-color: #0283c8;
+    box-shadow: 0 0 0 3px rgba(2, 131, 200, 0.12);
   }
 }
 
@@ -203,32 +203,32 @@
   align-items: flex-start;
   gap: 8px;
   margin: 4px 0 16px;
-  color: #5c6479;
+  color: #666666;
   font-size: 14px;
   cursor: pointer;
 
   input {
     margin-top: 3px;
-    accent-color: #213567;
+    accent-color: #0283c8;
   }
 
   a {
-    color: #213567;
+    color: #0283c8;
     font-weight: 600;
     text-decoration: underline;
   }
 
   &.invalid {
-    color: #dc2626;
+    color: #d01212;
 
     input {
-      accent-color: #dc2626;
-      outline: 2px solid #dc2626;
+      accent-color: #d01212;
+      outline: 2px solid #d01212;
       outline-offset: 1px;
     }
 
     a {
-      color: #dc2626;
+      color: #d01212;
     }
   }
 }
@@ -242,21 +242,21 @@
   margin-bottom: 16px;
   border: none;
   border-radius: 8px;
-  background: #213567;
+  background: #0283c8;
   color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(33, 53, 103, 0.18);
+  box-shadow: 0 4px 12px rgba(2, 131, 200, 0.18);
   transition: background-color 0.2s ease, transform 0.2s ease;
 
   &:hover:not(:disabled) {
-    background: #18284f;
+    background: #000000;
     transform: translateY(-1px);
   }
 
   &:disabled {
-    background: #94a3b8;
+    background: #999999;
     box-shadow: none;
     cursor: not-allowed;
     transform: none;
@@ -267,7 +267,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  color: #5c6479;
+  color: #666666;
   font-size: 12px;
   line-height: 18px;
 
@@ -302,7 +302,7 @@
   h2 {
     max-width: 440px;
     margin: 8px 0 0;
-    color: #213567;
+    color: #0283c8;
     font-size: 22px;
     font-weight: 700;
     line-height: 1.35;
@@ -311,7 +311,7 @@
   p {
     max-width: 480px;
     margin: 0;
-    color: #5c6479;
+    color: #666666;
     font-size: 15px;
     line-height: 1.6;
   }
@@ -330,7 +330,7 @@
   inset-inline: 0;
   height: 2px;
   border-radius: 999px;
-  background-image: radial-gradient(circle, rgba(33, 53, 103, 0.45) 1.5px, transparent 1.6px);
+  background-image: radial-gradient(circle, rgba(2, 131, 200, 0.45) 1.5px, transparent 1.6px);
   background-size: 14px 2px;
   background-repeat: repeat-x;
 }
@@ -340,7 +340,7 @@
   top: 50%;
   inset-inline-start: 0;
   display: flex;
-  color: #213567;
+  color: #0283c8;
   transform: translateY(-50%);
   animation: plane-fly 2.2s ease-in-out infinite;
 }
@@ -356,7 +356,7 @@
   margin-top: 10px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(33, 53, 103, 0.12);
+  background: rgba(2, 131, 200, 0.12);
 
   span {
     position: absolute;
@@ -364,7 +364,7 @@
     bottom: 0;
     width: 42%;
     border-radius: inherit;
-    background: #213567;
+    background: #0283c8;
     animation: prepare-slide 1.3s ease-in-out infinite;
   }
 }

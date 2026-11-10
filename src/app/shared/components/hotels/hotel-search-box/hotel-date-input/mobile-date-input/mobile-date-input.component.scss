@@ -57,14 +57,14 @@ header {
   .ngb-dp-header {
     background-color: white;
     padding: 0.5rem;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid #e5e5e5;
     direction: ltr !important;
   }
 
   .ngb-dp-navigation-select select {
     padding: 0.25rem;
     border-radius: 4px;
-    border: 1px solid #ced4da;
+    border: 1px solid #d9d9d9;
   }
 
   .ngb-dp-arrow {
@@ -79,8 +79,8 @@ header {
   }
 
   .ngb-dp-weekdays {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e9ecef;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #e5e5e5;
     justify-content: space-around !important;
   }
 
@@ -100,7 +100,7 @@ header {
   }
 
   .ngb-dp-day.disabled {
-    color: #adb5bd !important;
+    color: #999999 !important;
     cursor: not-allowed;
   }
 
@@ -115,12 +115,12 @@ header {
   }
 
   .ngb-dp-day:hover:not(.disabled):not(.selected) {
-    background-color: #f8f9fa;
+    background-color: #f7f7f7;
     border-radius: 4px;
   }
 
   .ngb-dp-today {
-    background-color: #e9ecef;
+    background-color: #e5e5e5;
     border-radius: 4px;
     font-weight: bold;
   }
@@ -154,7 +154,7 @@ header {
   }
 
   &.outside {
-    color: #adb5bd;
+    color: #999999;
   }
 
   &:hover {
