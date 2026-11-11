@@ -15,7 +15,7 @@
       </span>
     </button>
 
-    <div class="sort-menu">
+    <div class="sort-menu" #sortMenu>
       <button type="button" class="chip" (click)="toggleSort($event)">
         {{ 'results.sort.label' | translate }} {{ ('results.sort.' + activeSort.title) | translate }}
       </button>

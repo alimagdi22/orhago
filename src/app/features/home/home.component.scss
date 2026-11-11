@@ -110,6 +110,10 @@ main {
   }
 }
 
+:host-context(html.dark) .hero {
+  background: transparent !important;
+}
+
 @media (max-width: 1100px) {
   :host-context(html.dark) .hero__media {
     background: #15113f;

@@ -317,9 +317,11 @@ export class SharedService {
     }
 
     this.wegoBrandRequiredError = true;
-    if (typeof document !== 'undefined') {
-      document.getElementById('checkout-branded-fares')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    const brands = document.getElementById('checkout-branded-fares');
+    if (!brands || typeof window === 'undefined') return false;
+
+    const top = brands.getBoundingClientRect().top + window.scrollY - (this.screenWidth <= 768 ? 20 : 100);
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
     return true;
   }
 

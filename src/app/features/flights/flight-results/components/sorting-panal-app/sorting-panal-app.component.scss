@@ -1,5 +1,7 @@
 :host {
   display: block;
+  position: relative;
+  z-index: 5;
   font-family: 'Onest', sans-serif;
 }
 
@@ -14,7 +16,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  overflow-x: auto;
+  overflow: visible;
 }
 
 .chip {
@@ -60,7 +62,7 @@
   position: absolute;
   top: calc(100% + 6px);
   inset-inline-start: 0;
-  z-index: 6;
+  z-index: 30;
   min-width: 160px;
   margin: 0;
   padding: 6px;

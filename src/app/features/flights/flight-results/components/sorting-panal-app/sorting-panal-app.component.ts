@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FlightResultService } from 'rp-travel-ui';
 import { Subscription } from 'rxjs';
 import { ISortItem } from '../../models/sortItem.model';
@@ -22,6 +22,7 @@ export class SortingPanalAppComponent implements OnInit, OnDestroy {
   endIndex = this.itemsPerPage;
   subscription = new Subscription();
   @Input({ required: true }) sortItems: ISortItem[] = [];
+  @ViewChild('sortMenu') sortMenu?: ElementRef<HTMLElement>;
 
   ngOnInit(): void {
     const form = this.flightResultService.filterForm;
@@ -51,8 +52,10 @@ export class SortingPanalAppComponent implements OnInit, OnDestroy {
     return this.flightResultService.response?.airItineraries?.length || 0;
   }
 
-  @HostListener('document:click')
-  closeSort(): void {
+  @HostListener('document:click', ['$event'])
+  closeSort(event: Event): void {
+    const target = event.target as Node | null;
+    if (target && this.sortMenu?.nativeElement.contains(target)) return;
     this.sortOpen = false;
   }
 

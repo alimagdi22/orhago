@@ -397,7 +397,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
     if (!brands || typeof window === 'undefined') return;
 
     this.scrolledToBrands = true;
-    const top = brands.getBoundingClientRect().top + window.scrollY - 96;
+    const top = brands.getBoundingClientRect().top + window.scrollY - 5;
     window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
   }
 
@@ -634,6 +634,7 @@ export class FlightCheckoutComponent implements OnInit, AfterViewChecked, OnDest
 
   continuePassengers() {
     if (this.sharedService.blockCheckoutWithoutBrand()) {
+      this.scrolledToBrands = true;
       return;
     }
     this.checkPhoneNumberValidation();
